@@ -1,3 +1,8 @@
 <h1>Welcome To Golf Links!</h1>
 
-<%= link_to "Sign In", signin_path %>
+<% if logged_in? %>
+  <h3>Hi <%= current_user.username %></h3>
+  <%= link_to "Sign Out", signout_path, method: "delete" %>
+<% else %>
+  <%= link_to "Sign In", signin_path %>
+<% end %>

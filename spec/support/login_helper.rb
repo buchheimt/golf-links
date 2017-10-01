@@ -17,4 +17,9 @@ module LoginHelper
     click_button("Sign In")
   end
 
+  def user_logout
+    visit "/"
+    click_link "Sign Out"
+  end
+
 end

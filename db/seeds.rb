@@ -12,3 +12,9 @@ User.create(
   password: "123456",
   password_confirmation: "123456"
 )
+
+Course.create(
+  name: "Augusta National GC",
+  description: "Home of the Masters",
+  location: "Augusta, GA"
+)

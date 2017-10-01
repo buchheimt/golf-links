@@ -11,14 +11,17 @@ describe "Feature Test: Course Show", type: :feature do
   }
 
   it "displays a course name" do
+    visit course_path(course)
     expect(page).to have_content("Augusta National GC")
   end
 
   it "displays a course description" do
+    visit course_path(course)
     expect(page).to have_content("Home of the Masters")
   end
 
   it "displays a course location" do
+    visit course_path(course)
     expect(page).to have_content("Augusta, GA")
   end
 

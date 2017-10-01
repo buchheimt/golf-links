@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete '/signout', to: 'sessions#destroy'
 
   resources :users, only: [:new, :create, :show]
+  resources :courses, only: [:show]
 
   root to: "welcome#home"
 

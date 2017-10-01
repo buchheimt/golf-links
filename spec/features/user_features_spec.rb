@@ -8,4 +8,10 @@ describe "Feature Test: User Login", type: :feature do
     expect(current_path).to eq("/users/1")
     expect(page).to have_content("tylerB")
   end
+
+  it "stores the user id in the sessions hash" do
+    visit_signin
+    user_login
+    expect(page.get_rack_session_key('user_id')).to_not be_nil
+  end
 end

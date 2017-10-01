@@ -72,11 +72,4 @@ RSpec.describe User, type: :model do
       expect(User.new(mismatch_confirmation)).to_not be_valid
     end
   end
-
-  # it "has a secure password" do
-  #   password1 = "123456"
-  #   password2 = "abcdef"
-  #   expect(user.authenticate(password1)).to be_truthy
-  #   expect(user.authenticate(password2)).to be_falsey
-  # end
 end

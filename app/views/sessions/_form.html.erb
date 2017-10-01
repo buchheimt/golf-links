@@ -1,0 +1,14 @@
+<%= form_tag signin_path, method: "post" do %>
+  
+  <p>
+    <%= label_tag "user[username]", "Username" %>
+    <%= text_field_tag "user[username]" %>
+  </p>
+  
+  <p>
+    <%= label_tag "user[password]", "Password" %>
+    <%= password_field_tag "user[password]" %>
+  </p>
+
+  <%= submit_tag "Sign In" %>
+<% end %>

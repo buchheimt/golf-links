@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
-  resources :users, only: [:show]
+  resources :users, only: [:new, :create, :show]
 
   root to: "welcome#home"
 

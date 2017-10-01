@@ -1,5 +1,18 @@
 module LoginHelper
 
+  def visit_signup
+    visit "/"
+    click_link "Sign Up"
+  end
+
+  def user_signup
+    fill_in("user[username]", with: "tylerB")
+    fill_in("user[email]", with: "tyler@gmail.com")
+    fill_in("user[password]", with: "123456")
+    fill_in("user[password_confirmation]", with: "123456")
+    click_button("Sign Up")
+  end
+
   def visit_signin
     visit "/"
     click_link "Sign In"

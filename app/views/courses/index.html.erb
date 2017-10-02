@@ -1,0 +1,11 @@
+<h1>Course Index</h1>
+
+<%# binding.pry %>
+
+<ul>
+  <% @courses.each do |course| %>
+    <li>
+      <%= link_to course.name, course_path(course) %> - <%= course.location %>
+    </li>
+  <% end %>
+</ul>

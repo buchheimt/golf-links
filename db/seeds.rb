@@ -18,3 +18,21 @@ Course.create(
   description: "Home of the Masters",
   location: "Augusta, GA"
 )
+
+Course.create(
+  name: "Oakmont Country Club",
+  description: "The oldest top-ranked golf course in the U.S.",
+  location: "Pittsburgh, PA"
+)
+
+Course.create(
+  name: "Innisbrook Resort (Copperhead)",
+  description: "Home of the Valspar Championship",
+  location: "Palm Harbor, FL"
+)
+
+Course.create(
+  name: "Bay Hill Club & Lodge",
+  description: "Home of the Arnold Palmer Invitational",
+  location: "Orlando, FL"
+)

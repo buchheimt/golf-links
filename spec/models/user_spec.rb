@@ -20,10 +20,6 @@ RSpec.describe User, type: :model do
   let(:missing_confirmation) {attributes.except(:password_confirmation)}
   let(:mismatch_confirmation) {attributes.merge(password_confirmation: "654321")}
 
-  it "is valid with valid attributes" do
-    expect(User.new(attributes)).to be_valid
-  end
-
   it "has many UserTeeTimes" do
     user = User.create(attributes)
     user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
@@ -31,6 +27,40 @@ RSpec.describe User, type: :model do
     expect(user.user_tee_times.size).to eq(2)
     expect(user.user_tee_times.first).to eq(user_tee_time1)
     expect(user.user_tee_times.last).to eq(user_tee_time2)
+  end
+
+  it "has many TeeTimes through UserTeeTimes" do
+    user = User.create(attributes)
+    user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
+    tee_time1 = user_tee_time1.build_tee_time
+    tee_time1.build_course(name: "Augusta National GC")
+    user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
+    tee_time2 = user_tee_time2.build_tee_time
+    tee_time2.build_course(name: "Pebble Beach Golf Links")
+    user_tee_time1.save
+    user_tee_time2.save
+    expect(user.tee_times.size).to eq(2)
+    expect(user.tee_times.first).to eq(tee_time1)
+    expect(user.tee_times.last).to eq(tee_time2)
+  end
+
+  it "has many Courses through TeeTimes" do
+    user = User.create(attributes)
+    user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
+    tee_time1 = user_tee_time1.build_tee_time
+    course1 = tee_time1.build_course(name: "Augusta National GC")
+    user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
+    tee_time2 = user_tee_time2.build_tee_time
+    course2 = tee_time2.build_course(name: "Pebble Beach Golf Links")
+    user_tee_time1.save
+    user_tee_time2.save
+    expect(user.courses.size).to eq(2)
+    expect(user.courses.first).to eq(course1)
+    expect(user.courses.last).to eq(course2)
+  end
+
+  it "is valid with valid attributes" do
+    expect(User.new(attributes)).to be_valid
   end
 
   describe "username" do

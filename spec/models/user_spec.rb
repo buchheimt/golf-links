@@ -24,6 +24,15 @@ RSpec.describe User, type: :model do
     expect(User.new(attributes)).to be_valid
   end
 
+  it "has many UserTeeTimes" do
+    user = User.create(attributes)
+    user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
+    user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
+    expect(user.user_tee_times.size).to eq(2)
+    expect(user.user_tee_times.first).to eq(user_tee_time1)
+    expect(user.user_tee_times.last).to eq(user_tee_time2)
+  end
+
   describe "username" do
     it "is invalid with missing username" do
       expect(User.new(missing_username)).to_not be_valid

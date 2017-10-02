@@ -36,3 +36,6 @@ Course.create(
   description: "Home of the Arnold Palmer Invitational",
   location: "Orlando, FL"
 )
+
+TeeTime.create(course_id: Course.first.id, time: Time.now)
+UserTeeTime.create(user_id: User.first.id, tee_time_id: TeeTime.first.id)

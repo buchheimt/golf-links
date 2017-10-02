@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :courses, only: [:index, :show]
+  resources :users do
+    resources :tee_times, only: [:show]
+  end
 
   root to: "welcome#home"
 

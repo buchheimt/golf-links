@@ -49,3 +49,39 @@ describe "Feature Test: User Logout", type: :feature do
     expect(page.get_rack_session).to_not include(:user_id)
   end
 end
+
+describe "Feature Test: User#show", type: :feature do
+
+  before :each do
+    User.create(
+      username: "tylerB",
+      email: "tyler@gmail.com",
+      password: "123456",
+      password_confirmation: "123456"
+    )
+  end
+
+  let(:user) {
+    User.first
+  }
+
+  it "displays all of user's tee times" do
+    tee_time1 = TeeTime.new(time: Time.now)
+    tee_time1.build_course(name: "Augusta National GC")
+    tee_time1.save
+    user_tee_time1 = UserTeeTime.create(tee_time_id: tee_time1.id, user_id: user.id)
+    tee_time2 = TeeTime.new(time: Time.now)
+    tee_time2.build_course(name: "Pebble Beach Golf Links")
+    tee_time2.save
+    user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: user.id)
+    visit user_path(user)
+    expect(page).to have_content("#{tee_time1.course.name} - #{tee_time1.time}")
+    expect(page).to have_content("#{tee_time2.course.name} - #{tee_time2.time}")
+  end
+
+  it "links to User/TeeTime#new" do
+    visit user_path(user)
+    click_link("Create New Tee Time")
+    expect(current_path).to eq(new_user_tee_time_path(user))
+  end
+end

@@ -1,1 +1,11 @@
-hey there <%= @user.username %>
+<h2><%= @user.username %>'s Profile</h2>
+
+<%= link_to "Create New Tee Time", new_user_tee_time_path(@user) %>
+
+<h4>Tee Times:</h4>
+
+<ul>
+  <% @user.tee_times.each do |tee_time| %>
+    <li><%= "#{tee_time.course.name} - #{tee_time.time}" %></li>
+  <% end %>
+</ul>

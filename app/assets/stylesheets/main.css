@@ -1,0 +1,22 @@
+body {
+  background-image: url("background.jpg");
+  margin-top: 0;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  background: rgba(200, 230, 201, .75);
+  padding: 25px;
+  margin: 0 auto;
+  max-width: 960px;
+  min-height: 600px;
+}
+
+nav {
+  box-sizing: border-box;
+  background: rgba(27, 94, 32, .75);
+  color: white;
+  padding: 10px;
+  margin: 0 auto;
+  max-width: 960px;
+}

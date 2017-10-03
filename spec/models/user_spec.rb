@@ -6,7 +6,9 @@ RSpec.describe User, type: :model do
       username: "tylerB",
       email: "tyler@gmail.com",
       password: "123456",
-      password_confirmation: "123456"
+      password_confirmation: "123456",
+      pace: 3,
+      experience: 8,
     }
   end
 
@@ -19,6 +21,12 @@ RSpec.describe User, type: :model do
   let(:short_password) {attributes.merge(password: "12345", password_confirmation: "12345")}
   let(:missing_confirmation) {attributes.except(:password_confirmation)}
   let(:mismatch_confirmation) {attributes.merge(password_confirmation: "654321")}
+  let(:missing_pace) {attributes.except(:pace)}
+  let(:invalid_pace1) {attributes.merge(pace: "apple")}
+  let(:invalid_pace2) {attributes.merge(pace: 99)}
+  let(:missing_experience) {attributes.except(:experience)}
+  let(:invalid_experience1) {attributes.merge(experience: "apple")}
+  let(:invalid_experience2) {attributes.merge(experience: 99)}
 
   it "has many UserTeeTimes" do
     user = User.create(attributes)
@@ -111,4 +119,47 @@ RSpec.describe User, type: :model do
       expect(User.new(mismatch_confirmation)).to_not be_valid
     end
   end
+
+  describe "pace" do
+    it "is assignable" do
+      expect(User.new(attributes).pace).to eq(3)
+    end
+
+    it "is optional" do
+      expect(User.new(missing_pace)).to be_valid
+    end
+
+    it "is only valid with an integer 1-10" do
+      expect(User.new(invalid_pace1)).to_not be_valid
+      expect(User.new(invalid_pace2)).to_not be_valid
+    end
+  end
+
+  describe  "experience" do
+    it "is assignable" do
+      expect(User.new(attributes).experience).to eq(8)
+    end
+
+    it "is optional" do
+      expect(User.new(missing_experience)).to be_valid
+    end
+
+    it "is only valid with an integer 1-10" do
+      expect(User.new(invalid_experience1)).to_not be_valid
+      expect(User.new(invalid_experience2)).to_not be_valid
+    end
+  end
+
+
+  # it "has a cart preference" do
+  #
+  # end
+  #
+  # it "has a privacy setting" do
+  #
+  # end
+  #
+  # it "has a profile picture" do
+  #
+  # end
 end

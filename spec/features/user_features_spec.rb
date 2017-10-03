@@ -85,3 +85,68 @@ describe "Feature Test: User#show", type: :feature do
     expect(current_path).to eq(new_user_tee_time_path(user))
   end
 end
+
+describe "Feature Test: User Edit", type: :feature do
+
+  let(:user_attributes) do {
+      username: "jonS",
+      email: "jon@gmail.com",
+      password: "123456",
+      password_confirmation: "123456",
+      pace: 8,
+      experience: 7
+    }
+  end
+
+  context "correct user" do
+    it "allows user to properly edit info" do
+      visit_signin
+      user_login
+      visit edit_user_path(current_user)
+      fill_in("user[pace]", with: 1)
+      fill_in("user[password]", with: "123456")
+      fill_in("user[password_confirmation]", with: "123456")
+      click_button("Update User")
+      expect(current_user.pace).to eq(1)
+    end
+
+    it "prevents updating with invalid data" do
+      visit_signin
+      user_login
+      visit edit_user_path(current_user)
+      fill_in("user[pace]", with: "apple")
+      click_button("Update User")
+      expect(current_user.pace).to eq(8)
+    end
+
+    it "redirects to User#show upon successful edit" do
+      visit_signin
+      user_login
+      visit edit_user_path(current_user)
+      fill_in("user[pace]", with: 1)
+      fill_in("user[password]", with: "123456")
+      fill_in("user[password_confirmation]", with: "123456")
+      click_button("Update User")
+      expect(current_path).to eq(user_path(current_user))
+    end
+  end
+
+  context "incorrect user" do
+    it "redirects to user#show of the requested user" do
+      user = User.create(user_attributes)
+      visit_signin
+      user_login
+      visit edit_user_path(user)
+      expect(current_path).to eq(user_path(user))
+    end
+  end
+
+  context "logged out" do
+    it "redirects to welcome page" do
+      user = User.create(user_attributes)
+      visit edit_user_path(user)
+      expect(current_path).to eq(root_path)
+    end
+  end
+
+end

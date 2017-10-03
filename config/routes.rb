@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get '/auth/facebook/callback', to: 'sessions#create'
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show, :edit, :update]
   resources :courses, only: [:index, :show]
   resources :users do
     resources :tee_times, only: [:new, :create, :show]

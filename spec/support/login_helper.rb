@@ -10,7 +10,7 @@ module LoginHelper
     fill_in("user[email]", with: "tyler@gmail.com")
     fill_in("user[password]", with: "123456")
     fill_in("user[password_confirmation]", with: "123456")
-    click_button("Sign Up")
+    click_button("Create User")
   end
 
   def visit_signin
@@ -23,7 +23,9 @@ module LoginHelper
       username: "tylerB",
       email: "tyler@gmail.com",
       password: "123456",
-      password_confirmation: "123456"
+      password_confirmation: "123456",
+      pace: 8,
+      experience: 7
     )
     fill_in("user[username]", with: "tylerB")
     fill_in("user[password]", with: "123456")
@@ -36,7 +38,7 @@ module LoginHelper
   end
 
   def current_user
-    User.find_by_id(session[:user_id])
+    User.find_by_id(page.get_rack_session_key('user_id'))
   end
 
 end

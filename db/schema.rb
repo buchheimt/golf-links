@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20171002184153) do
     t.string "password_digest"
     t.integer "pace"
     t.integer "experience"
+    t.string "user_id"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

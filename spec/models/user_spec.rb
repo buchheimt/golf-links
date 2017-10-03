@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
       password_confirmation: "123456",
       pace: 3,
       experience: 8,
+      image: "image.jpg"
     }
   end
 
@@ -27,6 +28,7 @@ RSpec.describe User, type: :model do
   let(:missing_experience) {attributes.except(:experience)}
   let(:invalid_experience1) {attributes.merge(experience: "apple")}
   let(:invalid_experience2) {attributes.merge(experience: 99)}
+  let(:missing_image) {attributes.except(:image)}
 
   it "has many UserTeeTimes" do
     user = User.create(attributes)
@@ -147,6 +149,16 @@ RSpec.describe User, type: :model do
     it "is only valid with an integer 1-10" do
       expect(User.new(invalid_experience1)).to_not be_valid
       expect(User.new(invalid_experience2)).to_not be_valid
+    end
+  end
+
+  describe  "image" do
+    it "is assignable" do
+      expect(User.new(attributes).image).to eq("image.jpg")
+    end
+
+    it "is optional" do
+      expect(User.new(missing_image)).to be_valid
     end
   end
 

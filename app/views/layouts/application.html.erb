@@ -11,7 +11,27 @@
 
   <body>
     <nav>
-      Test
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <%= link_to "Golf Links", root_path %>
+          </div>
+          <div class="col-sm-3">
+            <%= link_to "Courses", courses_path %>
+          </div>
+          <div class="col-sm-3">
+            <p>TBD Feature</p>
+          </div>
+          <div class="col-sm-3">
+            <%# binding.pry %>
+            <% unless current_user.nil? %>
+              <%= link_to current_user.username, user_path(current_user) if current_user %>
+            <% else %>
+              <%= link_to "Sign In", signin_path %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </nav>
     <div class="wrapper">
       <%= yield %>

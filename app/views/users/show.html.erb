@@ -1,7 +1,42 @@
-<h2><%= @user.username %>'s Profile</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <% if @user.image %>
+        <div>
+          <img class="profile-pic" src="<%= @user.image %>?type=large" alt="Profile image">
+        </div>
+      <% else %>
+        <div>
+          <%= image_tag "golf-ball.jpg", class: "profile-pic" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-8 col-sm-offset-1">
+      <h1 class="profile-title"><%= @user.username %></h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Pace-of-Play: <%= @user.pace if @user.pace %></p>
+          </div>
+          <div class="col-sm-6">
+            <p>User Since: <%= @user.created_at.day %></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Experience: <%= @user.experience if @user.experience %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br><br><br>
+
 
 <%= link_to "Create New Tee Time", new_user_tee_time_path(@user) %>
-
+<br><br>
 <h4>Tee Times:</h4>
 
 <ul>

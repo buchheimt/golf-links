@@ -1,15 +1,23 @@
 class UserPolicy < ApplicationPolicy
 
+  def new?
+    !user
+  end
+
+  def create?
+    !user
+  end
+
   def show?
     user
   end
 
   def edit?
-    user.admin? || record.try(:id) == user.id
+    user && (user.admin? || record.try(:id) == user.id)
   end
 
   def update?
-    user.admin? || record.try(:id) == user.id
+    user && (user.admin? || record.try(:id) == user.id)
   end
 
 end

@@ -9,7 +9,8 @@ RSpec.describe User, type: :model do
       password_confirmation: "123456",
       pace: 3,
       experience: 8,
-      image: "image.jpg"
+      image: "image.jpg",
+      role: 1
     }
   end
 
@@ -29,6 +30,7 @@ RSpec.describe User, type: :model do
   let(:invalid_experience1) {attributes.merge(experience: "apple")}
   let(:invalid_experience2) {attributes.merge(experience: 99)}
   let(:missing_image) {attributes.except(:image)}
+  let(:missing_role) {attributes.except(:role)}
 
   it "has many UserTeeTimes" do
     user = User.create(attributes)
@@ -159,6 +161,20 @@ RSpec.describe User, type: :model do
 
     it "is optional" do
       expect(User.new(missing_image)).to be_valid
+    end
+  end
+
+  describe "role" do
+    it "is assignable" do
+      expect(User.new(attributes).role).to eq("owner")
+    end
+
+    it "is optional" do
+      expect(User.new(missing_role)).to be_valid
+    end
+
+    it "defaults to 'user'" do
+      expect(User.new(missing_role).role).to eq("user")
     end
   end
 

@@ -56,18 +56,20 @@ describe "User Features", type: :features do
   end
 
   describe "Logout", type: :feature do
-    it "successfully logs user out and redirects to home page" do
-      visit_signin
-      user_login
-      user_logout
-      expect(current_path).to eq(root_path)
-    end
+    context "when logged in" do
+      it "successfully logs user out and redirects to home page" do
+        visit_signin
+        user_login
+        user_logout
+        expect(current_path).to eq(root_path)
+      end
 
-    it "clears the user id from the session hash" do
-      visit_signin
-      user_login
-      user_logout
-      expect(page.get_rack_session).to_not include(:user_id)
+      it "clears the user id from the session hash" do
+        visit_signin
+        user_login
+        user_logout
+        expect(page.get_rack_session).to_not include(:user_id)
+      end
     end
   end
 

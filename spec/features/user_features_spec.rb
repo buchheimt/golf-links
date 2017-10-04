@@ -84,6 +84,14 @@ describe "Feature Test: User#show", type: :feature do
     click_link("Create New Tee Time")
     expect(current_path).to eq(new_user_tee_time_path(user))
   end
+
+  it "links to User/TeeTime#edit if current user's profile" do
+    visit_signin
+    user_login
+    visit user_path(user)
+    click_link("Edit Profile")
+    expect(current_path).to eq(edit_user_path(user))
+  end
 end
 
 describe "Feature Test: User Edit", type: :feature do

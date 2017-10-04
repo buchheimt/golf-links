@@ -26,6 +26,11 @@
           <div class="col-sm-6">
             <p>Experience: <%= @user.experience if @user.experience %></p>
           </div>
+          <% if @user == current_user %><%# binding.pry %>
+            <div class="col-sm-6">
+              <%= link_to "Edit Profile", edit_user_path(@user) %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

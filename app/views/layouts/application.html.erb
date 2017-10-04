@@ -23,7 +23,6 @@
             <a href="#">TBD</a>
           </div>
           <div class="col-sm-3">
-            <%# binding.pry %>
             <% unless current_user.nil? %>
               <%= link_to current_user.username, user_path(current_user) if current_user %>
             <% else %>

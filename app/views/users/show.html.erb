@@ -19,14 +19,14 @@
             <p>Pace-of-Play: <%= @user.pace if @user.pace %></p>
           </div>
           <div class="col-sm-6">
-            <p>User Since: <%= @user.created_at.day %></p>
+            <p>User Since: <%= format_created_at(@user) %></p>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
             <p>Experience: <%= @user.experience if @user.experience %></p>
           </div>
-          <% if @user == current_user %><%# binding.pry %>
+          <% if @user == current_user %>
             <div class="col-sm-6">
               <%= link_to "Edit Profile", edit_user_path(@user) %>
             </div>

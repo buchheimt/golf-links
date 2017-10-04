@@ -45,7 +45,7 @@ nav {
   a:hover {
     color: white;
     text-decoration: none;
-    background: rgba(7, 74, 12, .75)
+    background: rgba(7, 74, 12, .75);
   }
 }
 
@@ -54,7 +54,16 @@ h1.profile-title {
 }
 
 img.profile-pic {
+  margin-top: 15px;
   width: 100%;
   border-radius: 50%;
   border: 3px solid rgb(7, 74, 12);
+}
+
+div.profile-summary {
+  padding: 20px;
+  background: rgba(27, 94, 32, .75);
+  border-radius: 10px;
+  border: 1px solid white;
+  box-shadow: 4px 4px 2px #333;
 }

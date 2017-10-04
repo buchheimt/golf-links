@@ -6,7 +6,7 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 task :reload do
-  File.delete('db/development.sqlite3', 'db/schema.rb')
+  File.delete('db/development.sqlite3', 'db/test.sqlite3', 'db/schema.rb')
   Rake::Task["db:migrate"].invoke
   Rake::Task["test:prepare"].invoke
   Rake::Task["db:seed"].invoke

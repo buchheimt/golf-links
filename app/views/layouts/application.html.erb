@@ -33,6 +33,9 @@
       </div>
     </nav>
     <div class="wrapper">
+      <% if flash[:alert] %>
+        <h4 class="warning"><%= flash[:alert] %></h3>
+      <% end %>
       <%= yield %>
     </div>
   </body>

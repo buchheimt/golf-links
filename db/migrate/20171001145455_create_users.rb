@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.integer :experience
       t.string :user_id
       t.string :image
+      t.integer :role
 
       t.timestamps
     end

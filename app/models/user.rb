@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  enum role: [:user, :owner, :admin]
+
   has_secure_password
   validates :username, uniqueness: true, presence: true
   validates :username, format: {with: /\A[\w ]+\z/, message: "username can only contain letters, numbers, and underscores"}

@@ -19,8 +19,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    verify_user
+    #verify_user
     @user = User.find_by_id(params[:id])
+    authorize @user
   end
 
   def update

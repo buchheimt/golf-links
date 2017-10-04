@@ -1,5 +1,9 @@
 class TeeTimesController < ApplicationController
 
+  def index
+    @tee_times = TeeTime.all
+  end
+
   def new
     @tee_time = TeeTime.new
     @user = User.find_by_id(params[:user_id])
@@ -21,7 +25,7 @@ class TeeTimesController < ApplicationController
   end
 
   def edit
-    binding.pry
+
   end
 
   def update

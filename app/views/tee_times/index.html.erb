@@ -1,0 +1,7 @@
+<h1>Tee Times Index</h1>
+
+<ul>
+  <% @tee_times.each do |tee_time| %>
+    <li><%= link_to(tee_time.course.name + tee_time.time.to_s, tee_time_path(tee_time)) %></li>
+  <% end %>
+</ul>

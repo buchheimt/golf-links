@@ -11,7 +11,7 @@ class TeeTimesController < ApplicationController
     if @tee_time.save
       redirect_to user_tee_time_path(params[:user_id], @tee_time)
     else
-      render :new
+      redirect_to new_user_tee_time_path(current_user)
     end
   end
 
@@ -20,10 +20,18 @@ class TeeTimesController < ApplicationController
     @tee_time = TeeTime.find_by_id(params[:id])
   end
 
+  def edit
+    binding.pry
+  end
+
+  def update
+
+  end
+
   private
 
   def tee_time_params
-    params.require(:tee_time).permit(:course_id, :time)
+    params.require(:tee_time).permit(:course_id, :time, course_attributes: [:name, :description, :location])
   end
 
 end

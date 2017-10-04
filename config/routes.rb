@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :edit, :update]
   resources :courses, only: [:index, :show]
   resources :users do
-    resources :tee_times, only: [:new, :create, :show]
+    resources :tee_times, only: [:new, :create, :show, :edit, :update]
   end
 
   root to: "welcome#home"

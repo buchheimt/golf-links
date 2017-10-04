@@ -44,10 +44,10 @@ RSpec.describe User, type: :model do
   it "has many TeeTimes through UserTeeTimes" do
     user = User.create(attributes)
     user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
-    tee_time1 = user_tee_time1.build_tee_time
+    tee_time1 = user_tee_time1.build_tee_time(time: Time.now)
     tee_time1.build_course(name: "Augusta National GC")
     user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
-    tee_time2 = user_tee_time2.build_tee_time
+    tee_time2 = user_tee_time2.build_tee_time(time: Time.now)
     tee_time2.build_course(name: "Pebble Beach Golf Links")
     user_tee_time1.save
     user_tee_time2.save
@@ -59,10 +59,10 @@ RSpec.describe User, type: :model do
   it "has many Courses through TeeTimes" do
     user = User.create(attributes)
     user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
-    tee_time1 = user_tee_time1.build_tee_time
+    tee_time1 = user_tee_time1.build_tee_time(time: Time.now)
     course1 = tee_time1.build_course(name: "Augusta National GC")
     user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
-    tee_time2 = user_tee_time2.build_tee_time
+    tee_time2 = user_tee_time2.build_tee_time(time: Time.now)
     course2 = tee_time2.build_course(name: "Pebble Beach Golf Links")
     user_tee_time1.save
     user_tee_time2.save
@@ -177,17 +177,4 @@ RSpec.describe User, type: :model do
       expect(User.new(missing_role).role).to eq("user")
     end
   end
-
-
-  # it "has a cart preference" do
-  #
-  # end
-  #
-  # it "has a privacy setting" do
-  #
-  # end
-  #
-  # it "has a profile picture" do
-  #
-  # end
 end

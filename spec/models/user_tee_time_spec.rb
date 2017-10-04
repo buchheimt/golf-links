@@ -19,14 +19,14 @@ RSpec.describe UserTeeTime, type: :model do
 
   it "belongs to a TeeTime" do
     user_tee_time = UserTeeTime.create()
-    tee_time = user_tee_time.build_tee_time()
+    tee_time = user_tee_time.build_tee_time(time: Time.now)
     expect(user_tee_time.tee_time).to eq(tee_time)
   end
 
   it "belongs to a Course through a TeeTime" do
     user_tee_time = UserTeeTime.create()
-    tee_time = user_tee_time.build_tee_time()
-    course = tee_time.build_course()
+    tee_time = user_tee_time.build_tee_time(time: Time.now)
+    course = tee_time.build_course(name: "new course")
     expect(user_tee_time.course).to eq(course)
   end
 end

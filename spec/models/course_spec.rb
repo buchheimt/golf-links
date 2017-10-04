@@ -29,8 +29,8 @@ RSpec.describe Course, type: :model do
 
   it "has many TeeTimes" do
     course = Course.new(attributes)
-    tee_time1 = course.tee_times.build()
-    tee_time2 = course.tee_times.build()
+    tee_time1 = course.tee_times.build(time: Time.now)
+    tee_time2 = course.tee_times.build(time: Time.now)
     expect(course.tee_times.size).to eq(2)
     expect(course.tee_times.first).to eq(tee_time1)
     expect(course.tee_times.last).to eq(tee_time2)
@@ -38,10 +38,10 @@ RSpec.describe Course, type: :model do
 
   it "has many UserTeeTimes through TeeTimes" do
     course = Course.new(attributes)
-    tee_time1 = course.tee_times.build()
+    tee_time1 = course.tee_times.build(time: Time.now)
     user_tee_time1 = tee_time1.user_tee_times.build()
     user1 = user_tee_time1.build_user(user_attributes1)
-    tee_time2 = course.tee_times.build()
+    tee_time2 = course.tee_times.build(time: Time.now)
     user_tee_time2 = tee_time2.user_tee_times.build()
     user2 = user_tee_time2.build_user(user_attributes2)
     user_tee_time1.save
@@ -53,10 +53,10 @@ RSpec.describe Course, type: :model do
 
   it "has many Users through UserTeeTimes" do
     course = Course.new(attributes)
-    tee_time1 = course.tee_times.build()
+    tee_time1 = course.tee_times.build(time: Time.now)
     user_tee_time1 = tee_time1.user_tee_times.build()
     user1 = user_tee_time1.build_user(user_attributes1)
-    tee_time2 = course.tee_times.build()
+    tee_time2 = course.tee_times.build(time: Time.now)
     user_tee_time2 = tee_time2.user_tee_times.build()
     user2 = user_tee_time2.build_user(user_attributes2)
     user_tee_time1.save

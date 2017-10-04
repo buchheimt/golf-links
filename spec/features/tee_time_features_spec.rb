@@ -27,13 +27,44 @@ describe "Feature Test: TeeTime Add", type: :feature do
     Course.first
   }
 
-  it "allows a user to create a new TeeTime" do
+  it "allows a user to create a new TeeTime with an existing course" do
     visit new_user_tee_time_path(user)
     fill_in("tee_time[time]", with: Time.now)
-    fill_in("tee_time[course_id]", with: course.id)
+    select(course.name, from: "tee_time[course_id]")
     click_button("Create Tee Time")
     expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
     expect(page).to have_content(course.name)
+  end
+
+  it "allows a user to create a new TeeTime with an existing course" do
+    visit new_user_tee_time_path(user)
+    fill_in("tee_time[time]", with: Time.now)
+    fill_in("tee_time[course_attributes][name]", with: "new course")
+    fill_in("tee_time[course_attributes][description]", with: "description")
+    fill_in("tee_time[course_attributes][location]", with: "location")
+    click_button("Create Tee Time")
+    expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
+    expect(page).to have_content("new course")
+  end
+
+  it "redirects back to TeeTime#new if no course is selected or given" do
+    visit_signin
+    user_login
+    visit new_user_tee_time_path(current_user)
+    fill_in("tee_time[time]", with: Time.now)
+    click_button("Create Tee Time")
+    expect(current_path).to eq(new_user_tee_time_path(current_user))
+  end
+
+  it "redirects back to TeeTime#new if no time is given" do
+    visit_signin
+    user_login
+    visit new_user_tee_time_path(current_user)
+    fill_in("tee_time[course_attributes][name]", with: "new course")
+    fill_in("tee_time[course_attributes][description]", with: "description")
+    fill_in("tee_time[course_attributes][location]", with: "location")
+    click_button("Create Tee Time")
+    expect(current_path).to eq(new_user_tee_time_path(current_user))
   end
 
 end

@@ -26,7 +26,7 @@
           <div class="col-sm-6">
             <p>Experience: <%= @user.experience if @user.experience %></p>
           </div>
-          <% if @user == current_user %>
+          <% if policy(@user).update? %>
             <div class="col-sm-6">
               <%= link_to "Edit Profile", edit_user_path(@user) %>
             </div>
@@ -39,13 +39,17 @@
 </div>
 <br><br><br>
 
+<% if policy(@user).update? %>
+  <div class="col-sm-6">
+    <%= link_to "Create New Tee Time", new_user_tee_time_path(@user) %>
+  </div>
 
-<%= link_to "Create New Tee Time", new_user_tee_time_path(@user) %>
-<br><br>
-<h4>Tee Times:</h4>
+  <br><br>
+  <h4>Tee Times:</h4>
 
-<ul>
-  <% @user.tee_times.each do |tee_time| %>
-    <li><%= "#{tee_time.course.name} - #{tee_time.time}" %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @user.tee_times.each do |tee_time| %>
+      <li><%= "#{tee_time.course.name} - #{tee_time.time}" %></li>
+    <% end %>
+  </ul>
+<% end %>

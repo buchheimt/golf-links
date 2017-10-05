@@ -1,3 +1,13 @@
+$bg-color: rgba(64, 105, 81, .75);
+$main-dark: rgba(34, 79, 53, .75);
+$main-light: rgba(35, 156, 86, .75);
+$btn-light: rgba(99, 232, 156, .75);
+$btn-dark: rgba(66, 156, 104, .75);
+
+a:hover {
+  transition: background 0.65s, color 0.65s;
+}
+
 body {
   background-image: url("background.jpg");
   margin: 25px;
@@ -9,7 +19,7 @@ body {
 
 .wrapper {
   box-sizing: border-box;
-  background: rgba(89, 127, 108, .75);
+  background: $bg-color;
   margin: 0 auto;
   padding: 25px;
   max-width: 960px;
@@ -30,7 +40,7 @@ nav {
     padding-right: 0;
   }
   box-sizing: border-box;
-  background: rgba(27, 94, 32, .75);
+  background: $main-light;
   color: white;
   margin: 0 auto;
   max-width: 960px;
@@ -45,7 +55,7 @@ nav {
   a:hover {
     color: white;
     text-decoration: none;
-    background: rgba(7, 74, 12, .75);
+    background: $main-dark;
   }
 }
 
@@ -57,14 +67,14 @@ img.profile-pic {
   margin-top: 15px;
   width: 100%;
   border-radius: 50%;
-  border: 3px solid rgb(7, 74, 12);
+  border: 3px solid $main-dark;
 }
 
 div.profile-summary {
   padding: 20px;
-  background: rgba(27, 94, 32, .75);
+  background: $main-light;
   border-radius: 10px;
-  border: 1px solid rgb(7, 74, 12);
+  border: 1px solid $main-dark;
   box-shadow: 4px 4px 2px #333;
 }
 
@@ -73,12 +83,12 @@ div.profile-summary {
 }
 
 .site-title {
-  background: rgba(7, 74, 12, .75);
+  background: $main-dark;
 }
 
 .tee-time-card {
   margin: 10px;
-  background: rgba(27, 94, 32, .75);
+  background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
@@ -89,10 +99,19 @@ div.profile-summary {
     width: 100%;
   }
   a:hover {
-    background: rgba(7, 74, 12, .75);
+    background: $main-dark;
     text-decoration: none;
     color: white;
     border-radius: 10px;
-
   }
+}
+
+.btn {
+  background: $btn-light;
+}
+
+.btn:hover {
+  background: $btn-dark;
+  text-decoration: none;
+  color: white;
 }

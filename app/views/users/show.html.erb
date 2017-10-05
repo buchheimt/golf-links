@@ -41,7 +41,7 @@
 
 <% if policy(@user).update? %>
   <div class="col-sm-6">
-    <%= link_to "Create New Tee Time", new_user_tee_time_path(@user) %>
+    <%= link_to "Create New Tee Time", new_user_tee_time_path(@user), class: "btn" %>
   </div>
 
   <br><br>

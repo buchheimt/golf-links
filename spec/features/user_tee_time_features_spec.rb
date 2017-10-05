@@ -20,7 +20,6 @@ describe "UserTeeTime Features", type: :feature do
         visit_signin
         user_login
         tee_time = TeeTime.create(course_id: course.id, time: Time.now)
-        #binding.pry
         visit tee_time_path(tee_time)
         click_button("Join Tee Time")
         expect(tee_time.users).to include(current_user)

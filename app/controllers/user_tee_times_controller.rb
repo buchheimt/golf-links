@@ -1,14 +1,15 @@
 class UserTeeTimesController < ApplicationController
 
   def create
-    @user_tee_time = UserTeeTime.new(user_tee_time_params)
-    if @user_tee_time.save
+    @tee_time = TeeTime.find_by_id(params[:user_tee_time][:tee_time_id])
+    @user = User.find_by_id(params[:user_tee_time][:user_id])
+    @user_tee_time = @tee_time.add_user(@user)
+    if @user_tee_time
       flash[:alert] = "Success! You're in"
     else
       flash[:alert] = "Sorry, there seems to be an issue"
     end
-    #binding.pry
-    redirect_to tee_time_path(@user_tee_time.tee_time)
+    redirect_to tee_time_path(@tee_time)
   end
 
   private

@@ -10,4 +10,11 @@ class TeeTime < ApplicationRecord
     self.build_course(course_attributes) unless self.course
   end
 
+  def add_user(user)
+    if !self.users.include?(user) && self.user_tee_times.size <= 3
+      self.user_tee_times.build(user_id: user.id)
+      self.save
+    end
+  end
+
 end

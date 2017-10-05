@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :users do
     resources :tee_times, only: [:new, :create, :show, :edit, :update]
   end
+  resources :courses do
+    resources :tee_times, only: [:new, :create, :show, :edit, :update] 
+  end
   resources :tee_times, only: [:index, :show]
   resources :user_tee_times, only: [:index, :create]
 

@@ -30,12 +30,29 @@ end
 
 describe "Feature Test: Course Show", type: :feature do
 
-  let(:course) {
+  before :each do
+    User.create(
+      username: "tylerB",
+      email: "tyler@gmail.com",
+      password: "123456",
+      password_confirmation: "123456"
+    )
+  end
+
+  before :each do
     Course.create(
       name: "Augusta National GC",
       description: "Home of the Masters",
       location: "Augusta, GA"
     )
+  end
+
+  let(:user) {
+    User.first
+  }
+
+  let(:course) {
+    Course.first
   }
 
   it "displays a course name" do
@@ -51,6 +68,21 @@ describe "Feature Test: Course Show", type: :feature do
   it "displays a course location" do
     visit course_path(course)
     expect(page).to have_content("Augusta, GA")
+  end
+
+  it "displays tee times scheduled for the course" do
+    tee_time = course.tee_times.build(time: Time.now)
+    tee_time.add_user(user)
+    visit course_path(course)
+    expect(page).to have_content(tee_time.time.to_s(:long))
+  end
+
+  it "displays associated tee times as links to nested tee time show page" do
+    tee_time = course.tee_times.build(time: Time.now)
+    tee_time.add_user(user)
+    visit course_path(course)
+    click_link(tee_time.time.to_s(:long))
+    expect(current_path).to eq(course_tee_time_path(course, tee_time))
   end
 
 end

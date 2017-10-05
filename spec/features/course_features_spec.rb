@@ -55,6 +55,23 @@ describe "Feature Test: Course Show", type: :feature do
     Course.first
   }
 
+  context "when logged in" do
+    it "links to Course/TeeTime#new" do
+      visit_signin
+      user_login
+      visit course_path(course)
+      click_link("Create New Tee Time")
+      expect(current_path).to eq(new_course_tee_time_path(course))
+    end
+  end
+
+  context "when logged out" do
+    it "doesn't link to User/TeeTime#new" do
+      visit course_path(course)
+      expect(page).to_not have_content("Create New Tee Time")
+    end
+  end
+
   it "displays a course name" do
     visit course_path(course)
     expect(page).to have_content("Augusta National GC")

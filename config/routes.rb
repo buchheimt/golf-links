@@ -13,9 +13,9 @@ Rails.application.routes.draw do
     resources :tee_times, only: [:new, :create, :show, :edit, :update]
   end
   resources :courses do
-    resources :tee_times, only: [:new, :create, :show, :edit, :update] 
+    resources :tee_times, only: [:new, :create, :show, :edit, :update]
   end
-  resources :tee_times, only: [:index, :show]
+  resources :tee_times, only: [:index, :show, :new, :create]
   resources :user_tee_times, only: [:index, :create]
 
   root to: "welcome#home"

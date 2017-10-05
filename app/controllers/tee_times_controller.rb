@@ -7,15 +7,23 @@ class TeeTimesController < ApplicationController
   def new
     @tee_time = TeeTime.new
     @user = User.find_by_id(params[:user_id])
+    @course = Course.find_by_id(params[:course_id])
   end
 
   def create
     @tee_time = TeeTime.new(tee_time_params)
-    @tee_time.user_tee_times.build(user_id: params[:user_id])
+    @tee_time.user_tee_times.build(user_id: session[:user_id])
     if @tee_time.save
-      redirect_to user_tee_time_path(params[:user_id], @tee_time)
+      if params[:user_id]
+        redirect_to user_tee_time_path(params[:user_id], @tee_time)
+      elsif params[:course_id]
+        redirect_to course_tee_time_path(params[:course_id], @tee_time)
+      else
+        redirect_to tee_time_path(@tee_time)
+      end
     else
-      redirect_to new_user_tee_time_path(current_user)
+      binding.pry
+      render :new
     end
   end
 

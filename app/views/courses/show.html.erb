@@ -2,6 +2,10 @@
 <h3><%= @course.location %></h3>
 <h3><%= @course.description %></h3>
 
+<% if logged_in? %>
+  <%= link_to "Create New Tee Time", new_course_tee_time_path(@course) %>
+<% end %>
+
 <% if @tee_times %>
   <% @tee_times.each do |tee_time| %>
     <li><%= link_to tee_time.time.to_s(:long), course_tee_time_path(@course, tee_time) %></li>

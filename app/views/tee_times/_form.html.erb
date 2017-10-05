@@ -1,33 +1,48 @@
-<%= form_for [user, tee_time] do |f| %>
+<%= form_for tee_time_form_route(tee_time, user, course) do |f| %>
+
+<% if tee_time.errors.any? %>
+  <div id="error_explanations">
+    <h4>There were <%= pluralize(tee_time.errors.size, "error") %>:</h4>
+    <ul>
+      <% tee_time.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
   <p>
     <%= f.label :time %>
     <%= f.text_field :time %>
   </p>
 
-  <p>
-    <%= f.label :course_id, "Select Course" %>
-    <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Add new course" %>
-  </p>
-
-  <p>OR</p>
-
-  <%= f.fields_for :course, tee_time.build_course do |cf| %>
+  <% if @course %>
+    <%= f.hidden_field :course_id, value: course.id %>
+  <% else %>
     <p>
-      <%= cf.label :name, "New Course Name" %>
-      <%= cf.text_field :name, placeholder: "(Only for new course)" %>
+      <%= f.label :course_id, "Select Course" %>
+      <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Add new course" %>
     </p>
 
-    <p>
-      <%= cf.label :description, "New Course Description" %>
-      <%= cf.text_field :description, placeholder: "(Only for new course)" %>
-    </p>
+    <p>OR</p>
 
-    <p>
-      <%= cf.label :location, "New Course Location" %>
-      <%= cf.text_field :location, placeholder: "(Only for new course)" %>
-    </p>
+    <%= f.fields_for :course, tee_time.build_course do |cf| %>
+      <p>
+        <%= cf.label :name, "New Course Name" %>
+        <%= cf.text_field :name, placeholder: "(Only for new course)" %>
+      </p>
 
+      <p>
+        <%= cf.label :description, "New Course Description" %>
+        <%= cf.text_field :description, placeholder: "(Only for new course)" %>
+      </p>
+
+      <p>
+        <%= cf.label :location, "New Course Location" %>
+        <%= cf.text_field :location, placeholder: "(Only for new course)" %>
+      </p>
+
+    <% end %>
   <% end %>
 
   <%= f.submit "Create Tee Time" %>

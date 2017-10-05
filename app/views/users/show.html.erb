@@ -46,10 +46,8 @@
 
   <br><br>
   <h4>Tee Times:</h4>
+  <div class="col-sm-9">
+    <%= render @user.tee_times %>
+  </div>
 
-  <ul>
-    <% @user.tee_times.each do |tee_time| %>
-      <li><%= "#{tee_time.course.name} - #{tee_time.time}" %></li>
-    <% end %>
-  </ul>
 <% end %>

@@ -75,3 +75,24 @@ div.profile-summary {
 .site-title {
   background: rgba(7, 74, 12, .75);
 }
+
+.tee-time-card {
+  margin: 10px;
+  background: rgba(27, 94, 32, .75);
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+  a {
+    padding: 10px;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+  }
+  a:hover {
+    background: rgba(7, 74, 12, .75);
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+
+  }
+}

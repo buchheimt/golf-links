@@ -1,0 +1,44 @@
+<%= form_for course do |f| %>
+
+  <div class="row">
+    <div class="col-sm-12 mx-auto">
+      <%= f.label :name %>
+      <%= check_for_errors(course.errors, :name) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 mx-auto">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 mx-auto">
+      <%= f.label :description %>
+      <%= check_for_errors(course.errors, :description) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 mx-auto">
+      <%= f.text_field :description %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 mx-auto">
+      <%= f.label :location %>
+      <%= check_for_errors(course.errors, :location) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 mx-auto">
+      <%= f.text_field :location %>
+    </div>
+  </div><br><br>
+
+  <div class="row">
+    <div class="col-sm-8 mx-auto">
+      <%= f.submit class: "btn" %>
+    </div>
+  </div>
+<% end %>

@@ -1,16 +1,5 @@
 <%= form_for user do |f| %>
 
-  <!-- <% if user.errors.any? %>
-    <div id="error_explanations">
-      <h4>There were <%= pluralize(user.errors.size, "error") %>:</h4>
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><p><%= message %></p></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %> -->
-
   <div class="row">
     <div class="col-sm-12 mx-auto">
       <%= f.label :username %>

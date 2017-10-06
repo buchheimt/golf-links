@@ -132,6 +132,27 @@ div.profile-summary {
   box-shadow: 4px 4px 2px #333;
 }
 
+.course-card {
+  padding: 0;
+  margin: 10px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+  a {
+    padding: 10px;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+  }
+  a:hover {
+    background: $main-dark;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+  }
+}
+
 label {
   margin: 10px 15px 0;
 }

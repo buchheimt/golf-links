@@ -1,9 +1,13 @@
-<h1>Course Index</h1>
-
-<ul>
-  <% @courses.each do |course| %>
-    <li>
-      <%= link_to course.name, course_path(course) %> - <%= course.location %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 mx-auto">
+      <h1>Course Index</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 mx-auto">
+      <%= link_to "Add New Course", new_course_path, class: "btn" %>
+    </div>
+  </div><br>
+  <%= render @courses %>
+</div>

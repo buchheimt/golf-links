@@ -18,6 +18,18 @@ RSpec.describe TeeTime, type: :model do
     }
   end
 
+  before :each do
+    Course.create(
+      name: "Augusta National GC",
+      description: "Home of the Masters",
+      location: "Augusta, GA"
+    )
+  end
+
+  let(:course) {
+    Course.first
+  }
+
   let(:user_attributes3) {user_attributes1.merge(username: "emmaB", email: "emma@gmail.com")}
   let(:user_attributes4) {user_attributes1.merge(username: "aryaS", email: "arya@gmail.com")}
   let(:user_attributes5) {user_attributes1.merge(username: "sansaS", email: "sansa@gmail.com")}
@@ -92,6 +104,20 @@ RSpec.describe TeeTime, type: :model do
       tee_time = TeeTime.create(time: "apple")
       course = tee_time.build_course(name: "test course")
       expect(tee_time).to_not be_valid
+    end
+  end
+
+  context "date_sort" do
+    it "sorts tee times into chronological order" do
+      user = User.create(user_attributes1)
+      tee_time1 = course.tee_times.build(time: "8:00")
+      tee_time2 = course.tee_times.build(time: "4:00")
+      tee_time3 = course.tee_times.build(time: "6:00")
+      tee_time1.add_user(user)
+      tee_time2.add_user(user)
+      tee_time3.add_user(user)
+      tee_times = TeeTime.date_sort
+      expect(tee_times).to eq([tee_time2, tee_time3, tee_time1])
     end
   end
 

@@ -17,4 +17,16 @@ class TeeTime < ApplicationRecord
     end
   end
 
+  def self.date_sort
+    all.order(time: :asc)
+  end
+
+  def self.user_date_sort(user)
+    joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", user.id).order(time: :asc)
+  end
+
+  def self.course_date_sort(course)
+    where(course_id: course.id).order(time: :asc)
+  end
+
 end

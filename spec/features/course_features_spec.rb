@@ -109,5 +109,16 @@ describe "Course Features", type: :feature do
       expect(current_path).to eq(course_tee_time_path(course, tee_time))
     end
 
+    it "defaults to displaying associated tee times in chronological order" do
+      tee_time1 = course.tee_times.build(time: "8:00")
+      tee_time2 = course.tee_times.build(time: "4:00")
+      tee_time3 = course.tee_times.build(time: "6:00")
+      tee_time1.add_user(user)
+      tee_time2.add_user(user)
+      tee_time3.add_user(user)
+      visit course_path(course)
+      expect(page.body.index("4:00")).to be < page.body.index("8:00")
+    end
+
   end
 end

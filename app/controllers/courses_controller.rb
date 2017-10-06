@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @tee_times = @course.tee_times
+    @tee_times = TeeTime.course_date_sort(@course)
   end
 
   def new

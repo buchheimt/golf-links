@@ -50,10 +50,12 @@
         <h4>Tee Times:</h4>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-9">
-        <%= render @user.tee_times %>
+    <% if @tee_times %>
+      <div class="row">
+        <div class="col-sm-9">
+          <%= render @tee_times %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 <% end %>

@@ -143,6 +143,19 @@ describe "User Features", type: :features do
         click_link(tee_time.time.to_s(:long))
         expect(current_path).to eq(user_tee_time_path(current_user, tee_time))
       end
+
+      it "defaults to displaying associated tee times in chronological order" do
+        visit_signin
+        user_login
+        tee_time1 = course.tee_times.build(time: "8:00")
+        tee_time2 = course.tee_times.build(time: "4:00")
+        tee_time3 = course.tee_times.build(time: "6:00")
+        tee_time1.add_user(current_user)
+        tee_time2.add_user(current_user)
+        tee_time3.add_user(current_user)
+        visit user_path(current_user)
+        expect(page.body.index("4:00")).to be < page.body.index("8:00")
+      end
     end
 
     context "when different user" do

@@ -3,7 +3,7 @@
 <h3><%= @course.description %></h3>
 
 <% if logged_in? %>
-  <%= link_to "Create New Tee Time", new_course_tee_time_path(@course) %>
+  <%= link_to "Create New Tee Time", new_course_tee_time_path(@course), class: "btn" %>
 <% end %>
 
 <% if @tee_times %>

@@ -2,7 +2,7 @@ $bg-color: rgba(64, 105, 81, .75);
 $main-dark: rgba(34, 79, 53, .75);
 $main-light: rgba(35, 156, 86, .75);
 $btn-light: rgba(99, 232, 156, .75);
-$btn-dark: rgba(66, 156, 104, .75);
+$btn-dark: rgba(26, 116, 64, .75);
 
 a:hover {
   transition: background 0.65s, color 0.65s;
@@ -12,6 +12,7 @@ body {
   background-image: url("background.jpg");
   margin: 25px;
   color: white;
+  text-align: center;
   a {
     color: white;
   }
@@ -108,10 +109,38 @@ div.profile-summary {
 
 .btn {
   background: $btn-light;
+  color: white;
 }
 
 .btn:hover {
   background: $btn-dark;
   text-decoration: none;
   color: white;
+  cursor: pointer;
+}
+
+.user-card {
+  margin: 10px;
+  padding: 30px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+}
+
+label {
+  margin: 10px 15px 0;
+}
+
+input {
+  width: 100%;
+}
+
+.fb-btn {
+  margin: 15px;
+  background: #4343AC;
+}
+
+.fb-btn:hover {
+  background: #227;
 }

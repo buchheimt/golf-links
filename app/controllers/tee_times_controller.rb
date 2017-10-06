@@ -13,6 +13,7 @@ class TeeTimesController < ApplicationController
   def create
     @tee_time = TeeTime.new(tee_time_params)
     @tee_time.user_tee_times.build(user_id: session[:user_id])
+    @tee_time.set_time(params[:tee_time][:time])
     if @tee_time.save
       flash[:confirmation] = "Tee time created!"
       if params[:user_id]
@@ -43,7 +44,7 @@ class TeeTimesController < ApplicationController
   private
 
   def tee_time_params
-    params.require(:tee_time).permit(:course_id, :time, course_attributes: [:name, :description, :location])
+    params.require(:tee_time).permit(:course_id, course_attributes: [:name, :description, :location])
   end
 
 end

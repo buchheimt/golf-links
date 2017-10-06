@@ -1,19 +1,9 @@
 <%= form_for tee_time_form_route(tee_time, user, course) do |f| %>
 
-<% if tee_time.errors.any? %>
-  <div id="error_explanations">
-    <h4>There were <%= pluralize(tee_time.errors.size, "error") %>:</h4>
-    <ul>
-      <% tee_time.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
   <p>
-    <%= f.label :time %>
-    <%= f.text_field :time %>
+    <%= select_tag "tee_time[time][hour]", options_from_collection_for_select((7..19).to_a, :to_i, :to_i), prompt: "Hour"  %>
+    <%= select_tag "tee_time[time][day]", options_from_collection_for_select((1..30).to_a, :to_i, :to_i), prompt: "Day"  %>
+    <%= select_tag "tee_time[time][month]", options_from_collection_for_select((1..12).to_a, :to_i, :to_i), prompt: "Month"  %>
   </p>
 
   <% if @course %>

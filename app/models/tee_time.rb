@@ -37,6 +37,10 @@ class TeeTime < ApplicationRecord
     !self.users.include?(user) && self.users.size < 4
   end
 
+  def set_time(time_hash)
+    self.time = DateTime.new(Time.now.year, time_hash[:month].to_i, time_hash[:day].to_i, time_hash[:hour].to_i)
+  end
+
   def self.date_sort
     all.order(time: :asc)
   end

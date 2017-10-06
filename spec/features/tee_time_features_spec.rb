@@ -140,7 +140,9 @@ describe "TeeTime Features" do
       visit_signin
       user_login
       visit new_user_tee_time_path(user)
-      fill_in("tee_time[time]", with: Time.now)
+      select(8, from: "tee_time[time][hour]")
+      select(10, from: "tee_time[time][day]")
+      select(10, from: "tee_time[time][month]")
       select(course.name, from: "tee_time[course_id]")
       click_button("Create Tee Time")
       expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
@@ -151,7 +153,9 @@ describe "TeeTime Features" do
       visit_signin
       user_login
       visit new_user_tee_time_path(user)
-      fill_in("tee_time[time]", with: Time.now)
+      select(8, from: "tee_time[time][hour]")
+      select(10, from: "tee_time[time][day]")
+      select(10, from: "tee_time[time][month]")
       fill_in("tee_time[course_attributes][name]", with: "new course")
       fill_in("tee_time[course_attributes][description]", with: "description")
       fill_in("tee_time[course_attributes][location]", with: "location")

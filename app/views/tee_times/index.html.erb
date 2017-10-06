@@ -1,3 +1,13 @@
-<h1>Tee Times Index</h1>
-
-<%= render @tee_times %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 mx-auto">
+      <h1>Tee Times Index</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 mx-auto">
+      <%= link_to "Create New Tee Time", new_tee_time_path, class: "btn" %>
+    </div>
+  </div><br>
+  <%= render @tee_times %>
+</div>

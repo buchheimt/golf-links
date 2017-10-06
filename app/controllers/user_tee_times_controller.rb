@@ -5,9 +5,9 @@ class UserTeeTimesController < ApplicationController
     @user = User.find_by_id(params[:user_tee_time][:user_id])
     @user_tee_time = @tee_time.add_user(@user)
     if @user_tee_time
-      flash[:alert] = "Success! You're in"
+      flash[:confirmation] = "Success! You're in"
     else
-      flash[:alert] = "Sorry, there seems to be an issue"
+      flash[:warning] = "Unable to join"
     end
     redirect_to tee_time_path(@tee_time)
   end

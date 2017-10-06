@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     authorize @user
     if @user.save
       session[:user_id] = @user.id
+      flash[:confirmation] = "Welcome, #{@user.username}!"
       redirect_to user_path(@user)
     else
       render :new
@@ -31,6 +32,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     authorize @user
     if @user.update(user_params)
+      flash[:confirmation] = "Update successfull!"
       redirect_to user_path(@user)
     else
       render :edit

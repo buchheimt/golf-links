@@ -14,6 +14,7 @@ class TeeTimesController < ApplicationController
     @tee_time = TeeTime.new(tee_time_params)
     @tee_time.user_tee_times.build(user_id: session[:user_id])
     if @tee_time.save
+      flash[:confirmation] = "Tee time created!"
       if params[:user_id]
         redirect_to user_tee_time_path(params[:user_id], @tee_time)
       elsif params[:course_id]
@@ -22,7 +23,6 @@ class TeeTimesController < ApplicationController
         redirect_to tee_time_path(@tee_time)
       end
     else
-      binding.pry
       render :new
     end
   end

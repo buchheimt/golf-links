@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
+        flash[:alert] = "Invalid combination of Username and Password"
         render :new
       end
     end

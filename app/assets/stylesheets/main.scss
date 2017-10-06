@@ -80,7 +80,11 @@ div.profile-summary {
 }
 
 .warning {
+  font-size: 20px;
+  padding: 10px;
+  background: rgba(175, 75, 75, .75);
   color: #722;
+  border-radius: 10px;
 }
 
 .site-title {
@@ -143,4 +147,20 @@ input {
 
 .fb-btn:hover {
   background: #227;
+}
+
+div.field_with_errors input {
+  border: 2px solid red;
+}
+
+.error-list {
+  list-style: none;
+  background: rgba(175, 75, 75, .75);
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.error-message {
+  font-size: 14px;
+  color: #722;
 }

@@ -5,7 +5,6 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# stylesheet_link_tag 'main' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -34,7 +33,13 @@
     </nav>
     <div class="wrapper">
       <% if flash[:alert] %>
-        <h4 class="warning"><%= flash[:alert] %></h3>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 mx-auto">
+              <h4 class="warning"><%= flash[:alert] %></h3>
+            </div>
+          </div>
+        </div>
       <% end %>
       <%= yield %>
     </div>

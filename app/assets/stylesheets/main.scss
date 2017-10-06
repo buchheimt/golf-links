@@ -83,6 +83,18 @@ div.profile-summary {
   background: $main-dark;
 }
 
+.btn {
+  background: $btn-light;
+  color: white;
+}
+
+.btn:hover {
+  background: $btn-dark;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
 .tee-time-card {
   padding: 0;
   margin: 10px;
@@ -104,16 +116,39 @@ div.profile-summary {
   }
 }
 
-.btn {
-  background: $btn-light;
-  color: white;
-}
-
-.btn:hover {
-  background: $btn-dark;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
+.tee-time-show-card {
+  padding: 0;
+  margin: 10px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+  li {
+    list-style: none;
+  }
+  h2 {
+    margin-top: 20px;
+  }
+  h5 {
+    margin: 5px 25px;
+    text-align: left;
+  }
+  .btn {
+    margin: 15px;
+  }
+  a {
+    float: left;
+    text-align: left;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+  }
+  a:hover {
+    background: $main-dark;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+  }
 }
 
 .user-card {

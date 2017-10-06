@@ -1,39 +1,68 @@
 <%= form_for tee_time_form_route(tee_time, user, course) do |f| %>
-
-  <p>
-    <%= select_tag "tee_time[time][hour]", options_from_collection_for_select((7..19).to_a, :to_i, :to_i), prompt: "Hour"  %>
-    <%= select_tag "tee_time[time][day]", options_from_collection_for_select((1..30).to_a, :to_i, :to_i), prompt: "Day"  %>
-    <%= select_tag "tee_time[time][month]", options_from_collection_for_select((1..12).to_a, :to_i, :to_i), prompt: "Month"  %>
-  </p>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Select A Time</p>
+      <%= select_tag "tee_time[time][hour]", options_from_collection_for_select((7..19).to_a, :to_i, :to_i), prompt: "Hour"  %>
+      <%= select_tag "tee_time[time][day]", options_from_collection_for_select((1..30).to_a, :to_i, :to_i), prompt: "Day"  %>
+      <%= select_tag "tee_time[time][month]", options_from_collection_for_select((1..12).to_a, :to_i, :to_i), prompt: "Month"  %>
+    </div>
+  </div>
 
   <% if @course %>
     <%= f.hidden_field :course_id, value: course.id %>
   <% else %>
-    <p>
-      <%= f.label :course_id, "Select Course" %>
-      <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Add new course" %>
-    </p>
+    <div class="row">
+      <div class="col-sm-12 mx-auto">
+        <%= f.label :course_id, "Select Course" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9 mx-auto">
+        <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Add new course" %>
+      </div>
+    </div><br>
 
     <p>OR</p>
 
     <%= f.fields_for :course, tee_time.build_course do |cf| %>
-      <p>
-        <%= cf.label :name, "New Course Name" %>
-        <%= cf.text_field :name, placeholder: "(Only for new course)" %>
-      </p>
 
-      <p>
-        <%= cf.label :description, "New Course Description" %>
-        <%= cf.text_field :description, placeholder: "(Only for new course)" %>
-      </p>
-
-      <p>
-        <%= cf.label :location, "New Course Location" %>
-        <%= cf.text_field :location, placeholder: "(Only for new course)" %>
-      </p>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= cf.label :name, "New Course Name" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_field :name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= cf.label :description, "New Course Description" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_field :description %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= cf.label :location, "New Course Location" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_field :location%>
+        </div>
+      </div>
 
     <% end %>
   <% end %>
 
-  <%= f.submit "Create Tee Time" %>
+  <div class="row">
+    <div class="col-sm-7 mx-auto">
+      <%= f.submit "Create Tee Time", class: "btn" %>
+    </div>
+  </div>
 <% end %>

@@ -1,3 +1,12 @@
-<h1>Create A Tee Time</h1>
-
-<%= render partial: 'form', locals: {tee_time: @tee_time, user: @user, course: @course} %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5 mx-auto tee-time-new-card">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Create A Tee Time</h2><br>
+        </div>
+      </div>
+      <%= render partial: 'form', locals: {tee_time: @tee_time, user: @user, course: @course} %>
+    </div>
+  </div>
+</div>

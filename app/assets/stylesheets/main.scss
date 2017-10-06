@@ -116,6 +116,22 @@ div.profile-summary {
   }
 }
 
+.tee-time-new-card {
+  padding: 0;
+  margin: 10px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+  h2 {
+    margin: 15px;
+  }
+  .btn {
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+}
+
 .tee-time-show-card {
   padding: 0;
   margin: 10px;

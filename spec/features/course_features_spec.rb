@@ -20,10 +20,16 @@ describe "Feature Test: Courses Index", type: :feature do
     expect(page).to have_content(course.location)
   end
 
-  it "as links to course show pages" do
+  it "has links to course show pages" do
     visit courses_path
     click_link "Augusta National GC"
     expect(current_path).to eq(course_path(course))
+  end
+
+  it "has a link to Course#new" do
+    visit courses_path
+    click_link "Add New Course"
+    expect(current_path).to eq(new_course_path)
   end
 
 end

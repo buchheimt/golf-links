@@ -1,5 +1,5 @@
 <div class="tee-time-card">
-  <a href="<%= tee_time_path(tee_time) %>">
+  <a href="<%= show_route(tee_time) %>">
     <h4><%= "#{tee_time.course.name}  -   #{tee_time.time.to_s(:long)}" %></h4>
     <p>Current Size: | Avg Pace: | Avg Experience: </p>
   </a>

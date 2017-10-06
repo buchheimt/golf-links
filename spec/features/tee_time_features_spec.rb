@@ -193,6 +193,16 @@ describe "TeeTime Features" do
       )
     end
 
+    let(:user_attributes) do {
+        username: "jonS",
+        email: "jon@gmail.com",
+        password: "123456",
+        password_confirmation: "123456",
+        pace: 8,
+        experience: 7
+      }
+    end
+
     before :each do
       Course.create(
         name: "Augusta National GC",
@@ -209,6 +219,10 @@ describe "TeeTime Features" do
       Course.first
     }
 
+    let(:user_attributes2) {user_attributes.merge(username: "user2", email: "u2@g.c")}
+    let(:user_attributes3) {user_attributes.merge(username: "user3", email: "u3@g.c")}
+    let(:user_attributes4) {user_attributes.merge(username: "user4", email: "u4@g.c")}
+
     it "allows a user view a TeeTime that belongs to them" do
       visit_signin
       user_login
@@ -218,6 +232,27 @@ describe "TeeTime Features" do
       expect(page).to have_content(course.name)
       expect(page).to have_content(user.username)
       expect(page).to have_content(tee_time.time.to_s(:long))
+    end
+
+    it "doesn't display a Join Tee Time button if full" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes))
+      tee_time.add_user(User.create(user_attributes2))
+      tee_time.add_user(User.create(user_attributes3))
+      tee_time.add_user(User.create(user_attributes4))
+      visit_signin
+      user_login
+      visit tee_time_path(tee_time)
+      expect(page).to_not have_content("Join Tee Time")
+    end
+
+    it "doesn't display a Join Tee Time button if already joined" do
+      tee_time = course.tee_times.build(time: Time.now)
+      visit_signin
+      user_login
+      tee_time.add_user(current_user)
+      visit tee_time_path(tee_time)
+      expect(page).to_not have_content("Join Tee Time")
     end
 
   end

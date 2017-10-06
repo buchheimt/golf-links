@@ -161,4 +161,30 @@ RSpec.describe TeeTime, type: :model do
     end
   end
 
+  context "joinable?" do
+    it "returns true if group is still open and user hasn't joined" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes2))
+      tee_time.add_user(User.create(user_attributes3))
+      tee_time.add_user(User.create(user_attributes4))
+      expect(tee_time.joinable?(User.create(user_attributes1))).to be true
+    end
+
+    it "returns false if group is full" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes2))
+      tee_time.add_user(User.create(user_attributes3))
+      tee_time.add_user(User.create(user_attributes4))
+      tee_time.add_user(User.create(user_attributes5))
+      expect(tee_time.joinable?(User.create(user_attributes1))).to be false
+    end
+
+    it "returns false if user has already joined" do
+      tee_time = course.tee_times.build(time: Time.now)
+      user = User.create(user_attributes1)
+      tee_time.add_user(user)
+      expect(tee_time.joinable?(user)).to be false
+    end
+  end
+
 end

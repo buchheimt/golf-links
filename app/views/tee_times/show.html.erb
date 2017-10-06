@@ -36,14 +36,16 @@
           </ul>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-5 mx-auto">
-          <%= form_tag '/user_tee_times', method: 'post' do %>
-            <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
-            <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
-            <%= submit_tag "Join Tee Time", class: 'btn' %>
-          <% end %>
+      <% if @tee_time.joinable?(current_user) %>
+        <div class="row">
+          <div class="col-sm-5 mx-auto">
+            <%= form_tag '/user_tee_times', method: 'post' do %>
+              <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
+              <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
+              <%= submit_tag "Join Tee Time", class: 'btn' %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
   </div>
 </div>

@@ -33,6 +33,10 @@ class TeeTime < ApplicationRecord
     "Group Size: #{group_size}/4 | Avg. Pace: #{avg_pace} | Avg. Experience: #{avg_experience}"
   end
 
+  def joinable?(user)
+    !self.users.include?(user) && self.users.size < 4
+  end
+
   def self.date_sort
     all.order(time: :asc)
   end

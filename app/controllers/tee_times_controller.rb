@@ -13,7 +13,12 @@ class TeeTimesController < ApplicationController
   def create
     @tee_time = TeeTime.new(tee_time_params)
     @tee_time.user_tee_times.build(user_id: session[:user_id])
-    @tee_time.set_time(params[:tee_time][:time])
+    time_hash = {
+      hour: params[:tee_time][:time][:hour],
+      day: params[:tee_time][:time][:day],
+      month: params[:tee_time][:time][:month]
+    }
+    @tee_time.set_time(time_hash)
     if @tee_time.save
       flash[:confirmation] = "Tee time created!"
       if params[:user_id]

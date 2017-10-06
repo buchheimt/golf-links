@@ -115,7 +115,7 @@ RSpec.describe TeeTime, type: :model do
     it "takes user selections and creates and sets datetime" do
       time = DateTime.new(2017, 12, 10, 8)
       tee_time = course.tee_times.build()
-      tee_time.set_time({hour: 8, day: 10, month: 12})
+      tee_time.set_time({hour: "8", day: "10", month: "12"})
       tee_time.save
       expect(tee_time).to be_valid
       expect(tee_time.time).to eq(time)

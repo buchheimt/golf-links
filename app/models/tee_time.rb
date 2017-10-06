@@ -38,7 +38,9 @@ class TeeTime < ApplicationRecord
   end
 
   def set_time(time_hash)
-    self.time = DateTime.new(Time.now.year, time_hash[:month].to_i, time_hash[:day].to_i, time_hash[:hour].to_i)
+    unless time_hash.any? {|k, v| v.empty?}
+      self.time = DateTime.new(Time.now.year, time_hash[:month].to_i, time_hash[:day].to_i, time_hash[:hour].to_i)
+    end
   end
 
   def self.date_sort

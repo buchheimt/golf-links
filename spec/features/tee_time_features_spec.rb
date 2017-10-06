@@ -121,21 +121,6 @@ describe "TeeTime Features" do
       Course.first
     }
 
-    # context "when nested in a course" do
-    #   it "does not display course fields" do
-    #     visit_signin
-    #     user_login
-    #     visit new_course_tee_time_path(course)
-    #     fill_in("tee_time[time]", with: Time.now)
-    #     expect(page).to_not have_content("Select Course")
-    #     expect(page).to_not have_content("New Course Name")
-    #     click_button("Create Tee Time")
-    #     expect(current_path).to eq(course_tee_time_path(course, TeeTime.first))
-    #     expect(page).to have_content(course.name)
-    #     expect(page).to have_content(current_user.username)
-    #   end
-    # end
-
     it "allows a user to create a new TeeTime with an existing course" do
       visit_signin
       user_login
@@ -163,27 +148,6 @@ describe "TeeTime Features" do
       expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
       expect(page).to have_content("new course")
     end
-
-    # it "redirects back to TeeTime#new if no course is selected or given" do
-    #   visit_signin
-    #   user_login
-    #   visit new_user_tee_time_path(current_user)
-    #   fill_in("tee_time[time]", with: Time.now)
-    #   click_button("Create Tee Time")
-    #   expect(current_path).to eq(new_user_tee_time_path(current_user))
-    # end
-    #
-    # it "redirects back to TeeTime#new if no time is given" do
-    #   visit_signin
-    #   user_login
-    #   visit new_user_tee_time_path(current_user)
-    #   fill_in("tee_time[course_attributes][name]", with: "new course")
-    #   fill_in("tee_time[course_attributes][description]", with: "description")
-    #   fill_in("tee_time[course_attributes][location]", with: "location")
-    #   click_button("Create Tee Time")
-    #   expect(current_path).to eq(new_user_tee_time_path(current_user))
-    # end
-
   end
 
   describe "TeeTime#show", type: :feature do

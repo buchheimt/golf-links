@@ -7,16 +7,14 @@ Rails.application.routes.draw do
 
   get '/auth/facebook/callback', to: 'sessions#create'
 
-  resources :users, only: [:new, :create, :show, :edit, :update]
-  resources :courses, only: [:index, :show, :new, :create]
-  resources :users do
-    resources :tee_times, only: [:new, :create, :show, :edit, :update]
+  resources :users, only: [:new, :create, :show, :edit, :update] do
+    resources :tee_times, only: [:new, :create, :show]
   end
-  resources :courses do
-    resources :tee_times, only: [:new, :create, :show, :edit, :update]
+  resources :courses, only: [:index, :show, :new, :create] do
+    resources :tee_times, only: [:new, :create, :show]
   end
   resources :tee_times, only: [:index, :show, :new, :create]
-  resources :user_tee_times, only: [:index, :create]
+  resources :user_tee_times, only: [:create]
 
   root to: "welcome#home"
 

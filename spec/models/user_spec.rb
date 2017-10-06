@@ -115,10 +115,6 @@ RSpec.describe User, type: :model do
       expect(User.new(short_password)).to_not be_valid
     end
 
-    it "is invalid without confirmation" do
-      expect(User.new(missing_confirmation)).to_not be_valid
-    end
-
     it "is invalid without matching confirmation" do
       expect(User.new(mismatch_confirmation)).to_not be_valid
     end
@@ -129,8 +125,8 @@ RSpec.describe User, type: :model do
       expect(User.new(attributes).pace).to eq(3)
     end
 
-    it "is optional" do
-      expect(User.new(missing_pace)).to be_valid
+    it "defaults to 5" do
+      expect(User.new(missing_pace).pace).to eq(5)
     end
 
     it "is only valid with an integer 1-10" do
@@ -144,8 +140,8 @@ RSpec.describe User, type: :model do
       expect(User.new(attributes).experience).to eq(8)
     end
 
-    it "is optional" do
-      expect(User.new(missing_experience)).to be_valid
+    it "defaults to 5" do
+      expect(User.new(missing_experience).experience).to eq(5)
     end
 
     it "is only valid with an integer 1-10" do

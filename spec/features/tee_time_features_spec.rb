@@ -8,7 +8,20 @@ describe "TeeTime Features" do
         username: "tylerB",
         email: "tyler@gmail.com",
         password: "123456",
-        password_confirmation: "123456"
+        password_confirmation: "123456",
+        pace: 4,
+        experience: 6
+      )
+    end
+
+    before :each do
+      User.create(
+        username: "jonS",
+        email: "jon@gmail.com",
+        password: "123456",
+        password_confirmation: "123456",
+        pace: 2,
+        experience: 8
       )
     end
 
@@ -24,6 +37,10 @@ describe "TeeTime Features" do
       User.first
     }
 
+    let(:user2) {
+      User.last
+    }
+
     let(:course) {
       Course.first
     }
@@ -37,6 +54,16 @@ describe "TeeTime Features" do
       expect(page).to have_content(tee_time1.course.name)
       expect(page).to have_content(tee_time1.time.to_s(:long))
       expect(page).to have_content(tee_time2.time.to_s(:long))
+    end
+
+    it "displays with size, avg pace, and avg experience" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(user)
+      tee_time.add_user(user2)
+      visit tee_times_path
+      expect(page).to have_content("Avg. Pace: 3.0")
+      expect(page).to have_content("Avg. Experience: 7.0")
+      expect(page).to have_content("Group Size: 2/4")
     end
 
     it "defaults to displaying in chronological order" do

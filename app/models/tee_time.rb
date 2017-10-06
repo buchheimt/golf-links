@@ -17,6 +17,22 @@ class TeeTime < ApplicationRecord
     end
   end
 
+  def group_size
+    self.users.size
+  end
+
+  def avg_pace
+    self.users.inject(0) {|sum, user| sum += user.pace} / group_size.to_f
+  end
+
+  def avg_experience
+    self.users.inject(0) {|sum, user| sum += user.experience} / group_size.to_f
+  end
+
+  def group_description
+    "Group Size: #{group_size}/4 | Avg. Pace: #{avg_pace} | Avg. Experience: #{avg_experience}"
+  end
+
   def self.date_sort
     all.order(time: :asc)
   end

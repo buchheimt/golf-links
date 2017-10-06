@@ -6,7 +6,9 @@ RSpec.describe TeeTime, type: :model do
       username: "tylerB",
       email: "tyler@gmail.com",
       password: "123456",
-      password_confirmation: "123456"
+      password_confirmation: "123456",
+      pace: 4,
+      experience: 6
     }
   end
 
@@ -14,7 +16,9 @@ RSpec.describe TeeTime, type: :model do
       username: "jonS",
       email: "jon@gmail.com",
       password: "123456",
-      password_confirmation: "123456"
+      password_confirmation: "123456",
+      pace: 2,
+      experience: 8
     }
   end
 
@@ -107,7 +111,7 @@ RSpec.describe TeeTime, type: :model do
     end
   end
 
-  context "date_sort" do
+  context "TeeTime#date_sort" do
     it "sorts tee times into chronological order" do
       user = User.create(user_attributes1)
       tee_time1 = course.tee_times.build(time: "8:00")
@@ -118,6 +122,42 @@ RSpec.describe TeeTime, type: :model do
       tee_time3.add_user(user)
       tee_times = TeeTime.date_sort
       expect(tee_times).to eq([tee_time2, tee_time3, tee_time1])
+    end
+  end
+
+  context "#group_size" do
+    it "returns an int representing the current group size" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes1))
+      tee_time.add_user(User.create(user_attributes2))
+      expect(tee_time.group_size).to eq(2)
+    end
+  end
+
+  context "#avg_pace" do
+    it "returns a float representing the average pace" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes1))
+      tee_time.add_user(User.create(user_attributes2))
+      expect(tee_time.avg_pace).to eq(3.0)
+    end
+  end
+
+  context "#avg_experience" do
+    it "returns a float representing the average experience" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes1))
+      tee_time.add_user(User.create(user_attributes2))
+      expect(tee_time.avg_experience).to eq(7.0)
+    end
+  end
+
+  context "#group_description" do
+    it "returns a formatted string with the tee times details" do
+      tee_time = course.tee_times.build(time: Time.now)
+      tee_time.add_user(User.create(user_attributes1))
+      tee_time.add_user(User.create(user_attributes2))
+      expect(tee_time.group_description).to eq("Group Size: 2/4 | Avg. Pace: 3.0 | Avg. Experience: 7.0")
     end
   end
 

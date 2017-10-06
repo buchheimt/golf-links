@@ -84,9 +84,22 @@ describe "User Features", type: :features do
       )
     end
 
+    before :each do
+      Course.create(
+        name: "Augusta National GC",
+        description: "Home of the Masters",
+        location: "Augusta, GA"
+      )
+    end
+
     let(:user) {
       User.first
     }
+
+    let(:course) {
+      Course.first
+    }
+
 
     context "when correct user" do
       it "links to User/TeeTime#new" do
@@ -117,8 +130,18 @@ describe "User Features", type: :features do
         tee_time2.save
         user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: current_user.id)
         visit user_path(current_user)
-        expect(page).to have_content("#{tee_time1.course.name} - #{tee_time1.time}")
-        expect(page).to have_content("#{tee_time2.course.name} - #{tee_time2.time}")
+        expect(page).to have_content("#{tee_time1.course.name} - #{tee_time1.time.to_s(:long)}")
+        expect(page).to have_content("#{tee_time2.course.name} - #{tee_time2.time.to_s(:long)}")
+      end
+
+      it "displays associated tee times as links to nested tee time show page" do
+        visit_signin
+        user_login
+        tee_time = course.tee_times.build(time: Time.now)
+        tee_time.add_user(current_user)
+        visit user_path(current_user)
+        click_link(tee_time.time.to_s(:long))
+        expect(current_path).to eq(user_tee_time_path(current_user, tee_time))
       end
     end
 
@@ -179,27 +202,18 @@ describe "User Features", type: :features do
         visit_signin
         user_login
         visit edit_user_path(current_user)
-        fill_in("user[pace]", with: 1)
+        select(1, from: "user[pace]")
         fill_in("user[password]", with: "123456")
         fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")
         expect(current_user.pace).to eq(1)
       end
 
-      it "prevents updating with invalid data" do
-        visit_signin
-        user_login
-        visit edit_user_path(current_user)
-        fill_in("user[pace]", with: "apple")
-        click_button("Update User")
-        expect(current_user.pace).to eq(8)
-      end
-
       it "redirects to User#show upon successful edit" do
         visit_signin
         user_login
         visit edit_user_path(current_user)
-        fill_in("user[pace]", with: 1)
+        select(1, from: "user[pace]")
         fill_in("user[password]", with: "123456")
         fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")

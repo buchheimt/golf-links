@@ -18,10 +18,12 @@ Specs:
 - [x] Include login (how e.g. Devise) *-Custom authentication system implemented*
 - [x] Include logout (how e.g. Devise) *-Custom authentication system implemented*
 - [x] Include third party signup/login (how e.g. Devise/OmniAuth) *-Facebook*
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes)
+- [x] Include nested resource show or index (URL e.g. users/2/recipes)
+        *-Tee Times are nested in users and courses*
 - [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
         *-user/:id/tee_times/new for Users to create new tee times*
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
+        *-forms show validation errors next to proper field with styling*
 
 Confirm:
 - [ ] The application is pretty DRY

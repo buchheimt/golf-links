@@ -3,6 +3,14 @@
     <a href="<%= course_path(course) %>">
       <h4><%= course.name %></h4>
       <p><%= course.location %></p>
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Active Tee Times: <%= course.active_tee_times.size %></p>
+        </div>
+        <div class="col-sm-6">
+          <p>All-Time: <%= course.tee_times.size %></p>
+        </div>
+      </div>
     </a>
   </div>
 </div>

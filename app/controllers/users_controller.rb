@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     authorize @user
-    @tee_times = TeeTime.user_date_sort(@user).uniq
+    @tee_times = TeeTime.user_date_sort(@user)
   end
 
   def edit

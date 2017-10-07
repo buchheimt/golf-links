@@ -121,11 +121,11 @@ describe "User Features", type: :features do
       it "displays all of user's tee times" do
         visit_signin
         user_login
-        tee_time1 = TeeTime.new(time: Time.now)
+        tee_time1 = TeeTime.new(time: "Dec 1 2098")
         tee_time1.build_course(name: "Augusta National GC")
         tee_time1.save
         user_tee_time1 = UserTeeTime.create(tee_time_id: tee_time1.id, user_id: current_user.id)
-        tee_time2 = TeeTime.new(time: Time.now)
+        tee_time2 = TeeTime.new(time: "Dec 1 2099")
         tee_time2.build_course(name: "Pebble Beach Golf Links")
         tee_time2.save
         user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: current_user.id)
@@ -137,7 +137,7 @@ describe "User Features", type: :features do
       it "displays associated tee times as links to nested tee time show page" do
         visit_signin
         user_login
-        tee_time = course.tee_times.build(time: Time.now)
+        tee_time = course.tee_times.build(time: "Dec 1 2099")
         tee_time.add_user(current_user)
         visit user_path(current_user)
         click_link(tee_time.time.to_s(:long))
@@ -147,14 +147,23 @@ describe "User Features", type: :features do
       it "defaults to displaying associated tee times in chronological order" do
         visit_signin
         user_login
-        tee_time1 = course.tee_times.build(time: "8:00")
-        tee_time2 = course.tee_times.build(time: "4:00")
-        tee_time3 = course.tee_times.build(time: "6:00")
+        tee_time1 = course.tee_times.build(time: "Dec 1 2099")
+        tee_time2 = course.tee_times.build(time: "Dec 1 2097")
+        tee_time3 = course.tee_times.build(time: "Dec 1 2098")
         tee_time1.add_user(current_user)
         tee_time2.add_user(current_user)
         tee_time3.add_user(current_user)
         visit user_path(current_user)
-        expect(page.body.index("4:00")).to be < page.body.index("8:00")
+        expect(page.body.index(tee_time2.time.year.to_s)).to be < page.body.index(tee_time1.time.year.to_s)
+      end
+
+      it "does not display tee times that have already taken place" do
+        visit_signin
+        user_login
+        tee_time1 = course.tee_times.build(time: Time.now)
+        tee_time1.add_user(current_user)
+        visit user_path(current_user)
+        expect(page).to_not have_content(tee_time1.time.to_s(:long))
       end
     end
 

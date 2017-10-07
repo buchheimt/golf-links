@@ -44,15 +44,15 @@ class TeeTime < ApplicationRecord
   end
 
   def self.date_sort
-    all.order(time: :asc)
+    all.where("time > ?", Time.now).order(time: :asc)
   end
 
   def self.user_date_sort(user)
-    joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", user.id).order(time: :asc)
+    joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", user.id).where("time > ?", Time.now).order(time: :asc).uniq
   end
 
   def self.course_date_sort(course)
-    where(course_id: course.id).order(time: :asc)
+    where(course_id: course.id).where("time > ?", Time.now).order(time: :asc)
   end
 
 end

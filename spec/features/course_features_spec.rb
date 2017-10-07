@@ -95,14 +95,14 @@ describe "Course Features", type: :feature do
     end
 
     it "displays tee times scheduled for the course" do
-      tee_time = course.tee_times.build(time: Time.now)
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(user)
       visit course_path(course)
       expect(page).to have_content(tee_time.time.to_s(:long))
     end
 
     it "displays associated tee times as links to nested tee time show page" do
-      tee_time = course.tee_times.build(time: Time.now)
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(user)
       visit course_path(course)
       click_link(tee_time.time.to_s(:long))
@@ -110,14 +110,21 @@ describe "Course Features", type: :feature do
     end
 
     it "defaults to displaying associated tee times in chronological order" do
-      tee_time1 = course.tee_times.build(time: "8:00")
-      tee_time2 = course.tee_times.build(time: "4:00")
-      tee_time3 = course.tee_times.build(time: "6:00")
+      tee_time1 = course.tee_times.build(time: "Dec 1 2099")
+      tee_time2 = course.tee_times.build(time: "Dec 1 2097")
+      tee_time3 = course.tee_times.build(time: "Dec 1 2098")
       tee_time1.add_user(user)
       tee_time2.add_user(user)
       tee_time3.add_user(user)
       visit course_path(course)
-      expect(page.body.index("4:00")).to be < page.body.index("8:00")
+      expect(page.body.index(tee_time2.time.year.to_s)).to be < page.body.index(tee_time1.time.year.to_s)
+    end
+
+    it "does not display tee times that have already taken place" do
+      tee_time1 = course.tee_times.build(time: Time.now)
+      tee_time1.add_user(user)
+      visit course_path(course)
+      expect(page).to_not have_content(tee_time1.time.to_s(:long))
     end
 
   end

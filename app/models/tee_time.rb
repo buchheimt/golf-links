@@ -44,7 +44,7 @@ class TeeTime < ApplicationRecord
   end
 
   def self.date_sort
-    all.where("time > ?", Time.now).order(time: :asc)
+    where("time > ?", Time.now).order(time: :asc)
   end
 
   def self.user_date_sort(user)

@@ -15,4 +15,10 @@ class User < ApplicationRecord
   has_many :tee_times, through: :user_tee_times
   has_many :courses, through: :tee_times
 
+  def favorite_course
+    rank_hash = TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", self.id).group("tee_times.course_id").count
+    Course.find_by_id(rank_hash.max_by{|k,v| v})
+  end
+
 end
+TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", User.first.id).group("tee_times.course_id").count

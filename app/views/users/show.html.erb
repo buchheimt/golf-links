@@ -32,6 +32,16 @@
             </div>
           <% end %>
         </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Favorite Course: <%= @user.favorite_course.name if @user.courses %></p>
+          </div>
+          <% if policy(@user).update? %>
+            <div class="col-sm-6">
+
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

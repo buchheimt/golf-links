@@ -20,4 +20,8 @@ module TeeTimeHelper
     end
   end
 
+  def size_status(tee_time)
+    tee_time.users.size == 4 ? " tee-time-full" : ""
+  end
+
 end

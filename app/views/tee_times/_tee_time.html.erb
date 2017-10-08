@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-8 mx-auto tee-time-card">
+  <div class="col-sm-8 mx-auto tee-time-card<%= size_status(tee_time) %>">
     <a href="<%= show_route(tee_time) %>">
       <h5><%= "#{tee_time.course.name}  -   #{tee_time.time.to_s(:long)}" %></h5>
       <p><%= tee_time.group_description %></p>

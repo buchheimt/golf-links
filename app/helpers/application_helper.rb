@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def format_created_at(instance)
-    instance.created_at.strftime("%F")
+    instance.created_at.to_s(:long)
   end
 
   def check_for_errors(errors, field)

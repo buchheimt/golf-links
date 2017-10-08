@@ -73,6 +73,7 @@ img.profile-pic {
 }
 
 div.profile-summary {
+  text-align: left;
   padding: 20px;
   background: $main-light;
   border-radius: 10px;
@@ -111,6 +112,16 @@ div.profile-summary {
   }
   a:hover {
     background: $main-dark;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+  }
+}
+
+.tee-time-full {
+  background: rgba(51, 69, 58, .75);
+  a:hover {
+    background: rgba(51, 69, 58, .75);
     text-decoration: none;
     color: white;
     border-radius: 10px;

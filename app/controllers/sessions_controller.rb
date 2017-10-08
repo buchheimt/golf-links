@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     if auth
       @user = User.find_or_create_by(email: auth[:info][:email]) do |u|
-        u.username = auth['uid']
+        u.username = auth[:info][:name].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...4]
         u.email = auth['info']['email']
         u.password = SecureRandom.hex
         u.password_confirmation = u.password

@@ -34,7 +34,7 @@ courses.each {|attributes| Course.create(attributes)}
   course = Course.all[rand(Course.all.size)]
   year = rand(2) + 2017
   month = rand(12) + 1
-  day = rand(30) + 1
+  day = rand(28) + 1
   hour = rand(12) + 7
   time = DateTime.new(year, month, day, hour)
   tee_time = course.tee_times.build(time: time)

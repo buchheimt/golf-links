@@ -1,7 +1,16 @@
 module ApplicationHelper
 
-  def format_created_at(instance)
-    instance.created_at.to_s(:long)
+  def format_created_at(user)
+    user.created_at.strftime("%b %e, %Y")
+  end
+
+  def format_tee_time(tee_time)
+    tee_time.time.strftime("%A %B %e, %Y | %l:%m %p")
+  end
+
+  def format_tee_time_long(tee_time)
+    tee_time.time.strftime("<h4>%A | %l:%m %p</h4><h4>%B %e, %Y</h4>").html_safe
+    tee_time.time.strftime("<h4>%B %e, %Y</h4><h4>%A | %l:%m %p</h4>").html_safe
   end
 
   def check_for_errors(errors, field)

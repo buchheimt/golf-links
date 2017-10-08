@@ -25,7 +25,7 @@ module TeeTimeHelper
   end
 
   def check_for_course(tee_time)
-    params[:controller] != "courses" ? "#{tee_time.course.name} - " : ""
+    params[:controller] != "courses" ? "<h4>#{tee_time.course.name}</h4>".html_safe : ""
   end
 
   def get_user_tee_time(tee_time, user)

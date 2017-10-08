@@ -25,6 +25,17 @@ class CoursesController < ApplicationController
     @tee_times = TeeTime.course_date_sort(@course)
   end
 
+  def favorite_course
+    @user = User.find_by_id(params[:id])
+    if !@user || @user.courses.empty?
+      redirect_to root_path
+    else
+      @course = @user.favorite_course
+      @tee_times = TeeTime.course_date_sort(@course)
+      render :show
+    end
+  end
+
   private
 
   def course_params

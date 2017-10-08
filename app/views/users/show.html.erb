@@ -33,9 +33,11 @@
           <% end %>
         </div>
         <div class="row">
-          <div class="col-sm-6">
-            <p>Favorite Course: <%= @user.favorite_course.name unless @user.courses.empty? %></p>
-          </div>
+          <% unless @user.courses.empty? %>
+            <div class="col-sm-6">
+              <p>Favorite Course: <%= link_to @user.favorite_course.name, user_favorite_course_path(@user) %></p>
+            </div>
+          <% end %>
           <% if policy(@user).update? %>
             <div class="col-sm-6">
 

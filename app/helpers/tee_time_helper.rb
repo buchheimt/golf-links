@@ -24,4 +24,9 @@ module TeeTimeHelper
     tee_time.users.size == 4 ? " tee-time-full" : ""
   end
 
+  def check_for_course(tee_time)
+    params[:controller] != "courses" ? "#{tee_time.course.name} - " : ""
+
+  end
+
 end

@@ -26,7 +26,11 @@ module TeeTimeHelper
 
   def check_for_course(tee_time)
     params[:controller] != "courses" ? "#{tee_time.course.name} - " : ""
+  end
 
+  def get_user_tee_time(tee_time, user)
+    user_tee_time = UserTeeTime.find_by(tee_time_id: tee_time.id, user_id: user.id)
+    user_tee_time.id if user_tee_time
   end
 
 end

@@ -47,5 +47,16 @@
           </div>
         </div>
       <% end %>
+      <% if @tee_time.users.include?(current_user) %>
+      <div class="row">
+        <div class="col-sm-5 mx-auto">
+          <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete' do %>
+            <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
+            <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
+            <%= submit_tag "Leave Tee Time", class: 'btn' %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
   </div>
 </div>

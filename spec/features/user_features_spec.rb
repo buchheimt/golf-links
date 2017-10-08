@@ -163,7 +163,7 @@ describe "User Features", type: :features do
         tee_time1 = course.tee_times.build(time: Time.now)
         tee_time1.add_user(current_user)
         visit user_path(current_user)
-        expect(page).to_not have_content(tee_time1.time.to_s(:long))
+        expect(page).to_not have_content("Group Size:")
       end
     end
 

@@ -95,6 +95,8 @@ describe "TeeTime Features" do
     end
 
     it "has a link to TeeTime#new" do
+      visit_signin
+      user_login
       visit tee_times_path
       click_link "Create New Tee Time"
       expect(current_path).to eq(new_tee_time_path)

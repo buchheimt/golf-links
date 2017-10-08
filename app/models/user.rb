@@ -21,4 +21,3 @@ class User < ApplicationRecord
   end
 
 end
-TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", User.first.id).group("tee_times.course_id").count

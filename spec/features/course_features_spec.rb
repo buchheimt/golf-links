@@ -28,6 +28,8 @@ describe "Course Features", type: :feature do
     end
 
     it "has a link to Course#new" do
+      visit_signin
+      user_login
       visit courses_path
       click_link "Add New Course"
       expect(current_path).to eq(new_course_path)

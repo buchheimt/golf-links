@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to(root_path) if logged_in?
+    authorize :session, :new?
   end
 
   def create
+    authorize :session, :create?
     if auth
       @user = User.find_or_create_by(email: auth[:info][:email]) do |u|
         u.username = auth[:info][:name].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...4]
@@ -31,11 +32,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if logged_in?
-      session.delete :user_id
-      flash[:confirmation] = "Logout successful"
-      redirect_to root_path
-    end
+    authorize :session, :destroy?
+    session.delete :user_id
+    flash[:confirmation] = "Logout successful"
+    redirect_to root_path
   end
 
   private

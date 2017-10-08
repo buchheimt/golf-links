@@ -17,10 +17,11 @@ describe "Feature Test: Navbar", type: :feature do
   it "has a link to User's profile page" do
     visit_signin
     user_login
-    user = User.first
-    expect(page).to have_content(user.username)
-    click_link(user.username)
-    expect(current_path).to eq(user_path(user))
+    current_user
+    visit root_path
+    expect(page).to have_content(@current_user.username)
+    click_link(@current_user.username)
+    expect(current_path).to eq(user_path(@current_user))
   end
 
 end

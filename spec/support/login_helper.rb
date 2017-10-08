@@ -38,7 +38,7 @@ module LoginHelper
   end
 
   def current_user
-    User.find_by_id(page.get_rack_session_key('user_id'))
+    @current_user = User.find_by_id(page.get_rack_session_key('user_id')) if page.get_rack_session_key('user_id')
   end
 
 end

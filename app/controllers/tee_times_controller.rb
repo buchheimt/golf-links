@@ -6,12 +6,14 @@ class TeeTimesController < ApplicationController
 
   def new
     @tee_time = TeeTime.new
+    authorize @tee_time
     @user = User.find_by_id(params[:user_id])
     @course = Course.find_by_id(params[:course_id])
   end
 
   def create
     @tee_time = TeeTime.new(tee_time_params)
+    authorize @tee_time
     @tee_time.user_tee_times.build(user_id: session[:user_id])
     time_hash = {
       hour: params[:tee_time][:time][:hour],
@@ -36,14 +38,6 @@ class TeeTimesController < ApplicationController
   def show
     @user = User.find_by_id(params[:user_id])
     @tee_time = TeeTime.find_by_id(params[:id])
-  end
-
-  def edit
-
-  end
-
-  def update
-
   end
 
   private

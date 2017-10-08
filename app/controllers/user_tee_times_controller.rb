@@ -1,10 +1,10 @@
 class UserTeeTimesController < ApplicationController
 
   def create
+    authorize :user_tee_time, :create?
     @tee_time = TeeTime.find_by_id(params[:user_tee_time][:tee_time_id])
     @user = User.find_by_id(params[:user_tee_time][:user_id])
-    @user_tee_time = @tee_time.add_user(@user)
-    if @user_tee_time
+    if @tee_time.add_user(@user)
       flash[:confirmation] = "Success! You're in"
     else
       flash[:warning] = "Unable to join"

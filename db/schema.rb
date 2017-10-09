@@ -10,12 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006173317) do
+ActiveRecord::Schema.define(version: 20171009204303) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "location"
+    t.integer "par"
+    t.integer "length"
+    t.integer "price"
+    t.string "image", default: "course-bg.jpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171006173317) do
     t.integer "pace", default: 5
     t.integer "experience", default: 5
     t.string "user_id"
-    t.string "image"
+    t.string "image", default: "golf-ball.jpg"
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

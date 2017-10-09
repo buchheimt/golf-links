@@ -3,15 +3,9 @@
     <div class="col-sm-10 mx-auto profile-summary">
       <div class="row">
         <div class="col-sm-3">
-          <% if @user.image %>
-            <div>
-              <img class="profile-pic" src="<%= @user.image %>?type=large" alt="Profile image">
-            </div>
-          <% else %>
-            <div>
-              <%= image_tag "golf-ball.jpg", class: "profile-pic" %>
-            </div>
-          <% end %>
+          <div>
+            <%= image_tag @user.image, class: "profile-pic" %>
+          </div>
         </div>
         <div class="col-sm-8 col-sm-offset-1">
           <h1 class="profile-title"><%= @user.username %></h1>

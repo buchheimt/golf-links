@@ -16,16 +16,70 @@
   )}
 
 courses = [
-  {name: "Augusta National GC", description: "Home of the Masters", location: "Augusta, GA"},
-  {name: "Oakmont Country Club", description: "The oldest top-ranked golf course in the U.S.", location: "Pittsburgh, PA"},
-  {name: "Innisbrook Resort (Copperhead)", description: "Home of the Valspar Championship", location: "Palm Harbor, FL"},
-  {name: "Bay Hill Club & Lodge", description: "Home of the Arnold Palmer Invitational", location: "Orlando, FL"},
-  {name: "Waialae CC", description: "Home of the Sony Open", location: "Honolulu, HI"},
-  {name: "Torrey Pines GC (South)", description: "Home of the Farmers Insurance Open", location: "San Diego, CA"},
-  {name: "Riviera CC", description: "Home of the Genesis Open", location: "Pacific Palisades, CA"},
-  {name: "Harbour Town GL", description: "Home of the RBC Heritage", location: "Hilton Head, SC"},
-  {name: "TPC San Antonio", description: "Home of the Valero Texas Open", location: "San Antonio, TX"},
-  {name: "Quail Hollow Club", description: "Home of the Wells Fargo Championship", location: "Charlotte, NC"}
+  {
+    name: "Cowboys Golf Club",
+    description: "Etched into the rolling hills of Grapevine, Texas, Cowboys Golf Club is distinguished as the first and only NFL-themed golf club in the world, and one of the region's only all-inclusive world-class resort golf properties.",
+    location: "Grapevine, TX",
+    par: 72,
+    length: 7017,
+    price: 140
+  },
+  {
+    name: "Iron Horse Golf Course",
+    description: "Iron Horse Golf Course's award-winning championship golf course serves as the centerpiece to a full-service daily fee golf facility boasting an array of dining and event amenities and numerous opportunities for fun and competitive play.",
+    location: "North Richard Hills, TX",
+    par: 70,
+    length: 6700,
+    price: 60
+  },
+  {
+    name: "Tierra Verde Golf Club",
+    description: "It's hard to find a more beautiful course than the award-winning Tierra Verde Golf Club. Tierra Verde is the first golf course in Texas and the first municipal course in the world to be certified as an Audubon Signature Sanctuary.",
+    location: "Arlington, TX",
+    par: 72,
+    length: 6975,
+    price: 72
+  },
+  {
+    name: "Tangle Ridge Golf Club",
+    description: "Tangle Ridge Golf Course in Grand Prairie, TX, will challenge your senses and skills. This 18-hole championship public golf course features exciting elevation changes, subtle Champion Ultra Dwarf Bermuda Grass Greens, tree-lined fairways, and water and sand hazards.",
+    location: "Grand Prairie, TX",
+    par: 72,
+    length: 6835,
+    price: 50
+  },
+  {
+    name: "Tenison Park GC (Tenison Highlands)",
+    description: "Tenison Highlands is one of the most popular golf courses in Texas. Redesigned in 2001 by PGA Tour professional D. A. Weibring and architect Steve Wolfard, the Highlands now has five beautiful lakes, 32 sand bunkers, tiff-eagle greens, and 419 Bermuda fairways to go along with its elevation changes and groves of hardwood trees.",
+    location: "Dallas, TX",
+    par: 72,
+    length: 7078,
+    price: 27
+  },
+  {
+    name: "The Bridges Golf Club",
+    description: "The Bridges Golf Club, a magnificent 18-hole Fred Couples Signature Golf Course, winds its way through The Bridges at Preston Crossings, a North Texas community, adding to the lush, park-like feel of the neighborhood.",
+    location: "Gunter, TX",
+    par: 72,
+    length: 7612,
+    price: 65
+  },
+  {
+    name: "Texas Star Golf Course",
+    description: "The Texas Star Golf Course and Conference Centre is conveniently located in Euless, Texas. It is a vibrant part of the Euless community.",
+    location: "Euless, TX",
+    par: 71,
+    length: 6936,
+    price: 77
+  },
+  {
+    name: "The Tribute Golf Club",
+    description: "Located in The Colony, Texas, just off the eastern shores of Lake Lewisville, The Tribute at The Colony offers a unique Scottish links-style golf experience unlike any other in North Texas, complemented by an array of upscale amenities – all open to the public.",
+    location: "The Colony, TX",
+    par: 72,
+    length: 7002,
+    price: 129
+  },
 ]
 
 courses.each {|attributes| Course.create(attributes)}

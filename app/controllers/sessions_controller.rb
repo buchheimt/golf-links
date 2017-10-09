@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         u.email = auth['info']['email']
         u.password = SecureRandom.hex
         u.password_confirmation = u.password
-        u.image = auth['info']['image']
+        u.image = auth['info']['image'] + "?type=large"
         u.save
       end
       session[:user_id] = @user.id

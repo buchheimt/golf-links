@@ -148,4 +148,40 @@ describe "Course Features", type: :feature do
     end
 
   end
+
+  describe "Course#edit", type: :feature do
+    before :each do
+      Course.create(
+        name: "Augusta National GC",
+        description: "Home of the Masters",
+        location: "Augusta, GA"
+      )
+    end
+
+    let(:course) {
+      Course.first
+    }
+
+    context "as admin" do
+      it "allows for the course to be updated" do
+        visit_signin
+        admin_login
+        visit edit_course_path(course)
+        fill_in("course[description]", with: "Madagascar")
+        click_button "Update Course"
+        expect(current_path).to eq(course_path(course))
+        expect(page).to have_content("Madagascar")
+      end
+    end
+
+    context "when not admin" do
+      it "redirects to welcome page" do
+        visit_signin
+        user_login
+        visit edit_course_path(course)
+        expect(current_path).to eq(root_path)
+      end
+    end
+
+  end
 end

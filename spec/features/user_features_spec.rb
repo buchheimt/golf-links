@@ -130,8 +130,10 @@ describe "User Features", type: :features do
         tee_time2.save
         user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: current_user.id)
         visit user_path(current_user)
-        expect(page).to have_content("#{tee_time1.course.name} - #{tee_time1.time.to_s(:long)}")
-        expect(page).to have_content("#{tee_time2.course.name} - #{tee_time2.time.to_s(:long)}")
+        expect(page).to have_content(tee_time1.course.name)
+        expect(page).to have_content(tee_time1.time.year)
+        expect(page).to have_content(tee_time2.course.name)
+        expect(page).to have_content(tee_time2.time.year)
       end
 
       it "displays associated tee times as links to nested tee time show page" do
@@ -140,7 +142,7 @@ describe "User Features", type: :features do
         tee_time = course.tee_times.build(time: "Dec 1 2099")
         tee_time.add_user(current_user)
         visit user_path(current_user)
-        click_link(tee_time.time.to_s(:long))
+        click_link(tee_time.time.year)
         expect(current_path).to eq(user_tee_time_path(current_user, tee_time))
       end
 

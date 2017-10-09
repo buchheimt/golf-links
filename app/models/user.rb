@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  enum role: [:user, :owner, :admin]
+  enum role: [:user, :admin]
 
   has_secure_password
   validates :username, uniqueness: true, presence: true

@@ -158,7 +158,7 @@ RSpec.describe TeeTime, type: :model do
     end
   end
 
-  context "joinable?" do
+  context "#joinable?" do
     it "returns true if group is still open and user hasn't joined" do
       tee_time = course.tee_times.build(time: Time.now)
       tee_time.add_user(User.create(user_attributes2))

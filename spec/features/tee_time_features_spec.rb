@@ -52,8 +52,8 @@ describe "TeeTime Features" do
       tee_time2.add_user(user)
       visit tee_times_path
       expect(page).to have_content(tee_time1.course.name)
-      expect(page).to have_content(tee_time1.time.to_s(:long))
-      expect(page).to have_content(tee_time2.time.to_s(:long))
+      expect(page).to have_content(format_tee_time(tee_time1))
+      expect(page).to have_content(format_tee_time(tee_time2))
     end
 
     it "displays with size, avg pace, and avg experience" do
@@ -81,7 +81,7 @@ describe "TeeTime Features" do
       tee_time1 = course.tee_times.build(time: Time.now)
       tee_time1.add_user(user)
       visit tee_times_path
-      expect(page).to_not have_content(tee_time1.time.to_s(:long))
+      expect(page).to_not have_content(format_tee_time(tee_time1))
     end
 
     it "has links to tee_time show pages" do
@@ -90,7 +90,7 @@ describe "TeeTime Features" do
       visit_signin
       user_login
       visit tee_times_path
-      click_link tee_time.time.to_s(:long)
+      click_link tee_time.time.year
       expect(current_path).to eq(tee_time_path(tee_time))
     end
 
@@ -200,7 +200,7 @@ describe "TeeTime Features" do
     let(:user_attributes3) {user_attributes.merge(username: "user3", email: "u3@g.c")}
     let(:user_attributes4) {user_attributes.merge(username: "user4", email: "u4@g.c")}
 
-    it "allows a user view a TeeTime that belongs to them" do
+    it "allows a user view a TeeTime" do
       visit_signin
       user_login
       tee_time = TeeTime.create(course_id: course.id, time: Time.now)
@@ -208,7 +208,7 @@ describe "TeeTime Features" do
       visit user_tee_time_path(user, tee_time)
       expect(page).to have_content(course.name)
       expect(page).to have_content(user.username)
-      expect(page).to have_content(tee_time.time.to_s(:long))
+      expect(page).to have_content(tee_time.time.year)
     end
 
     it "doesn't display a Join Tee Time button if full" do

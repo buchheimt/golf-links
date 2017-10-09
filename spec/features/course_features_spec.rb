@@ -64,6 +64,17 @@ describe "Course Features", type: :feature do
       Course.first
     }
 
+    context "as admin" do
+      it "has a link to Course#edit" do
+        visit_signin
+        admin_login
+        visit course_path(course)
+        expect(page).to have_content("Edit Course")
+        click_link "Edit Course"
+        expect(current_path).to eq(edit_course(course))
+      end
+    end
+
     context "when logged in" do
       it "links to Course/TeeTime#new" do
         visit_signin
@@ -71,6 +82,13 @@ describe "Course Features", type: :feature do
         visit course_path(course)
         click_link("Create New Tee Time")
         expect(current_path).to eq(new_course_tee_time_path(course))
+      end
+
+      it "does not link to Course#edit if not an admin" do
+        visit_signin
+        user_login
+        visit course_path(course)
+        expect(page).to_not have_content("Edit Course")
       end
     end
 
@@ -100,14 +118,14 @@ describe "Course Features", type: :feature do
       tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(user)
       visit course_path(course)
-      expect(page).to have_content(tee_time.time.to_s(:long))
+      expect(page).to have_content(format_tee_time(tee_time))
     end
 
     it "displays associated tee times as links to nested tee time show page" do
       tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(user)
       visit course_path(course)
-      click_link(tee_time.time.to_s(:long))
+      click_link(tee_time.time.year)
       expect(current_path).to eq(course_tee_time_path(course, tee_time))
     end
 
@@ -126,7 +144,7 @@ describe "Course Features", type: :feature do
       tee_time1 = course.tee_times.build(time: Time.now)
       tee_time1.add_user(user)
       visit course_path(course)
-      expect(page).to_not have_content(tee_time1.time.to_s(:long))
+      expect(page).to_not have_content(tee_time1.time.year)
     end
 
   end

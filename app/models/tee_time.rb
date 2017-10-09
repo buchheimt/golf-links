@@ -34,7 +34,7 @@ class TeeTime < ApplicationRecord
   end
 
   def joinable?(user)
-    !self.users.include?(user) && self.users.size < 4
+    !self.users.include?(user) && self.users.size < 4 && !!user
   end
 
   def set_time(time_hash)

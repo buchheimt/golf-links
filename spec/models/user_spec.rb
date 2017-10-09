@@ -162,7 +162,7 @@ RSpec.describe User, type: :model do
 
   describe "role" do
     it "is assignable" do
-      expect(User.new(attributes).role).to eq("owner")
+      expect(User.new(attributes).role).to eq("admin")
     end
 
     it "is optional" do

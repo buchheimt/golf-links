@@ -11,7 +11,6 @@ a:hover {
 body {
   background-image: url("background.jpg");
   background-attachment: fixed;
-  margin: 25px;
   color: white;
   text-align: center;
   a {
@@ -23,7 +22,7 @@ body {
   box-sizing: border-box;
   background: $bg-color;
   margin: 0 auto;
-  padding: 25px;
+  padding: 40px;
   max-width: 960px;
   min-height: 600px;
 }
@@ -79,6 +78,16 @@ img.course-pic {
 }
 
 div.profile-summary {
+  text-align: left;
+  padding: 20px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid $main-dark;
+  box-shadow: 4px 4px 2px #333;
+}
+
+div.course-summary {
+  margin-top: 10px;
   text-align: left;
   padding: 20px;
   background: $main-light;
@@ -194,6 +203,15 @@ div.profile-summary {
   box-shadow: 4px 4px 2px #333;
 }
 
+.course-main {
+  padding: 15px;
+  margin: 10px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+}
+
 .course-card {
   padding: 0;
   margin: 10px;
@@ -258,7 +276,12 @@ div.field_with_errors input {
   background: rgba(175, 75, 75, .75);
   color: #722;
 }
+
 .confirmation {
   background: $btn-light;
   color: $btn-dark;
+}
+
+.description {
+  text-align: center;
 }

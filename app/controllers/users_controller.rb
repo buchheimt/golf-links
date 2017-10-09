@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params(:username, :email, :pace, :experience, :role, :password, :password_confirmation))
     authorize @user
     if @user.save
       session[:user_id] = @user.id
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_id(params[:id])
     authorize @user
-    if @user.update(user_params)
+    if @user.update(user_params(:username, :email, :pace, :experience, :role))
       flash[:confirmation] = "Update successfull!"
       redirect_to user_path(@user)
     else
@@ -41,8 +41,8 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:username, :email, :pace, :experience, :role, :password, :password_confirmation)
+  def user_params(*args)
+    params.require(:user).permit(*args)
   end
 
 end

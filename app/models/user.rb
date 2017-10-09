@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :username, format: {with: /\A[\w ]+\z/, message: "username can only contain letters, numbers, and underscores"}
   validates :email, uniqueness: true, presence: true
   validates :email, format: {with: /.+@.+\..+/, message: "invalid email format"}
-  validates :password, length: {minimum: 6}, presence: true, confirmation: true
+  validates :password, length: {minimum: 6}, presence: true, confirmation: true, on: :create
   validates_inclusion_of :pace, in: 1..10, allow_nil: true
   validates_inclusion_of :experience, in: 1..10, allow_nil: true
 

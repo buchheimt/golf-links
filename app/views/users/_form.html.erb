@@ -43,30 +43,31 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :password %>
-      <%= check_for_errors(user.errors, :password) %>
+  <% unless user.persisted? %>
+    <div class="row">
+      <div class="col-sm-12 mx-auto">
+        <%= f.label :password %>
+        <%= check_for_errors(user.errors, :password) %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-11 mx-auto">
-      <%= f.password_field :password %>
+    <div class="row">
+      <div class="col-sm-11 mx-auto">
+        <%= f.password_field :password %>
+      </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :password_confirmation %>
-      <%= check_for_errors(user.errors, :password_confirmation) %>
+    <div class="row">
+      <div class="col-sm-12 mx-auto">
+        <%= f.label :password_confirmation %>
+        <%= check_for_errors(user.errors, :password_confirmation) %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-11 mx-auto">
-      <%= f.password_field :password_confirmation %>
+    <div class="row">
+      <div class="col-sm-11 mx-auto">
+        <%= f.password_field :password_confirmation %>
+      </div>
     </div>
-  </div><br><br>
-
+  <% end %>
+  <br><br>
   <div class="row">
     <div class="col-sm-8 mx-auto">
       <%= f.submit class: "btn" %>

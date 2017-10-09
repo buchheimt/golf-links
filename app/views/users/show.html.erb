@@ -15,7 +15,13 @@
         </div>
         <div class="col-sm-8 col-sm-offset-1">
           <h1 class="profile-title"><%= @user.username %></h1>
+
           <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <%= "<h3>Admin</h3>".html_safe if @user.admin? %>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-8">
                 <p>User Since: <%= format_created_at(@user) %></p>
@@ -37,7 +43,15 @@
             <div class="row">
               <% if policy(@user).update? %>
                 <div class="col-sm-4">
-                  <%= link_to "Edit Profile", edit_user_path(@user) %>
+                  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn" %>
+                </div>
+              <% end %>
+              <% if current_user.admin? && !@user.admin? %>
+                <div class="col-sm-4">
+                  <%= form_tag user_path(@user), method: "patch" do %>
+                    <%= hidden_field_tag "user[role]", "admin" %>
+                    <%= submit_tag "Make Admin", class: "btn" %>
+                  <% end %>
                 </div>
               <% end %>
             </div>

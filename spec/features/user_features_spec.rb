@@ -100,6 +100,34 @@ describe "User Features", type: :features do
       Course.first
     }
 
+    context "when admin on non-admin profile" do
+      it "has a link to make user an admin" do
+        visit_signin
+        admin_login
+        visit user_path(user)
+        click_button "Make Admin"
+        user = User.first
+        expect(user.admin?).to be true
+      end
+    end
+
+    context "when not admin or on an admin profile" do
+      it "doesn't have link to make already admin an admin" do
+        visit_signin
+        admin_login
+        user.role = "admin"
+        user.save
+        visit user_path(user)
+        expect(page).to_not have_content("Make Admin")
+      end
+
+      it "doesn't have link if current user isn't an admin" do
+        visit_signin
+        user_login
+        visit user_path(user)
+        expect(page).to_not have_content("Make Admin")
+      end
+    end
 
     context "when correct user" do
       it "links to User/TeeTime#new" do
@@ -227,8 +255,6 @@ describe "User Features", type: :features do
         user_login
         visit edit_user_path(current_user)
         select(1, from: "user[pace]")
-        fill_in("user[password]", with: "123456")
-        fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")
         expect(current_user.pace).to eq(1)
       end
@@ -238,8 +264,6 @@ describe "User Features", type: :features do
         user_login
         visit edit_user_path(current_user)
         select(1, from: "user[pace]")
-        fill_in("user[password]", with: "123456")
-        fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")
         expect(current_path).to eq(user_path(current_user))
       end

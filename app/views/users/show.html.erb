@@ -48,6 +48,11 @@
                   <% end %>
                 </div>
               <% end %>
+              <% if policy(@user).update? %>
+                <div class="col-sm-4">
+                  <%= link_to "Create New Tee Time", new_user_tee_time_path(@user), class: "btn" %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -58,22 +63,15 @@
   <% if policy(@user).update? %>
     <div class="container">
       <div class="row">
-        <div class="col-sm-8">
-          <div class="row">
-            <div class="col-sm-12">
-              <h4>My Upcoming Tee Times:</h4>
-            </div>
-          </div><br>
-          <div class="row">
-            <div class="col-sm-12">
-              <%= link_to "Create New Tee Time", new_user_tee_time_path(@user), class: "btn" %>
-            </div>
-          </div><br><br>
-          <% if @tee_times %>
-            <%= render @tee_times %>
-          <% end %>
+        <div class="col-sm-12">
+          <h4>My Upcoming Tee Times:</h4>
         </div>
-      </div>
+      </div><br>
+      <% if @tee_times %>
+        <div class="row">
+          <%= render @tee_times %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -25,6 +25,22 @@ class CoursesController < ApplicationController
     @tee_times = TeeTime.course_date_sort(@course)
   end
 
+  def edit
+    @course = Course.find_by_id(params[:id])
+    authorize @course
+  end
+
+  def update
+    @course = Course.find_by_id(params[:id])
+    authorize @course
+    if @course.update
+      flash[:confirmation] = "Course successfully updated!"
+      redirect_to course_path(course)
+    else
+      render :edit
+    end
+  end
+
   def favorite_course
     @user = User.find_by_id(params[:id])
     if !@user || @user.courses.empty?

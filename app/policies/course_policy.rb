@@ -1,11 +1,19 @@
 class CoursePolicy < ApplicationPolicy
 
   def new?
-    user
+    create?
   end
 
   def create?
     user
+  end
+
+  def edit?
+    update?
+  end
+
+  def update?
+    user && user.admin?
   end
 
 end

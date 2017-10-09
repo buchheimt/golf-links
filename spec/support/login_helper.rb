@@ -42,7 +42,7 @@ module LoginHelper
       experience: 7,
       role: 1
     )
-    fill_in("user[username]", with: "tylerB")
+    fill_in("user[username]", with: "tyler10000")
     fill_in("user[password]", with: "123456")
     click_button("Sign In")
   end

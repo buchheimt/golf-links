@@ -71,7 +71,7 @@ describe "Course Features", type: :feature do
         visit course_path(course)
         expect(page).to have_content("Edit Course")
         click_link "Edit Course"
-        expect(current_path).to eq(edit_course(course))
+        expect(current_path).to eq(edit_course_path(course))
       end
     end
 

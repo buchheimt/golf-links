@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :edit, :update] do
     resources :tee_times, only: [:new, :create, :show]
   end
-  resources :courses, only: [:index, :show, :new, :create] do
+  resources :courses, only: [:index, :show, :new, :create, :edit, :update] do
     resources :tee_times, only: [:new, :create, :show]
   end
   resources :tee_times, only: [:index, :show, :new, :create]

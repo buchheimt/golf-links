@@ -63,7 +63,7 @@ describe "TeeTime Features" do
       visit tee_times_path
       expect(page).to have_content("Avg. Pace: 3.0")
       expect(page).to have_content("Avg. Experience: 7.0")
-      expect(page).to have_content("Group Size: 2/4")
+      expect(page).to have_content("Size: 2/4")
     end
 
     it "defaults to displaying in chronological order" do

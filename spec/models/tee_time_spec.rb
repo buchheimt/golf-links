@@ -154,7 +154,7 @@ RSpec.describe TeeTime, type: :model do
       tee_time = course.tee_times.build(time: Time.now)
       tee_time.add_user(User.create(user_attributes1))
       tee_time.add_user(User.create(user_attributes2))
-      expect(tee_time.group_description).to eq("Group Size: 2/4 | Avg. Pace: 3.0 | Avg. Experience: 7.0")
+      expect(tee_time.group_description).to eq("Size: 2/4 | Avg. Pace: 3.0 | Avg. Experience: 7.0")
     end
   end
 

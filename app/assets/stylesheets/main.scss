@@ -206,14 +206,20 @@ div.course-summary {
 
 .course-main {
   padding: 15px;
-  margin: 10px;
+  margin: 10px 0;
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
   p {
-    // text-align: left;
+    text-align: left;
     margin-bottom: 5px;
+  }
+  .description {
+    text-align: center;
+  }
+  .btn {
+    margin: 10px;
   }
 }
 

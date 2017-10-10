@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def format_tee_time(tee_time)
-    tee_time.time.strftime("%A %B %e, %Y | %l:%m %p")
+    tee_time.time.strftime("%A %b %e, %Y | %l:%m %p")
   end
 
   def format_tee_time_long(tee_time)

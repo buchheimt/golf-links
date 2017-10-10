@@ -9,8 +9,7 @@
   </head>
 
   <body>
-    <nav>
-      <div class="container">
+    <nav class="fixed-nav">
         <div class="row">
           <div class="col-sm-3">
             <%= link_to "Golf Links", root_path, class: "site-title" %>
@@ -29,7 +28,6 @@
             <% end %>
           </div>
         </div>
-      </div>
     </nav>
     <div class="wrapper">
       <% if flash[:warning] %>

@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
         redirect_to user_path(@user)
       else
         flash[:warning] = "Invalid combination of Username and Password"
-        render :new
+        redirect_to signin_path
       end
     end
   end

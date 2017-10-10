@@ -31,7 +31,6 @@ class TeeTimesController < ApplicationController
         redirect_to tee_time_path(@tee_time)
       end
     else
-      binding.pry
       render :new
     end
   end

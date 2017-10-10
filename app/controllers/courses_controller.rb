@@ -37,11 +37,10 @@ class CoursesController < ApplicationController
     if @course.update(course_params)
       if last_update == @course.updated_at
         flash[:warning] = "No changes to update"
-        render :edit
       else
         flash[:confirmation] = "Course successfully updated!"
-        redirect_to course_path(@course)
       end
+      redirect_to course_path(@course)
     else
       render :edit
     end

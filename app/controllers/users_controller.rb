@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     if @user.update(user_params(:username, :email, :pace, :experience, :image, :role))
       if last_update == @user.updated_at
         flash[:warning] = "No changes to update"
-        render :edit
+        redirect_to user_path(@user)
       else
         flash[:confirmation] = "Update successful!"
         redirect_to user_path(@user)

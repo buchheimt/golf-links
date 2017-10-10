@@ -31,6 +31,7 @@ class TeeTimesController < ApplicationController
         redirect_to tee_time_path(@tee_time)
       end
     else
+      binding.pry
       render :new
     end
   end
@@ -43,7 +44,7 @@ class TeeTimesController < ApplicationController
   private
 
   def tee_time_params
-    params.require(:tee_time).permit(:course_id, course_attributes: [:name, :description, :location])
+    params.require(:tee_time).permit(:course_id, course_attributes: [:name, :description, :location, :image, :par, :length, :price])
   end
 
 end

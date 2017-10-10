@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-12 mx-auto">
       <%= f.label :name %>
-      <%= check_for_errors(course.errors, :name) %>
+      <%= check_for_errors(course.errors, [:name]) %>
     </div>
   </div>
   <div class="row">
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-sm-12 mx-auto">
       <%= f.label :description %>
-      <%= check_for_errors(course.errors, :description) %>
+      <%= check_for_errors(course.errors, [:description]) %>
     </div>
   </div>
   <div class="row">
@@ -27,7 +27,7 @@
   <div class="row">
     <div class="col-sm-12 mx-auto">
       <%= f.label :location %>
-      <%= check_for_errors(course.errors, :location) %>
+      <%= check_for_errors(course.errors, [:location]) %>
     </div>
   </div>
   <div class="row">
@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-sm-12 mx-auto">
       <%= f.label :image %>
-      <%= check_for_errors(course.errors, :image) %>
+      <%= check_for_errors(course.errors, [:image]) %>
     </div>
   </div>
   <div class="row">
@@ -51,15 +51,17 @@
   <div class="row details">
     <div class="col-sm-3 mx-auto">
       <%= f.label :par %>
-      <%= check_for_errors(course.errors, :par) %>
     </div>
     <div class="col-sm-3 mx-auto">
       <%= f.label :length %>
-      <%= check_for_errors(course.errors, :length) %>
     </div>
     <div class="col-sm-3 mx-auto">
       <%= f.label :price %>
-      <%= check_for_errors(course.errors, :price) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 mx-auto">
+      <%= check_for_errors(course.errors, [:par, :length, :price]) %>
     </div>
   </div>
 

@@ -56,7 +56,7 @@ RSpec.describe TeeTime, type: :model do
   context "users" do
     it "has many Users through UserTeeTimes" do
       tee_time = TeeTime.create(time: Time.now)
-      tee_time.build_course(name: "Augusta National GC")
+      tee_time.build_course(name: "Augusta National GC", location: "test")
       user_tee_time1 = tee_time.user_tee_times.build()
       user1 = user_tee_time1.build_user(user_attributes1)
       user_tee_time2 = tee_time.user_tee_times.build()
@@ -70,7 +70,7 @@ RSpec.describe TeeTime, type: :model do
 
     it "prevents duplicate users" do
       tee_time = TeeTime.create(time: Time.now)
-      tee_time.build_course(name: "Augusta National GC")
+      tee_time.build_course(name: "Augusta National GC", location: "test")
       user1 = User.create(user_attributes1)
       tee_time.add_user(user1)
       tee_time.add_user(user1)
@@ -80,7 +80,7 @@ RSpec.describe TeeTime, type: :model do
 
     it "prevents more than four users from joining" do
       tee_time = TeeTime.create(time: Time.now)
-      tee_time.build_course(name: "Augusta National GC")
+      tee_time.build_course(name: "Augusta National GC", location: "test")
       user1 = User.create(user_attributes1)
       user2 = User.create(user_attributes2)
       user3 = User.create(user_attributes3)

@@ -45,10 +45,10 @@ RSpec.describe User, type: :model do
     user = User.create(attributes)
     user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
     tee_time1 = user_tee_time1.build_tee_time(time: Time.now)
-    tee_time1.build_course(name: "Augusta National GC")
+    tee_time1.build_course(name: "Augusta National GC", location: "test")
     user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
     tee_time2 = user_tee_time2.build_tee_time(time: Time.now)
-    tee_time2.build_course(name: "Pebble Beach Golf Links")
+    tee_time2.build_course(name: "Pebble Beach Golf Links", location: "test2")
     user_tee_time1.save
     user_tee_time2.save
     expect(user.tee_times.size).to eq(2)
@@ -60,10 +60,10 @@ RSpec.describe User, type: :model do
     user = User.create(attributes)
     user_tee_time1 = user.user_tee_times.build(tee_time_id: 1)
     tee_time1 = user_tee_time1.build_tee_time(time: Time.now)
-    course1 = tee_time1.build_course(name: "Augusta National GC")
+    course1 = tee_time1.build_course(name: "Augusta National GC", location: "test")
     user_tee_time2 = user.user_tee_times.build(tee_time_id: 2)
     tee_time2 = user_tee_time2.build_tee_time(time: Time.now)
-    course2 = tee_time2.build_course(name: "Pebble Beach Golf Links")
+    course2 = tee_time2.build_course(name: "Pebble Beach Golf Links", location: "test2")
     user_tee_time1.save
     user_tee_time2.save
     expect(user.courses.size).to eq(2)

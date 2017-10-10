@@ -150,11 +150,11 @@ describe "User Features", type: :features do
         visit_signin
         user_login
         tee_time1 = TeeTime.new(time: "Dec 1 2098")
-        tee_time1.build_course(name: "Augusta National GC")
+        tee_time1.build_course(name: "Augusta National GC", location: "test")
         tee_time1.save
         user_tee_time1 = UserTeeTime.create(tee_time_id: tee_time1.id, user_id: current_user.id)
         tee_time2 = TeeTime.new(time: "Dec 1 2099")
-        tee_time2.build_course(name: "Pebble Beach Golf Links")
+        tee_time2.build_course(name: "Pebble Beach Golf Links", location: "test2")
         tee_time2.save
         user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: current_user.id)
         visit user_path(current_user)

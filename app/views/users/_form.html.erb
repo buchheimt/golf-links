@@ -43,6 +43,18 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-sm-12 mx-auto">
+      <%= f.label :image %>
+      <%= check_for_errors(user.errors, :image) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-11 mx-auto">
+      <%= f.text_field :image %>
+    </div>
+  </div>
+
   <% unless user.persisted? %>
     <div class="row">
       <div class="col-sm-12 mx-auto">

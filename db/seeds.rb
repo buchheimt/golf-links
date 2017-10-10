@@ -49,7 +49,7 @@ courses = [
     price: 50
   },
   {
-    name: "Tenison Park GC (Tenison Highlands)",
+    name: "Tenison Park GC",
     description: "Tenison Highlands is one of the most popular golf courses in Texas. Redesigned in 2001 by PGA Tour professional D. A. Weibring and architect Steve Wolfard, the Highlands now has five beautiful lakes, 32 sand bunkers, tiff-eagle greens, and 419 Bermuda fairways to go along with its elevation changes and groves of hardwood trees.",
     location: "Dallas, TX",
     par: 72,

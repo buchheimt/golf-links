@@ -20,4 +20,8 @@ class User < ApplicationRecord
     Course.find_by_id(rank_hash.max_by{|k,v| v})
   end
 
+  def active_tee_times
+    TeeTime.user_date_sort(self)
+  end
+
 end

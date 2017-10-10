@@ -65,7 +65,7 @@ h1.profile-title {
 }
 
 img.profile-pic {
-  margin-top: 15px;
+  margin-top: 40px;
   width: 100%;
   border-radius: 50%;
   border: 3px solid $main-dark;
@@ -305,4 +305,11 @@ textarea {
 .details label {
   margin: 0;
   text-align: center;
+}
+
+.admin {
+  background: $main-dark;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
 }

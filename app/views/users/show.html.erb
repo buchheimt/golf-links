@@ -8,14 +8,15 @@
           </div>
         </div>
         <div class="col-sm-8 col-sm-offset-1">
-          <h1 class="profile-title"><%= @user.username %></h1>
-
+        <div class="row">
+          <div class="col-sm-8">
+            <h1 class="profile-title"><%= @user.username %></h1>
+          </div>
+          <div class="col-sm-4">
+            <%= "<h3 class=\"admin\">Admin</h3>".html_safe if @user.admin? %>
+          </div>
+        </div>
           <div class="container">
-            <div class="row">
-              <div class="col-sm-6">
-                <%= "<h3>Admin</h3>".html_safe if @user.admin? %>
-              </div>
-            </div>
             <div class="row">
               <div class="col-sm-8">
                 <p>User Since: <%= format_created_at(@user) %></p>
@@ -32,6 +33,16 @@
               <% end %>
               <div class="col-sm-4">
                 <p>Experience: <%= @user.experience if @user.experience %></p>
+              </div>
+            </div>
+            <div class="row">
+              <% unless @user.courses.empty? %>
+                <div class="col-sm-8">
+                  <p>Active Tee Times: <%= @user.active_tee_times.size %></p>
+                </div>
+              <% end %>
+              <div class="col-sm-4">
+                <p>All-Time: <%= @user.tee_times.size %></p>
               </div>
             </div>
             <div class="row">

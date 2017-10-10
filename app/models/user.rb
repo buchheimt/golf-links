@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   def favorite_course
     rank_hash = TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", self.id).group("tee_times.course_id").count
-    Course.find_by_id(rank_hash.max_by{|k,v| v})
+    Course.find_by_id(rank_hash.max_by{|k,v| v}[0])
   end
 
   def active_tee_times

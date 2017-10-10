@@ -28,7 +28,7 @@
             <div class="row">
               <% unless @user.courses.empty? %>
                 <div class="col-sm-8">
-                  <p>Favorite Course: <%= link_to @user.favorite_course.name, user_favorite_course_path(@user) %></p>
+                  <p>Favorite Course: <%= link_to @user.favorite_course.name, user_favorite_course_path(@user), class: "fav-course" %></p>
                 </div>
               <% end %>
               <div class="col-sm-4">

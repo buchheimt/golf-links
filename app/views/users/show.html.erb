@@ -19,30 +19,30 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-8">
-                <p>User Since: <%= format_created_at(@user) %></p>
+                <p><strong>User Since: </strong><%= format_created_at(@user) %></p>
               </div>
               <div class="col-sm-4">
-                <p>Pace-of-Play: <%= @user.pace if @user.pace %></p>
-              </div>
-            </div>
-            <div class="row">
-              <% unless @user.courses.empty? %>
-                <div class="col-sm-8">
-                  <p>Favorite Course: <%= link_to @user.favorite_course.name, user_favorite_course_path(@user), class: "fav-course" %></p>
-                </div>
-              <% end %>
-              <div class="col-sm-4">
-                <p>Experience: <%= @user.experience if @user.experience %></p>
+                <p><strong>Pace-of-Play: </strong><%= @user.pace if @user.pace %></p>
               </div>
             </div>
             <div class="row">
               <% unless @user.courses.empty? %>
                 <div class="col-sm-8">
-                  <p>Active Tee Times: <%= @user.active_tee_times.size %></p>
+                  <p><strong>Favorite Course: </strong><%= link_to @user.favorite_course.name, user_favorite_course_path(@user), class: "fav-course" %></p>
                 </div>
               <% end %>
               <div class="col-sm-4">
-                <p>All-Time: <%= @user.tee_times.size %></p>
+                <p><strong>Experience: </strong><%= @user.experience if @user.experience %></p>
+              </div>
+            </div>
+            <div class="row">
+              <% unless @user.courses.empty? %>
+                <div class="col-sm-8">
+                  <p><strong>Active Tee Times: </strong><%= @user.active_tee_times.size %></p>
+                </div>
+              <% end %>
+              <div class="col-sm-4">
+                <p><strong>All-Time: </strong><%= @user.tee_times.size %></p>
               </div>
             </div>
             <div class="row">

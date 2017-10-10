@@ -10,21 +10,21 @@
         <div class="col-sm-12 mx-auto">
           <h3><%= format_tee_time_long(@tee_time) %></h3>
         </div>
+      </div><br><br>
+      <div class="row">
+        <div class="col-sm-12">
+          <h5><strong>Group Size:</strong> <%= @tee_time.group_size %>/4</h5>
+        </div>
+        <div class="col-sm-12">
+          <h5><strong>Average Pace:</strong> <%= @tee_time.avg_pace %></h5>
+        </div>
+        <div class="col-sm-12">
+          <h5><strong>Average Experience:</strong> <%= @tee_time.avg_experience %></h5>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <h5>Group Size: <%= @tee_time.group_size %>/4</h5>
-        </div>
-        <div class="col-sm-12">
-          <h5>Average Pace: <%= @tee_time.avg_pace %></h5>
-        </div>
-        <div class="col-sm-12">
-          <h5>Average Experience: <%= @tee_time.avg_experience %></h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <h5>Golfers:</h5>
+          <h5><strong>Golfers:</strong></h5>
           <ul>
             <% @tee_time.users.each do |user| %>
               <div class="row">

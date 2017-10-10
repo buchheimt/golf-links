@@ -30,7 +30,7 @@ class TeeTime < ApplicationRecord
   end
 
   def group_description
-    "Size: #{group_size}/4 | Avg. Pace: #{avg_pace} | Avg. Experience: #{avg_experience}"
+    "<strong>Size:</strong> #{group_size}/4 | <strong>Avg. Pace:</strong> #{avg_pace} | <strong>Avg. Experience:</strong> #{avg_experience}".html_safe
   end
 
   def joinable?(user)

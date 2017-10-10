@@ -33,9 +33,15 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find_by_id(params[:id])
     authorize @course
+    last_update = @course.updated_at
     if @course.update(course_params)
-      flash[:confirmation] = "Course successfully updated!"
-      redirect_to course_path(@course)
+      if last_update == @course.updated_at
+        flash[:warning] = "No changes to update"
+        render :edit
+      else
+        flash[:confirmation] = "Course successfully updated!"
+        redirect_to course_path(@course)
+      end
     else
       render :edit
     end

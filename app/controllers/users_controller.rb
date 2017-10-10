@@ -30,10 +30,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
+    last_update = @user.updated_at
     authorize @user
     if @user.update(user_params(:username, :email, :pace, :experience, :image, :role))
-      flash[:confirmation] = "Update successful!"
-      redirect_to user_path(@user)
+      if last_update == @user.updated_at
+        flash[:warning] = "No changes to update"
+        render :edit
+      else
+        flash[:confirmation] = "Update successful!"
+        redirect_to user_path(@user)
+      end
     else
       render :edit
     end

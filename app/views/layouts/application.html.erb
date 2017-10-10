@@ -14,17 +14,29 @@
           <div class="col-sm-3">
             <%= link_to "Golf Links", root_path, class: "site-title" %>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <%= link_to "Courses", courses_path %>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <%= link_to "Tee Times", tee_times_path %>
           </div>
-          <div class="col-sm-3">
             <% unless current_user.nil? %>
-              <%= link_to current_user.username, user_path(current_user) if current_user %>
+              <div class="col-sm-2">
+                <%= link_to "Create Tee Time", new_tee_time_path %>
+              </div>
+              <div class="col-sm-1">
+                <%= image_tag current_user.image, class: "nav-pic" %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to current_user.username, user_path(current_user), class: "nav-user" %>
+              </div>
             <% else %>
-              <%= link_to "Sign In", signin_path %>
+              <div class="col-sm-2">
+                <%= link_to "Sign Up", new_user_path %>
+              </div>
+              <div class="col-sm-3">
+                <%= link_to "Log In", signin_path %>
+              </div>
             <% end %>
           </div>
         </div>

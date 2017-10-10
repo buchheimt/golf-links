@@ -20,4 +20,8 @@ class UserPolicy < ApplicationPolicy
     user && (user.admin? || record.try(:id) == user.id)
   end
 
+  def destroy?
+    user && (user.admin? || record.try(:id) == user.id)
+  end
+
 end

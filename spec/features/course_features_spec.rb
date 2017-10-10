@@ -172,6 +172,13 @@ describe "Course Features", type: :feature do
         expect(current_path).to eq(course_path(course))
         expect(page).to have_content("Madagascar")
       end
+
+      it "has a link to destroy the course" do
+        visit_signin
+        admin_login
+        visit edit_course_path(course)
+        expect(page).to have_content("Delete Course")
+      end
     end
 
     context "when not admin" do
@@ -183,5 +190,66 @@ describe "Course Features", type: :feature do
       end
     end
 
+  end
+
+  describe "Course#destroy", type: :feature do
+
+    before :each do
+      User.create(
+        username: "tylerB",
+        email: "tyler@gmail.com",
+        password: "123456",
+        password_confirmation: "123456"
+      )
+    end
+
+    before :each do
+      Course.create(
+        name: "Augusta National GC",
+        description: "Home of the Masters",
+        location: "Augusta, GA"
+      )
+    end
+
+    let(:user) {
+      User.first
+    }
+
+    let(:course) {
+      Course.first
+    }
+
+    it "destroys course" do
+      course_id = course.id
+      visit_signin
+      admin_login
+      visit edit_course_path(course)
+      click_link "Delete Course"
+      expect(current_path).to eq(courses_path)
+      expect(Course.find_by_id(course_id)).to be_nil
+    end
+
+    it "destroys all course tee times" do
+      tee_time = course.tee_times.build(time: "Dec 1 2098")
+      tee_time_id = tee_time.id
+      visit_signin
+      admin_login
+      visit edit_course_path(course)
+      click_link "Delete Course"
+      expect(current_path).to eq(courses_path)
+      expect(TeeTime.find_by_id(tee_time_id)).to be_nil
+    end
+
+    it "destroys all user tee times associated with course" do
+      tee_time = course.tee_times.build(time: "Dec 1 2098")
+      tee_time.add_user(user)
+      user_tee_time_id = tee_time.user_tee_times.first.id
+      visit_signin
+      admin_login
+      visit edit_course_path(course)
+      click_link "Delete Course"
+      expect(current_path).to eq(courses_path)
+      expect(UserTeeTime.find_by_id(user_tee_time_id)).to be_nil
+    end
   end
 end

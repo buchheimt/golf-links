@@ -45,6 +45,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find_by_id(params[:id])
+    authorize @user
+    flash[:confirmation] = "#{@user.username} has been deleted"
+    @user.user_tee_times.each {|user_tee_time| user_tee_time.destroy}
+    @user.destroy
+    redirect_to root_path
+  end
+
   private
 
   def user_params(*args)

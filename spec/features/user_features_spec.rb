@@ -267,6 +267,13 @@ describe "User Features", type: :features do
         click_button("Update User")
         expect(current_path).to eq(user_path(current_user))
       end
+
+      it "has link to delete user" do
+        visit_signin
+        user_login
+        visit edit_user_path(current_user)
+        expect(page).to have_content("Delete User")
+      end
     end
 
     context "when different user" do
@@ -286,6 +293,55 @@ describe "User Features", type: :features do
         expect(current_path).to eq(root_path)
       end
     end
+  end
 
+  describe "User#edit", type: :feature do
+
+    before :each do
+      User.create(
+        username: "johnS",
+        email: "john@gmail.com",
+        password: "123456",
+        password_confirmation: "123456"
+      )
+    end
+
+    before :each do
+      Course.create(
+        name: "Augusta National GC",
+        description: "Home of the Masters",
+        location: "Augusta, GA"
+      )
+    end
+
+    let(:user) {
+      User.first
+    }
+
+    let(:course) {
+      Course.first
+    }
+
+    it "destroys User" do
+      user_id = user.id
+      visit_signin
+      admin_login
+      visit edit_user_path(user)
+      click_link "Delete User"
+      expect(current_path).to eq(root_path)
+      expect(User.find_by_id(user_id)).to be_nil
+    end
+
+    it "destroys user tee times" do
+      tee_time = course.tee_times.build(time: "Dec 1 2098")
+      tee_time.add_user(user)
+      user_tee_time_id = tee_time.user_tee_times.first.id
+      visit_signin
+      admin_login
+      visit edit_user_path(user)
+      click_link "Delete User"
+      expect(current_path).to eq(root_path)
+      expect(UserTeeTime.find_by_id(user_tee_time_id)).to be_nil
+    end
   end
 end

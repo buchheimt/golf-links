@@ -74,6 +74,7 @@ img.profile-pic {
 img.course-pic {
   margin-top: 15px;
   width: 100%;
+  border-radius: 10px;
   border: 3px solid $main-dark;
 }
 
@@ -210,6 +211,10 @@ div.course-summary {
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
+  p {
+    // text-align: left;
+    margin-bottom: 5px;
+  }
 }
 
 .course-card {

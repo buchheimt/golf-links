@@ -4,7 +4,12 @@ class TeeTime < ApplicationRecord
   has_many :user_tee_times
   has_many :users, through: :user_tee_times
   validates :time, presence: true
+  validate :valid_date
   accepts_nested_attributes_for :course
+
+  def valid_date
+    errors.add(:time, "Selected can't be in the past") unless time > Time.now
+  end
 
   def course_attributes=(course_attributes)
     self.build_course(course_attributes) unless self.course
@@ -35,12 +40,6 @@ class TeeTime < ApplicationRecord
 
   def joinable?(user)
     !self.users.include?(user) && self.users.size < 4 && !!user
-  end
-
-  def set_time(time_hash)
-    unless time_hash.any? {|k, v| v.empty?}
-      self.time = DateTime.new(Time.now.year, time_hash[:month].to_i, time_hash[:day].to_i, time_hash[:hour].to_i)
-    end
   end
 
   def self.date_sort

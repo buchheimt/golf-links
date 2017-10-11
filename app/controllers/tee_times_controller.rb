@@ -15,12 +15,6 @@ class TeeTimesController < ApplicationController
     @tee_time = TeeTime.new(tee_time_params)
     authorize @tee_time
     @tee_time.user_tee_times.build(user_id: session[:user_id])
-    time_hash = {
-      hour: params[:tee_time][:time][:hour],
-      day: params[:tee_time][:time][:day],
-      month: params[:tee_time][:time][:month]
-    }
-    @tee_time.set_time(time_hash)
     if @tee_time.save
       flash[:confirmation] = "Tee time created!"
       if params[:user_id]
@@ -43,7 +37,7 @@ class TeeTimesController < ApplicationController
   private
 
   def tee_time_params
-    params.require(:tee_time).permit(:course_id, course_attributes: [:name, :description, :location, :image, :par, :length, :price])
+    params.require(:tee_time).permit(:time, :course_id, course_attributes: [:name, :description, :location, :image, :par, :length, :price])
   end
 
 end

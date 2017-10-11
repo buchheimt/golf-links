@@ -110,18 +110,7 @@ RSpec.describe TeeTime, type: :model do
       expect(tee_time).to_not be_valid
     end
   end
-
-  context "#set_time" do
-    it "takes user selections and creates and sets datetime" do
-      time = DateTime.new(2017, 12, 10, 8)
-      tee_time = course.tee_times.build()
-      tee_time.set_time({hour: "8", day: "10", month: "12"})
-      tee_time.save
-      expect(tee_time).to be_valid
-      expect(tee_time.time).to eq(time)
-    end
-  end
-
+  
   context "#group_size" do
     it "returns an int representing the current group size" do
       tee_time = course.tee_times.build(time: Time.now)
@@ -154,7 +143,7 @@ RSpec.describe TeeTime, type: :model do
       tee_time = course.tee_times.build(time: Time.now)
       tee_time.add_user(User.create(user_attributes1))
       tee_time.add_user(User.create(user_attributes2))
-      expect(tee_time.group_description).to eq("Size: 2/4 | Avg. Pace: 3.0 | Avg. Experience: 7.0")
+      expect(tee_time.group_description).to eq("<strong>Size:</strong> 2/4 | <strong>Avg. Pace:</strong> 3.0 | <strong>Avg. Experience:</strong> 7.0")
     end
   end
 

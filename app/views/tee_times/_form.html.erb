@@ -3,9 +3,7 @@
     <div class="col-sm-12">
       <p>Select A Time</p>
       <%= check_for_errors(tee_time.errors, [:time]) %>
-      <%= select_tag "tee_time[time][hour]", options_from_collection_for_select((7..19).to_a, :to_i, :to_i), prompt: "Hour"  %>
-      <%= select_tag "tee_time[time][day]", options_from_collection_for_select((1..30).to_a, :to_i, :to_i), prompt: "Day"  %>
-      <%= select_tag "tee_time[time][month]", options_from_collection_for_select((1..12).to_a, :to_i, :to_i), prompt: "Month"  %>
+      <%= f.datetime_select :time, ampm: true, start_year: Time.now.year, end_year: Time.now.year + 1, start_hour: 7, end_hour: 19, minute_step: 15 %>
     </div>
   </div><br><br>
 
@@ -18,7 +16,7 @@
         <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
       </div>
     </div>
-    <div class="row">
+    <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.name"].empty? %>">
       <div class="col-sm-9 mx-auto">
         <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Add new course" %>
       </div>
@@ -35,7 +33,7 @@
           <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
         </div>
       </div>
-      <div class="row">
+      <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.name"].empty? %>">
         <div class="col-sm-9 mx-auto">
           <%= cf.text_field :name %>
         </div>
@@ -46,7 +44,7 @@
           <%= check_for_errors(tee_time.errors, [:"course.decription"]) %>
         </div>
       </div>
-      <div class="row">
+      <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.description"].empty? %>">
         <div class="col-sm-9 mx-auto">
           <%= cf.text_field :description %>
         </div>
@@ -57,7 +55,7 @@
           <%= check_for_errors(tee_time.errors, [:"course.location"]) %>
         </div>
       </div>
-      <div class="row">
+      <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.location"].empty? %>">
         <div class="col-sm-9 mx-auto">
           <%= cf.text_field :location%>
         </div>
@@ -68,7 +66,7 @@
           <%= check_for_errors(tee_time.errors, [:"course.image"]) %>
         </div>
       </div>
-      <div class="row">
+      <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.image"].empty? %>">
         <div class="col-sm-10 mx-auto">
           <%= cf.text_field :image %>
         </div>
@@ -91,7 +89,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.par"].empty? && tee_time.errors[:"course.length"].empty? && tee_time.errors[:"course.price"].empty? %>">
         <div class="col-sm-3 mx-auto">
           <%= cf.text_field :par %>
         </div>

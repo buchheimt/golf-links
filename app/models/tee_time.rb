@@ -4,7 +4,7 @@ class TeeTime < ApplicationRecord
   has_many :user_tee_times
   has_many :users, through: :user_tee_times
   validates :time, presence: true
-  validate :valid_date
+  validate :valid_date, on: :create
   accepts_nested_attributes_for :course
 
   def valid_date

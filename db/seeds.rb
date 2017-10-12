@@ -86,15 +86,17 @@ courses.each {|attributes| Course.create(attributes)}
 
 100.times do
   course = Course.all[rand(Course.all.size)]
-  year = rand(2) + 2017
-  month = rand(12) + 1
-  day = rand(28) + 1
+  year = 2017
+  month = rand(6) + 7
+  day = rand(30) + 1
   hour = rand(12) + 7
   time = DateTime.new(year, month, day, hour)
-  tee_time = course.tee_times.build(time: time)
+  tee_time = course.tee_times.build(time: "Dec 30, 2099")
   (rand(4) + 1).times do
     user = User.all[rand(User.all.size)]
     tee_time.add_user(user)
   end
+  tee_time.save
+  tee_time.update(time: time)
   course.save
 end

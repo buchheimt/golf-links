@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20171009204303) do
     t.string "password_digest"
     t.integer "pace", default: 5
     t.integer "experience", default: 5
-    t.string "user_id"
+    t.string "uid"
     t.string "image", default: "golf-ball.jpg"
     t.integer "role", default: 0
     t.datetime "created_at", null: false

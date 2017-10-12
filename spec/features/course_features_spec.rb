@@ -118,7 +118,7 @@ describe "Course Features", type: :feature do
       tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(user)
       visit course_path(course)
-      expect(page).to have_content(format_tee_time(tee_time))
+      expect(page).to have_content("Dec 1, 2099")
     end
 
     it "displays associated tee times as links to nested tee time show page" do

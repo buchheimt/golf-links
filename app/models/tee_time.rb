@@ -8,7 +8,7 @@ class TeeTime < ApplicationRecord
   accepts_nested_attributes_for :course
 
   def valid_date
-    errors.add(:time, "Selected can't be in the past") unless time > Time.now
+    errors.add(:time, "Selected can't be in the past") unless time.nil? || time > Time.now
   end
 
   def course_attributes=(course_attributes)

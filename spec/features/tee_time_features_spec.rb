@@ -52,8 +52,8 @@ describe "TeeTime Features" do
       tee_time2.add_user(user)
       visit tee_times_path
       expect(page).to have_content(tee_time1.course.name)
-      expect(page).to have_content(format_tee_time(tee_time1))
-      expect(page).to have_content(format_tee_time(tee_time2))
+      expect(page).to have_content("Dec 1, 2098")
+      expect(page).to have_content("Dec 1, 2099")
     end
 
     it "displays with size, avg pace, and avg experience" do
@@ -134,9 +134,7 @@ describe "TeeTime Features" do
       visit_signin
       user_login
       visit new_user_tee_time_path(user)
-      select("8", from: "tee_time[time][hour]")
-      select("10", from: "tee_time[time][day]")
-      select("10", from: "tee_time[time][month]")
+      select("2018", from: "tee_time[time(1i)]")
       select(course.name, from: "tee_time[course_id]")
       click_button("Create Tee Time")
       expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
@@ -147,9 +145,7 @@ describe "TeeTime Features" do
       visit_signin
       user_login
       visit new_user_tee_time_path(user)
-      select("8", from: "tee_time[time][hour]")
-      select("10", from: "tee_time[time][day]")
-      select("10", from: "tee_time[time][month]")
+      select("2018", from: "tee_time[time(1i)]")
       fill_in("tee_time[course_attributes][name]", with: "new course")
       fill_in("tee_time[course_attributes][description]", with: "description")
       fill_in("tee_time[course_attributes][location]", with: "location")
@@ -203,7 +199,7 @@ describe "TeeTime Features" do
     it "allows a user view a TeeTime" do
       visit_signin
       user_login
-      tee_time = TeeTime.create(course_id: course.id, time: Time.now)
+      tee_time = TeeTime.create(course_id: course.id, time: "Dec 1 2099")
       user_tee_time = user.user_tee_times.build(tee_time_id: tee_time.id)
       visit user_tee_time_path(user, tee_time)
       expect(page).to have_content(course.name)
@@ -212,7 +208,7 @@ describe "TeeTime Features" do
     end
 
     it "doesn't display a Join Tee Time button if full" do
-      tee_time = course.tee_times.build(time: Time.now)
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(User.create(user_attributes))
       tee_time.add_user(User.create(user_attributes2))
       tee_time.add_user(User.create(user_attributes3))
@@ -224,7 +220,7 @@ describe "TeeTime Features" do
     end
 
     it "doesn't display a Join Tee Time button if already joined" do
-      tee_time = course.tee_times.build(time: Time.now)
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       visit_signin
       user_login
       tee_time.add_user(current_user)

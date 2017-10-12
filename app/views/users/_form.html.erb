@@ -39,10 +39,10 @@
   </div>
   <div class="row">
     <div class="col-sm-5 mx-auto">
-      <%= f.collection_select :pace, (1..10).to_a, :to_i, :to_i %>
+      <%= f.select :pace, (1..10).to_a %>
     </div>
     <div class="col-sm-5 mx-auto">
-      <%= f.collection_select :experience, (1..10).to_a, :to_i, :to_i %>
+      <%= f.select :experience, (1..10).to_a %>
     </div>
   </div>
 

@@ -172,46 +172,4 @@ RSpec.describe TeeTime, type: :model do
       expect(tee_time.joinable?(user)).to be false
     end
   end
-
-  context "TeeTime#date_sort" do
-    it "sorts tee times into chronological order" do
-      user = User.create(user_attributes1)
-      tee_time1 = course.tee_times.build(time: "Dec 1 2099")
-      tee_time2 = course.tee_times.build(time: "Dec 1 2097")
-      tee_time3 = course.tee_times.build(time: "Dec 1 2098")
-      tee_time1.add_user(user)
-      tee_time2.add_user(user)
-      tee_time3.add_user(user)
-      tee_times = TeeTime.date_sort
-      expect(tee_times).to eq([tee_time2, tee_time3, tee_time1])
-    end
-  end
-
-  context "TeeTime#course_date_sort" do
-    it "sorts tee times into chronological order for a course" do
-      user = User.create(user_attributes1)
-      tee_time1 = course.tee_times.build(time: "Dec 1 2099")
-      tee_time2 = course.tee_times.build(time: "Dec 1 2097")
-      tee_time3 = course.tee_times.build(time: "Dec 1 2098")
-      tee_time1.add_user(user)
-      tee_time2.add_user(user)
-      tee_time3.add_user(user)
-      tee_times = TeeTime.course_date_sort(course)
-      expect(tee_times).to eq([tee_time2, tee_time3, tee_time1])
-    end
-  end
-
-  context "TeeTime#user_date_sort" do
-    it "sorts tee times into chronological order for a user" do
-      user = User.create(user_attributes1)
-      tee_time1 = course.tee_times.build(time: "Dec 1 2099")
-      tee_time2 = course.tee_times.build(time: "Dec 1 2097")
-      tee_time3 = course.tee_times.build(time: "Dec 1 2098")
-      tee_time1.add_user(user)
-      tee_time2.add_user(user)
-      tee_time3.add_user(user)
-      tee_times = TeeTime.user_date_sort(user)
-      expect(tee_times).to eq([tee_time2, tee_time3, tee_time1])
-    end
-  end
 end

@@ -142,6 +142,9 @@ div.course-summary {
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
+  input {
+    width: 100%;
+  }
   h2 {
     margin: 15px;
   }
@@ -196,6 +199,9 @@ div.course-summary {
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
+  input {
+    width: 100%;
+  }
 }
 
 .fav-course {
@@ -232,6 +238,15 @@ div.course-summary {
   }
 }
 
+.filter-card {
+  padding: 10px;
+  margin: 10px;
+  background: $main-light;
+  border-radius: 10px;
+  border: 1px solid rgb(7, 74, 12);
+  box-shadow: 4px 4px 2px #333;
+}
+
 .course-card {
   padding: 0;
   margin: 10px;
@@ -258,9 +273,7 @@ label {
   margin: 10px 15px 0;
 }
 
-input {
-  width: 100%;
-}
+
 
 .fb-btn {
   margin: 15px;
@@ -389,4 +402,9 @@ img.nav-pic {
   p.stat {
     text-align: center;
   }
+}
+
+.filter {
+  width: 50%;
+  margin: 15px;
 }

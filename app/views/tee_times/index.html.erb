@@ -4,13 +4,64 @@
       <h1>Tee Times</h1>
     </div>
   </div>
-  <% if policy(TeeTime.new).create? %>
+    <% if policy(TeeTime.new).create? %>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= link_to "Create New Tee Time", new_tee_time_path, class: "btn" %>
+        </div>
+      </div>
+    <% end %>
   <div class="row">
-    <div class="col-sm-4 mx-auto">
-      <%= link_to "Create New Tee Time", new_tee_time_path, class: "btn" %>
+    <div class="col-sm-10 mx-auto filter-card">
+      <%= form_tag tee_times_path, method: "get", class: "form-horizontal" do %>
+      <div class="row">
+        <div class="col-sm-5">
+          <h5>Group Size</h5>
+        </div>
+        <div class="col-sm-5">
+          <h5>Status</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label>
+            <%= check_box_tag "size[]", 1, @sizes ? @sizes.include?("1") : true %>
+            1/4
+          </label>
+          <label class="checkbox-inline">
+            <%= check_box_tag "size[]", 2, @sizes ? @sizes.include?("2") : true  %>
+            2/4
+          </label>
+          <label class="checkbox-inline">
+            <%= check_box_tag "size[]", 3, @sizes ? @sizes.include?("3") : true  %>
+            3/4
+          </label class="checkbox-inline">
+          <label>
+            <%= check_box_tag "size[]", 4, @sizes ? @sizes.include?("4") : true  %>
+            4/4
+          </label>
+        </div>
+        <div class="col-sm-5">
+          <label class="radio-inline">
+            <%= radio_button_tag "status", "active", @status ? @status == "active" : true %>
+            Active
+          </label>
+          <label class="radio-inline">
+            <%= radio_button_tag "status", "inactive", @status == "inactive" %>
+            Inactive
+          </label>
+          <label class="radio-inline">
+            <%= radio_button_tag "status", "all", @status == "all" %>
+            All
+          </label>
+        </div>
+        <div class="col-sm-2">
+          <%= submit_tag "Filter", class: "btn" %>
+        </div>
+      </div>
+      <% end %>
     </div>
   </div><br>
-  <% end %>
   <div class="row">
     <%= render @tee_times %>
   </div>

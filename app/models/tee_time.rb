@@ -39,19 +39,23 @@ class TeeTime < ApplicationRecord
   end
 
   def joinable?(user)
-    !self.users.include?(user) && self.users.size < 4 && !!user
+    !self.users.include?(user) && self.users.size < 4 && !!user && self.time > Time.now
   end
 
-  def self.date_sort
+  def self.active_sort
     where("time > ?", Time.now).order(time: :asc)
   end
 
-  def self.user_date_sort(user)
-    joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", user.id).where("time > ?", Time.now).order(time: :asc).uniq
+  def self.inactive_sort
+    where("time <= ?", Time.now).order(time: :asc)
   end
 
-  def self.course_date_sort(course)
-    where(course_id: course.id).where("time > ?", Time.now).order(time: :asc)
+  def self.all_sort
+    all.order(time: :asc)
+  end
+
+  def self.size_filter(sizes, status)
+    self.send("#{status}_sort").select {|tt| sizes.include?(tt.users.size.to_s)}
   end
 
 end

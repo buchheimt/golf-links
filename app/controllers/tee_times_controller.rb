@@ -1,7 +1,14 @@
 class TeeTimesController < ApplicationController
 
   def index
-    @tee_times = TeeTime.date_sort
+    if params[:size]
+      @tee_times = TeeTime.size_filter(params[:size], params[:status])
+      @sizes = params[:size]
+      @status = params[:status]
+    else
+      @tee_times = TeeTime.active_sort
+    end
+
   end
 
   def new

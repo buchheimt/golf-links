@@ -11,7 +11,7 @@ class Course < ApplicationRecord
   has_many :users, through: :user_tee_times
 
   def active_tee_times
-    TeeTime.course_date_sort(self)
+    TeeTime.active_sort.where(course_id: self.id)
   end
 
 end

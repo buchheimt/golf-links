@@ -5,7 +5,7 @@
       <%= check_for_errors(tee_time.errors, [:time]) %>
       <%= f.datetime_select :time, ampm: true, start_year: Time.now.year, end_year: Time.now.year + 1, start_hour: 7, end_hour: 19, minute_step: 15 %>
     </div>
-  </div><br><br>
+  </div><br>
 
   <% if @course %>
     <%= f.hidden_field :course_id, value: course.id %>
@@ -46,7 +46,7 @@
       </div>
       <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.description"].empty? %>">
         <div class="col-sm-9 mx-auto">
-          <%= cf.text_field :description %>
+          <%= cf.text_area :description %>
         </div>
       </div>
       <div class="row">
@@ -67,12 +67,13 @@
         </div>
       </div>
       <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.image"].empty? %>">
-        <div class="col-sm-10 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= cf.text_field :image %>
         </div>
       </div><br>
 
       <div class="row details">
+        <div class="col-sm-1"></div>
         <div class="col-sm-3 mx-auto">
           <%= cf.label :par %>
         </div>
@@ -82,14 +83,16 @@
         <div class="col-sm-3 mx-auto">
           <%= cf.label :price %>
         </div>
+        <div class="col-sm-1"></div>
       </div>
       <div class="row">
-        <div class="col-sm-10 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= check_for_errors(tee_time.errors, [:"course.par", :"course.length", :"course.price"]) %>
         </div>
       </div>
 
       <div class="row<%= " field_with_errors" unless tee_time.errors[:"course.par"].empty? && tee_time.errors[:"course.length"].empty? && tee_time.errors[:"course.price"].empty? %>">
+        <div class="col-sm-1"></div>
         <div class="col-sm-3 mx-auto">
           <%= cf.text_field :par %>
         </div>
@@ -99,6 +102,7 @@
         <div class="col-sm-3 mx-auto">
           <%= cf.text_field :price %>
         </div>
+        <div class="col-sm-1"></div>
       </div><br><br>
     <% end %>
   <% end %>

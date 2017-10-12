@@ -158,6 +158,9 @@ div.course-summary {
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
+  p {
+    text-align: left;
+  }
   li {
     list-style: none;
   }
@@ -237,7 +240,7 @@ div.course-summary {
   border: 1px solid rgb(7, 74, 12);
   box-shadow: 4px 4px 2px #333;
   a {
-    padding: 10px;
+    padding: 25px 10px 10px;
     display: inline-block;
     height: 100%;
     width: 100%;
@@ -245,6 +248,7 @@ div.course-summary {
   a:hover {
     background: $main-dark;
     text-decoration: none;
+    height: 100%;
     color: white;
     border-radius: 10px;
   }

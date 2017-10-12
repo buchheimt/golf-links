@@ -12,23 +12,41 @@
         </div>
       </div><br><br>
       <div class="row">
-        <div class="col-sm-12">
-          <h5><strong>Group Size:</strong> <%= @tee_time.group_size %>/4</h5>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+          <h5><strong>Group Size: </strong></h5>
         </div>
-        <div class="col-sm-12">
-          <h5><strong>Average Pace:</strong> <%= @tee_time.avg_pace %></h5>
-        </div>
-        <div class="col-sm-12">
-          <h5><strong>Average Experience:</strong> <%= @tee_time.avg_experience %></h5>
+        <div class="col-sm-6">
+          <p><%= @tee_time.group_size %>/4</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+          <h5><strong>Average Pace: </strong></h5>
+        </div>
+        <div class="col-sm-6">
+          <p><%= @tee_time.avg_pace %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+          <h5><strong>Average Experience: </strong></h5>
+        </div>
+        <div class="col-sm-6">
+          <p><%= @tee_time.avg_experience %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-11">
           <h5><strong>Golfers:</strong></h5>
           <ul>
             <% @tee_time.users.each do |user| %>
               <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
                   <li><%= link_to "- #{user.username} (Pace: #{user.pace}, Experience: #{user.experience})", user_path(user)%></li>
                 </div>
               </div>

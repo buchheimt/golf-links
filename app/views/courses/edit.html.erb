@@ -1,9 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-5 mx-auto user-card">
-      <h2>Edit <%= @course.name %></h2>
-      <%= link_to "Delete Course", course_path(@course), method: "delete", class: "btn warning" %>
-      <br>
+    <div class="col-sm-10 mx-auto user-card">
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <h2>Edit <%= @course.name %></h2><br>
+          <%= link_to "Delete Course", course_path(@course), method: "delete", class: "btn warning" %>
+        </div><br>
+      </div>
       <%= render partial: 'form', locals: {course: @course} %>
     </div>
   </div>

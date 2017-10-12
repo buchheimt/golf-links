@@ -1,90 +1,94 @@
 <%= form_for user do |f| %>
-
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :username %>
-      <%= check_for_errors(user.errors, [:username]) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-11 mx-auto">
-      <%= f.text_field :username %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :email %>
-      <%= check_for_errors(user.errors, [:email]) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-11 mx-auto">
-      <%= f.text_field :email %>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-sm-6">
-      <%= f.label :pace %>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= f.label :username %>
+          <%= check_for_errors(user.errors, [:username]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= f.text_field :username %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= f.label :email %>
+          <%= check_for_errors(user.errors, [:email]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= f.text_field :email %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.label :pace %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.label :experience %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= check_for_errors(user.errors, [:pace, :experience]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 mx-auto">
+          <%= f.select :pace, (1..10).to_a %>
+        </div>
+        <div class="col-sm-4 mx-auto">
+          <%= f.select :experience, (1..10).to_a %>
+        </div>
+      </div>
     </div>
+
     <div class="col-sm-6">
-      <%= f.label :experience %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= check_for_errors(user.errors, [:pace, :experience]) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-5 mx-auto">
-      <%= f.select :pace, (1..10).to_a %>
-    </div>
-    <div class="col-sm-5 mx-auto">
-      <%= f.select :experience, (1..10).to_a %>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= f.label :image %>
+          <%= check_for_errors(user.errors, [:image]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= f.text_field :image %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= f.label :password %>
+          <%= check_for_errors(user.errors, [:password]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= f.password_field :password %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 mx-auto">
+          <%= f.label :password_confirmation %>
+          <%= check_for_errors(user.errors, [:password_confirmation]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= f.password_field :password_confirmation %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :image %>
-      <%= check_for_errors(user.errors, [:image]) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-11 mx-auto">
-      <%= f.text_field :image %>
-    </div>
-  </div>
-
-  <% unless user.persisted? %>
-    <div class="row">
-      <div class="col-sm-12 mx-auto">
-        <%= f.label :password %>
-        <%= check_for_errors(user.errors, [:password]) %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-11 mx-auto">
-        <%= f.password_field :password %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 mx-auto">
-        <%= f.label :password_confirmation %>
-        <%= check_for_errors(user.errors, [:password_confirmation]) %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-11 mx-auto">
-        <%= f.password_field :password_confirmation %>
-      </div>
-    </div>
-  <% end %>
   <br><br>
   <div class="row">
-    <div class="col-sm-8 mx-auto">
+    <div class="col-sm-4 mx-auto">
       <%= f.submit class: "btn" %>
     </div>
   </div>

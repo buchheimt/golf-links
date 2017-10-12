@@ -255,6 +255,8 @@ describe "User Features", type: :features do
         user_login
         visit edit_user_path(current_user)
         select(1, from: "user[pace]")
+        fill_in("user[password]", with: "123456")
+        fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")
         expect(current_user.pace).to eq(1)
       end
@@ -264,6 +266,8 @@ describe "User Features", type: :features do
         user_login
         visit edit_user_path(current_user)
         select(1, from: "user[pace]")
+        fill_in("user[password]", with: "123456")
+        fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")
         expect(current_path).to eq(user_path(current_user))
       end

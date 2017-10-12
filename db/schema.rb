@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20171009204303) do
     t.integer "par"
     t.integer "length"
     t.integer "price"
-    t.string "image", default: "course-bg.jpg"
+    t.string "image", default: "course-default.jpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171009204303) do
     t.integer "pace", default: 5
     t.integer "experience", default: 5
     t.string "uid"
-    t.string "image", default: "golf-ball.jpg"
+    t.string "image", default: "user-default.jpg"
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   validates :email, format: {with: /.+@.+\..+/, message: "invalid email format"}
   validates :password, length: {minimum: 6}, presence: true, confirmation: true, on: :create
+  validates :password, length: {minimum: 6}, allow_nil: true, on: :update
   validates_inclusion_of :pace, in: 1..10, allow_nil: true
   validates_inclusion_of :experience, in: 1..10, allow_nil: true
 

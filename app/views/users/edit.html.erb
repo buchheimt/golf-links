@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-4 mx-auto user-card">
-      <h2>Edit <%= @user.username %></h2><br>
-      <%= link_to "Delete User", user_path(@user), method: "delete", class: "btn warning" %>
+    <div class="col-sm-9 mx-auto user-card">
+      <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3">
+          <%= link_to "Delete User", user_path(@user), method: "delete", class: "btn warning" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Edit <%= @user.username %></h2><br>
+        </div>
+      </div>
       <%= render partial: 'form', locals: {user: @user} %>
     </div>
   </div>

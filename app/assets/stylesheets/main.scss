@@ -163,7 +163,7 @@ div.course-summary {
 }
 
 .tee-time-show-card {
-  padding: 0;
+  padding: 25px 10px;
   margin: 10px;
   background: $main-light;
   border-radius: 10px;
@@ -189,7 +189,6 @@ div.course-summary {
     float: left;
     text-align: left;
     padding: 10px;
-    height: 100%;
     width: 100%;
   }
   a:hover {
@@ -380,8 +379,9 @@ nav {
 }
 
 img.nav-pic {
+  float: left;
+  margin: 6px 15px 0px;
   display: inline-block;
-  margin-top: 6px;
   height: 50px;
   border-radius: 50%;
   border: 2px solid $main-dark;
@@ -448,6 +448,7 @@ a.nav-user {
   height: 66px;
   padding: 0;
   span {
+    float: left;
     display: inline-block;
     margin-top: 20px;
   }
@@ -461,4 +462,15 @@ a.nav-user {
   height: 60px;
   margin-right: 10px;
   border-radius: 50%;
+}
+
+.tee-time-user {
+  p {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.user-list:first-child {
+  margin-top: 35px;
 }

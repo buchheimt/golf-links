@@ -10,55 +10,72 @@
         <div class="col-sm-12 mx-auto">
           <h3><%= format_tee_time_long(@tee_time) %></h3>
         </div>
-      </div><br><br>
+      </div><br>
       <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
           <h5><strong>Group Size: </strong></h5>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <p><%= @tee_time.group_size %>/4</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
           <h5><strong>Average Pace: </strong></h5>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <p><%= @tee_time.avg_pace %></p>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
           <h5><strong>Average Experience: </strong></h5>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <p><%= @tee_time.avg_experience %></p>
         </div>
       </div>
+
       <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-11">
-          <h5><strong>Golfers:</strong></h5>
-          <ul>
+        <div class="col-sm-10 mx-auto user-list">
+          <div class="row">
             <% @tee_time.users.each do |user| %>
-              <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-9">
-                  <li>
-                    <a href="<%= user_path(user) %>">
-                      <%= image_tag user.image, class: "tee-time-pic" %>
-                      <span><%=" #{user.username} (Pace: #{user.pace}, Experience: #{user.experience})" %></span>
-                    </a>
-                  </li>
+              <div class="col-sm-6">
+                <div class="row">
+                  <a href="<%= user_path(user) %>" class="tee-time-user">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <%= image_tag user.image, class: "tee-time-pic" %>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p><strong><%= user.username %></strong></p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p>Pace: <%= user.pace %></p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p>Experience: <%= user.experience %></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
                 </div>
               </div>
             <% end %>
-          </ul>
+          </div>
         </div>
-      </div>
+      </div><br>
+
       <% if @tee_time.joinable?(current_user) %>
         <div class="row">
           <div class="col-sm-5 mx-auto">
@@ -71,16 +88,16 @@
         </div>
       <% end %>
       <% if @tee_time.users.include?(current_user) %>
-      <div class="row">
-        <div class="col-sm-5 mx-auto">
-          <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete' do %>
-            <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
-            <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
-            <%= submit_tag "Leave Tee Time", class: 'btn' %>
-          <% end %>
+        <div class="row">
+          <div class="col-sm-5 mx-auto">
+            <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete' do %>
+              <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
+              <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
+              <%= submit_tag "Leave Tee Time", class: 'btn' %>
+            <% end %>
+          </div>
         </div>
-      </div>
       <% end %>
+    </div>
   </div>
-</div>
 </div>

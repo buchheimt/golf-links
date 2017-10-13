@@ -13,7 +13,7 @@ hash = JSON.parse temp
 
 hash.each do |user|
   User.create(
-    username: "#{user["name"]}#{user["surname"][0].upcase}#{user["credit_card"]["pin"].to_s[0..2]}",
+    username: "#{user["name"]}#{user["surname"][0].upcase}#{user["credit_card"]["pin"].to_s[0..1]}TU",
     email: user["email"],
     password: user["password"],
     pace: rand(10) + 1,
@@ -24,7 +24,7 @@ end
 
 courses = [
   {
-    name: "Cowboys Golf Club",
+    name: "Cowboys GC",
     description: "Etched into the rolling hills of Grapevine, Texas, Cowboys Golf Club is distinguished as the first and only NFL-themed golf club in the world, and one of the region's only all-inclusive world-class resort golf properties.",
     location: "Grapevine, TX",
     par: 72,
@@ -32,7 +32,7 @@ courses = [
     price: 140
   },
   {
-    name: "Iron Horse Golf Course",
+    name: "Iron Horse GC",
     description: "Iron Horse Golf Course's award-winning championship golf course serves as the centerpiece to a full-service daily fee golf facility boasting an array of dining and event amenities and numerous opportunities for fun and competitive play.",
     location: "North Richard Hills, TX",
     par: 70,
@@ -40,7 +40,7 @@ courses = [
     price: 60
   },
   {
-    name: "Tierra Verde Golf Club",
+    name: "Tierra Verde GC",
     description: "It's hard to find a more beautiful course than the award-winning Tierra Verde Golf Club. Tierra Verde is the first golf course in Texas and the first municipal course in the world to be certified as an Audubon Signature Sanctuary.",
     location: "Arlington, TX",
     par: 72,
@@ -48,7 +48,7 @@ courses = [
     price: 72
   },
   {
-    name: "Tangle Ridge Golf Club",
+    name: "Tangle Ridge GC",
     description: "Tangle Ridge Golf Course in Grand Prairie, TX, will challenge your senses and skills. This 18-hole championship public golf course features exciting elevation changes, subtle Champion Ultra Dwarf Bermuda Grass Greens, tree-lined fairways, and water and sand hazards.",
     location: "Grand Prairie, TX",
     par: 72,
@@ -64,7 +64,7 @@ courses = [
     price: 27
   },
   {
-    name: "The Bridges Golf Club",
+    name: "The Bridges GC",
     description: "The Bridges Golf Club, a magnificent 18-hole Fred Couples Signature Golf Course, winds its way through The Bridges at Preston Crossings, a North Texas community, adding to the lush, park-like feel of the neighborhood.",
     location: "Gunter, TX",
     par: 72,
@@ -72,7 +72,7 @@ courses = [
     price: 65
   },
   {
-    name: "Texas Star Golf Course",
+    name: "Texas Star GC",
     description: "The Texas Star Golf Course and Conference Centre is conveniently located in Euless, Texas. It is a vibrant part of the Euless community.",
     location: "Euless, TX",
     par: 71,
@@ -80,7 +80,7 @@ courses = [
     price: 77
   },
   {
-    name: "The Tribute Golf Club",
+    name: "The Tribute GC",
     description: "Located in The Colony, Texas, just off the eastern shores of Lake Lewisville, The Tribute at The Colony offers a unique Scottish links-style golf experience unlike any other in North Texas, complemented by an array of upscale amenities – all open to the public.",
     location: "The Colony, TX",
     par: 72,

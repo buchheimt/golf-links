@@ -17,7 +17,11 @@
                   <h1 class="profile-title"><%= @user.username %></h1>
                 </div>
                 <div class="col-sm-3">
-                  <h5 class="admin"><%= "Admin" if @user.admin? %></h5>
+                  <% if @user.admin? %>
+                    <h5 class="admin">Admin</h5>
+                  <% else %>
+                    <h5></h5>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -96,11 +100,11 @@
       </div>
     </div>
   </div><br><br><br>
-  <% if policy(@user).update? %>
+  <% if policy(@user).show? %>
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h4>My Upcoming Tee Times:</h4>
+          <h4>Upcoming Tee Times for <%= @user.username %>:</h4>
         </div>
       </div><br>
       <% if @tee_times %>

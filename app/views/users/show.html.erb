@@ -104,7 +104,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h4>Upcoming Tee Times for <%= @user.username %>:</h4>
+          <h4>Tee Times for <%= @user.username %>:</h4>
         </div>
       </div><br>
       <% if @tee_times %>
@@ -112,6 +112,11 @@
           <%= render @tee_times %>
         </div>
       <% end %>
+    </div><br>
+    <div class="row">
+      <div class="col-sm-5 mx-auto">
+        <%= link_to "See all Tee Times for #{@user.username}", user_tee_times_path(@user), class: "btn" %>
+      </div>
     </div>
   <% end %>
 </div>

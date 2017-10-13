@@ -1,9 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 mx-auto">
-      <h1>Tee Times</h1>
+      <% if @user %>
+        <h1>All Tee Times for <%= @user.username %></h1>
+      <% else %>
+        <h1>Tee Times</h1>
+      <% end %>
+
     </div>
   </div><br>
+  <% unless @user %>
     <% if policy(TeeTime.new).create? %>
       <div class="row">
         <div class="col-sm-12 mx-auto">
@@ -62,6 +68,7 @@
       <% end %>
     </div>
   </div><br>
+  <% end %>
   <div class="row">
     <%= render @tee_times %>
   </div>

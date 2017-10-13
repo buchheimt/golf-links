@@ -1,6 +1,9 @@
 <div class="col-sm-6">
-  <div class="tee-time-card<%= size_status(tee_time) %>">
+  <div class="tee-time-card<%= tee_time_status(tee_time) %>">
     <a href="<%= show_route(tee_time) %>">
+      <% if tee_time.users.include?(current_user) %>
+        <div class="joined-marker"></div>
+      <% end %>
       <%= check_for_course(tee_time) %>
       <h5><%= format_tee_time(tee_time) %></h5>
       <p><%= tee_time.group_description %></p>

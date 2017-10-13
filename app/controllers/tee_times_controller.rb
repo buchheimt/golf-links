@@ -1,7 +1,10 @@
 class TeeTimesController < ApplicationController
 
   def index
-    if params[:size]
+    if params[:user_id]
+      @user = User.find_by_id(params[:user_id])
+      @tee_times = @user.tee_times.sort {|a, b| a.time <=> b.time}
+    elsif params[:size]
       @tee_times = TeeTime.size_filter(params[:size], params[:status])
       @sizes = params[:size]
       @status = params[:status]

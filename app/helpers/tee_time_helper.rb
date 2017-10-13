@@ -20,8 +20,8 @@ module TeeTimeHelper
     end
   end
 
-  def size_status(tee_time)
-    tee_time.users.size == 4 ? " tee-time-full" : ""
+  def tee_time_status(tee_time)
+    tee_time.users.size == 4 || tee_time.time < Time.now ? " tee-time-unjoinable" : ""
   end
 
   def check_for_course(tee_time)

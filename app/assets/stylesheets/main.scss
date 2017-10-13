@@ -12,7 +12,7 @@ $footer: rgba(51, 69, 58, .95);
 $footer-dark: rgba(51, 69, 58, .95);
 
 a:hover {
-  transition: background 0.5s, color 0.5s;
+  transition: background 0.5s, color 0.5, box-shadow 0.5;
 }
 
 p {
@@ -51,6 +51,7 @@ h1.profile-title {
 }
 
 .admin {
+  box-shadow: 2px 2px 2px #333 inset;
   margin-top: 15px;
   padding: 10px;
   border-radius: 10px;
@@ -133,7 +134,17 @@ div.course-summary {
   }
 }
 
-.tee-time-full {
+.joined-marker {
+  position: absolute;
+  top: 25px;
+  right: 45px;
+  width: 15px;
+  height: 15px;
+  background: yellow;
+  border-radius: 50%;
+}
+
+.tee-time-unjoinable {
   background: rgba(51, 69, 58, .75);
   border-radius: 10px;
   a:hover {

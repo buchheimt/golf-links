@@ -24,6 +24,7 @@
 
     <p>OR</p>
 
+    <h5>New Course</h5>
     <p> <em>*Name and Location are required to create a new course</em></p>
     <%= f.fields_for :course, tee_time.build_course do |cf| %>
 
@@ -103,7 +104,7 @@
           <%= cf.text_field :price %>
         </div>
         <div class="col-sm-1"></div>
-      </div><br><br>
+      </div><br>
     <% end %>
   <% end %>
 

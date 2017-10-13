@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     authorize :session, :create?
     if auth
       @user = User.find_or_create_by(uid: auth['uid']) do |u|
-        u.username = auth['info']['name'].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...4]
+        u.username = auth['info']['name'].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...2]
         u.email = auth['info']['email']
         u.uid = auth['uid']
         u.password = SecureRandom.hex

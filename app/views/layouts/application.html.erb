@@ -24,11 +24,11 @@
               <div class="col-sm-2">
                 <%= link_to "Create Tee Time", new_tee_time_path %>
               </div>
-              <!-- <div class="col-sm-1">
-                <%= image_tag current_user.image, class: "nav-pic" %>
-              </div> -->
               <div class="col-sm-3">
-                <%= link_to current_user.username, user_path(current_user), class: "nav-user" %>
+                <a href="<%= user_path(current_user) %>" class="nav-user">
+                  <%= image_tag current_user.image, class: "nav-pic" %>
+                  <span><%= current_user.username %></span>
+                </a>
               </div>
             <% else %>
               <div class="col-sm-2">

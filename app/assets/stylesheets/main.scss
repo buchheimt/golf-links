@@ -443,3 +443,22 @@ footer {
     display: inline-block;
   }
 }
+
+a.nav-user {
+  height: 66px;
+  padding: 0;
+  span {
+    display: inline-block;
+    margin-top: 20px;
+  }
+}
+
+.nav-pic {
+  margin: 0 25px 10px 0;
+}
+
+.tee-time-pic {
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 50%;
+}

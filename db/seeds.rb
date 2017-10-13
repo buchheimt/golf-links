@@ -5,15 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#https://uinames.com/api/?amount=50&maxlen=20&ext&region=united+states
+require 'open-uri'
 
-50.times {|i| User.create(
-    username: "user#{i}",
-    email: "user#{i}@gmail.com",
-    password: "123456",
-    password_confirmation: "123456",
+temp = open('https://uinames.com/api/?amount=50&maxlen=20&ext&region=united+states').read
+hash = JSON.parse temp
+
+hash.each do |user|
+  User.create(
+    username: "#{user["name"]}#{user["surname"][0].upcase}#{user["credit_card"]["pin"].to_s[0..2]}",
+    email: user["email"],
+    password: user["password"],
     pace: rand(10) + 1,
-    experience: rand(10) + 1
-  )}
+    experience: rand(10) + 1,
+    image: user["photo"]
+  )
+end
 
 courses = [
   {

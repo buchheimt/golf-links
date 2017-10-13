@@ -144,7 +144,7 @@ describe "Course Features", type: :feature do
       tee_time1 = course.tee_times.build(time: Time.now)
       tee_time1.add_user(user)
       visit course_path(course)
-      expect(page).to_not have_content(tee_time1.time.year)
+      expect(page).to_not have_content("Avg. Experience")
     end
 
   end

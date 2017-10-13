@@ -45,9 +45,14 @@
           <ul>
             <% @tee_time.users.each do |user| %>
               <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                  <li><%= link_to "- #{user.username} (Pace: #{user.pace}, Experience: #{user.experience})", user_path(user)%></li>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-9">
+                  <li>
+                    <a href="<%= user_path(user) %>">
+                      <%= image_tag user.image, class: "tee-time-pic" %>
+                      <span><%=" #{user.username} (Pace: #{user.pace}, Experience: #{user.experience})" %></span>
+                    </a>
+                  </li>
                 </div>
               </div>
             <% end %>
@@ -77,4 +82,5 @@
       </div>
       <% end %>
   </div>
+</div>
 </div>

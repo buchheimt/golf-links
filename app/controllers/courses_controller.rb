@@ -64,7 +64,7 @@ class CoursesController < ApplicationController
       redirect_to root_path
     else
       @course = @user.favorite_course
-      @tee_times = TeeTime.course_date_sort(@course)
+      @tee_times = @course.active_tee_times
       render :show
     end
   end

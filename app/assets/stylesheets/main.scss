@@ -6,11 +6,11 @@ $main-dark: rgba(34, 79, 53, .85);
 $main-light: rgba(35, 156, 86, .75);
 $nav-dark: rgb(34, 79, 53);
 $nav-light: rgb(35, 156, 86);
-$btn-light: rgba(99, 232, 156, .75);
-$btn-dark: rgba(26, 116, 64, .75);
+$btn-light: rgba(86, 218, 136, .75);
+$btn-dark: rgba(23, 103, 54, .75);
 
 a:hover {
-  transition: background 0.65s, color 0.65s;
+  transition: background 0.5s, color 0.5s;
 }
 
 p {
@@ -56,7 +56,7 @@ h1.profile-title {
 }
 
 img.profile-pic {
-  margin-top: 35px;
+  margin-top: 55px;
   width: 100%;
   border-radius: 50%;
   border: 3px solid $main-dark;
@@ -93,11 +93,13 @@ div.course-summary {
 }
 
 .btn {
+  box-shadow: 2px 2px 2px #333;
   background: $btn-light;
   color: white;
 }
 
 .btn:hover {
+  box-shadow: 2px 2px 2px #333 inset;
   background: $btn-dark;
   text-decoration: none;
   color: white;
@@ -110,14 +112,16 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
   a {
+    box-shadow: 4px 4px 2px #333;
     padding: 10px;
+    border-radius: 10px;
     display: inline-block;
     height: 100%;
     width: 100%;
   }
   a:hover {
+    box-shadow: 4px 4px 2px #333 inset;
     background: $main-dark;
     text-decoration: none;
     color: white;
@@ -127,6 +131,7 @@ div.course-summary {
 
 .tee-time-full {
   background: rgba(51, 69, 58, .75);
+  border-radius: 10px;
   a:hover {
     background: rgba(51, 69, 58, .75);
     text-decoration: none;
@@ -213,6 +218,7 @@ div.course-summary {
 }
 
 .fav-course:hover a {
+  box-shadow: 2px 2px 2px #333 inset;
   background: rgba(51, 69, 58, .75);
   text-decoration: none;
   color: white;
@@ -250,17 +256,19 @@ div.course-summary {
 .course-card {
   padding: 0;
   margin: 10px;
-  background: $main-light;
   border-radius: 10px;
+  background: $main-light;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
   a {
+    box-shadow: 4px 4px 2px #333;
     padding: 25px 10px 10px;
+    border-radius: 10px;
     display: inline-block;
     height: 100%;
     width: 100%;
   }
   a:hover {
+    box-shadow: 4px 4px 2px #333 inset;
     background: $main-dark;
     text-decoration: none;
     height: 100%;
@@ -270,10 +278,8 @@ div.course-summary {
 }
 
 label {
-  margin: 10px 15px 0;
+  margin: 25px 15px 0;
 }
-
-
 
 .fb-btn {
   margin: 15px;
@@ -297,7 +303,7 @@ div.field_with_errors input, div.field_with_errors select {
 
 .error-message {
   font-size: 14px;
-  color: #722;
+  color: white;
 }
 
 .flash {
@@ -308,17 +314,17 @@ div.field_with_errors input, div.field_with_errors select {
 
 .warning {
   background: rgba(175, 75, 75, .75);
-  color: #722;
+  color: white;
 }
 
 a.warning:hover {
-  color: rgba(175, 75, 75, .75);
+  color: white;
   background: #722;
 }
 
 .confirmation {
   background: $btn-light;
-  color: $btn-dark;
+  color: white;
 }
 
 .description {
@@ -342,8 +348,10 @@ nav {
   }
   box-sizing: border-box;
   background: $nav-light;
+  box-shadow: 0 4px 4px #333;
   color: white;
   a {
+    box-sizing: border-box;
     width: 100%;
     text-align: center;
     display: inline-block;
@@ -353,6 +361,7 @@ nav {
     border: 1px solid $nav-dark;
   }
   a:hover {
+    box-shadow: 2px 2px 2px #333 inset;
     color: white;
     text-decoration: none;
     background: $nav-dark;
@@ -364,7 +373,7 @@ nav {
   top: 0;
   z-index: 999;
   width: 100%;
-  height: 64px;
+  height: 66px;
 }
 
 img.nav-pic {

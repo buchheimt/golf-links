@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   get '/users/:id/favorite_course', to: 'courses#favorite_course', as: "user_favorite_course"
 
   root to: "welcome#home"
+  get '/about', to: "welcome#about"
 
 end

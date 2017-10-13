@@ -8,6 +8,8 @@ $nav-dark: rgb(34, 79, 53);
 $nav-light: rgb(35, 156, 86);
 $btn-light: rgba(86, 218, 136, .75);
 $btn-dark: rgba(23, 103, 54, .75);
+$footer: rgba(51, 69, 58, .95);
+$footer-dark: rgba(51, 69, 58, .95);
 
 a:hover {
   transition: background 0.5s, color 0.5s;
@@ -89,6 +91,7 @@ div.course-summary {
 }
 
 .site-title {
+  font-family: $font-primary;
   background: $nav-dark;
 }
 
@@ -361,7 +364,7 @@ nav {
     border: 1px solid $nav-dark;
   }
   a:hover {
-    box-shadow: 2px 2px 2px #333 inset;
+    box-shadow: 3px 3px 3px #333 inset;
     color: white;
     text-decoration: none;
     background: $nav-dark;
@@ -416,4 +419,27 @@ img.nav-pic {
 .filter {
   width: 50%;
   margin: 15px;
+}
+
+footer {
+  padding: 15px 0 0;
+  margin: 0 auto;
+  max-width: 1080px;
+  background: $footer;
+  .footer-link {
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .footer-link:hover {
+    background: $footer-dark;
+    box-shadow: 2px 2px 2px #333 inset;
+    color: white;
+    text-decoration: none;
+  }
+  #footer-info {
+    padding: 5px;
+    width: 100%;
+    display: inline-block;
+  }
 }

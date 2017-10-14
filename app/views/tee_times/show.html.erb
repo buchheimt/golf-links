@@ -72,6 +72,26 @@
                 </div>
               </div>
             <% end %>
+            <% @tee_time.guests.each do |guest| %>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="tee-time-guest">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <%= image_tag "user-default.jpg", class: "tee-time-pic" %>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p><strong><%= guest %>'s Guest</strong></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div><br>
@@ -88,11 +108,29 @@
         </div>
       <% end %>
       <% if @tee_time.users.include?(current_user) %>
+        <% if @tee_time.available? %>
+          <div class="row">
+            <div class="col-sm-6 mx-auto">
+              <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch' do %>
+                <%= hidden_field_tag "operation", 1 %>
+                <%= submit_tag "Add a Guest", class: 'btn' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <% if current_user.has_guests?(@tee_time) %>
+          <div class="row">
+            <div class="col-sm-6 mx-auto">
+              <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch' do %>
+                <%= hidden_field_tag "operation", -1 %>
+                <%= submit_tag "Remove a Guest", class: 'btn warning' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
         <div class="row">
-          <div class="col-sm-5 mx-auto">
+          <div class="col-sm-6 mx-auto">
             <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete' do %>
-              <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
-              <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
               <%= submit_tag "Leave Tee Time", class: 'btn' %>
             <% end %>
           </div>

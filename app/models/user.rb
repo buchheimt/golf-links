@@ -25,4 +25,9 @@ class User < ApplicationRecord
     TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ? AND tee_times.time > ?", self.id, Time.now).order(time: :asc).uniq
   end
 
+  def has_guests?(tee_time)
+    user_tee_time = UserTeeTime.find_by(user_id: self.id, tee_time_id: tee_time.id)
+    user_tee_time.guest_count > 0
+  end
+
 end

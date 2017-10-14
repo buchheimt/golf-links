@@ -4,8 +4,12 @@ class UserTeeTimePolicy < ApplicationPolicy
     user
   end
 
+  def update?
+    user && @record.user == user
+  end
+
   def destroy?
-    user && @record.tee_time.users.include?(user)
+    user && @record.user == user
   end
 
 end

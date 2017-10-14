@@ -13,10 +13,22 @@ class UserTeeTimesController < ApplicationController
     redirect_to tee_time_path(@tee_time)
   end
 
-  def destroy
-    tee_time = TeeTime.find_by_id(params[:user_tee_time][:tee_time_id])
-    @user_tee_time = UserTeeTime.find_by(tee_time_id: params[:user_tee_time][:tee_time_id], user_id: params[:user_tee_time][:user_id])
+  def update
+    @user_tee_time = UserTeeTime.find_by_id(params[:id])
     authorize @user_tee_time
+    params[:operation] == '1' ? @user_tee_time.add_guest : @user_tee_time.remove_guest
+    if @user_tee_time.save
+      flash[:confirmation] = "Success!"
+    else
+      flash[:confirmation] = "Uh oh, something went wrong"
+    end
+    redirect_to tee_time_path(@user_tee_time.tee_time)
+  end
+
+  def destroy
+    @user_tee_time = UserTeeTime.find_by_id(params[:id])
+    authorize @user_tee_time
+    tee_time = @user_tee_time.tee_time
     @user_tee_time.destroy
     if tee_time.users.empty?
       flash[:confirmation] = "Successfully left and deleted Tee Time"

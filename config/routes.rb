@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :tee_times, only: [:new, :create, :show]
   end
   resources :tee_times, only: [:index, :show, :new, :create]
-  resources :user_tee_times, only: [:create, :destroy]
+  resources :user_tee_times, only: [:create, :update, :destroy]
 
   get '/users/:id/favorite_course', to: 'courses#favorite_course', as: "user_favorite_course"
 

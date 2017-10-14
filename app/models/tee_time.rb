@@ -5,7 +5,6 @@ class TeeTime < ApplicationRecord
   has_many :users, through: :user_tee_times
   validates :time, presence: true
   validate :valid_date, on: :create
-  #accepts_nested_attributes_for :course
 
   def valid_date
     errors.add(:time, "Selected can't be in the past") unless time.nil? || time > Time.now
@@ -45,8 +44,12 @@ class TeeTime < ApplicationRecord
     "<strong>Size:</strong> #{group_size}/4 | <strong>Avg. Pace:</strong> #{avg_pace} | <strong>Avg. Experience:</strong> #{avg_experience}".html_safe
   end
 
+  def available?
+    self.group_size < 4 && self.time > Time.now
+  end
+
   def joinable?(user)
-    !self.users.include?(user) && self.users.size < 4 && !!user && self.time > Time.now
+    !!user && !self.users.include?(user) && available?
   end
 
   def self.active_sort
@@ -63,6 +66,14 @@ class TeeTime < ApplicationRecord
 
   def self.size_filter(sizes, status)
     self.send("#{status}_sort").select {|tt| sizes.include?(tt.users.size.to_s)}
+  end
+
+  def guests
+    guests = []
+    self.user_tee_times.each do |user_tee_time|
+      user_tee_time.guest_count.times {guests << user_tee_time.user.username}
+    end
+    guests
   end
 
 end

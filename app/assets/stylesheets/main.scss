@@ -338,7 +338,7 @@ div.field_with_errors input, div.field_with_errors select {
   color: white;
 }
 
-a.warning:hover {
+a.warning:hover, input.warning:hover {
   color: white;
   background: #722;
 }
@@ -508,4 +508,41 @@ a.nav-user {
   text-decoration: none;
   color: white;
   border-radius: 10px;
+}
+
+.about {
+  margin: 10px 40px;
+  padding: 25px 50px;
+  background: $main-light;
+  border-radius: 10px;
+  a {
+    padding: 0;
+    text-decoration: underline;
+  }
+  p {
+    text-align: left;
+  }
+  img {
+    margin: 10px 30px;
+  }
+}
+
+.icon {
+  color: $main-light
+}
+
+.icon:hover {
+  color: $main-light;
+  text-decoration: none;
+}
+
+.link-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+a:hover .link-icon {
+  padding: 0;
+  background: $main-dark;
 }

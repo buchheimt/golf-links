@@ -141,7 +141,7 @@ describe "TeeTime Features" do
       expect(page).to have_content(course.name)
     end
 
-    it "allows a user to create a new TeeTime with an existing course" do
+    it "allows a user to create a new TeeTime with a new course" do
       visit_signin
       user_login
       visit new_user_tee_time_path(user)
@@ -152,6 +152,19 @@ describe "TeeTime Features" do
       click_button("Create Tee Time")
       expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
       expect(page).to have_content("new course")
+    end
+
+    it "handles selecting a guest count" do
+      visit_signin
+      user_login
+      visit new_user_tee_time_path(user)
+      select("2018", from: "tee_time[time(1i)]")
+      select(course.name, from: "tee_time[course_id]")
+      select('2', from: "tee_time[user_tee_times_attributes][0][guest_count]")
+      click_button("Create Tee Time")
+      expect(current_path).to eq(user_tee_time_path(user, TeeTime.first))
+      expect(page).to have_content(course.name)
+      expect(TeeTime.first.group_size).to eq(3)
     end
   end
 

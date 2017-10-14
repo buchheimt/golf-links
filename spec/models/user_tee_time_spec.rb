@@ -52,5 +52,13 @@ RSpec.describe UserTeeTime, type: :model do
       user_tee_time.build_user(user_attributes)
       expect(user_tee_time).to_not be_valid
     end
+
+    it "defaults to 0" do
+      user_tee_time = UserTeeTime.create
+      user_tee_time.build_tee_time(time: Time.now)
+      user_tee_time.build_user(user_attributes)
+      expect(user_tee_time.guest_count).to eq(0)
+      expect(user_tee_time).to be_valid
+    end
   end
 end

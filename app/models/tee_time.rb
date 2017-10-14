@@ -5,7 +5,7 @@ class TeeTime < ApplicationRecord
   has_many :users, through: :user_tee_times
   validates :time, presence: true
   validate :valid_date, on: :create
-  accepts_nested_attributes_for :course
+  #accepts_nested_attributes_for :course
 
   def valid_date
     errors.add(:time, "Selected can't be in the past") unless time.nil? || time > Time.now
@@ -13,6 +13,13 @@ class TeeTime < ApplicationRecord
 
   def course_attributes=(course_attributes)
     self.build_course(course_attributes) unless self.course
+  end
+
+  def user_tee_times_attributes=(user_tee_times_attributes)
+    user_tee_time = self.user_tee_times.build
+    user_tee_time.user_id = user_tee_times_attributes['0'][:user_id]
+    guest_count = user_tee_times_attributes['0'][:guest_count]
+    user_tee_time.guest_count = guest_count unless guest_count.empty?
   end
 
   def add_user(user)
@@ -23,7 +30,7 @@ class TeeTime < ApplicationRecord
   end
 
   def group_size
-    self.users.size
+    self.users.size + self.user_tee_times.inject(0) {|sum, utt| sum += utt.guest_count}
   end
 
   def avg_pace

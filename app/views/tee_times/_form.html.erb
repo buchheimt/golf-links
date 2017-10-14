@@ -5,7 +5,20 @@
       <%= check_for_errors(tee_time.errors, [:time]) %>
       <%= f.datetime_select :time, ampm: true, start_year: Time.now.year, end_year: Time.now.year + 1, start_hour: 7, end_hour: 19, minute_step: 15 %>
     </div>
-  </div><br>
+  </div>
+  <%= f.fields_for :user_tee_times, tee_time.user_tee_times.build do |uttf| %>
+    <%= uttf.hidden_field :user_id, value: current_user.id %>
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <%= uttf.label :guest_count, "Any Guests?", class: "guest-count-label" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <%= uttf.select :guest_count, (1..3).to_a, include_blank: "Nope", selected: "Nope" %>
+      </div>
+    </div><br>
+  <% end %>
 
   <% if @course %>
     <%= f.hidden_field :course_id, value: course.id %>

@@ -5,7 +5,7 @@ class SessionPolicy < Struct.new(:user, :session)
   end
 
   def create?
-    !user
+    !user || !user.uid
   end
 
   def destroy?

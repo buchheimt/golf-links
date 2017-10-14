@@ -48,6 +48,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by_id(params[:id])
     authorize @user
+    session.delete(:user_id) if session[:user_id] == @user.id
     flash[:confirmation] = "#{@user.username} has been deleted"
     @user.user_tee_times.each {|user_tee_time| user_tee_time.destroy}
     @user.destroy

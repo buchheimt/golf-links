@@ -5,9 +5,10 @@ class TeeTime < ApplicationRecord
   has_many :users, through: :user_tee_times
   validates :time, presence: true
   validate :valid_date, on: :create
+  accepts_nested_attributes_for :course
 
   def valid_date
-    errors.add(:time, "Selected can't be in the past") unless time.nil? || time > Time.now
+    errors.add(:time, "selected can't be a previous day") unless !time.nil? && time.to_date >= Time.now.to_date
   end
 
   def course_attributes=(course_attributes)
@@ -45,7 +46,7 @@ class TeeTime < ApplicationRecord
   end
 
   def available?
-    self.group_size < 4 && self.time > Time.now
+    self.group_size < 4 && self.time >= Time.now.to_date
   end
 
   def joinable?(user)
@@ -53,11 +54,11 @@ class TeeTime < ApplicationRecord
   end
 
   def self.active_sort
-    where("time > ?", Time.now).order(time: :asc)
+    where("time >= ?", Time.now.to_date).order(time: :asc)
   end
 
   def self.inactive_sort
-    where("time <= ?", Time.now).order(time: :asc)
+    where("time < ?", Time.now.to_date).order(time: :asc)
   end
 
   def self.all_sort

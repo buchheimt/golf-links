@@ -23,7 +23,7 @@ describe "User Features", type: :features do
         visit_signin
         user_login
         visit new_user_path
-        expect(current_path).to eq(root_path)
+        expect(current_path).to eq(user_path(current_user))
       end
     end
   end
@@ -42,15 +42,6 @@ describe "User Features", type: :features do
         visit_signin
         user_login
         expect(page.get_rack_session_key('user_id')).to_not be_nil
-      end
-    end
-
-    context "when logged in" do
-      it "redirects to welcome page" do
-        visit_signin
-        user_login
-        visit signin_path
-        expect(current_path).to eq(root_path)
       end
     end
   end
@@ -286,7 +277,7 @@ describe "User Features", type: :features do
         visit_signin
         user_login
         visit edit_user_path(user)
-        expect(current_path).to eq(root_path)
+        expect(current_path).to eq(user_path(current_user))
       end
     end
 

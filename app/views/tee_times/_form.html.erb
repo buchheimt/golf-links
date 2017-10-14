@@ -1,8 +1,12 @@
 <%= form_for tee_time_form_route(tee_time, user, course) do |f| %>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-8 mx-auto">
       <p>Select A Time</p>
       <%= check_for_errors(tee_time.errors, [:time]) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
       <%= f.datetime_select :time, ampm: true, start_year: Time.now.year, end_year: Time.now.year + 1, start_hour: 7, end_hour: 19, minute_step: 15 %>
     </div>
   </div>
@@ -24,7 +28,7 @@
     <%= f.hidden_field :course_id, value: course.id %>
   <% else %>
     <div class="row">
-      <div class="col-sm-12 mx-auto">
+      <div class="col-sm-8 mx-auto">
         <%= f.label :course_id, "Select Course" %>
         <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
       </div>
@@ -35,14 +39,13 @@
       </div>
     </div><br>
 
-    <p>OR</p>
+    <p>OR</p><br>
 
     <h5>New Course</h5>
-    <p> <em>*Name and Location are required to create a new course</em></p>
     <%= f.fields_for :course, tee_time.build_course do |cf| %>
 
       <div class="row">
-        <div class="col-sm-12 mx-auto">
+        <div class="col-sm-8 mx-auto">
           <%= cf.label :name, "New Course Name" %>
           <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
         </div>
@@ -53,7 +56,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12 mx-auto">
+        <div class="col-sm-8 mx-auto">
           <%= cf.label :description, "New Course Description" %>
           <%= check_for_errors(tee_time.errors, [:"course.decription"]) %>
         </div>
@@ -64,7 +67,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12 mx-auto">
+        <div class="col-sm-8 mx-auto">
           <%= cf.label :location, "New Course Location" %>
           <%= check_for_errors(tee_time.errors, [:"course.location"]) %>
         </div>
@@ -75,7 +78,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12 mx-auto">
+        <div class="col-sm-8 mx-auto">
           <%= cf.label :image, "New Course Image" %>
           <%= check_for_errors(tee_time.errors, [:"course.image"]) %>
         </div>
@@ -100,7 +103,7 @@
         <div class="col-sm-1"></div>
       </div>
       <div class="row">
-        <div class="col-sm-9 mx-auto">
+        <div class="col-sm-8 mx-auto">
           <%= check_for_errors(tee_time.errors, [:"course.par", :"course.length", :"course.price"]) %>
         </div>
       </div>

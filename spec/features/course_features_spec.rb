@@ -141,7 +141,7 @@ describe "Course Features", type: :feature do
     end
 
     it "does not display tee times that have already taken place" do
-      tee_time1 = course.tee_times.build(time: Time.now)
+      tee_time1 = course.tee_times.build(time: "Dec 1 2000")
       tee_time1.add_user(user)
       visit course_path(course)
       expect(page).to_not have_content("Avg. Experience")
@@ -186,7 +186,7 @@ describe "Course Features", type: :feature do
         visit_signin
         user_login
         visit edit_course_path(course)
-        expect(current_path).to eq(root_path)
+        expect(current_path).to eq(user_path(current_user))
       end
     end
 

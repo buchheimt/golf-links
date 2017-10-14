@@ -1,23 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-8 mx-auto user-card">
-      <div class="row">
-        <div class="col-sm-12 mx-auto">
-          <h1>Welcome To Golf Links!</h1>
-        </div>
-      </div>
-      <% if logged_in? %>
-        <div class="row">
-          <div class="col-sm-6 mx-auto">
-            <h3>Hi <%= current_user.username %></h3><br>
-            <%= link_to "Sign Out", signout_path, method: "delete", class: "btn" %>
-          </div>
-        </div>
-      <% else %>
-        <%= link_to "Sign In", signin_path, class: "btn" %>
-        <%= link_to "Sign in with Facebook", '/auth/facebook', class: "btn fb-btn" %><br><br>
-        <%= link_to "Sign Up", new_user_path, class: "btn" %><br><br>
-      <% end %>
+    <div class="col-sm-12 mx-auto">
+      <h1>Welcome To Golf Links!</h1>
     </div>
   </div>
+  <% if logged_in? %>
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <h3>Hi <%= current_user.username %></h3><br>
+        <%= link_to "Sign Out", signout_path, method: "delete", class: "btn" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 mx-auto user-card">
+          <%= render partial: 'sessions/form' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

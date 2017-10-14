@@ -296,12 +296,19 @@ label {
 }
 
 .fb-btn {
-  margin: 15px;
   background: #4343AC;
+  span {
+    margin-left: 10px;
+  }
 }
 
 .fb-btn:hover {
   background: #227;
+}
+
+.fb-icon {
+  width: 20px;
+  float: left;
 }
 
 div.field_with_errors input, div.field_with_errors select {
@@ -484,4 +491,8 @@ a.nav-user {
 
 .guest-count-label {
   margin-bottom: 15px;
+}
+
+.full {
+  width: 100%;
 }

@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-11 mx-auto">
+    <div class="col-sm-9 mx-auto">
       <%= f.text_field :username %>
     </div>
   </div>
@@ -15,13 +15,26 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-11 mx-auto">
+    <div class="col-sm-9 mx-auto">
       <%= f.password_field :password %>
     </div>
   </div><br><br>
   <div class="row">
-    <div class="col-sm-6 mx-auto">
-      <%= f.submit "Sign In", class: "btn" %>
+    <div class="col-sm-9 mx-auto">
+      <%= f.submit "Sign In", class: "btn full" %>
+    </div>
+  </div><br><br>
+
+  <div class="row">
+    <div class="col-sm-5 mx-auto">
+      <a href='/auth/facebook' class="btn fb-btn full">
+        <%= image_tag "fb-icon.png", class: "fb-icon" %>
+        <span>Sign In</span>
+      </a>
+    </div>
+    <div class="col-sm-5 mx-auto">
+      <%= link_to "Sign Up", new_user_path, class: "btn full" %>
     </div>
   </div>
+
 <% end %>

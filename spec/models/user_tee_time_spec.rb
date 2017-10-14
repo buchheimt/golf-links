@@ -29,4 +29,28 @@ RSpec.describe UserTeeTime, type: :model do
     course = tee_time.build_course(name: "new course")
     expect(user_tee_time.course).to eq(course)
   end
+
+  context "#guest_count" do
+    it "is assignable with a number between 0 and 3" do
+      user_tee_time = UserTeeTime.create(guest_count: 1)
+      user_tee_time.build_tee_time(time: Time.now)
+      user_tee_time.build_user(user_attributes)
+      expect(user_tee_time.guest_count).to eq(1)
+      expect(user_tee_time).to be_valid
+    end
+
+    it "is invalid with wrong number" do
+      user_tee_time = UserTeeTime.create(guest_count: 8)
+      user_tee_time.build_tee_time(time: Time.now)
+      user_tee_time.build_user(user_attributes)
+      expect(user_tee_time).to_not be_valid
+    end
+
+    it "is invalid with a non-integer" do
+      user_tee_time = UserTeeTime.create(guest_count: "apple")
+      user_tee_time.build_tee_time(time: Time.now)
+      user_tee_time.build_user(user_attributes)
+      expect(user_tee_time).to_not be_valid
+    end
+  end
 end

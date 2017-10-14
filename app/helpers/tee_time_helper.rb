@@ -21,7 +21,7 @@ module TeeTimeHelper
   end
 
   def tee_time_status(tee_time)
-    tee_time.users.size == 4 || tee_time.time < Time.now ? " tee-time-unjoinable" : ""
+    tee_time.group_size == 4 || tee_time.time < Time.now ? " tee-time-unjoinable" : ""
   end
 
   def check_for_course(tee_time)

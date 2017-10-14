@@ -33,11 +33,11 @@ class TeeTime < ApplicationRecord
   end
 
   def avg_pace
-    (self.users.inject(0) {|sum, user| sum += user.pace} / group_size.to_f).round(1)
+    (self.users.inject(0) {|sum, user| sum += user.pace} / users.size.to_f).round(1)
   end
 
   def avg_experience
-    (self.users.inject(0) {|sum, user| sum += user.experience} / group_size.to_f).round(1)
+    (self.users.inject(0) {|sum, user| sum += user.experience} / users.size.to_f).round(1)
   end
 
   def group_description

@@ -15,12 +15,12 @@ class SessionsController < ApplicationController
           @user.image = auth['info']['image'] + "?type=large"
           @user.save
           flash[:confirmation] = "You're connected!"
+          redirect_to user_path(@user)
         end
+      elsif User.find_by(email: auth['info']['email'])
+        flash[:warning] = "This Facebook account is associated with another user"
+        redirect_to root_path
       else
-        if User.find_by(email: auth['info']['email'])
-          flash[:warning] = "This Facebook account is associated with another user"
-          redirect_to root_path
-        end
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
           u.username = auth['info']['name'].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...2]
           u.email = auth['info']['email']
@@ -30,10 +30,10 @@ class SessionsController < ApplicationController
           u.image = auth['info']['image'] + "?type=large"
           u.save
         end
-      flash[:confirmation] = "Welcome, #{@user.username}!"
+        flash[:confirmation] = "Welcome, #{@user.username}!"
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
       end
-      session[:user_id] = @user.id
-      redirect_to user_path(@user)
     else
       @user = User.find_by(username: params[:user][:username])
       if @user && @user.authenticate(params[:user][:password])

@@ -23,7 +23,7 @@
     <div class="col-sm-9 mx-auto">
       <%= f.submit "Sign In", class: "btn full" %>
     </div>
-  </div><br><br>
+  </div><br>
 
   <div class="row">
     <div class="col-sm-5 mx-auto">
@@ -32,8 +32,10 @@
         <span>Sign In</span>
       </a>
     </div>
+  </div><br>
+  <div>
     <div class="col-sm-5 mx-auto">
-      <%= link_to "Sign Up", new_user_path, class: "btn full" %>
+      <%= link_to "New User?", new_user_path, class: "session-link" %>
     </div>
   </div>
 

@@ -14,7 +14,7 @@ $footer-dark: rgba(51, 69, 58, .95);
 a:hover {
   transition: background 0.5s, color 0.5, box-shadow 0.5;
 }
-
+mx-auto
 p {
   font-family: $font-secondary;
   font-size: 16px;
@@ -495,4 +495,17 @@ a.nav-user {
 
 .full {
   width: 100%;
+}
+
+.session-link {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.session-link:hover {
+  box-shadow: 4px 4px 2px #333 inset;
+  background: $main-dark;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
 }

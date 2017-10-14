@@ -42,20 +42,23 @@
         </div>
     </nav>
     <div class="wrapper">
-      <% if flash[:warning] %>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 mx-auto">
-              <h4 class="flash warning"><%= flash[:warning] %></h3>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 mx-auto">
+            <% if flash[:warning] %>
+              <h3 class="flash warning"><%= flash[:warning] %></h3>
+            <% elsif flash[:confirmation] %>
+              <h3 class="flash confirmation"><%= flash[:confirmation] %></h3>
+            <% else %>
+              <h3 class="hidden-flash">.</h3>
+            <% end %>
           </div>
         </div>
-      <% end %>
+      </div>
       <% if flash[:confirmation] %>
         <div class="container">
           <div class="row">
             <div class="col-sm-8 mx-auto">
-              <h4 class="flash confirmation"><%= flash[:confirmation] %></h3>
             </div>
           </div>
         </div>

@@ -140,7 +140,7 @@ div.course-summary {
   right: 45px;
   width: 15px;
   height: 15px;
-  background: yellow;
+  background: $btn-light;
   border-radius: 50%;
 }
 
@@ -545,4 +545,10 @@ a.nav-user {
 a:hover .link-icon {
   padding: 0;
   background: $main-dark;
+}
+
+.hidden-flash {
+  font-size: 20px;
+  padding: 10px;
+  visibility: hidden;
 }

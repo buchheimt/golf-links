@@ -5,10 +5,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
     authorize :session, :create?
     if auth
-      unless auth['info']['email']
+      if !auth['info']['email']
         flash[:warning] = "Your FB does not have a valid email, check your contact info"
         redirect_to root_path
       elsif @user = current_user
@@ -46,8 +45,6 @@ class SessionsController < ApplicationController
           u.password_confirmation = u.password
           u.image = auth['info']['image'] + "?type=large"
           u.save
-          binding.pry
-          puts u.errors.full_messages
         end
         if @user.valid?
           flash[:confirmation] = "Welcome, #{@user.username}!"

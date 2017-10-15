@@ -14,6 +14,7 @@ $footer-dark: rgba(51, 69, 58, .95);
 a:hover {
   transition: background 0.5s, color 0.5, box-shadow 0.5;
 }
+
 mx-auto
 p {
   font-family: $font-secondary;
@@ -399,9 +400,9 @@ nav {
 
 img.nav-pic {
   float: left;
-  margin: 6px 15px 0px;
+  margin: 11px 10px 0px 25px;
   display: inline-block;
-  height: 50px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid $main-dark;
 }
@@ -415,9 +416,24 @@ img.nav-pic {
   width: 100%;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 499px) {
+  p {
+    text-align: center;
+  }
+  div.wrapper {
+    margin: 396px auto 0;
+  }
+  nav.fixed-nav {
+    height: 396px;
+  }
   p.stat {
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 799px) {
+  #nav-name {
+    visibility: hidden;
   }
 }
 
@@ -457,6 +473,13 @@ a.nav-user {
     display: inline-block;
     margin-top: 20px;
   }
+}
+
+nav-user-card {
+  img {
+    display: inline-block;
+  }
+  margin: 0 auto;
 }
 
 .nav-pic {

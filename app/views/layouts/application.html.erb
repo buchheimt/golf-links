@@ -11,7 +11,7 @@
   <body>
     <nav class="fixed-nav">
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <%= link_to "Golf Links", root_path, class: "site-title" %>
           </div>
           <div class="col-sm-2">
@@ -24,18 +24,26 @@
               <div class="col-sm-2">
                 <%= link_to "Create Tee Time", new_tee_time_path %>
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-2">
+                <%= link_to "Sign Out", signout_path, method: "delete" %>
+              </div>
+              <div class="col-sm-2">
                 <a href="<%= user_path(current_user) %>" class="nav-user">
-                  <%= image_tag current_user.image, class: "nav-pic" %>
-                  <span><%= current_user.username %></span>
+                  <div class="nav-user-card clearfix">
+                    <%= image_tag current_user.image, class: "nav-pic" %>
+                    <span id="nav-name"><%= current_user.username %></span>
+                  </div>
                 </a>
               </div>
             <% else %>
               <div class="col-sm-2">
                 <%= link_to "Sign Up", new_user_path %>
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-2">
                 <%= link_to "Sign In", signin_path %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to "About", about_path %>
               </div>
             <% end %>
           </div>

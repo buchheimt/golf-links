@@ -7,7 +7,7 @@ describe "User Features", type: :features do
         visit_signup
         expect(current_path).to eq("/users/new")
         user_signup
-        expect(current_path).to eq("/users/1")
+        expect(current_path).to eq(user_path(User.last))
         expect(page).to have_content("tylerB")
       end
 
@@ -34,7 +34,7 @@ describe "User Features", type: :features do
         visit_signin
         expect(current_path).to eq("/signin")
         user_login
-        expect(current_path).to eq("/users/1")
+        expect(current_path).to eq(user_path(User.last))
         expect(page).to have_content("tylerB")
       end
 

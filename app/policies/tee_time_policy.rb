@@ -1,7 +1,7 @@
 class TeeTimePolicy < ApplicationPolicy
 
   def new?
-    user
+    create?
   end
 
   def create?

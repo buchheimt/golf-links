@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
-
   get '/auth/facebook/callback', to: 'sessions#create'
 
   resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
@@ -18,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/favorite_course', to: 'courses#favorite_course', as: "user_favorite_course"
 
-  root to: "welcome#home"
   get '/about', to: "welcome#about"
-
+  root to: "welcome#home"
+  
 end

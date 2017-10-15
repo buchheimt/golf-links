@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
 
   def new?
-    !user
+    create?
   end
 
   def create?
@@ -13,7 +13,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    user && (user.admin? || record.try(:id) == user.id)
+    update?
   end
 
   def update?

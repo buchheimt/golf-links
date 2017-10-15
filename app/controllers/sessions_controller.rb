@@ -5,9 +5,13 @@ class SessionsController < ApplicationController
   end
 
   def create
+    binding.pry
     authorize :session, :create?
     if auth
-      if @user = current_user
+      unless auth['info']['email']
+        flash[:warning] = "Your FB does not have a valid email, check your contact info"
+        redirect_to root_path
+      elsif @user = current_user
         if User.find_by(uid: auth['uid'])
           flash[:warning] = "This Facebook account is associated with another user"
           redirect_to root_path
@@ -42,11 +46,17 @@ class SessionsController < ApplicationController
           u.password_confirmation = u.password
           u.image = auth['info']['image'] + "?type=large"
           u.save
+          binding.pry
           puts u.errors.full_messages
         end
-        flash[:confirmation] = "Welcome, #{@user.username}!"
-        session[:user_id] = @user.id
-        redirect_to user_path(@user)
+        if @user.valid?
+          flash[:confirmation] = "Welcome, #{@user.username}!"
+          session[:user_id] = @user.id
+          redirect_to user_path(@user)
+        else
+          flash[:warning] = "Sorry, your FB settings"
+          redirect_to user_path(@user)
+        end
       end
     else
       @user = User.find_by(username: params[:user][:username])

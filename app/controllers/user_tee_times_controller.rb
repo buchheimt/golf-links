@@ -8,7 +8,7 @@ class UserTeeTimesController < ApplicationController
     if @tee_time.add_user(@user)
       flash[:confirmation] = "Success! You're in"
     else
-      flash[:warning] = "Unable to join"
+      flash[:warning] = @tee_time.user_tee_times.last.errors.full_messages.first
     end
     redirect_to tee_time_path(@tee_time)
   end

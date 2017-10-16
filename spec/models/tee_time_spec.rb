@@ -39,13 +39,12 @@ RSpec.describe TeeTime, type: :model do
   let(:user_attributes5) {user_attributes1.merge(username: "sansaS", email: "sansa@gmail.com")}
 
   it "belongs to a Course" do
-    tee_time = TeeTime.create(time: "Dec 1 2099")
-    course = tee_time.build_course(name: "test course")
+    tee_time = course.tee_times.build(time: "Dec 1 2099")
     expect(tee_time.course).to eq(course)
   end
 
   it "has many UserTeeTimes" do
-    tee_time = TeeTime.create(time: "Dec 1 2099")
+    tee_time = course.tee_times.build(time: "Dec 1 2099")
     user_tee_time1 = tee_time.user_tee_times.build()
     user_tee_time2 = tee_time.user_tee_times.build()
     expect(tee_time.user_tee_times.size).to eq(2)
@@ -55,8 +54,7 @@ RSpec.describe TeeTime, type: :model do
 
   context "users" do
     it "has many Users through UserTeeTimes" do
-      tee_time = TeeTime.create(time: "Dec 1 2099")
-      tee_time.build_course(name: "Augusta National GC", location: "test")
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       user_tee_time1 = tee_time.user_tee_times.build()
       user1 = user_tee_time1.build_user(user_attributes1)
       user_tee_time2 = tee_time.user_tee_times.build()
@@ -69,8 +67,7 @@ RSpec.describe TeeTime, type: :model do
     end
 
     it "prevents duplicate users" do
-      tee_time = TeeTime.create(time: "Dec 1 2099")
-      tee_time.build_course(name: "Augusta National GC", location: "test")
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       user1 = User.create(user_attributes1)
       tee_time.add_user(user1)
       tee_time.add_user(user1)
@@ -79,8 +76,7 @@ RSpec.describe TeeTime, type: :model do
     end
 
     it "prevents more than four users from joining" do
-      tee_time = TeeTime.create(time: "Dec 1 2099")
-      tee_time.build_course(name: "Augusta National GC", location: "test")
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
       user1 = User.create(user_attributes1)
       user2 = User.create(user_attributes2)
       user3 = User.create(user_attributes3)
@@ -99,14 +95,18 @@ RSpec.describe TeeTime, type: :model do
 
   context "time" do
     it "is invalid with missing time" do
-      tee_time = TeeTime.create()
-      course = tee_time.build_course(name: "test course")
+      user = User.create(user_attributes1)
+      tee_time = course.tee_times.build
+      tee_time.user_tee_times.build(user_id: user.id)
+      course.save
       expect(tee_time).to_not be_valid
     end
 
     it "is invalid with incorrect time format" do
-      tee_time = TeeTime.create(time: "apple")
-      course = tee_time.build_course(name: "test course")
+      user = User.create(user_attributes1)
+      tee_time = course.tee_times.build(time: "apple")
+      tee_time.user_tee_times.build(user_id: user.id)
+      course.save
       expect(tee_time).to_not be_valid
     end
   end

@@ -34,6 +34,7 @@ class TeeTimesController < ApplicationController
         redirect_to tee_time_path(@tee_time)
       end
     else
+      @course = Course.find_by_id(params[:course_id])
       render :new
     end
   end

@@ -140,14 +140,14 @@ describe "User Features", type: :features do
       it "displays all of user's tee times" do
         visit_signin
         user_login
-        tee_time1 = TeeTime.new(time: "Dec 1 2098")
-        tee_time1.build_course(name: "Augusta National GC", location: "test")
-        tee_time1.save
-        user_tee_time1 = UserTeeTime.create(tee_time_id: tee_time1.id, user_id: current_user.id)
-        tee_time2 = TeeTime.new(time: "Dec 1 2099")
-        tee_time2.build_course(name: "Pebble Beach Golf Links", location: "test2")
-        tee_time2.save
-        user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: current_user.id)
+        course1 = Course.create(name: "Augusta National GC", location: "test")
+        tee_time1 = course1.tee_times.build(time: "Dec 1 2098")
+        tee_time1.user_tee_times.build(user_id: current_user.id)
+        course2 = Course.create(name: "Pebble Beach Golf Links", location: "test2")
+        tee_time2 = course2.tee_times.build(time: "Dec 1 2099")
+        tee_time2.user_tee_times.build(user_id: current_user.id)
+        course1.save
+        course2.save
         visit user_path(current_user)
         expect(page).to have_content(tee_time1.course.name)
         expect(page).to have_content(tee_time1.time.year)
@@ -171,9 +171,10 @@ describe "User Features", type: :features do
         tee_time1 = course.tee_times.build(time: "Dec 1 2099")
         tee_time2 = course.tee_times.build(time: "Dec 1 2097")
         tee_time3 = course.tee_times.build(time: "Dec 1 2098")
-        tee_time1.add_user(current_user)
-        tee_time2.add_user(current_user)
-        tee_time3.add_user(current_user)
+        tee_time1.user_tee_times.build(user_id: current_user.id)
+        tee_time2.user_tee_times.build(user_id: current_user.id)
+        tee_time3.user_tee_times.build(user_id: current_user.id)
+        course.save
         visit user_path(current_user)
         expect(page.body.index(tee_time2.time.year.to_s)).to be < page.body.index(tee_time1.time.year.to_s)
       end
@@ -189,22 +190,6 @@ describe "User Features", type: :features do
     end
 
     context "when different user" do
-      it "doesn't display all of user's tee times" do
-        visit_signin
-        user_login
-        tee_time1 = TeeTime.new(time: Time.now)
-        tee_time1.build_course(name: "Augusta National GC")
-        tee_time1.save
-        user_tee_time1 = UserTeeTime.create(tee_time_id: tee_time1.id, user_id: user.id)
-        tee_time2 = TeeTime.new(time: Time.now)
-        tee_time2.build_course(name: "Pebble Beach Golf Links")
-        tee_time2.save
-        user_tee_time2 = UserTeeTime.create(tee_time_id: tee_time2.id, user_id: user.id)
-        visit user_path(user)
-        expect(page).to_not have_content("#{tee_time1.course.name} - #{tee_time1.time}")
-        expect(page).to_not have_content("#{tee_time2.course.name} - #{tee_time2.time}")
-      end
-
       it "doesn't link to User/TeeTime#new" do
         visit_signin
         user_login

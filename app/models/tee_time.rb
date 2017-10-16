@@ -6,10 +6,23 @@ class TeeTime < ApplicationRecord
 
   validates :time, presence: true
   validate :valid_date, on: :create
+  validate :no_conflicts, on: :create
   accepts_nested_attributes_for :course
 
   def valid_date
     errors.add(:time, "selected can't be a previous day") unless !time.nil? && time.to_date >= Time.now.to_date
+  end
+
+  def no_conflicts
+    #binding.pry
+    course_times = course.tee_times
+    if !course_times.empty? && course_times.any? {|tt| tt.time == time && tt.id != nil}
+      errors.add(:time, "is already schedule at this course")
+    end
+    user_times = user_tee_times.first.user.tee_times
+    if user_times && user_times.any? {|tt| tt.time == time && tt.id != nil && tt.id != self.id}
+      errors.add(:time, "is already scheduled for this user")
+    end
   end
 
   def course_attributes=(course_attributes)
@@ -18,6 +31,7 @@ class TeeTime < ApplicationRecord
 
   def user_tee_times_attributes=(user_tee_times_attributes)
     user_tee_time = self.user_tee_times.build
+    user_tee_time.tee_time_id = self.id
     user_tee_time.user_id = user_tee_times_attributes['0'][:user_id]
     guest_count = user_tee_times_attributes['0'][:guest_count]
     user_tee_time.guest_count = guest_count unless guest_count.empty?
@@ -47,7 +61,7 @@ class TeeTime < ApplicationRecord
   end
 
   def joinable?(user)
-    !!user && !self.users.include?(user) && available?
+    !!user && !self.users.include?(user) && available? && user.tee_times.none? {|tt| tt.time == time }
   end
 
   def self.active_sort

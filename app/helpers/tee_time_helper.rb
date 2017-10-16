@@ -21,7 +21,7 @@ module TeeTimeHelper
 
   def show_route(tee_time)
     if params[:controller] == "users"
-      user_tee_time_path(tee_time.user, tee_time)
+      user_tee_time_path(params[:id], tee_time)
     elsif params[:controller] == "courses"
       course_tee_time_path(tee_time.course, tee_time)
     else

@@ -48,8 +48,9 @@ describe "TeeTime Features" do
     it "displays with name and time" do
       tee_time1 = course.tee_times.build(time: "Dec 1 2098")
       tee_time2 = course.tee_times.build(time: "Dec 1 2099")
-      tee_time1.add_user(user)
-      tee_time2.add_user(user)
+      tee_time1.user_tee_times.build(user_id: user.id)
+      tee_time2.user_tee_times.build(user_id: user.id)
+      course.save
       visit tee_times_path
       expect(page).to have_content(tee_time1.course.name)
       expect(page).to have_content("Dec 1, 2098")
@@ -70,9 +71,10 @@ describe "TeeTime Features" do
       tee_time1 = course.tee_times.build(time: "Dec 1 2099")
       tee_time2 = course.tee_times.build(time: "Dec 1 2097")
       tee_time3 = course.tee_times.build(time: "Dec 1 2098")
-      tee_time1.add_user(user)
-      tee_time2.add_user(user)
-      tee_time3.add_user(user)
+      tee_time1.user_tee_times.build(user_id: user.id)
+      tee_time2.user_tee_times.build(user_id: user.id)
+      tee_time3.user_tee_times.build(user_id: user.id)
+      course.save
       visit tee_times_path
       expect(page.body.index(tee_time2.time.year.to_s)).to be < page.body.index(tee_time1.time.year.to_s)
     end
@@ -212,8 +214,9 @@ describe "TeeTime Features" do
     it "allows a user view a TeeTime" do
       visit_signin
       user_login
-      tee_time = TeeTime.create(course_id: course.id, time: "Dec 1 2099")
-      user_tee_time = user.user_tee_times.build(tee_time_id: tee_time.id)
+      tee_time = course.tee_times.build(time: "Dec 1 2099")
+      user_tee_time = tee_time.user_tee_times.build(user_id: user.id)
+      course.save
       visit user_tee_time_path(user, tee_time)
       expect(page).to have_content(course.name)
       expect(page).to have_content(user.username)

@@ -437,6 +437,12 @@ img.nav-pic {
   }
 }
 
+@media screen and (max-width: 950px) {
+  #connect-text {
+    visibility: hidden;
+  }
+}
+
 .filter {
   width: 50%;
   margin: 15px;

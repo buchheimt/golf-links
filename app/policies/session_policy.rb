@@ -5,6 +5,7 @@ class SessionPolicy < Struct.new(:user, :session)
   end
 
   def create?
+    #binding.pry
     !user || !user.uid
   end
 

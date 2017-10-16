@@ -10,6 +10,7 @@
   </head>
 
   <body>
+
     <nav class="fixed-nav">
         <div class="row">
           <div class="col-sm-2">
@@ -21,59 +22,53 @@
           <div class="col-sm-2">
             <%= link_to "Tee Times", tee_times_path %>
           </div>
-            <% unless current_user.nil? %>
-              <div class="col-sm-2">
-                <%= link_to "Create Tee Time", new_tee_time_path %>
-              </div>
-              <div class="col-sm-2">
-                <%= link_to "Sign Out", signout_path, method: "delete" %>
-              </div>
-              <div class="col-sm-2">
-                <a href="<%= user_path(current_user) %>" class="nav-user">
-                  <div class="nav-user-card clearfix">
-                    <%= image_tag current_user.image, class: "nav-pic" %>
-                    <span id="nav-name"><%= current_user.username %></span>
-                  </div>
-                </a>
-              </div>
-            <% else %>
-              <div class="col-sm-2">
-                <%= link_to "Sign Up", new_user_path %>
-              </div>
-              <div class="col-sm-2">
-                <%= link_to "Sign In", signin_path %>
-              </div>
-              <div class="col-sm-2">
-                <%= link_to "About", about_path %>
-              </div>
-            <% end %>
+        <% unless current_user.nil? %>
+          <div class="col-sm-2">
+            <%= link_to "Create Tee Time", new_tee_time_path %>
           </div>
+          <div class="col-sm-2">
+            <%= link_to "Sign Out", signout_path, method: "delete" %>
+          </div>
+          <div class="col-sm-2">
+            <a href="<%= user_path(current_user) %>" class="nav-user">
+              <div class="nav-user-card clearfix">
+                <%= image_tag current_user.image, class: "nav-pic" %>
+                <span id="nav-name"><%= current_user.username %></span>
+              </div>
+            </a>
+          </div>
+        <% else %>
+          <div class="col-sm-2">
+            <%= link_to "Sign Up", new_user_path %>
+          </div>
+          <div class="col-sm-2">
+            <%= link_to "Sign In", signin_path %>
+          </div>
+          <div class="col-sm-2">
+            <%= link_to "About", about_path %>
+          </div>
+        <% end %>
         </div>
+      </div>
     </nav>
+
     <div class="wrapper">
       <div class="container">
         <div class="row">
           <div class="col-sm-8 mx-auto">
-            <% if flash[:warning] %>
-              <h3 class="flash warning"><%= flash[:warning] %></h3>
-            <% elsif flash[:confirmation] %>
-              <h3 class="flash confirmation"><%= flash[:confirmation] %></h3>
-            <% else %>
-              <h3 class="hidden-flash">.</h3>
-            <% end %>
+          <% if flash[:warning] %>
+            <h3 class="flash warning"><%= flash[:warning] %></h3>
+          <% elsif flash[:confirmation] %>
+            <h3 class="flash confirmation"><%= flash[:confirmation] %></h3>
+          <% else %>
+            <h3 class="hidden-flash">.</h3>
+          <% end %>
           </div>
         </div>
       </div>
-      <% if flash[:confirmation] %>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 mx-auto">
-            </div>
-          </div>
-        </div>
-      <% end %>
       <%= yield %>
     </div>
+
     <footer>
       <div class="row">
         <div class="col-sm-3">
@@ -85,5 +80,6 @@
         </div>
       </div>
     </footer>
+    
   </body>
 </html>

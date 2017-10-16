@@ -5,20 +5,20 @@
       <p><em>This site is currently a working demo, check out the about page <a href="/about">here</a> for more info.</em></p>
     </div>
   </div>
-  <% if logged_in? %>
+<% if logged_in? %>
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <h3>Hi <%= current_user.username %></h3><br>
+      <%= link_to "Sign Out", signout_path, method: "delete", class: "btn" %>
+    </div>
+  </div>
+<% else %>
+  <div class="container">
     <div class="row">
-      <div class="col-sm-6 mx-auto">
-        <h3>Hi <%= current_user.username %></h3><br>
-        <%= link_to "Sign Out", signout_path, method: "delete", class: "btn" %>
+      <div class="col-sm-5 mx-auto user-card">
+        <%= render partial: 'sessions/form' %>
       </div>
     </div>
-  <% else %>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-5 mx-auto user-card">
-          <%= render partial: 'sessions/form' %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  </div>
+<% end %>
 </div>

@@ -9,8 +9,6 @@
         </div>
         <div class="col-sm-8 col-sm-offset-1">
           <div class="row">
-          </div>
-          <div class="row">
             <div class="col-sm-12 mx-auto">
               <div class="row">
                 <div class="col-sm-9">
@@ -26,102 +24,101 @@
               </div>
             </div>
           </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-4">
-                  <p><strong>User Since: </strong></p>
-                </div>
-                <div class="col-sm-4">
-                  <p><%= format_created_at(@user) %></p>
-                </div>
-                <div class="col-sm-3">
-                  <p><strong>Pace: </strong></p>
-                </div>
-                <div class="col-sm-1">
-                  <p><%= @user.pace %></p>
-                </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <p><strong>User Since: </strong></p>
               </div>
-              <div class="row">
-                <div class="col-sm-4">
-                  <p><strong>Favorite Course: </strong></p>
+              <div class="col-sm-4">
+                <p><%= format_created_at(@user) %></p>
+              </div>
+              <div class="col-sm-3">
+                <p><strong>Pace: </strong></p>
+              </div>
+              <div class="col-sm-1">
+                <p><%= @user.pace %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <p><strong>Favorite Course: </strong></p>
+              </div>
+              <div class="col-sm-4 fav-course">
+                <% unless @user.courses.empty? %>
+                  <p><%= link_to @user.favorite_course.name, user_favorite_course_path(@user) %></p>
+                <% end %>
+              </div>
+              <div class="col-sm-3">
+                <p><strong>Experience: </strong></p>
+              </div>
+              <div class="col-sm-1">
+                <p><%= @user.experience %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <p><strong>Active Tee Times: </strong></p>
+              </div>
+              <div class="col-sm-4">
+                <p><%= @user.active_tee_times.size %></p>
+              </div>
+              <div class="col-sm-3">
+                <p><strong>All-Time: </strong></p>
+              </div>
+              <div class="col-sm-1">
+                <p><%= @user.tee_times.size %></p>
+              </div>
+            </div><br>
+            <div class="row">
+              <% if policy(@user).update? %>
+                <div class="col-sm-3">
+                  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn" %>
                 </div>
-                <div class="col-sm-4 fav-course">
-                  <% unless @user.courses.empty? %>
-                    <p><%= link_to @user.favorite_course.name, user_favorite_course_path(@user) %></p>
+              <% end %>
+              <% if current_user.admin? && !@user.admin? %>
+                <div class="col-sm-3">
+                  <%= form_tag user_path(@user), method: "patch" do %>
+                    <%= hidden_field_tag "user[role]", "admin" %>
+                    <%= submit_tag "Make Admin", class: "btn" %>
                   <% end %>
                 </div>
-                <div class="col-sm-3">
-                  <p><strong>Experience: </strong></p>
+              <% end %>
+              <% if current_user == @user %>
+                <div class="col-sm-5 mx-auto">
+                  <%= link_to "Create New Tee Time", new_user_tee_time_path(@user), class: "btn" %>
                 </div>
-                <div class="col-sm-1">
-                  <p><%= @user.experience %></p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-4">
-                  <p><strong>Active Tee Times: </strong></p>
-                </div>
-                <div class="col-sm-4">
-                  <p><%= @user.active_tee_times.size %></p>
-                </div>
-                <div class="col-sm-3">
-                  <p><strong>All-Time: </strong></p>
-                </div>
-                <div class="col-sm-1">
-                  <p><%= @user.tee_times.size %></p>
-                </div>
-              </div><br>
-              <div class="row">
-                <% if policy(@user).update? %>
-                  <div class="col-sm-3">
-                    <%= link_to "Edit Profile", edit_user_path(@user), class: "btn" %>
+                <% unless @user.uid %>
+                  <div class="col-sm-3 mx-auto">
+                    <a href='/auth/facebook' class="btn fb-btn full">
+                      <%= image_tag "fb-icon.png", class: "fb-icon" %>
+                      <span>Connect</span>
+                    </a>
                   </div>
                 <% end %>
-                <% if current_user.admin? && !@user.admin? %>
-                  <div class="col-sm-3">
-                    <%= form_tag user_path(@user), method: "patch" do %>
-                      <%= hidden_field_tag "user[role]", "admin" %>
-                      <%= submit_tag "Make Admin", class: "btn" %>
-                    <% end %>
-                  </div>
-                <% end %>
-                <% if current_user == @user %>
-                  <div class="col-sm-5 mx-auto">
-                    <%= link_to "Create New Tee Time", new_user_tee_time_path(@user), class: "btn" %>
-                  </div>
-                  <% unless @user.uid %>
-                    <div class="col-sm-3 mx-auto">
-                      <a href='/auth/facebook' class="btn fb-btn full">
-                        <%= image_tag "fb-icon.png", class: "fb-icon" %>
-                        <span>Connect</span>
-                      </a>
-                    </div>
-                  <% end %>
-                <% end %>
-              </div>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div><br><br><br>
-  <% if policy(@user).show? %>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <h4>Tee Times for <%= @user.username %>:</h4>
-        </div>
-      </div><br>
-      <% if @tee_times %>
-        <div class="row">
-          <%= render @tee_times %>
-        </div>
-      <% end %>
-    </div><br>
+  </div>
+</div><br><br><br>
+<% if policy(@user).show? %>
+  <div class="container">
     <div class="row">
-      <div class="col-sm-5 mx-auto">
-        <%= link_to "See all Tee Times for #{@user.username}", user_tee_times_path(@user), class: "btn" %>
+      <div class="col-sm-12">
+        <h4>Tee Times for <%= @user.username %>:</h4>
       </div>
+    </div><br>
+  <% if @tee_times %>
+    <div class="row">
+      <%= render @tee_times %>
     </div>
   <% end %>
-</div>
+  </div><br>
+  <div class="row">
+    <div class="col-sm-5 mx-auto">
+      <%= link_to "See all Tee Times for #{@user.username}", user_tee_times_path(@user), class: "btn" %>
+    </div>
+  </div>
+<% end %>

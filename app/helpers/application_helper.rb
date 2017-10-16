@@ -11,4 +11,8 @@ module ApplicationHelper
     end
   end
 
+  def error_class(errors, field)
+    " field_with_errors" unless errors[field].empty?
+  end
+
 end

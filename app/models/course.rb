@@ -14,4 +14,9 @@ class Course < ApplicationRecord
     TeeTime.active_sort.where(course_id: self.id)
   end
 
+  def self.most_popular
+    rank_hash = joins(:tee_times).group("courses.id").count
+    Course.find_by_id(rank_hash.max_by{|k,v| v}[0])
+  end
+
 end

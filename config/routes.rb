@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   delete '/signout', to: 'sessions#destroy'
   get '/auth/facebook/callback', to: 'sessions#create'
 
+  get '/users/:id/favorite_course', to: 'courses#favorite_course', as: 'user_favorite_course'
+  get '/courses/most_popular', to: 'courses#most_popular', as: 'most_popular_course'
+
   resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
     resources :tee_times, only: [:index, :new, :create, :show]
   end
@@ -15,9 +18,7 @@ Rails.application.routes.draw do
   resources :tee_times, only: [:index, :show, :new, :create]
   resources :user_tee_times, only: [:create, :update, :destroy]
 
-  get '/users/:id/favorite_course', to: 'courses#favorite_course', as: "user_favorite_course"
+  get '/about', to: 'welcome#about'
+  root to: 'welcome#home'
 
-  get '/about', to: "welcome#about"
-  root to: "welcome#home"
-  
 end

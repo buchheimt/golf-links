@@ -69,6 +69,12 @@ class CoursesController < ApplicationController
     end
   end
 
+  def most_popular
+    @course = Course.most_popular
+    @tee_times = @course.active_tee_times
+    render :show
+  end
+
   private
 
   def course_params

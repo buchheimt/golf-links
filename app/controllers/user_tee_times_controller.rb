@@ -17,7 +17,7 @@ class UserTeeTimesController < ApplicationController
     @user_tee_time = UserTeeTime.find_by_id(params[:id])
     authorize @user_tee_time
     params[:operation] == '1' ? @user_tee_time.add_guest : @user_tee_time.remove_guest
-    if @user_tee_time.save
+    if (params[:operation] == '1' || params[:operation] == '-1') && @user_tee_time.save
       flash[:confirmation] = "Success!"
     else
       flash[:confirmation] = "Uh oh, something went wrong"

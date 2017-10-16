@@ -47,14 +47,14 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course = Course.find_by_id(params[:id])
-    authorize @course
-    flash[:confirmation] = "#{@course.name} has been deleted"
-    @course.tee_times.each do |tee_time|
-      tee_time.user_tee_times.each {|user_tee_time| user_tee_time.destroy}
+    course = Course.find_by_id(params[:id])
+    authorize course
+    flash[:confirmation] = "#{course.name} has been deleted"
+    course.tee_times.each do |tee_time|
+      tee_time.user_tee_times.destroy_all
       tee_time.destroy
     end
-    @course.destroy
+    course.destroy
     redirect_to courses_path
   end
 

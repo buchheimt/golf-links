@@ -24,7 +24,6 @@ class TeeTimesController < ApplicationController
   def create
     @tee_time = TeeTime.new(tee_time_params)
     authorize @tee_time
-    #binding.pry
     if @tee_time.save
       flash[:confirmation] = "Tee time created!"
       if params[:user_id]

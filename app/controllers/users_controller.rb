@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     authorize @user
     session.delete(:user_id) if session[:user_id] == @user.id
     flash[:confirmation] = "#{@user.username} has been deleted"
-    @user.user_tee_times.each {|user_tee_time| user_tee_time.destroy}
+    @user.user_tee_times.destroy_all
     @user.destroy
     redirect_to root_path
   end

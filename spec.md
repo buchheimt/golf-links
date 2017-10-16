@@ -13,7 +13,7 @@ Specs:
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
         *-User, Course, TeeTime, UserTeeTime*
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-        *-User.favorite_course URL: /users/1/favorite_course*
+        *-Course.most_popular: /courses/most_popular*
 - [x] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
         *-/tee_times/new, UserTeeTime*
 - [x] Include signup (how e.g. Devise) *-Custom authentication system with bcrypt and omniauth/facebook*

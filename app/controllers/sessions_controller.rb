@@ -66,16 +66,7 @@ class SessionsController < ApplicationController
   end
 
   def facebook_new_email
-    user = User.find_or_create_by(uid: auth['uid']) do |u|
-      u.username = auth['info']['name'].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...2]
-      u.email = auth['info']['email']
-      u.uid = auth['uid']
-      u.password = SecureRandom.hex
-      u.password_confirmation = u.password
-      u.image = auth['info']['image'] + "?type=large"
-      u.save
-    end
-
+    user = User.new_from_omniauth(auth)
     if user.valid?
       facebook_valid_login(user)
     else
@@ -85,9 +76,7 @@ class SessionsController < ApplicationController
 
 
   def facebook_valid_connect
-    current_user.uid = auth['uid']
-    current_user.image = auth['info']['image'] + "?type=large"
-    current_user.save
+    current_user.connect_from_omniauth(auth)
     facebook_success
   end
 

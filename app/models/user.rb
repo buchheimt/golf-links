@@ -30,4 +30,23 @@ class User < ApplicationRecord
     user_tee_time.guest_count > 0
   end
 
+  def connect_from_omniauth(auth)
+    self.uid = auth['uid']
+    self.image = auth['info']['image'] + "?type=large"
+    self.save
+  end
+
+  def self.new_from_omniauth(auth)
+    user = self.find_or_create_by(uid: auth['uid']) do |u|
+      u.username = auth['info']['name'].split(" ")[0].capitalize + auth[:info][:name].split(" ")[1][0] + auth[:uid][0...2]
+      u.email = auth['info']['email']
+      u.uid = auth['uid']
+      u.password = SecureRandom.hex
+      u.password_confirmation = u.password
+      u.image = auth['info']['image'] + "?type=large"
+      u.save
+    end
+    user
+  end
+
 end

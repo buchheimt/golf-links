@@ -2,6 +2,10 @@ class User < ApplicationRecord
 
   enum role: [:user, :admin]
 
+  has_many :user_tee_times
+  has_many :tee_times, through: :user_tee_times
+  has_many :courses, through: :tee_times
+
   has_secure_password
   validates :username, uniqueness: true, presence: true
   validates :username, format: {with: /\A[\w ]+\z/, message: "username can only contain letters, numbers, and underscores"}
@@ -11,10 +15,6 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6}, allow_nil: true, on: :update
   validates_inclusion_of :pace, in: 1..10, allow_nil: true
   validates_inclusion_of :experience, in: 1..10, allow_nil: true
-
-  has_many :user_tee_times
-  has_many :tee_times, through: :user_tee_times
-  has_many :courses, through: :tee_times
 
   def favorite_course
     rank_hash = TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", self.id).distinct.group("tee_times.course_id").count

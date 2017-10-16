@@ -138,15 +138,6 @@ RSpec.describe TeeTime, type: :model do
     end
   end
 
-  context "#group_description" do
-    it "returns a formatted string with the tee times details" do
-      tee_time = course.tee_times.build(time: "Dec 1 2099")
-      tee_time.add_user(User.create(user_attributes1))
-      tee_time.add_user(User.create(user_attributes2))
-      expect(tee_time.group_description).to eq("<strong>Size:</strong> 2/4 | <strong>Avg. Pace:</strong> 3.0 | <strong>Avg. Experience:</strong> 7.0")
-    end
-  end
-
   context "#joinable?" do
     it "returns true if group is still open and user hasn't joined" do
       tee_time = course.tee_times.build(time: "Dec 1 2099")

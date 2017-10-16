@@ -3,6 +3,7 @@ class TeeTime < ApplicationRecord
   belongs_to :course
   has_many :user_tee_times
   has_many :users, through: :user_tee_times
+
   validates :time, presence: true
   validate :valid_date, on: :create
   accepts_nested_attributes_for :course
@@ -39,10 +40,6 @@ class TeeTime < ApplicationRecord
 
   def avg_experience
     (self.users.inject(0) {|sum, user| sum += user.experience} / users.size.to_f).round(1)
-  end
-
-  def group_description
-    "<strong>Size:</strong> #{group_size}/4 | <strong>Avg. Pace:</strong> #{avg_pace} | <strong>Avg. Experience:</strong> #{avg_experience}".html_safe
   end
 
   def available?

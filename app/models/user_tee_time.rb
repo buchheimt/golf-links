@@ -9,7 +9,6 @@ class UserTeeTime < ApplicationRecord
 
   def add_guest
     self.guest_count += 1 if tee_time.available? && tee_time.users.include?(user)
-
   end
 
   def remove_guest

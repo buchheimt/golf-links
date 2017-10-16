@@ -32,36 +32,10 @@
         </div>
         <div class="row">
           <div class="col-sm-5">
-            <label>
-              <%= check_box_tag "size[]", 1, @sizes ? @sizes.include?("1") : true %>
-              1/4
-            </label>
-            <label class="checkbox-inline">
-              <%= check_box_tag "size[]", 2, @sizes ? @sizes.include?("2") : true  %>
-              2/4
-            </label>
-            <label class="checkbox-inline">
-              <%= check_box_tag "size[]", 3, @sizes ? @sizes.include?("3") : true  %>
-              3/4
-            </label class="checkbox-inline">
-            <label>
-              <%= check_box_tag "size[]", 4, @sizes ? @sizes.include?("4") : true  %>
-              4/4
-            </label>
+            <%= generate_group_size_checkboxes(1, 4, @sizes) %>
           </div>
           <div class="col-sm-5">
-            <label class="radio-inline">
-              <%= radio_button_tag "status", "active", @status ? @status == "active" : true %>
-              Active
-            </label>
-            <label class="radio-inline">
-              <%= radio_button_tag "status", "inactive", @status == "inactive" %>
-              Inactive
-            </label>
-            <label class="radio-inline">
-              <%= radio_button_tag "status", "all", @status == "all" %>
-              All
-            </label>
+            <%= generate_status_radio_buttons(["active", "inactive", "all"], @status) %>
           </div>
           <div class="col-sm-2">
             <%= submit_tag "Filter", class: "btn" %>

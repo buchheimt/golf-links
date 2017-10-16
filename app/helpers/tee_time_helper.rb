@@ -46,4 +46,27 @@ module TeeTimeHelper
     "<strong>Size:</strong> #{tee_time.group_size}/4 | <strong>Avg. Pace:</strong> #{tee_time.avg_pace} | <strong>Avg. Experience:</strong> #{tee_time.avg_experience}".html_safe
   end
 
+  def generate_group_size_checkboxes(min, max, sizes)
+    output = ""
+    (max - min + 1).times do |i|
+      size = i + min
+      output += "<label class=\"checkbox-inline\">"
+      output += check_box_tag("size[]", size, sizes ? sizes.include?(size.to_s) : true)
+      output += "#{size}/#{max}"
+      output += "</label class=\"checkbox-inline\">"
+    end
+    output.html_safe
+  end
+
+  def generate_status_radio_buttons(options, status)
+    output = ""
+    options.each do |option|
+      selected = (!status && option == "active") ? true : status == option
+      output += "<label class=\"radio-inline\">"
+      output += radio_button_tag("status", option, selected)
+      output += "#{option.capitalize}</label>"
+    end
+    output.html_safe
+  end
+
 end

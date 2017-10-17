@@ -36,7 +36,7 @@ body {
   box-sizing: border-box;
   background-color: $bg-color;
   margin: 64px auto 0;
-  padding: 40px 40px 64px;
+  padding: 25px 40px 64px;
   max-width: 1080px;
   min-height: 700px;
   height: 100%;
@@ -329,8 +329,8 @@ div.field_with_errors input, div.field_with_errors select {
 }
 
 .flash {
-  font-size: 20px;
-  padding: 10px;
+  font-size: 16px;
+  padding: 5px;
   border-radius: 10px;
 }
 
@@ -580,4 +580,8 @@ a:hover .link-icon {
   font-size: 20px;
   padding: 10px;
   visibility: hidden;
+}
+
+.course-primary-info {
+  width: 100%;
 }

@@ -14,10 +14,9 @@ class TeeTime < ApplicationRecord
   end
 
   def no_conflicts
-    #binding.pry
     course_times = course.tee_times
     if !course_times.empty? && course_times.any? {|tt| tt.time == time && tt.id != nil}
-      errors.add(:time, "is already schedule at this course")
+      errors.add(:time, "is already scheduled at this course")
     end
     user_times = user_tee_times.first.user.tee_times
     if user_times && user_times.any? {|tt| tt.time == time && tt.id != nil && tt.id != self.id}

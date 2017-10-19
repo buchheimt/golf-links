@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def active_tee_times
-    TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ? AND tee_times.time > ?", self.id, Time.now).order(time: :asc).uniq
+    TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ? AND tee_times.time > ?", self.id, Time.now.to_date).order(time: :asc).uniq
   end
 
   def has_guests?(tee_time)

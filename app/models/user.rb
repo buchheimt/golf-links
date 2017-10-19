@@ -18,7 +18,7 @@ class User < ApplicationRecord
   validate :valid_image_url
 
   def valid_image_url
-    unless self.nil? || self.image.match(/^https?:\/\/|^\/\//i) || self.image.empty? || self.image == 'user-default.jpg'
+    unless self.image.nil? || self.image.match(/^https?:\/\/|^\/\//i) || self.image.empty? || self.image == 'user-default.jpg'
       errors.add(:image, "must be a valid URL. Leave blank for default")
     end
   end

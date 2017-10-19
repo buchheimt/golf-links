@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
       password_confirmation: "123456",
       pace: 3,
       experience: 8,
-      image: "image.jpg",
+      image: "user-default.jpg",
       role: 1
     }
   end
@@ -154,7 +154,7 @@ RSpec.describe User, type: :model do
 
   describe  "image" do
     it "is assignable" do
-      expect(User.new(attributes).image).to eq("image.jpg")
+      expect(User.new(attributes).image).to eq("user-default.jpg")
     end
 
     it "is optional" do

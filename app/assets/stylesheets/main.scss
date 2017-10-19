@@ -432,13 +432,14 @@ img.nav-pic {
 }
 
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  #nav-name {
-    visibility: hidden;
-  }
+
 }
 
 @media screen and (max-width: 950px) {
   #connect-text {
+    visibility: hidden;
+  }
+  #nav-name {
     visibility: hidden;
   }
 }

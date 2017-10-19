@@ -78,13 +78,13 @@
     </div>
     <div class="row">
       <div class="col-sm-8 mx-auto">
-        <%= cf.label :image, "New Course Image" %>
+        <%= cf.label :image, "New Course Image URL" %>
         <%= check_for_errors(tee_time.errors, [:"course.image"]) %>
       </div>
     </div>
     <div class="row<%= error_class(tee_time.errors, "course.image") %>">
       <div class="col-sm-9 mx-auto">
-        <%= cf.text_field :image %>
+        <%= cf.text_field :image, placeholder: "Leave blank for default" %>
       </div>
     </div><br>
 

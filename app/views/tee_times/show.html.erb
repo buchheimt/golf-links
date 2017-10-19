@@ -48,7 +48,7 @@
                   <a href="<%= user_path(user) %>" class="tee-time-user">
                     <div class="row">
                       <div class="col-sm-4">
-                        <%= image_tag user.image, class: "tee-time-pic" %>
+                        <%= image_tag user.get_image, class: "tee-time-pic" %>
                       </div>
                       <div class="col-sm-8">
                         <div class="row">

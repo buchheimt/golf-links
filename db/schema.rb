@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014003739) do
+ActiveRecord::Schema.define(version: 20171019140429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171014003739) do
     t.integer "par"
     t.integer "length"
     t.integer "price"
-    t.string "image", default: "course-default.jpg"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171014003739) do
     t.integer "pace", default: 5
     t.integer "experience", default: 5
     t.string "uid"
-    t.string "image", default: "user-default.jpg"
+    t.string "image"
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

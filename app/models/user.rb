@@ -15,6 +15,17 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6}, allow_nil: true, on: :update
   validates_inclusion_of :pace, in: 1..10, allow_nil: true
   validates_inclusion_of :experience, in: 1..10, allow_nil: true
+  validate :valid_image_url
+
+  def valid_image_url
+    unless self.nil? || self.image.match(/^https?:\/\/|^\/\//i) || self.image.empty? || self.image == 'user-default.jpg'
+      errors.add(:image, "must be a valid URL. Leave blank for default")
+    end
+  end
+
+  def get_image
+    self.image && !self.image.empty? ? self.image : 'user-default.jpg'
+  end
 
   def favorite_course
     rank_hash = TeeTime.joins(:user_tee_times).joins(:users).where("user_tee_times.user_id = ?", self.id).distinct.group("tee_times.course_id").count

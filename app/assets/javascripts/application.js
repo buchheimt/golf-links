@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require handlebars.min
 //= require tee_time
+//= require comment
 //= require_tree .

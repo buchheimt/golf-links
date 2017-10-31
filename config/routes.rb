@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :tee_times, only: [:index, :show, :new, :create]
   resources :user_tee_times, only: [:create, :update, :destroy]
 
+  resources :comments, only: [:create]
+
   get '/about', to: 'welcome#about'
   root to: 'welcome#home'
 

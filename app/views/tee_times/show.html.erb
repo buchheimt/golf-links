@@ -136,9 +136,20 @@
     </div>
   </div>
   <div class="row">
+    <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
+      <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
+      <%= f.text_field :content, placeholder: "join the conversation!" %>
+      <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
+    <% end %>
+  </div><br>
+  <div id="comments">
     <% if @comments %>
       <% @comments.each do |comment| %>
-        <p><%= comment.content %>-<%= comment.user.username %></p>
+        <div class="row">
+          <div class="col-sm-12">
+            <h4><%= comment.content %>-<%= comment.user.username %></h4><br>
+          </div>
+        </div>
       <% end %>
     <% end %>
   </div>

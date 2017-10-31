@@ -14,5 +14,6 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require handlebars.min
 //= require tee_time
 //= require_tree .

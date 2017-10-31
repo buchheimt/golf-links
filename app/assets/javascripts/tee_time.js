@@ -5,10 +5,13 @@ $(function() {
 
 const reloadTeeTimes = (e) => {
   e.preventDefault();
+  const templateSource = $("#tee-time-template").html();
+  const template = Handlebars.compile(templateSource);
   $.get("/tee_times.json", (teeTimes) => {
     $("#teeTimeCards").empty();
     teeTimes.forEach(function(teeTime) {
-      const $teeTimeCard = $("#teeTimeCards").append('<div class="col-sm-6">' + teeTime["time"] + '</div>');
+      const $teeTimeDiv = $(template());
+      $("#teeTimeCards").append($teeTimeDiv);
     })
   });
 }

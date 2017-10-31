@@ -51,6 +51,17 @@
 </div>
 
 <script id="tee-time-template" type="text/x-handlebars-template">
-  <p> It's a me</p>
-
+  <div class="col-sm-6">
+    <div class="tee-time-card">
+      <a href="/tee_times/{{id}}">
+        <h4>{{course.name}}</h4>
+        <h5>{{time_formatted}}</h5>
+        <p>
+          <strong>Size:</strong> {{group_size}}/4 |
+          <strong>Avg. Pace:</strong> {{avg_pace}} |
+          <strong>Avg. Experience:</strong> {{avg_experience}}
+        </p>
+      </a>
+    </div>
+  </div>
 </script>

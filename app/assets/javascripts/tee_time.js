@@ -10,7 +10,7 @@ const reloadTeeTimes = (e) => {
   $.get("/tee_times.json", (teeTimes) => {
     $("#teeTimeCards").empty();
     teeTimes.forEach(function(teeTime) {
-      const $teeTimeDiv = $(template());
+      const $teeTimeDiv = $(template(teeTime));
       $("#teeTimeCards").append($teeTimeDiv);
     })
   });

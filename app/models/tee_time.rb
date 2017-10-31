@@ -37,6 +37,10 @@ class TeeTime < ApplicationRecord
     user_tee_time.guest_count = guest_count unless guest_count.empty?
   end
 
+  def time_formatted
+    time.strftime("%A %b %e, %Y | %l:%M %p")
+  end
+
   def add_user(user)
     if !self.users.include?(user) && self.user_tee_times.size <= 3
       self.user_tee_times.build(user_id: user.id)
@@ -49,11 +53,11 @@ class TeeTime < ApplicationRecord
   end
 
   def avg_pace
-    (self.users.inject(0) {|sum, user| sum += user.pace} / users.size.to_f).round(1)
+    (self.users.inject(0) {|sum, user| sum += user.pace} / users.size.to_f).round(1).to_s
   end
 
   def avg_experience
-    (self.users.inject(0) {|sum, user| sum += user.experience} / users.size.to_f).round(1)
+    (self.users.inject(0) {|sum, user| sum += user.experience} / users.size.to_f).round(1).to_s
   end
 
   def available?

@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :user_tee_times
   has_many :tee_times, through: :user_tee_times
   has_many :courses, through: :tee_times
+  has_many :comments
 
   has_secure_password
   validates :username, uniqueness: true, presence: true

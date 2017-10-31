@@ -42,6 +42,8 @@ gem 'dotenv-rails'
 
 gem 'pundit'
 
+gem 'active_model_serializers', '0.10.6'
+
 gem 'rails_12factor', group: :production
 
 group :test, :development do

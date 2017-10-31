@@ -3,6 +3,7 @@ class TeeTime < ApplicationRecord
   belongs_to :course
   has_many :user_tee_times
   has_many :users, through: :user_tee_times
+  has_many :comments
 
   validates :time, presence: true
   validate :valid_date, on: :create

@@ -135,4 +135,11 @@
       <% end %>
     </div>
   </div>
+  <div class="row">
+    <% if @comments %>
+      <% @comments.each do |comment| %>
+        <p><%= comment.content %>-<%= comment.user.username %></p>
+      <% end %>
+    <% end %>
+  </div>
 </div>

@@ -38,14 +38,14 @@
             <%= generate_status_radio_buttons(["active", "inactive", "all"], @status) %>
           </div>
           <div class="col-sm-2">
-            <%= submit_tag "Filter", class: "btn" %>
+            <%= submit_tag "Filter", class: "btn", id: "filterBtn" %>
           </div>
         </div>
       <% end %>
     </div>
   </div><br>
   <% end %>
-  <div class="row">
+  <div class="row" id="teeTimeCards">
     <%= render @tee_times %>
   </div>
 </div>

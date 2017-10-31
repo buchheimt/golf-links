@@ -11,7 +11,10 @@ class TeeTimesController < ApplicationController
     else
       @tee_times = TeeTime.active_sort
     end
-
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @tee_times, include: 'course'}
+    end
   end
 
   def new
@@ -42,6 +45,7 @@ class TeeTimesController < ApplicationController
   def show
     @user = User.find_by_id(params[:user_id])
     @tee_time = TeeTime.find_by_id(params[:id])
+    @comments = @tee_time.comments
   end
 
   private

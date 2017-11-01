@@ -5,7 +5,5 @@ $(function() {
 
 const updateResult = (e) => {
   const $range = $(e.target);
-  console.log($range.val());
-  console.log($range.prev());
   $range.parent().prev().val($range.val());
 }

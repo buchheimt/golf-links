@@ -17,6 +17,7 @@
 //= require rangeslider.min
 //= require handlebars.min
 //= require tee_time
+//= require main
 //= require user_form
 //= require comment
 //= require_tree .

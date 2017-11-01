@@ -29,12 +29,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6">
-          <%= f.label :pace %>
-        </div>
-        <div class="col-sm-6">
-          <%= f.label :experience %>
-        </div>
+
+
       </div>
       <div class="row">
         <div class="col-sm-8 mx-auto">
@@ -42,11 +38,19 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4 mx-auto">
-          <%= f.select :pace, (1..10).to_a %>
+        <div class="col-sm-12">
+          <%= f.label :pace %>
         </div>
-        <div class="col-sm-4 mx-auto">
-          <%= f.select :experience, (1..10).to_a %>
+        <output name="paceResult">5</output>
+        <div class="col-sm-12 mx-auto">
+          <%= f.range_field :pace, in: 1..10 %>
+        </div>
+        <div class="col-sm-12">
+          <%= f.label :experience %>
+        </div>
+        <output name="experienceResult">5</output>
+        <div class="col-sm-12 mx-auto">
+          <%= f.range_field :experience, in: 1..10 %>
         </div>
       </div>
     </div>

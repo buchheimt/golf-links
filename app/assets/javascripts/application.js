@@ -14,7 +14,9 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require rangeslider.min
 //= require handlebars.min
 //= require tee_time
+//= require user_form
 //= require comment
 //= require_tree .

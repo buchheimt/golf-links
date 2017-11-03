@@ -2,10 +2,12 @@
 
 Specs:
 - [x] Use jQuery for implementing new requirements
-- [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
+- [x] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
+        *-Course#show routes can cycle via 'Next' and 'Prev' via AJAX*
 - [x] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
         *-TeeTime#index page can be filtered via AJAX requests*
-- [ ] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
+- [x] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
+        *-Course has many TeeTimes and TeeTimes are loaded and appended to DOM via AJAX when 'Next' or 'Prev' is clicked*
 - [x] Use your Rails API and a form to create a resource and render the response without a page refresh.
         *-Comments are created and added to TeeTime#show DOM via AJAX*
 - [ ] Translate JSON responses into js model objects.

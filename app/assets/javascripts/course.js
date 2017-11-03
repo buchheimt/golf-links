@@ -13,10 +13,9 @@ const updateCourseShow = (course) => {
 
   if (course.image.indexOf("course-default.jpg") != 0) {
     $("#coursePic").attr("src", course.image);
-  } //else {
-  //   $("#coursePic").attr("src", "/assets/images/course-default.jpg");
-  // }
+  }
 
+  loadTeeTimes(course.tee_times);
 
   $("#prevBtn").data("id", course.id);
   $("#nextBtn").data("id", course.id);
@@ -43,4 +42,18 @@ const setField = (field, course) => {
   } else {
     $("#" + field).text(value);
   }
+}
+
+const loadTeeTimes = (teeTimes) => {
+  const templateSource = $("#tee-time-template").html();
+  const template = Handlebars.compile(templateSource);
+  $("#teeTimeCards").empty();
+  teeTimes.forEach(function(teeTime) {
+    console.log(teeTime.time)
+    console.log(teeTime.time >= Date.now())
+    if (teeTime.active) {
+      const $teeTimeDiv = $(template(teeTime));
+      $("#teeTimeCards").append($teeTimeDiv);
+    }
+  })
 }

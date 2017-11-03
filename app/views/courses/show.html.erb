@@ -69,9 +69,24 @@
       <h4>Upcoming Tee Times</h4>
     </div>
   </div><br>
-  <div class="row">
+  <div class="row" id="teeTimeCards">
   <% if @tee_times %>
     <%= render @tee_times %>
   <% end %>
   </div>
 </div>
+
+<script id="tee-time-template" type="text/x-handlebars-template">
+  <div class="col-sm-6">
+    <div class="tee-time-card">
+      <a href="/tee_times/{{id}}">
+        <h5>{{time_formatted}}</h5>
+        <p>
+          <strong>Size:</strong> {{group_size}}/4 |
+          <strong>Avg. Pace:</strong> {{avg_pace}} |
+          <strong>Avg. Experience:</strong> {{avg_experience}}
+        </p>
+      </a>
+    </div>
+  </div>
+</script>

@@ -60,8 +60,12 @@ class TeeTime < ApplicationRecord
     (self.users.inject(0) {|sum, user| sum += user.experience} / users.size.to_f).round(1).to_s
   end
 
+  def active
+    self.time >= Time.now.to_date
+  end
+
   def available?
-    self.group_size < 4 && self.time >= Time.now.to_date
+    self.group_size < 4 && self.active
   end
 
   def joinable?(user)

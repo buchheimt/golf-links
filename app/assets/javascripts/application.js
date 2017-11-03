@@ -20,4 +20,5 @@
 //= require main
 //= require user_form
 //= require comment
+//= require course
 //= require_tree .

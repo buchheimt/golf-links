@@ -30,4 +30,14 @@ class Course < ApplicationRecord
     Course.find_by_id(rank_hash.max_by{|k,v| v}[0])
   end
 
+  def self.find_next_course(id)
+    next_course = where("id > ?", id).order(id: :asc).limit(1)
+    next_course.empty? ? self.first : next_course.first
+  end
+
+  def self.find_prev_course(id)
+    prev_course = where("id < ?", id).order(id: :desc).limit(1)
+    prev_course.empty? ? self.last : prev_course.first
+  end
+
 end

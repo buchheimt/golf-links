@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row course-main">
       <div class="col-sm-8">
-        <%= image_tag @course.get_image, class: "course-pic" %>
+        <%= image_tag @course.get_image, class: "course-pic", id: "coursePic" %>
       </div><br>
       <div class="col-sm-4"><br><br><br>
         <div class="row">
@@ -9,7 +9,7 @@
             <p><strong>Location:</strong></p>
           </div>
           <div class="col-sm-8">
-            <p><%= @course.location %></p>
+            <p id="location"><%= @course.location %></p>
           </div>
         </div>
         <div class="row">
@@ -17,7 +17,7 @@
             <p><strong>Par:</strong></p>
           </div>
           <div class="col-sm-8">
-            <p><%= @course.par.to_s %></p>
+            <p id="par"><%= @course.par.to_s %></p>
           </div>
         </div>
         <div class="row">
@@ -25,7 +25,7 @@
             <p><strong>Length:</strong></p>
           </div>
           <div class="col-sm-8">
-            <p><%= @course.length.to_s %> yds</p>
+            <p><span id="length"><%= @course.length.to_s %></span> yds</p>
           </div>
         </div>
         <div class="row">
@@ -33,7 +33,7 @@
             <p><strong>Fees:</strong></p>
           </div>
           <div class="col-sm-8">
-            <p>$<%= @course.price.to_s %></p>
+            <p>$<span id="price"><%= @course.price.to_s %></span></p>
           </div>
         </div>
       <% if policy(@course).update? %>
@@ -42,8 +42,8 @@
       </div>
       <div class="row course-primary-info">
         <div class="col-sm-12"><br>
-          <h1><%= @course.name %></h1><br>
-          <p class="description"><%= @course.description %></p><br>
+          <h1 id="name"><%= @course.name %></h1><br>
+          <p class="description" id="description"><%= @course.description %></p><br>
         </div>
       </div><br>
     <% if policy(TeeTime.new).create? %>
@@ -51,6 +51,16 @@
         <%= link_to "Create New Tee Time", new_course_tee_time_path(@course), class: "btn" %>
       </div>
     <% end %>
+    </div>
+  </div><br>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <button type="button" data-id="<%= @course.id %>" name="button" class="btn" id="prevBtn">Prev</button>
+    </div>
+    <div class="col-sm-8"></div>
+    <div class="col-sm-2">
+      <button type="button" data-id="<%= @course.id %>" name="button" class="btn" id="nextBtn">Next</button>
     </div>
   </div><br>
 

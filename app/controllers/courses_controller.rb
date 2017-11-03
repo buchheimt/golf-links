@@ -2,6 +2,9 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @courses}
   end
 
   def new
@@ -23,6 +26,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @tee_times = @course.active_tee_times
+    end
   end
 
   def edit
@@ -73,6 +77,16 @@ class CoursesController < ApplicationController
     @course = Course.most_popular
     @tee_times = @course.active_tee_times
     render :show
+  end
+
+  def prev
+    @course = Course.find_prev_course(params[:id])
+    render json: @course
+  end
+
+  def next
+    @course = Course.find_next_course(params[:id])
+    render json: @course
   end
 
   private

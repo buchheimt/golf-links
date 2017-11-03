@@ -20,6 +20,9 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create]
 
+  get '/courses/:id/prev', to: 'courses#prev', as: 'prev_course'
+  get '/courses/:id/next', to: 'courses#next', as: 'next_course'
+
   get '/about', to: 'welcome#about'
   root to: 'welcome#home'
 

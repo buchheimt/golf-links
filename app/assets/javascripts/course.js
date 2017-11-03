@@ -11,10 +11,6 @@ const updateCourseShow = (course) => {
   setField("name", course);
   setField("description", course);
 
-  if (course.image.indexOf("course-default.jpg") != 0) {
-    $("#coursePic").attr("src", course.image);
-  }
-
   loadTeeTimes(course.tee_times);
 
   $("#prevBtn").data("id", course.id);

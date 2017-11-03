@@ -6,8 +6,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12">
-      <%= f.datetime_select :time, ampm: true, start_year: Time.now.year, end_year: Time.now.year + 1, start_hour: 7, end_hour: 19, minute_step: 15 %>
+    <div class="col-sm-6 mx-auto">
+      <input id="datetimepicker" type="text" name="tee_time[time]">
     </div>
   </div>
 <%= f.fields_for :user_tee_times, tee_time.user_tee_times.build do |uttf| %>

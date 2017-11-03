@@ -15,10 +15,12 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require rangeslider.min
+//= require datetimepicker.min
 //= require handlebars.min
 //= require tee_time
 //= require main
 //= require user_form
+//= require tee_time_form
 //= require comment
 //= require course
 //= require_tree .

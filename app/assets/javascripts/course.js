@@ -13,6 +13,8 @@ const updateCourseShow = (course) => {
 
   loadTeeTimes(course.tee_times);
 
+  $("#courseEditBtn").attr("href", course.id + "/edit")
+  $("#createTeeTimeBtn").attr("href", course.id + "/tee_times/new")
   $("#prevBtn").data("id", course.id);
   $("#nextBtn").data("id", course.id);
 }

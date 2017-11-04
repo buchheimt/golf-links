@@ -1,6 +1,7 @@
 $(function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
+  $("#commentForm").hide();
 });
 
 const createComment = (e) => {
@@ -19,6 +20,7 @@ const createComment = (e) => {
 
 const toggleComments = () => {
   if ($("#toggleComments").text() === "Show Comments") {
+    $("#commentForm").show();
     if ($("#comments div").length > 0) {
       $("#comments div").show();
     } else {
@@ -34,6 +36,7 @@ const toggleComments = () => {
     }
     $("#toggleComments").text("Hide Comments");
   } else {
+    $("#commentForm").hide();
     $("#comments div").hide();
     $("#toggleComments").text("Show Comments");
   }

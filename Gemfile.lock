@@ -279,6 +279,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   pg
+  popper_js
   pry
   puma (~> 3.7)
   pundit

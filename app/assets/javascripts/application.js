@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require rails-ujs
+//= require popper
 //= require bootstrap-sprockets
 //= require rangeslider.min
 //= require datetimepicker.min

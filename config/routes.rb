@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :tee_times, only: [:index, :show, :new, :create]
   resources :user_tee_times, only: [:create, :update, :destroy]
 
-  resources :comments, only: [:create]
+  resources :comments, only: [:index, :create]
 
   get '/courses/:id/prev', to: 'courses#prev', as: 'prev_course'
   get '/courses/:id/next', to: 'courses#next', as: 'next_course'

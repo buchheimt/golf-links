@@ -592,3 +592,20 @@ output {
   text-align: center;
   width: 100%;
 }
+
+.comment-content {
+  background: $main-light;
+  border-radius: 20px 20px 0 20px;
+  padding-left: 25px;
+  p {
+    text-align: left;
+  }
+}
+
+.timestamp {
+  font-size: 12px;
+}
+
+#comments a {
+  text-decoration: none;
+}

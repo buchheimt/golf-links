@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require rangeslider.min
 //= require datetimepicker.min

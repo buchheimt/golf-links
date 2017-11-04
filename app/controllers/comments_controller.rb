@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
 
+  def index
+    @comments = TeeTime.find_by_id(params[:id]).comments
+    render json: @comments
+  end
+
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user

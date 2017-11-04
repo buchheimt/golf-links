@@ -134,23 +134,46 @@
         </div>
       <% end %>
     </div>
-  </div>
-  <div class="row">
-    <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
-      <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
-      <%= f.text_field :content, placeholder: "join the conversation!" %>
-      <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
-    <% end %>
   </div><br>
-  <div id="comments">
-    <% if @comments %>
-      <% @comments.each do |comment| %>
-        <div class="row">
-          <div class="col-sm-12">
-            <h4><%= comment.content %>-<%= comment.user.username %></h4><br>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+
+  <% if @tee_time.users.include?(current_user) %>
+    <div class="row">
+      <div class="col-sm-4 mx-auto">
+        <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">Show Comments</button>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <div class="col-sm-8 mx-auto">
+        <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
+          <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
+          <%= f.text_field :content, placeholder: "join the conversation!" %>
+          <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
+        <% end %>
+      </div>
+
+    </div><br>
+
+    <div class="row">
+      <div class="col-sm-8 mx-auto" id="comments">
+
+      </div>
+    </div>
+  <% end %>
 </div>
+
+<script id="comment-template" type="text/x-handlebars-template">
+  <div class="row my-3">
+    <div class="col-sm-2">
+      <p class="timestamp pt-3">{{created_at_formatted}}</p>
+    </div>
+    <div class="col-sm-8 py-2 comment-content">
+      <p>{{content}}</p>
+    </div>
+    <div class="col-sm-2">
+      <a href="/users/{{user.id}}">
+        <p>{{user.username}}</p>
+      </a>
+    </div>
+  </div>
+</script>

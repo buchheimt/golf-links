@@ -334,12 +334,12 @@ div.field_with_errors input, div.field_with_errors select {
   border-radius: 10px;
 }
 
-.warning {
+.warning, .leave {
   background: rgba(175, 75, 75, .75);
   color: white;
 }
 
-a.warning:hover, input.warning:hover, button.warning:hover {
+a.warning:hover, a.leave:hover, input.warning:hover, button.warning:hover {
   color: white;
   background: #722;
 }

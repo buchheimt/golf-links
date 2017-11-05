@@ -7,10 +7,12 @@ class UserTeeTimesController < ApplicationController
     @user = User.find_by_id(params[:user_tee_time][:user_id])
     if @tee_time.add_user(@user)
       flash[:confirmation] = "Success! You're in"
+      render json: @user
     else
       flash[:warning] = @tee_time.user_tee_times.last.errors.full_messages.first
+      redirect_to tee_time_path(@tee_time)
     end
-    redirect_to tee_time_path(@tee_time)
+
   end
 
   def update

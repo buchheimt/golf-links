@@ -46,12 +46,19 @@ const addGuest = (e) => {
 
 const removeGuest = (e) => {
   e.preventDefault();
-  alert ("removing!");
-
-
+  $.ajax({
+    url: "/user_tee_times/" + $("#currentUser").data("id"),
+    method: 'PATCH',
+    data: {'operation': '-1'}
+  }).done(function(userTeeTime) {
+    $(".userGuest").last().remove();
+    if (userTeeTime.guest_count < 1) {
+      $("#removeDiv").hide();
+    }
+  });
   $("#removeBtn").removeAttr("data-disable-with");
   $("#removeBtn").removeAttr("disabled");
-  // show add button
+  $("#addDiv").show();
 }
 
 const leaveTeeTime = (e) => {

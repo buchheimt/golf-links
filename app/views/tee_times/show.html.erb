@@ -73,7 +73,7 @@
               </div>
             <% end %>
             <% @tee_time.guests.each do |guest| %>
-              <div class="col-md-6">
+              <div class="col-md-6<%= " userGuest" if guest == current_user.username %>">
                 <div class="row">
                   <div class="tee-time-guest">
                     <div class="row">
@@ -147,7 +147,6 @@
 
     <div class="row">
       <div class="col-sm-8 mx-auto" id="comments">
-
       </div>
     </div>
   <% end %>
@@ -196,6 +195,27 @@
       <a href="/users/{{user.id}}">
         <p>{{user.username}}</p>
       </a>
+    </div>
+  </div>
+</script>
+
+<script id="guest-card-template" type="text/x-handlebars-template">
+  <div class="col-md-6 userGuest">
+    <div class="row">
+      <div class="tee-time-guest">
+        <div class="row">
+          <div class="col-sm-4">
+            <%= image_tag "user-default.jpg", class: "tee-time-pic" %>
+          </div>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-12">
+                <p><strong>{{username}}'s Guest</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </script>

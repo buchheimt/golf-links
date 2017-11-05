@@ -35,12 +35,10 @@ class UserTeeTimesController < ApplicationController
     tee_time = @user_tee_time.tee_time
     @user_tee_time.destroy
     if tee_time.users.empty?
-      #binding.pry
       flash[:confirmation] = "Successfully left and deleted Tee Time"
       tee_time.destroy
       render json: current_user
     else
-      #binding.pry
       flash[:confirmation] = "Successfully left Tee Time"
       render json: current_user
     end

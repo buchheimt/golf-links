@@ -18,7 +18,9 @@ const joinTeeTime = (e) => {
     if ($("div.user-list > div.row > div").length < 4) {
       $("#addDiv").show();
     }
-    $("#leaveDiv").data("id", data.id);
+    console.log(data);
+    console.log(data.id);
+    $("#currentUser").data("id", data.id);
   });
   $("#joinBtn").removeAttr("data-disable-with");
   $("#joinBtn").removeAttr("disabled");
@@ -26,21 +28,37 @@ const joinTeeTime = (e) => {
 
 const addGuest = (e) => {
   e.preventDefault();
-  alert ("adding!");
+  $.ajax({
+    url: "/user_tee_times/" + $("#currentUser").data("id"),
+    method: 'PATCH',
+    data: {'operation': 1}
+  }).done(function() {
+    alert('done did!')
+  });
+
+
+  $("#addBtn").removeAttr("data-disable-with");
+  $("#addBtn").removeAttr("disabled");
+  // show remove button
 }
 
 const removeGuest = (e) => {
   e.preventDefault();
   alert ("removing!");
+
+
+  $("#removeBtn").removeAttr("data-disable-with");
+  $("#removeBtn").removeAttr("disabled");
+  // show add button
 }
 
 const leaveTeeTime = (e) => {
   e.preventDefault();
   $.ajax({
-    url: "/user_tee_times/" + $("#leaveDiv").data("id"),
+    url: "/user_tee_times/" + $("#currentUser").data("id"),
     method: "DELETE"
   }).done(function(user) {
-    $(".userCard[data-id=" + user.id + "]").remove();
+    $("#currentUser").remove();
     $("#leaveDiv").hide();
     $("#joinDiv").show();
     $("#addDiv").hide();

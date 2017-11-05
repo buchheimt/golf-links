@@ -96,43 +96,35 @@
         </div>
       </div><br>
 
-      <% if @tee_time.joinable?(current_user) %>
-        <div class="row">
-          <div class="col-md-4 mx-auto">
-            <%= form_tag '/user_tee_times', method: 'post', id: "joinTeeTime" do %>
-              <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
-              <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
-              <%= submit_tag "Join Tee Time", class: 'btn' %>
-            <% end %>
-          </div>
+      <div class="row<%= hidden?(current_user, @tee_time, "join") %>" id="joinDiv">
+        <div class="col-md-4 mx-auto">
+          <%= form_tag '/user_tee_times', method: 'post', id: "joinTeeTime" do %>
+            <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
+            <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
+            <%= submit_tag "Join Tee Time", class: 'btn' %>
+          <% end %>
         </div>
-      <% end %>
+      </div>
 
-      <% if @tee_time.users.include?(current_user) %>
-        <div class="row">
-        <% if @tee_time.available? %>
-          <div class="col-md-4 mx-auto">
-            <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch' do %>
-              <%= hidden_field_tag "operation", 1 %>
-              <%= submit_tag "Add a Guest", class: 'btn', id: "addGuest" %>
-            <% end %>
-          </div>
-        <% end %>
-        <% if current_user.has_guests?(@tee_time) %>
-          <div class="col-md-4 mx-auto">
-            <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch' do %>
-              <%= hidden_field_tag "operation", -1 %>
-              <%= submit_tag "Remove a Guest", class: 'btn leave', id: "removeGuest" %>
-            <% end %>
-          </div>
-        <% end %>
-          <div class="col-md-4 mx-auto">
-            <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete' do %>
-              <%= submit_tag "Leave Tee Time", class: 'btn leave', id: "LeaveTeeTime" %>
-            <% end %>
-          </div>
+      <div class="row">
+        <div class="col-md-4 mx-auto<%= hidden?(current_user, @tee_time, "add") %>" id="addDiv">
+          <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch' do %>
+            <%= hidden_field_tag "operation", 1 %>
+            <%= submit_tag "Add a Guest", class: 'btn', id: "addGuest" %>
+          <% end %>
         </div>
-      <% end %>
+        <div class="col-md-4 mx-auto<%= hidden?(current_user, @tee_time, "remove") %>" id="removeDiv">
+          <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch' do %>
+            <%= hidden_field_tag "operation", -1 %>
+            <%= submit_tag "Remove a Guest", class: 'btn leave', id: "removeGuest" %>
+          <% end %>
+        </div>
+        <div class="col-md-4 mx-auto<%= hidden?(current_user, @tee_time, "leave") %>" id="leaveDiv">
+          <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete' do %>
+            <%= submit_tag "Leave Tee Time", class: 'btn leave', id: "LeaveTeeTime" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div><br>
 

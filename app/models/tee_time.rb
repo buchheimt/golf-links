@@ -72,6 +72,18 @@ class TeeTime < ApplicationRecord
     !!user && !self.users.include?(user) && available? && user.tee_times.none? {|tt| tt.time == time }
   end
 
+  def leavable?(user)
+    self.users.include?(user)
+  end
+
+  def addable?(user)
+    available? && leavable?(user)
+  end
+
+  def removable?(user)
+    leavable?(user) && user.has_guests?(self)
+  end
+
   def self.active_sort
     where("time >= ?", Time.now.to_date).order(time: :asc)
   end

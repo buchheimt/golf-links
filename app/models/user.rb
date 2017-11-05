@@ -39,7 +39,7 @@ class User < ApplicationRecord
 
   def has_guests?(tee_time)
     user_tee_time = UserTeeTime.find_by(user_id: self.id, tee_time_id: tee_time.id)
-    user_tee_time.guest_count > 0
+    user_tee_time.guest_count > 0 if user_tee_time
   end
 
   def connect_from_omniauth(auth)

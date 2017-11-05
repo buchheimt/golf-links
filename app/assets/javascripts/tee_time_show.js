@@ -2,7 +2,7 @@ $(function() {
   $("#joinTeeTime").submit(joinTeeTime);
   $("#addGuest").submit(addGuest);
   $("#removeGuest").submit(removeGuest);
-  $("#LeaveTeeTime").submit(leaveTeeTime);
+  $("#leaveTeeTime").submit(leaveTeeTime);
 });
 
 const joinTeeTime = (e) => {
@@ -20,8 +20,8 @@ const joinTeeTime = (e) => {
     }
     $("#leaveDiv").data("id", data.id);
   });
-
-
+  $("#joinBtn").removeAttr("data-disable-with");
+  $("#joinBtn").removeAttr("disabled");
 }
 
 const addGuest = (e) => {
@@ -35,9 +35,17 @@ const removeGuest = (e) => {
 }
 
 const leaveTeeTime = (e) => {
-  // e.preventDefault();
-  // $.ajax({
-  //   url: "/user_tee_times/"
-  // })
-
+  e.preventDefault();
+  $.ajax({
+    url: "/user_tee_times/" + $("#leaveDiv").data("id"),
+    method: "DELETE"
+  }).done(function(user) {
+    $(".userCard[data-id=" + user.id + "]").remove();
+    $("#leaveDiv").hide();
+    $("#joinDiv").show();
+    $("#addDiv").hide();
+    $("#removeDiv").hide();
+    $("#leaveBtn").removeAttr("data-disable-with");
+    $("#leaveBtn").removeAttr("disabled");
+  });
 }

@@ -21,10 +21,12 @@ class UserTeeTimesController < ApplicationController
     params[:operation] == '1' ? @user_tee_time.add_guest : @user_tee_time.remove_guest
     if (params[:operation] == '1' || params[:operation] == '-1') && @user_tee_time.save
       flash[:confirmation] = "Success!"
+      redirect_to tee_time_path(@user_tee_time.tee_time)
     else
       flash[:confirmation] = "Uh oh, something went wrong"
+      redirect_to tee_time_path(@user_tee_time.tee_time)
     end
-    redirect_to tee_time_path(@user_tee_time.tee_time)
+
   end
 
   def destroy
@@ -33,12 +35,14 @@ class UserTeeTimesController < ApplicationController
     tee_time = @user_tee_time.tee_time
     @user_tee_time.destroy
     if tee_time.users.empty?
+      #binding.pry
       flash[:confirmation] = "Successfully left and deleted Tee Time"
       tee_time.destroy
-      redirect_to user_path(current_user)
+      render json: current_user
     else
+      #binding.pry
       flash[:confirmation] = "Successfully left Tee Time"
-      redirect_to tee_time_path(tee_time)
+      render json: current_user
     end
   end
 

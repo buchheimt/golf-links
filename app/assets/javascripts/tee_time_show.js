@@ -22,6 +22,7 @@ const joinTeeTime = (e) => {
   });
   $("#joinBtn").removeAttr("data-disable-with");
   $("#joinBtn").removeAttr("disabled");
+  $("#commentSection").show();
 }
 
 const addGuest = (e) => {
@@ -75,5 +76,6 @@ const leaveTeeTime = (e) => {
     $("#removeDiv").hide();
     $("#leaveBtn").removeAttr("data-disable-with");
     $("#leaveBtn").removeAttr("disabled");
+    $("#commentSection").hide();
   });
 }

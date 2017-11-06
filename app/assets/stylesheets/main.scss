@@ -15,7 +15,6 @@ a:hover {
   transition: background 0.5s, color 0.5, box-shadow 0.5;
 }
 
-mx-auto
 p {
   font-family: $font-secondary;
   font-size: 16px;
@@ -627,4 +626,15 @@ output {
 
 .hidden {
   display: none;
+}
+
+.comment-pic {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 2px solid $main-dark;
+}
+
+.comment-link:hover {
+  color: white;
 }

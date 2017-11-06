@@ -12,6 +12,11 @@ const createComment = (e) => {
   $.post("/comments", values, function(comment) {
     const newComment = template(comment);
     $("#comments").append(newComment);
+
+    if (comment.user.get_image !== "user-default.jpg") {
+      $("#comments img").last().attr("src", comment.user.get_image);
+    }
+
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
     $("#comment_content").val("");
@@ -31,6 +36,10 @@ const toggleComments = () => {
         comments.forEach(function(comment) {
           const commentDiv = template(comment);
           $("#comments").append(commentDiv);
+
+          if (comment.user.get_image !== "user-default.jpg") {
+            $("#comments img").last().attr("src", comment.user.get_image);
+          }
         });
       });
     }

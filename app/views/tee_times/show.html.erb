@@ -159,7 +159,6 @@
       <a href="/users/{{id}}" class="tee-time-user">
         <div class="row">
           <div class="col-sm-4">
-            
             <%= image_tag "user-default.jpg", class: "tee-time-pic" %>
           </div>
           <div class="col-sm-8">
@@ -207,16 +206,17 @@
 </script>
 
 <script id="comment-template" type="text/x-handlebars-template">
-  <div class="row my-3">
+  <div class="row my-3 comment-content">
     <div class="col-sm-2">
       <p class="timestamp pt-3">{{created_at_formatted}}</p>
     </div>
-    <div class="col-sm-8 py-2 comment-content">
+    <div class="col-sm-7 py-2">
       <p>{{content}}</p>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3 text-center">
       <a href="/users/{{user.id}}">
-        <p>{{user.username}}</p>
+        <%= image_tag "user-default.jpg", class: "comment-pic" %>
+        <p class="mb-0">{{user.username}}</p>
       </a>
     </div>
   </div>

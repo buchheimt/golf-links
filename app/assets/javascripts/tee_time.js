@@ -13,6 +13,9 @@ const reloadTeeTimes = (e) => {
     teeTimes.forEach(function(teeTime) {
       const $teeTimeDiv = $(template(teeTime));
       $("#teeTimeCards").append($teeTimeDiv);
+      if (!teeTime['available?']) {
+        $teeTimeDiv.children("div").addClass("tee-time-unjoinable");
+      }
     })
     $("#filterBtn").removeAttr("data-disable-with");
     $("#filterBtn").removeAttr("disabled");

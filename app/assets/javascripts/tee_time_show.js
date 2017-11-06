@@ -13,10 +13,12 @@ const joinTeeTime = (e) => {
   $.post("/user_tee_times", values, function(data) {
     const newCard = template(data.user);
     $("div.user-list > div.row").append($(newCard));
-    $("#joinBtn").prop("disabled");
-    $("#leaveBtn").removeAttr("disabled");
+    $("#joinBtn").prop("disabled", true);
+    $("#leaveBtn").prop("disabled", false);
     if ($("div.user-list > div.row > div").length < 4) {
-      $("#addBtn").removeAttr("disabled");
+      $("#addBtn").prop("disabled", false);
+    } else {
+      $("#addBtn").prop("disabled", true);
     }
     $("#currentUser").data("id", data.id);
   });
@@ -36,9 +38,12 @@ const addGuest = (e) => {
     $("div.user-list > div.row").append($(newCard));
   });
   if ($("div.user-list > div.row > div").length + 1 >= 4) {
-    $("#addBtn").prop("disabled");
+    $("#addBtn").prop("disabled", true);
+  } else {
+    $("#addBtn").prop("disabled", false);
+    $("#addBtn").removeAttr("data-disable-with");
   }
-  $("#removeBtn").removeAttr("disabled");
+  $("#removeBtn").prop("disabled", false);
 }
 
 const removeGuest = (e) => {
@@ -50,10 +55,13 @@ const removeGuest = (e) => {
   }).done(function(userTeeTime) {
     $(".userGuest").last().remove();
     if (userTeeTime.guest_count < 1) {
-      $("#removeBtn").prop("disabled");
+      $("#removeBtn").prop("disabled", true);
+    } else {
+      $("#removeBtn").prop("disabled", false);
+      $("#removeBtn").removeAttr("data-disable-with");
     }
   });
-  $("#addBtn").removeAttr("disabled");
+  $("#addBtn").prop("disabled", false);
 }
 
 const leaveTeeTime = (e) => {
@@ -68,10 +76,10 @@ const leaveTeeTime = (e) => {
     }).done(function(user) {
       $("#currentUser").remove();
       $(".userGuest").remove();
-      $("#leaveBtn").prop("disabled");
-      $("#addBtn").prop("disabled");
-      $("#removeBtn").prop("disabled");
-      $("#joinBtn").removeAttr("disabled");
+      $("#leaveBtn").prop("disabled", true);
+      $("#addBtn").prop("disabled", true);
+      $("#removeBtn").prop("disabled", true);
+      $("#joinBtn").prop("disabled",false);
       $("#commentSection").hide();
     });
   }

@@ -112,6 +112,12 @@ div.course-summary {
   cursor: pointer;
 }
 
+.btn:disabled, .btn:hover:disabled {
+  box-shadow: 0 0 0 #000;
+  background: $btn-light;
+  color: white;
+}
+
 .tee-time-card {
   padding: 0;
   margin: 10px;
@@ -339,9 +345,18 @@ div.field_with_errors input, div.field_with_errors select {
   color: white;
 }
 
-a.warning:hover, a.leave:hover, input.warning:hover, button.warning:hover {
+.btn.warning:disabled, .btn.leave:disabled {
+  background: rgba(175, 75, 75, .75);
+
+}
+
+a.warning:hover, a.leave:hover, input.leave:hover, input.warning:hover, button.warning:hover {
   color: white;
   background: #722;
+}
+
+a.warning:hover:disabled, a.leave:hover:disabled, input.warning:hover:disabled, input.warning:hover:disabled {
+  background: rgba(175, 75, 75, .75);
 }
 
 .confirmation {

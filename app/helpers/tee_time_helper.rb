@@ -69,9 +69,9 @@ module TeeTimeHelper
     output.html_safe
   end
 
-  def hidden?(user, tee_time, action)
+  def disabled?(user, tee_time, action)
     action = action.slice(0...-1) if action[-1] == "e"
-    tee_time.send("#{action}able?", user) ? "" : " hidden"
+    !tee_time.send("#{action}able?", user)
   end
 
 end

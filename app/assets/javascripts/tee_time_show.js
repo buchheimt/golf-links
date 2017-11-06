@@ -13,15 +13,13 @@ const joinTeeTime = (e) => {
   $.post("/user_tee_times", values, function(data) {
     const newCard = template(data.user);
     $("div.user-list > div.row").append($(newCard));
-    $("#joinDiv").hide();
-    $("#leaveDiv").show();
+    $("#joinBtn").prop("disabled");
+    $("#leaveBtn").removeAttr("disabled");
     if ($("div.user-list > div.row > div").length < 4) {
-      $("#addDiv").show();
+      $("#addBtn").removeAttr("disabled");
     }
     $("#currentUser").data("id", data.id);
   });
-  $("#joinBtn").removeAttr("data-disable-with");
-  $("#joinBtn").removeAttr("disabled");
   $("#commentSection").show();
 }
 
@@ -38,11 +36,9 @@ const addGuest = (e) => {
     $("div.user-list > div.row").append($(newCard));
   });
   if ($("div.user-list > div.row > div").length + 1 >= 4) {
-    $("#addDiv").hide();
+    $("#addBtn").prop("disabled");
   }
-  $("#addBtn").removeAttr("data-disable-with");
-  $("#addBtn").removeAttr("disabled");
-  $("#removeDiv").show();
+  $("#removeBtn").removeAttr("disabled");
 }
 
 const removeGuest = (e) => {
@@ -54,12 +50,10 @@ const removeGuest = (e) => {
   }).done(function(userTeeTime) {
     $(".userGuest").last().remove();
     if (userTeeTime.guest_count < 1) {
-      $("#removeDiv").hide();
+      $("#removeBtn").prop("disabled");
     }
   });
-  $("#removeBtn").removeAttr("data-disable-with");
-  $("#removeBtn").removeAttr("disabled");
-  $("#addDiv").show();
+  $("#addBtn").removeAttr("disabled");
 }
 
 const leaveTeeTime = (e) => {
@@ -74,12 +68,10 @@ const leaveTeeTime = (e) => {
     }).done(function(user) {
       $("#currentUser").remove();
       $(".userGuest").remove();
-      $("#leaveDiv").hide();
-      $("#joinDiv").show();
-      $("#addDiv").hide();
-      $("#removeDiv").hide();
-      $("#leaveBtn").removeAttr("data-disable-with");
-      $("#leaveBtn").removeAttr("disabled");
+      $("#leaveBtn").prop("disabled");
+      $("#addBtn").prop("disabled");
+      $("#removeBtn").prop("disabled");
+      $("#joinBtn").removeAttr("disabled");
       $("#commentSection").hide();
     });
   }

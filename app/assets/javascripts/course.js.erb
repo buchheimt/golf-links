@@ -11,6 +11,14 @@ const updateCourseShow = (course) => {
   setField("name", course);
   setField("description", course);
 
+  let imageResource;
+  if (course.get_image === "course-default.jpg") {
+    imageResource = "<%= asset_path('course-default.jpg') %>";
+  } else {
+    imageResource = course.get_image;
+  }
+  $("#coursePic").attr("src", imageResource);
+
   loadTeeTimes(course.tee_times);
 
   $("#courseEditBtn").attr("href", course.id + "/edit")

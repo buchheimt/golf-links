@@ -12,7 +12,13 @@ const joinTeeTime = (e) => {
   const values = $("#joinTeeTime").serialize();
   $.post("/user_tee_times", values, function(data) {
     const newCard = template(data.user);
+
     $("div.user-list > div.row").append($(newCard));
+
+    if (data.user.get_image !== "user-default.jpg") {
+      $("#currentUser img").attr("src", data.user.get_image);
+    }
+
     $("#joinBtn").prop("disabled", true);
     $("#leaveBtn").prop("disabled", false);
     if ($("div.user-list > div.row > div").length < 4) {

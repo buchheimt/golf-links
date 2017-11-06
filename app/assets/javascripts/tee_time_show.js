@@ -63,19 +63,24 @@ const removeGuest = (e) => {
 }
 
 const leaveTeeTime = (e) => {
-  e.preventDefault();
-  $.ajax({
-    url: "/user_tee_times/" + $("#currentUser").data("id"),
-    method: "DELETE"
-  }).done(function(user) {
-    $("#currentUser").remove();
-    $(".userGuest").remove();
-    $("#leaveDiv").hide();
-    $("#joinDiv").show();
-    $("#addDiv").hide();
-    $("#removeDiv").hide();
-    $("#leaveBtn").removeAttr("data-disable-with");
-    $("#leaveBtn").removeAttr("disabled");
-    $("#commentSection").hide();
-  });
+  const userCount = $("#currentUser").length;
+  const guestCount = $(".userGuest").length;
+  const totalCount = $("div.user-list > div.row > div").length;
+  if (userCount + guestCount < totalCount) {
+    e.preventDefault();
+    $.ajax({
+      url: "/user_tee_times/" + $("#currentUser").data("id"),
+      method: "DELETE"
+    }).done(function(user) {
+      $("#currentUser").remove();
+      $(".userGuest").remove();
+      $("#leaveDiv").hide();
+      $("#joinDiv").show();
+      $("#addDiv").hide();
+      $("#removeDiv").hide();
+      $("#leaveBtn").removeAttr("data-disable-with");
+      $("#leaveBtn").removeAttr("disabled");
+      $("#commentSection").hide();
+    });
+  }
 }

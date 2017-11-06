@@ -42,12 +42,13 @@ const getNext = () => {
 }
 
 const setField = (field, course) => {
+  $("#" + field + "Container").show();
   value = course[field]
-  if (value == null) {
+  if (value === null) {
     value = "";
-  } else {
-    $("#" + field).text(value);
+    $("#" + field + "Container").hide();
   }
+  $("#" + field).text(value);
 }
 
 const loadTeeTimes = (teeTimes) => {

@@ -27,100 +27,112 @@
 <% if @course %>
   <%= f.hidden_field :course_id, value: course.id %>
 <% else %>
+
   <div class="row">
-    <div class="col-sm-8 mx-auto">
-      <%= f.label :course_id, "Select Course" %>
-      <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
+    <div class="col-sm-5 mx-auto">
+      <%= button_tag "Existing Course", class: "btn full-width", id: "selectCourseBtn" %>
+    </div>
+    <div class="col-sm-5 mx-auto">
+      <%= button_tag "New Course", class: "btn full-width", id: "newCourseBtn" %>
     </div>
   </div>
-  <div class="row<%= error_class(tee_time.errors, "course.name") %>">
-    <div class="col-sm-9 mx-auto">
-      <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Add new course" %>
-    </div>
-  </div><br>
 
-  <p>— OR —</p><br>
-
-  <h5>New Course</h5>
-  <%= f.fields_for :course, tee_time.build_course do |cf| %>
-    <div class="row">
+  <div class="hidden mt-3" id="selectCourseForm">
+    <div class="row hidden">
       <div class="col-sm-8 mx-auto">
-        <%= cf.label :name, "New Course Name" %>
+        <%= f.label :course_id, "Select Course" %>
         <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
       </div>
     </div>
     <div class="row<%= error_class(tee_time.errors, "course.name") %>">
       <div class="col-sm-9 mx-auto">
-        <%= cf.text_field :name %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8 mx-auto">
-        <%= cf.label :description, "New Course Description" %>
-        <%= check_for_errors(tee_time.errors, [:"course.decription"]) %>
-      </div>
-    </div>
-    <div class="row<%= error_class(tee_time.errors, "course.description") %>">
-      <div class="col-sm-9 mx-auto">
-        <%= cf.text_area :description %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8 mx-auto">
-        <%= cf.label :location, "New Course Location" %>
-        <%= check_for_errors(tee_time.errors, [:"course.location"]) %>
-      </div>
-    </div>
-    <div class="row<%= error_class(tee_time.errors, "course.location") %>">
-      <div class="col-sm-9 mx-auto">
-        <%= cf.text_field :location%>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8 mx-auto">
-        <%= cf.label :image, "New Course Image URL" %>
-        <%= check_for_errors(tee_time.errors, [:"course.image"]) %>
-      </div>
-    </div>
-    <div class="row<%= error_class(tee_time.errors, "course.image") %>">
-      <div class="col-sm-9 mx-auto">
-        <%= cf.text_field :image, placeholder: "Leave blank for default" %>
+        <%= f.collection_select :course_id, Course.all, :id, :name, include_blank: "Select course" %>
       </div>
     </div><br>
+  </div>
 
-    <div class="row details">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-3 mx-auto">
-        <%= cf.label :par %>
+  <div class="hidden" id="newCourseForm">
+    <%= f.fields_for :course, tee_time.build_course do |cf| %>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= cf.label :name, "New Course Name" %>
+          <%= check_for_errors(tee_time.errors, [:"course.name"]) %>
+        </div>
       </div>
-      <div class="col-sm-3 mx-auto">
-        <%= cf.label :length %>
+      <div class="row<%= error_class(tee_time.errors, "course.name") %>">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_field :name %>
+        </div>
       </div>
-      <div class="col-sm-3 mx-auto">
-        <%= cf.label :price %>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= cf.label :description, "New Course Description" %>
+          <%= check_for_errors(tee_time.errors, [:"course.decription"]) %>
+        </div>
       </div>
-      <div class="col-sm-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8 mx-auto">
-        <%= check_for_errors(tee_time.errors, [:"course.par", :"course.length", :"course.price"]) %>
+      <div class="row<%= error_class(tee_time.errors, "course.description") %>">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_area :description %>
+        </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= cf.label :location, "New Course Location" %>
+          <%= check_for_errors(tee_time.errors, [:"course.location"]) %>
+        </div>
+      </div>
+      <div class="row<%= error_class(tee_time.errors, "course.location") %>">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_field :location%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= cf.label :image, "New Course Image URL" %>
+          <%= check_for_errors(tee_time.errors, [:"course.image"]) %>
+        </div>
+      </div>
+      <div class="row<%= error_class(tee_time.errors, "course.image") %>">
+        <div class="col-sm-9 mx-auto">
+          <%= cf.text_field :image, placeholder: "Leave blank for default" %>
+        </div>
+      </div><br>
 
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.par") %>">
-        <%= cf.text_field :par %>
+      <div class="row details">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3 mx-auto">
+          <%= cf.label :par %>
+        </div>
+        <div class="col-sm-3 mx-auto">
+          <%= cf.label :length %>
+        </div>
+        <div class="col-sm-3 mx-auto">
+          <%= cf.label :price %>
+        </div>
+        <div class="col-sm-1"></div>
       </div>
-      <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.length") %>">
-        <%= cf.text_field :length %>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <%= check_for_errors(tee_time.errors, [:"course.par", :"course.length", :"course.price"]) %>
+        </div>
       </div>
-      <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.price") %>">
-        <%= cf.text_field :price %>
-      </div>
-      <div class="col-sm-1"></div>
-    </div><br>
-  <% end %>
+
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.par") %>">
+          <%= cf.text_field :par %>
+        </div>
+        <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.length") %>">
+          <%= cf.text_field :length %>
+        </div>
+        <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.price") %>">
+          <%= cf.text_field :price %>
+        </div>
+        <div class="col-sm-1"></div>
+      </div><br>
+    <% end %>
+  </div>
+
 <% end %>
 
   <div class="row">

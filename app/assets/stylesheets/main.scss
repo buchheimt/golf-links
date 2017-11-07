@@ -11,7 +11,7 @@ $btn-dark: rgba(23, 103, 54, .75);
 $footer: rgba(51, 69, 58, .95);
 $footer-dark: rgba(51, 69, 58, .95);
 
-a:hover {
+a:hover, .btn-selected {
   transition: background 0.5s, color 0.5, box-shadow 0.5;
 }
 
@@ -103,7 +103,7 @@ div.course-summary {
   color: white;
 }
 
-.btn:hover {
+.btn:hover, .btn-selected {
   box-shadow: 2px 2px 2px #333 inset;
   background: $btn-dark;
   text-decoration: none;
@@ -637,4 +637,8 @@ output {
 
 .comment-link:hover {
   color: white;
+}
+
+.full-width {
+  width: 100%;
 }

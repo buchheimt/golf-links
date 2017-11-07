@@ -17,7 +17,7 @@
           <h5><strong>Group Size: </strong></h5>
         </div>
         <div class="col-sm-3">
-          <p><%= @tee_time.group_size %>/4</p>
+          <p><span id="groupSize"><%= @tee_time.group_size %></span>/4</p>
         </div>
       </div>
       <div class="row">
@@ -26,7 +26,7 @@
           <h5><strong>Average Pace: </strong></h5>
         </div>
         <div class="col-sm-3">
-          <p><%= @tee_time.avg_pace %></p>
+          <p><span id="avgPace"><%= @tee_time.avg_pace %></span></p>
         </div>
       </div>
       <div class="row">
@@ -35,7 +35,7 @@
           <h5><strong>Average Experience: </strong></h5>
         </div>
         <div class="col-sm-3">
-          <p><%= @tee_time.avg_experience %></p>
+          <p><span id="avgExperience"><%= @tee_time.avg_experience %></span></p>
         </div>
       </div>
 

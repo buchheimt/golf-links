@@ -12,12 +12,15 @@ const joinTeeTime = (e) => {
   const values = $("#joinTeeTime").serialize();
   $.post("/user_tee_times", values, function(data) {
     const newCard = template(data.user);
-
     $("div.user-list > div.row").append($(newCard));
 
     if (data.user.get_image !== "user-default.jpg") {
       $("#currentUser img").attr("src", data.user.get_image);
     }
+
+    $("#groupSize").text(data.tee_time.group_size);
+    $("#avgPace").text(data.tee_time.avg_pace);
+    $("#avgExperience").text(data.tee_time.avg_experience);
 
     $("#joinBtn").prop("disabled", true);
     $("#leaveBtn").prop("disabled", false);
@@ -39,8 +42,10 @@ const addGuest = (e) => {
     url: "/user_tee_times/" + $("#currentUser").data("id"),
     method: 'PATCH',
     data: {'operation': '1'}
-  }).done(function(user) {
-    const newCard = template(user);
+  }).done(function(userTeeTime) {
+    $("#groupSize").text(userTeeTime.tee_time.group_size);
+    console.log(userTeeTime);
+    const newCard = template(userTeeTime);
     $("div.user-list > div.row").append($(newCard));
   });
   if ($("div.user-list > div.row > div").length + 1 >= 4) {
@@ -59,6 +64,8 @@ const removeGuest = (e) => {
     method: 'PATCH',
     data: {'operation': '-1'}
   }).done(function(userTeeTime) {
+    $("#groupSize").text(userTeeTime.tee_time.group_size)
+    console.log(userTeeTime);
     $(".userGuest").last().remove();
     if (userTeeTime.guest_count < 1) {
       $("#removeBtn").prop("disabled", true);
@@ -79,7 +86,11 @@ const leaveTeeTime = (e) => {
     $.ajax({
       url: "/user_tee_times/" + $("#currentUser").data("id"),
       method: "DELETE"
-    }).done(function(user) {
+    }).done(function(data) {
+      $("#groupSize").text(data.group_size);
+      $("#avgPace").text(data.avg_pace);
+      $("#avgExperience").text(data.avg_experience);
+
       $("#currentUser").remove();
       $(".userGuest").remove();
       $("#leaveBtn").prop("disabled", true);

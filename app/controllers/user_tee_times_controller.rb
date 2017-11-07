@@ -21,7 +21,7 @@ class UserTeeTimesController < ApplicationController
     params[:operation] == '1' ? @user_tee_time.add_guest : @user_tee_time.remove_guest
     if (params[:operation] == '1' || params[:operation] == '-1') && @user_tee_time.save
       flash[:confirmation] = "Success!"
-      render json: @user_tee_time
+      render json: UserTeeTime.find_by_id(params[:id])
     else
       flash[:confirmation] = "Uh oh, something went wrong"
       redirect_to tee_time_path(@user_tee_time.tee_time)
@@ -40,7 +40,7 @@ class UserTeeTimesController < ApplicationController
       redirect_to user_path(current_user)
     else
       flash[:confirmation] = "Successfully left Tee Time"
-      render json: current_user
+      render json: tee_time
     end
   end
 

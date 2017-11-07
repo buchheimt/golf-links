@@ -19,9 +19,9 @@ const joinTeeTime = (e) => {
       $("#currentUser img").attr("src", data.user.get_image);
     }
 
-    $("#groupSize").text(data.tee_time.group_size);
-    $("#avgPace").text(data.tee_time.avg_pace);
-    $("#avgExperience").text(data.tee_time.avg_experience);
+    updateField("groupSize", data.tee_time.group_size);
+    updateField("avgPace", data.tee_time.avg_pace);
+    updateField("avgExperience", data.tee_time.avg_experience);
 
     $("#joinBtn").prop("disabled", true);
     $("#leaveBtn").prop("disabled", false);
@@ -44,7 +44,7 @@ const addGuest = (e) => {
     method: 'PATCH',
     data: {'operation': '1'}
   }).done(function(userTeeTime) {
-    $("#groupSize").text(userTeeTime.tee_time.group_size);
+    updateField("groupSize", userTeeTime.tee_time.group_size);
     const newCard = template(userTeeTime);
     $("div.user-list > div.row").append($(newCard));
     $(".userGuest").last().fadeIn();
@@ -65,7 +65,7 @@ const removeGuest = (e) => {
     method: 'PATCH',
     data: {'operation': '-1'}
   }).done(function(userTeeTime) {
-    $("#groupSize").text(userTeeTime.tee_time.group_size)
+    updateField("groupSize", userTeeTime.tee_time.group_size);
     $(".userGuest").last().fadeOut(400, function() {$(this).remove()});
     if (userTeeTime.guest_count < 1) {
       $("#removeBtn").prop("disabled", true);
@@ -87,9 +87,10 @@ const leaveTeeTime = (e) => {
       url: "/user_tee_times/" + $("#currentUser").data("id"),
       method: "DELETE"
     }).done(function(data) {
-      $("#groupSize").text(data.group_size);
-      $("#avgPace").text(data.avg_pace);
-      $("#avgExperience").text(data.avg_experience);
+
+      updateField("groupSize", data.group_size);
+      updateField("avgPace", data.avg_pace);
+      updateField("avgExperience", data.avg_experience);
 
       $("#currentUser").fadeOut(400, function() {$(this).remove()});
       $(".userGuest").fadeOut(400, function() {$(this).remove()});
@@ -100,4 +101,10 @@ const leaveTeeTime = (e) => {
       $("#commentSection").fadeOut();
     });
   }
+}
+
+const updateField = (selector, value) => {
+  $("#" + selector).hide();
+  $("#" + selector).text(value);
+  $("#" + selector).fadeIn();
 }

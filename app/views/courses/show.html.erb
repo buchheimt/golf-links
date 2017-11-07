@@ -4,7 +4,7 @@
         <%= image_tag @course.get_image, class: "course-pic", id: "coursePic" %>
       </div><br>
       <div class="col-sm-4"><br><br><br>
-        <div class="row" id="locatinContainer">
+        <div class="row <%= "hidden" if !@course.location %>" id="locationContainer">
           <div class="col-sm-4">
             <p><strong>Location:</strong></p>
           </div>
@@ -12,7 +12,7 @@
             <p id="location"><%= @course.location %></p>
           </div>
         </div>
-        <div class="row" id="parContainer">
+        <div class="row <%= "hidden" if !@course.par %>" id="parContainer">
           <div class="col-sm-4">
             <p><strong>Par:</strong></p>
           </div>
@@ -20,7 +20,7 @@
             <p id="par"><%= @course.par.to_s %></p>
           </div>
         </div>
-        <div class="row" id="lengthContainer">
+        <div class="row <%= "hidden" if !@course.length %>" id="lengthContainer">
           <div class="col-sm-4">
             <p><strong>Length:</strong></p>
           </div>
@@ -28,12 +28,12 @@
             <p><span id="length"><%= @course.length.to_s %></span> yds</p>
           </div>
         </div>
-        <div class="row" id="priceContainer">
+        <div class="row <%= "hidden" if !@course.price %>" id="priceContainer">
           <div class="col-sm-4">
             <p><strong>Fees:</strong></p>
           </div>
           <div class="col-sm-8">
-            <p id="price">$<span ><%= @course.price.to_s %></span></p>
+            <p>$<span id="price"><%= @course.price.to_s %></span></p>
           </div>
         </div>
       <% if policy(@course).update? %>

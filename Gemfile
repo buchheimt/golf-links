@@ -47,8 +47,6 @@ gem 'active_model_serializers', '0.10.6'
 
 gem 'rails_12factor', group: :production
 
-gem 'browserify-rails', group: :production
-
 group :test, :development do
   gem "rspec-rails"
   gem "capybara"

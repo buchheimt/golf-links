@@ -23,20 +23,23 @@ $(function() {
 
 const revealCourseSelect = (e) => {
   e.preventDefault();
-  $("#selectCourseForm").show();
-  $("#selectCourseBtn").addClass("btn-selected");
-  $("#newCourseForm").hide();
-  $("#newCourseForm input[type=text]").val("");
-  $("#newCourseForm textarea").val("");
-  $("#newCourseBtn").removeClass("btn-selected");
+
+  $("#newCourseForm").fadeOut(200, function() {
+    $("#selectCourseForm").fadeIn();
+    $("#selectCourseBtn").addClass("btn-selected");
+    $("#newCourseForm input[type=text]").val("");
+    $("#newCourseForm textarea").val("");
+    $("#newCourseBtn").removeClass("btn-selected");
+  });
 }
 
 const revealCourseNew = (e) => {
   e.preventDefault();
-  $("#newCourseForm").show();
-  $("#newCourseBtn").addClass("btn-selected");
 
-  $("#selectCourseForm").hide().removeClass("btn-selected");
-  $("#tee_time_course_id").val($("#tee_time_course_id").data("default-value"));
-  $("#selectCourseBtn").removeClass("btn-selected");
+  $("#selectCourseForm").fadeOut(200, function() {
+    $("#newCourseForm").fadeIn();
+    $("#newCourseBtn").addClass("btn-selected");
+    $("#tee_time_course_id").val($("#tee_time_course_id").data("default-value"));
+    $("#selectCourseBtn").removeClass("btn-selected");
+  });
 }

@@ -13,6 +13,7 @@ const joinTeeTime = (e) => {
   $.post("/user_tee_times", values, function(data) {
     const newCard = template(data.user);
     $("div.user-list > div.row").append($(newCard));
+    $("#currentUser").fadeIn();
 
     if (data.user.get_image !== "user-default.jpg") {
       $("#currentUser img").attr("src", data.user.get_image);
@@ -31,7 +32,7 @@ const joinTeeTime = (e) => {
     }
     $("#currentUser").data("id", data.id);
   });
-  $("#commentSection").show();
+  $("#commentSection").fadeIn();
 }
 
 const addGuest = (e) => {
@@ -44,9 +45,9 @@ const addGuest = (e) => {
     data: {'operation': '1'}
   }).done(function(userTeeTime) {
     $("#groupSize").text(userTeeTime.tee_time.group_size);
-    console.log(userTeeTime);
     const newCard = template(userTeeTime);
     $("div.user-list > div.row").append($(newCard));
+    $(".userGuest").last().fadeIn();
   });
   if ($("div.user-list > div.row > div").length + 1 >= 4) {
     $("#addBtn").prop("disabled", true);
@@ -65,8 +66,7 @@ const removeGuest = (e) => {
     data: {'operation': '-1'}
   }).done(function(userTeeTime) {
     $("#groupSize").text(userTeeTime.tee_time.group_size)
-    console.log(userTeeTime);
-    $(".userGuest").last().remove();
+    $(".userGuest").last().fadeOut(400, function() {$(this).remove()});
     if (userTeeTime.guest_count < 1) {
       $("#removeBtn").prop("disabled", true);
     } else {
@@ -91,13 +91,13 @@ const leaveTeeTime = (e) => {
       $("#avgPace").text(data.avg_pace);
       $("#avgExperience").text(data.avg_experience);
 
-      $("#currentUser").remove();
-      $(".userGuest").remove();
+      $("#currentUser").fadeOut(400, function() {$(this).remove()});
+      $(".userGuest").fadeOut(400, function() {$(this).remove()});
       $("#leaveBtn").prop("disabled", true);
       $("#addBtn").prop("disabled", true);
       $("#removeBtn").prop("disabled", true);
       $("#joinBtn").prop("disabled",false);
-      $("#commentSection").hide();
+      $("#commentSection").fadeOut();
     });
   }
 }

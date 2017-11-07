@@ -154,7 +154,7 @@
 </div>
 
 <script id="user-card-template" type="text/x-handlebars-template">
-  <div class="col-md-6 userCard" data-id="{{id}}" id="currentUser">
+  <div class="col-md-6 userCard hidden" data-id="{{id}}" id="currentUser">
     <div class="row">
       <a href="/users/{{id}}" class="tee-time-user">
         <div class="row">
@@ -185,7 +185,7 @@
 </script>
 
 <script id="guest-card-template" type="text/x-handlebars-template">
-  <div class="col-md-6 userGuest">
+  <div class="col-md-6 hidden userGuest">
     <div class="row">
       <div class="tee-time-guest">
         <div class="row">
@@ -206,7 +206,7 @@
 </script>
 
 <script id="comment-template" type="text/x-handlebars-template">
-  <div class="row my-3 comment-content">
+  <div class="row my-3 comment-content hidden">
     <div class="col-sm-2">
       <p class="timestamp pt-3">{{created_at_formatted}}</p>
     </div>

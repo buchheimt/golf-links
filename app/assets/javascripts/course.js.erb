@@ -4,27 +4,34 @@ $(function() {
 });
 
 const updateCourseShow = (course) => {
-  setField("location", course);
-  setField("par", course);
-  setField("length", course);
-  setField("price", course);
-  setField("name", course);
-  setField("description", course);
+  $(".course-main").fadeOut('fast', function() {
+    setField("location", course);
+    setField("par", course);
+    setField("length", course);
+    setField("price", course);
+    setField("name", course);
+    setField("description", course);
 
-  let imageResource;
-  if (course.get_image === "course-default.jpg") {
-    imageResource = "<%= asset_path('course-default.jpg') %>";
-  } else {
-    imageResource = course.get_image;
-  }
-  $("#coursePic").attr("src", imageResource);
+    let imageResource;
+    if (course.get_image === "course-default.jpg") {
+      imageResource = "<%= asset_path('course-default.jpg') %>";
+    } else {
+      imageResource = course.get_image;
+    }
+    $("#coursePic").attr("src", imageResource);
 
-  loadTeeTimes(course.tee_times);
+    $(".course-main").fadeIn('fast');
+
+    loadTeeTimes(course.tee_times);
+  });
+
+
 
   $("#courseEditBtn").attr("href", course.id + "/edit")
   $("#createTeeTimeBtn").attr("href", course.id + "/tee_times/new")
   $("#prevBtn").data("id", course.id);
   $("#nextBtn").data("id", course.id);
+
 }
 
 const getPrev = () => {
@@ -52,6 +59,16 @@ const setField = (field, course) => {
 }
 
 const loadTeeTimes = (teeTimes) => {
+  if ($("#teeTimeCards div").length > 0) {
+    $("#teeTimeCards div").fadeOut("fast", function() {
+      loadEachTeeTime(teeTimes);
+    });
+  } else {
+    loadEachTeeTime(teeTimes);
+  }
+}
+
+const loadEachTeeTime = (teeTimes) => {
   const templateSource = $("#tee-time-template").html();
   const template = Handlebars.compile(templateSource);
   $("#teeTimeCards").empty();
@@ -64,4 +81,5 @@ const loadTeeTimes = (teeTimes) => {
       }
     }
   });
+  $("#teeTimeCards div").fadeIn('fast')
 }

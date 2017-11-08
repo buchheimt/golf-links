@@ -56,6 +56,7 @@ class CoursesController < ApplicationController
     flash[:confirmation] = "#{course.name} has been deleted"
     course.tee_times.each do |tee_time|
       tee_time.user_tee_times.destroy_all
+      tee_time.comments.destroy_all
       tee_time.destroy
     end
     course.destroy

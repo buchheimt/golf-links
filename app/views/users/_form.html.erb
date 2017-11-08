@@ -2,38 +2,18 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.label :username %>
           <%= check_for_errors(user.errors, [:username]) %>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.text_field :username %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8 mx-auto">
-          <%= f.label :email %>
-          <%= check_for_errors(user.errors, [:email]) %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8 mx-auto">
-          <%= f.text_field :email %>
         </div>
       </div><br>
       <div class="row">
-        <div class="col-sm-10 mx-auto">
-          <h5>Preferences</h5>
-        </div>
-      </div>
-      <div class="row">
-
-
-      </div>
-      <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= check_for_errors(user.errors, [:pace, :experience]) %>
         </div>
       </div>
@@ -57,35 +37,46 @@
 
     <div class="col-sm-6">
       <div class="row">
-        <div class="col-sm-8 mx-auto">
-          <%= f.label :image, "Image URL" %>
+        <div class="col-sm-9 mx-auto">
+          <%= f.label :email %>
+          <%= check_for_errors(user.errors, [:email]) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 mx-auto">
+          <%= f.text_field :email %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-sm-9 mx-auto">
+          <%= f.label :image, "Avatar URL" %>
           <%= check_for_errors(user.errors, [:image]) %>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.text_field :image, placeholder: "Leave blank for default" %>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.label :password %>
           <%= check_for_errors(user.errors, [:password]) %>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.password_field :password %>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.label :password_confirmation %>
           <%= check_for_errors(user.errors, [:password_confirmation]) %>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-9 mx-auto">
           <%= f.password_field :password_confirmation %>
         </div>
       </div>

@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-6">
-          <h5><strong>Group Size: </strong></h5>
+          <p><strong>Group Size: </strong></p>
         </div>
         <div class="col-sm-3">
           <p><span id="groupSize"><%= @tee_time.group_size %></span>/4</p>
@@ -23,7 +23,7 @@
       <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-6">
-          <h5><strong>Average Pace: </strong></h5>
+          <p><strong>Average Pace: </strong></p>
         </div>
         <div class="col-sm-3">
           <p><span id="avgPace"><%= @tee_time.avg_pace %></span></p>
@@ -32,7 +32,7 @@
       <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-6">
-          <h5><strong>Average Experience: </strong></h5>
+          <p><strong>Average Experience: </strong></p>
         </div>
         <div class="col-sm-3">
           <p><span id="avgExperience"><%= @tee_time.avg_experience %></span></p>
@@ -94,17 +94,17 @@
             <% end %>
           </div>
         </div>
-      </div><br>
+      </div>
 
       <div class="row">
-        <div class="col-md-4 mx-auto" id="joinDiv">
+        <div class="col-md-5 col-lg-4 mx-auto" id="joinDiv">
           <%= form_tag '/user_tee_times', method: 'post', id: "joinTeeTime" do %>
             <%= hidden_field_tag "user_tee_time[tee_time_id]", @tee_time.id %>
             <%= hidden_field_tag "user_tee_time[user_id]", current_user.id %>
             <%= submit_tag "Join Tee Time", class: 'btn full-width', id: "joinBtn", disabled: disabled?(current_user, @tee_time, "join") %>
           <% end %>
         </div>
-        <div class="col-md-4 mx-auto" id="addDiv">
+        <div class="col-md-5 col-lg-4 mx-auto" id="addDiv">
           <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch', id: 'addGuest' do %>
             <%= hidden_field_tag "operation", 1 %>
             <%= submit_tag "Add a Guest", class: 'btn full-width', id: "addBtn", disabled: disabled?(current_user, @tee_time, "add") %>
@@ -113,13 +113,13 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 mx-auto" id="leaveDiv" data-id="<%= get_user_tee_time(@tee_time, current_user) %>">
+        <div class="col-md-5 col-lg-4 mx-auto" id="leaveDiv" data-id="<%= get_user_tee_time(@tee_time, current_user) %>">
           <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'delete', id: "leaveTeeTime" do %>
             <%= submit_tag "Leave Tee Time", class: 'btn leave full-width', id: "leaveBtn", disabled: disabled?(current_user, @tee_time, "leave") %>
           <% end %>
         </div>
 
-        <div class="col-md-4 mx-auto" id="removeDiv">
+        <div class="col-md-5 col-lg-4 mx-auto" id="removeDiv">
           <%= form_tag "/user_tee_times/#{get_user_tee_time(@tee_time, current_user)}", method: 'patch', id: 'removeGuest' do %>
             <%= hidden_field_tag "operation", -1 %>
             <%= submit_tag "Remove a Guest", class: 'btn leave full-width', id: "removeBtn", disabled: disabled?(current_user, @tee_time, "remove") %>

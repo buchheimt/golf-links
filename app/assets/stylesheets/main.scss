@@ -162,7 +162,7 @@ div.course-summary {
 }
 
 .tee-time-new-card {
-  padding: 0;
+  padding: 0 24px;
   margin: 10px;
   background: $main-light;
   border-radius: 10px;
@@ -181,8 +181,8 @@ div.course-summary {
 }
 
 .tee-time-show-card {
-  padding: 25px 10px;
-  margin: 10px;
+  padding: 0 10px 5px;
+  margin: 0 10px 10px;
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
@@ -265,7 +265,7 @@ div.course-summary {
 }
 
 .filter-card {
-  padding: 10px;
+  padding: 24px;
   margin: 10px;
   background: $main-light;
   border-radius: 10px;
@@ -431,6 +431,38 @@ img.nav-pic {
 }
 
 @media screen and (max-width: 499px) {
+  .tee-time-show-card p {
+    text-align: center;
+  }
+  a.tee-time-user, .tee-time-guest {
+    width: 50%;
+    margin: 0 auto;
+  }
+  img.tee-time-pic {
+    display: block;
+    margin: auto;
+  }
+  nav {
+    display: none;
+  }
+  .tee-time-user {
+
+  }
+  div.course-main p {
+    text-align: center;
+  }
+  .admin {
+    width: 100%;
+    text-align: center;
+  }
+  #createTeeTimeBtn, #courseEditBtn {
+    margin-left: 0;
+  }
+  .btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
   p {
     text-align: center;
   }
@@ -529,10 +561,6 @@ nav-user-card {
   }
 }
 
-.user-list:first-child {
-  margin-top: 35px;
-}
-
 .guest-count-label {
   margin-bottom: 15px;
 }
@@ -595,10 +623,6 @@ a:hover .link-icon {
   font-size: 20px;
   padding: 10px;
   visibility: hidden;
-}
-
-.course-primary-info {
-  width: 100%;
 }
 
 output {

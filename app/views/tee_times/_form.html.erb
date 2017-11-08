@@ -29,10 +29,10 @@
 <% else %>
 
   <div class="row">
-    <div class="col-sm-5 mx-auto">
+    <div class="col-lg-5 mx-auto">
       <%= button_tag "Existing Course", class: "btn full-width", id: "selectCourseBtn" %>
     </div>
-    <div class="col-sm-5 mx-auto">
+    <div class="col-lg-5 mx-auto">
       <%= button_tag "New Course", class: "btn full-width", id: "newCourseBtn" %>
     </div>
   </div>
@@ -99,17 +99,15 @@
       </div><br>
 
       <div class="row details">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3 mx-auto">
+        <div class="col-4 mx-auto">
           <%= cf.label :par %>
         </div>
-        <div class="col-sm-3 mx-auto">
+        <div class="col-4 mx-auto">
           <%= cf.label :length %>
         </div>
-        <div class="col-sm-3 mx-auto">
+        <div class="col-4 mx-auto">
           <%= cf.label :price %>
         </div>
-        <div class="col-sm-1"></div>
       </div>
       <div class="row">
         <div class="col-sm-8 mx-auto">
@@ -118,17 +116,15 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.par") %>">
+        <div class="col-4 mx-auto <%= error_class(tee_time.errors, "course.par") %>">
           <%= cf.text_field :par %>
         </div>
-        <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.length") %>">
+        <div class="col-4 mx-auto <%= error_class(tee_time.errors, "course.length") %>">
           <%= cf.text_field :length %>
         </div>
-        <div class="col-sm-3 mx-auto <%= error_class(tee_time.errors, "course.price") %>">
+        <div class="col-4 mx-auto <%= error_class(tee_time.errors, "course.price") %>">
           <%= cf.text_field :price %>
         </div>
-        <div class="col-sm-1"></div>
       </div><br>
     <% end %>
   </div>

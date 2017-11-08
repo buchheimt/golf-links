@@ -6,13 +6,11 @@ class UserTeeTimesController < ApplicationController
     @tee_time = TeeTime.find_by_id(params[:user_tee_time][:tee_time_id])
     @user = User.find_by_id(params[:user_tee_time][:user_id])
     if @tee_time.add_user(@user)
-      flash[:confirmation] = "Success! You're in"
       render json: @tee_time.user_tee_times.last
     else
       flash[:warning] = @tee_time.user_tee_times.last.errors.full_messages.first
       redirect_to tee_time_path(@tee_time)
     end
-
   end
 
   def update
@@ -20,7 +18,6 @@ class UserTeeTimesController < ApplicationController
     authorize @user_tee_time
     params[:operation] == '1' ? @user_tee_time.add_guest : @user_tee_time.remove_guest
     if (params[:operation] == '1' || params[:operation] == '-1') && @user_tee_time.save
-      flash[:confirmation] = "Success!"
       render json: UserTeeTime.find_by_id(params[:id])
     else
       flash[:confirmation] = "Uh oh, something went wrong"
@@ -39,7 +36,6 @@ class UserTeeTimesController < ApplicationController
       tee_time.destroy
       redirect_to user_path(current_user)
     else
-      flash[:confirmation] = "Successfully left Tee Time"
       render json: tee_time
     end
   end

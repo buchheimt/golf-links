@@ -97,7 +97,7 @@ class TeeTime < ApplicationRecord
   end
 
   def self.size_filter(sizes, status)
-    self.send("#{status}_sort").select {|tt| sizes.include?(tt.users.size.to_s)}
+    self.send("#{status}_sort").select {|tt| sizes.include?(tt.group_size.to_s)}
   end
 
   def guests

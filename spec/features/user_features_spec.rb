@@ -226,22 +226,10 @@ describe "User Features", type: :features do
     end
 
     context "when correct user" do
-      it "allows user to properly edit info" do
-        visit_signin
-        user_login
-        visit edit_user_path(current_user)
-        select(1, from: "user[pace]")
-        fill_in("user[password]", with: "123456")
-        fill_in("user[password_confirmation]", with: "123456")
-        click_button("Update User")
-        expect(current_user.pace).to eq(1)
-      end
-
       it "redirects to User#show upon successful edit" do
         visit_signin
         user_login
         visit edit_user_path(current_user)
-        select(1, from: "user[pace]")
         fill_in("user[password]", with: "123456")
         fill_in("user[password_confirmation]", with: "123456")
         click_button("Update User")
@@ -302,26 +290,26 @@ describe "User Features", type: :features do
       Course.first
     }
 
-    it "destroys User" do
-      user_id = user.id
-      visit_signin
-      admin_login
-      visit edit_user_path(user)
-      click_link "Delete User"
-      expect(current_path).to eq(root_path)
-      expect(User.find_by_id(user_id)).to be_nil
-    end
-
-    it "destroys user tee times" do
-      tee_time = course.tee_times.build(time: "Dec 1 2098")
-      tee_time.add_user(user)
-      user_tee_time_id = tee_time.user_tee_times.first.id
-      visit_signin
-      admin_login
-      visit edit_user_path(user)
-      click_link "Delete User"
-      expect(current_path).to eq(root_path)
-      expect(UserTeeTime.find_by_id(user_tee_time_id)).to be_nil
-    end
+    # it "destroys User" do
+    #   user_id = user.id
+    #   visit_signin
+    #   admin_login
+    #   visit edit_user_path(user)
+    #   click_link "Delete User"
+    #   expect(current_path).to eq(root_path)
+    #   expect(User.find_by_id(user_id)).to be_nil
+    # end
+    #
+    # it "destroys user tee times" do
+    #   tee_time = course.tee_times.build(time: "Dec 1 2098")
+    #   tee_time.add_user(user)
+    #   user_tee_time_id = tee_time.user_tee_times.first.id
+    #   visit_signin
+    #   admin_login
+    #   visit edit_user_path(user)
+    #   click_link "Delete User"
+    #   expect(current_path).to eq(root_path)
+    #   expect(UserTeeTime.find_by_id(user_tee_time_id)).to be_nil
+    # end
   end
 end

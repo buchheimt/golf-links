@@ -125,7 +125,7 @@ RSpec.describe TeeTime, type: :model do
       tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(User.create(user_attributes1))
       tee_time.add_user(User.create(user_attributes2))
-      expect(tee_time.avg_pace).to eq(3.0)
+      expect(tee_time.avg_pace).to eq('3.0')
     end
   end
 
@@ -134,7 +134,7 @@ RSpec.describe TeeTime, type: :model do
       tee_time = course.tee_times.build(time: "Dec 1 2099")
       tee_time.add_user(User.create(user_attributes1))
       tee_time.add_user(User.create(user_attributes2))
-      expect(tee_time.avg_experience).to eq(7.0)
+      expect(tee_time.avg_experience).to eq('7.0')
     end
   end
 

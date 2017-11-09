@@ -214,15 +214,23 @@
 </script>
 
 <script id="comment-template" type="text/x-handlebars-template">
-  <div class="row commentDiv my-2">
+  <div class="row commentDiv my-2" data-id="id">
     <div class="col-12 comment-content">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-2">
           <p class="mb-1">{{user.username}}</p>
           <p class="timestamp">{{created_at_formatted}}</p>
         </div>
-        <div class="col-md-9">
+        <div class="col-lg-9">
           <p>{{content}}</p>
+        </div>
+        <div class="col-lg-1">
+          <button class="hidden comment-edit">
+            <%= Octicons::Octicon.new("pencil").to_svg.html_safe %>
+          </button><br>
+          <button class="hidden comment-remove">
+            <%= Octicons::Octicon.new("x").to_svg.html_safe %>
+          </button>
         </div>
       </div>
     </div>

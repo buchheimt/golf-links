@@ -680,3 +680,21 @@ div.commentDiv div.comment-content.dark {
 #comment_content {
   width: 100%;
 }
+
+.comment-edit, .comment-remove {
+  padding: 5px;
+  width: 100%;
+  background: none;
+  color: white;
+  border: none;
+  color: #CCC;
+  cursor: pointer;
+}
+
+.octicon:hover {
+  fill: $main-light;
+}
+
+.octicon {
+  fill: white;
+}

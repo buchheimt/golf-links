@@ -12,8 +12,10 @@ const createComment = (e) => {
     const newComment = template(comment);
     $(newComment).addClass("dark");
     $("#comments").append(newComment);
+    const $newComment = $("#comments div").last();
     $("#comments .comment-content").last().addClass("dark");
-
+    $newComment.children(".comment-edit").show();
+    $newComment.children(".comment-remove").show();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
     $("#comment_content").val("");
@@ -33,9 +35,12 @@ const toggleComments = () => {
         comments.forEach(function(comment) {
           const commentDiv = template(comment);
           $("#comments").append(commentDiv);
+          const $newComment = $("#comments div").last();
+
           if (comment.user.username === $("#currentUser .username").text()) {
-            console.log("wha");
             $("#comments .comment-content").last().addClass("dark");
+            $newComment.children(".comment-edit").show();
+            $newComment.children(".comment-remove").show();
           }
         });
       });

@@ -74,4 +74,8 @@ module TeeTimeHelper
     !tee_time.send("#{action}able?", user)
   end
 
+  def hidden?(user, tee_time)
+    tee_time.leavable?(user) ? "" : " hidden"
+  end
+
 end

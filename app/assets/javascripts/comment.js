@@ -1,7 +1,6 @@
 $(function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
-  $("#commentForm").fadeOut();
 });
 
 const createComment = (e) => {

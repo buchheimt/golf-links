@@ -131,19 +131,25 @@
 </div>
 
 
-<div class="container <%= disabled?(current_user, @tee_time, "leave") %>" id="commentSection">
+<div class="container <%= hidden?(current_user, @tee_time) %>" id="commentSection">
   <div class="row">
     <div class="col-sm-4 mx-auto">
       <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">Show Comments</button>
     </div>
   </div><br>
 
-  <div class="row" id="commentForm">
+  <div class="row hidden" id="commentForm">
     <div class="col-sm-8 mx-auto">
       <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
         <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
-        <%= f.text_field :content, placeholder: "join the conversation!" %>
-        <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
+        <div class="row">
+          <div class="col-md-9">
+            <%= f.text_field :content, placeholder: "join the conversation!" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div><br>

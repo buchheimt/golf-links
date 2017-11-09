@@ -14,7 +14,10 @@ const createComment = (e) => {
     $("#comments").append(newComment);
     const $newComment = $("#comments div").last();
     $("#comments .comment-content").last().addClass("dark");
-    $newComment.children(".comment-edit").show();
+    $("#comments .comment-content").last().addClass("dark");
+    attachCommentEditListener($newComment.children(".comment-edit"))
+    attachCommentRemoveListener($newComment.children(".comment-remove"))
+    $newComment.children(".comment-edit").show()
     $newComment.children(".comment-remove").show();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
@@ -41,8 +44,12 @@ const toggleComments = () => {
 
           if (comment.user.username === $("#currentUser .username").text()) {
             $("#comments .comment-content").last().addClass("dark");
-            $newComment.children(".comment-edit").show();
-            $newComment.children(".comment-remove").show();
+            attachCommentEditListener($newComment.children(".comment-edit"))
+            attachCommentRemoveListener($newComment.children(".comment-remove"))
+            if (comment.status === "active") {
+              $newComment.children(".comment-edit").show()
+              $newComment.children(".comment-remove").show();
+            }
           }
         });
       });
@@ -55,4 +62,34 @@ const toggleComments = () => {
     $("#comments div").fadeOut();
     $("#toggleComments").text("To Comments");
   }
+}
+
+const attachCommentEditListener = ($button) => {
+  $button.click(function() {
+    if (confirm("Are you sure?")) {
+      const deleteRoute = $(this).data("url");
+      $.ajax({url: deleteRoute, method: "DELETE"}).done(function(data) {
+        const $toWipe = $(".commentDiv[data-id=" + data.id + "]");
+        $toWipe.find(".content").text(data.content);
+        $toWipe.find(".username").text("[removed]");
+      });
+      $(this).hide();
+      $(this).siblings().hide();
+    }
+  })
+}
+
+const attachCommentRemoveListener = ($button) => {
+  $button.click(function() {
+    if (confirm("Are you sure?")) {
+      const deleteRoute = $(this).data("url");
+      $.ajax({url: deleteRoute, method: "DELETE"}).done(function(data) {
+        const $toWipe = $(".commentDiv[data-id=" + data.id + "]");
+        $toWipe.find(".content").text(data.content);
+        $toWipe.find(".username").text("[removed]");
+      });
+      $(this).hide();
+      $(this).siblings().hide();
+    }
+  })
 }

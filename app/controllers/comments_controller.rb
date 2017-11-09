@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   def index
-    @comments = TeeTime.find_by_id(params[:id]).comments
+    @comments = Comment.for_tee_time_sorted(params[:id])
     render json: @comments
   end
 
@@ -12,6 +12,13 @@ class CommentsController < ApplicationController
     if @comment.save
       render json: @comment
     end
+  end
+
+  def destroy
+    @comment = Comment.find_by_id(params[:id])
+    authorize @comment
+    @comment.wipe
+    render json: @comment
   end
 
   private

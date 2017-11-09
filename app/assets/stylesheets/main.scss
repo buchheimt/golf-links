@@ -632,16 +632,25 @@ output {
 }
 
 .comment-content {
+  padding: 15px;
   background: $main-light;
-  border-radius: 20px 20px 0 20px;
-  padding-left: 25px;
+  border-radius: 20px;
   p {
+    margin: 0;
+    text-align: left;
+  }
+  .timestamp {
     text-align: left;
   }
 }
 
+div.commentDiv div.comment-content.dark {
+  background: $main-dark;
+}
+
 .timestamp {
   font-size: 12px;
+  color: #CCC;
 }
 
 #comments a {
@@ -653,8 +662,9 @@ output {
 }
 
 .comment-pic {
-  height: 80px;
-  width: 80px;
+  float: right;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   border: 2px solid $main-dark;
 }

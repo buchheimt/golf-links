@@ -23,8 +23,10 @@ const createComment = (e) => {
 }
 
 const toggleComments = () => {
-  if ($("#toggleComments").text() === "Show Comments") {
+  if ($("#toggleComments").text() === "To Comments") {
+    $(".tee-time-show-card").fadeOut();
     $("#commentForm").fadeIn();
+    $("#toggleComments").hide();
     if ($("#comments div").length > 0) {
       $("#comments div").fadeIn();
     } else {
@@ -45,10 +47,12 @@ const toggleComments = () => {
         });
       });
     }
-    $("#toggleComments").text("Hide Comments");
+    $("#toggleComments").text("Back to Info");
+    $("#toggleComments").fadeIn();
   } else {
+    $(".tee-time-show-card").fadeIn();
     $("#commentForm").fadeOut();
     $("#comments div").fadeOut();
-    $("#toggleComments").text("Show Comments");
+    $("#toggleComments").text("To Comments");
   }
 }

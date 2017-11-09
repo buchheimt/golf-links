@@ -134,7 +134,7 @@
 <div class="container <%= hidden?(current_user, @tee_time) %>" id="commentSection">
   <div class="row">
     <div class="col-sm-4 mx-auto">
-      <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">Show Comments</button>
+      <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">To Comments</button>
     </div>
   </div><br>
 
@@ -217,7 +217,7 @@
   <div class="row commentDiv my-2" data-id="id">
     <div class="col-12 comment-content">
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-2 border-right-2">
           <p class="mb-1">{{user.username}}</p>
           <p class="timestamp">{{created_at_formatted}}</p>
         </div>

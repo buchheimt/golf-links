@@ -33,6 +33,7 @@ class UserTeeTimesController < ApplicationController
     @user_tee_time.destroy
     if tee_time.users.empty?
       flash[:confirmation] = "Successfully left and deleted Tee Time"
+      tee_time.comments.destroy_all
       tee_time.destroy
       redirect_to user_path(current_user)
     else

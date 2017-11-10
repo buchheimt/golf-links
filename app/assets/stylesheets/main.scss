@@ -3,6 +3,7 @@ $font-primary: "Copse";
 $font-secondary: "Open Sans";
 $bg-color: rgba(64, 105, 81, .75);
 $main-dark: rgba(34, 79, 53, .85);
+$main-dark-input: rgb(34, 79, 53);
 $main-light: rgba(35, 156, 86, .75);
 $nav-dark: rgb(34, 79, 53);
 $nav-light: rgb(35, 156, 86);
@@ -697,4 +698,10 @@ div.commentDiv div.comment-content.dark {
 
 .octicon {
   fill: white;
+}
+
+.textEditor {
+  color: white;
+  background: $main-dark-input;
+  border-color: #343;
 }

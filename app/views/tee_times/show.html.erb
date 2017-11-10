@@ -221,12 +221,13 @@
           <p class="username mb-1">{{user.username}}</p>
           <p class="timestamp">{{created_at_formatted}}</p>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-9 content-col">
           <p class="content">{{content}}</p>
         </div>
         <div class="col-lg-1">
           <button class="hidden comment-edit" data-url="/comments/{{id}}">
             <%= Octicons::Octicon.new("pencil").to_svg.html_safe %>
+            <%= Octicons::Octicon.new("check").to_svg.html_safe %>
           </button><br>
           <button class="hidden comment-remove" data-url="/comments/{{id}}">
             <%= Octicons::Octicon.new("x").to_svg.html_safe %>

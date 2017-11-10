@@ -14,6 +14,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find_by_id(params[:id])
+    authorize @comment
+    @comment.content = params[:content]
+    if @comment.save
+      render json: @comment
+    else
+      render json: Comment.find_by_id(params[:id])
+    end
+  end
+
   def destroy
     @comment = Comment.find_by_id(params[:id])
     authorize @comment

@@ -4,8 +4,12 @@ class CommentPolicy < ApplicationPolicy
     user && @record.tee_time.users.include?(user)
   end
 
+  def update?
+    create?
+  end
+
   def destroy?
-    user && @record.tee_time.users.include?(user)
+    create?
   end
 
 end

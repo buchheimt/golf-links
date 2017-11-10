@@ -54,6 +54,9 @@
   <div class="col-sm-6">
     <div class="tee-time-card">
       <a href="/tee_times/{{id}}">
+        <div class="joined-marker hidden">
+          <%= Octicons::Octicon.new("check", {height: 16, width: 16}).to_svg.html_safe %>
+        </div>
         <h4>{{course.name}}</h4>
         <h5>{{time_formatted}}</h5>
         <p>

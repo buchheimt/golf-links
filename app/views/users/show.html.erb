@@ -72,7 +72,9 @@
             <div class="row">
               <% if policy(@user).update? %>
                 <div class="col-sm-3">
-                  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn" %>
+                  <a href="<%= edit_user_path(@user) %>" class="btn">
+                    <%= Octicons::Octicon.new("pencil").to_svg.html_safe %>
+                  </a>
                 </div>
               <% end %>
               <% if current_user.admin? && !@user.admin? %>

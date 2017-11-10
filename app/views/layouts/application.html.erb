@@ -31,7 +31,7 @@
           </div>
           <div class="col-sm-2">
             <a href="<%= user_path(current_user) %>" class="nav-user">
-              <div class="nav-user-card clearfix">
+              <div class="nav-user-card clearfix" data-id="<%= current_user.id %>">
                 <%= image_tag current_user.get_image, class: "nav-pic" %>
                 <span id="nav-name"><%= current_user.username %></span>
               </div>

@@ -17,6 +17,14 @@ const reloadTeeTimes = (e) => {
         if (!teeTime['available?']) {
           $teeTimeDiv.children("div").addClass("tee-time-unjoinable");
         }
+        if ($(".nav-user-card")[0]) {
+          const userMatch = teeTime.user_tee_times.find(function(el) {
+            return el.user_id === $(".nav-user-card").data("id");
+          });
+          if (userMatch) {
+            $teeTimeDiv.find(".joined-marker").show();
+          }
+        }
       });
       $("#filterBtn").removeAttr("data-disable-with");
       $("#filterBtn").removeAttr("disabled");

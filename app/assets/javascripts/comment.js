@@ -27,42 +27,44 @@ const createComment = (e) => {
 }
 
 const toggleComments = () => {
-  if ($("#toggleComments").text() === "To Comments") {
-    $(".tee-time-show-card").fadeOut();
-    $("#commentForm").fadeIn();
-    $("#toggleComments").hide();
-    if ($("#comments div").length > 0) {
-      $("#comments div").fadeIn();
-    } else {
-      const teeTimeId = $("#toggleComments").data("id").toString();
-      const templateSource = $("#comment-template").html();
-      const template = Handlebars.compile(templateSource);
-      $.get("/comments", {id: teeTimeId}, function(comments) {
-        comments.forEach(function(comment) {
-          const commentDiv = template(comment);
-          $("#comments").append(commentDiv);
-          const $newComment = $("#comments div").last();
+  if ($("#toggleComments").text() === "View Comments") {
+    $(".tee-time-show-card").fadeOut('400', function() {
+      $("#commentForm").fadeIn();
+      $("#toggleComments").hide();
+      if ($("#comments div").length > 0) {
+        $("#comments div").fadeIn();
+      } else {
+        const teeTimeId = $("#toggleComments").data("id").toString();
+        const templateSource = $("#comment-template").html();
+        const template = Handlebars.compile(templateSource);
+        $.get("/comments", {id: teeTimeId}, function(comments) {
+          comments.forEach(function(comment) {
+            const commentDiv = template(comment);
+            $("#comments").append(commentDiv);
+            const $newComment = $("#comments div").last();
 
-          if (comment.user.username === $("#currentUser .username").text()) {
-            $("#comments .comment-content").last().addClass("dark");
-            attachCommentEditListener($newComment.children(".comment-edit"))
-            attachCommentRemoveListener($newComment.children(".comment-remove"))
-            if (comment.status === "active") {
-              $(".octicon-check").addClass("hidden");
-              $newComment.children(".comment-edit").show();
-              $newComment.children(".comment-remove").show();
+            if (comment.user.username === $("#currentUser .username").text()) {
+              $("#comments .comment-content").last().addClass("dark");
+              attachCommentEditListener($newComment.children(".comment-edit"))
+              attachCommentRemoveListener($newComment.children(".comment-remove"))
+              if (comment.status === "active") {
+                $(".octicon-check").addClass("hidden");
+                $newComment.children(".comment-edit").show();
+                $newComment.children(".comment-remove").show();
+              }
             }
-          }
+          });
         });
-      });
-    }
-    $("#toggleComments").text("Back to Info");
-    $("#toggleComments").fadeIn();
+      }
+      $("#toggleComments").text("Back to Info");
+      $("#toggleComments").fadeIn();
+    });
+
   } else {
     $(".tee-time-show-card").fadeIn();
     $("#commentForm").fadeOut();
     $("#comments div").fadeOut();
-    $("#toggleComments").text("To Comments");
+    $("#toggleComments").text("View Comments");
   }
 }
 

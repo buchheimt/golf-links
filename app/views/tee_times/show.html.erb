@@ -134,7 +134,7 @@
 <div class="container <%= hidden?(current_user, @tee_time) %>" id="commentSection">
   <div class="row">
     <div class="col-sm-4 mx-auto">
-      <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">To Comments</button>
+      <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">View Comments</button>
     </div>
   </div><br>
 
@@ -217,14 +217,14 @@
   <div class="row commentDiv my-2" data-id="{{id}}">
     <div class="col-12 comment-content">
       <div class="row">
-        <div class="col-lg-2 border-right-2">
+        <div class="col-lg-2 col-md-3 col-12 border-right-2">
           <p class="username mb-1">{{user.username}}</p>
           <p class="timestamp">{{created_at_formatted}}</p>
         </div>
-        <div class="col-lg-9 content-col">
+        <div class="col-lg-9 col-md-8 col-10 content-col">
           <p class="content">{{content}}</p>
         </div>
-        <div class="col-lg-1">
+        <div class="col-md-1 col-2">
           <button class="hidden comment-edit" data-url="/comments/{{id}}">
             <%= Octicons::Octicon.new("pencil").to_svg.html_safe %>
             <%= Octicons::Octicon.new("check").to_svg.html_safe %>

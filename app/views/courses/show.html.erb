@@ -2,7 +2,7 @@
   <div class="row course-main">
       <div class="col-sm-8">
         <%= image_tag @course.get_image, class: "course-pic", id: "coursePic" %>
-      </div><br>
+      </div>
       <div class="col-sm-4"><br><br><br>
         <div class="row <%= "hidden" if !@course.location %>" id="locationContainer">
           <div class="col-lg-4">
@@ -36,18 +36,18 @@
             <p>$<span id="price"><%= @course.price.to_s %></span></p>
           </div>
         </div>
-      <% if policy(@course).update? %>
-        <%= link_to "Edit Course", edit_course_path(@course), class: "btn", id: "courseEditBtn" %>
-      <% end %>
+        <% if policy(@course).update? %>
+          <a href="<%= edit_course_path(@course) %>" class="btn right" id="courseEditBtn">
+            <%= Octicons::Octicon.new("pencil").to_svg.html_safe %>
+          </a>
+        <% end %>
       </div>
-      <div class="row course-primary-info">
-        <div class="col-sm-12"><br>
+      <div class="course-primary-info full-width mt-3">
           <h1 id="name"><%= @course.name %></h1><br>
           <p class="description" id="description"><%= @course.description %></p><br>
         </div>
-      </div><br>
     <% if policy(TeeTime.new).create? %>
-      <div class="col-sm-12 mx-auto">
+      <div class="col-12 mx-auto">
         <%= link_to "Create New Tee Time", new_course_tee_time_path(@course), class: "btn", id: "createTeeTimeBtn" %>
       </div>
     <% end %>
@@ -55,12 +55,16 @@
   </div><br>
 
   <div class="row">
-    <div class="col-sm-2">
-      <button type="button" data-id="<%= @course.id %>" name="button" class="btn" id="prevBtn">Prev</button>
+    <div class="col-sm-2 col-5">
+      <button type="button" data-id="<%= @course.id %>" name="button" class="btn half-width pt-2" id="prevBtn">
+        <%= Octicons::Octicon.new("arrow-left", {width: 24, height: 24}).to_svg.html_safe %>
+      </button>
     </div>
-    <div class="col-sm-8"></div>
-    <div class="col-sm-2">
-      <button type="button" data-id="<%= @course.id %>" name="button" class="btn" id="nextBtn">Next</button>
+    <div class="col-sm-8 col-2"></div>
+    <div class="col-sm-2 col-5">
+      <button type="button" data-id="<%= @course.id %>" name="button" class="btn half-width pt-2" id="nextBtn">
+        <%= Octicons::Octicon.new("arrow-right", {width: 24, height: 24}).to_svg.html_safe %>
+      </button>
     </div>
   </div><br>
 

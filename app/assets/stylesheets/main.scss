@@ -439,6 +439,9 @@ img.nav-pic {
     width: 50%;
     margin: 0 auto;
   }
+  #courseEditBtn {
+    width: 25%;
+  }
   img.tee-time-pic {
     display: block;
     margin: auto;
@@ -704,4 +707,13 @@ div.commentDiv div.comment-content.dark {
   color: white;
   background: $main-dark-input;
   border-color: #343;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.right {
+  display: inline-block;
+  float: right;
 }

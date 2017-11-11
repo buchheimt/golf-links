@@ -43,7 +43,7 @@
         <div class="col-sm-10 mx-auto user-list">
           <div class="row">
             <% @tee_time.users.each do |user| %>
-              <div class="col-md-6 userCard" id="<%= "currentUser" if user.id == current_user.id %>" data-id="<%= get_user_tee_time(@tee_time, user) %>">
+              <div class="col-md-6 userCard" id="<%= "currentUser" if current_user && user.id == current_user.id %>" data-id="<%= get_user_tee_time(@tee_time, user) %>">
                 <div class="row">
                   <a href="<%= user_path(user) %>" class="tee-time-user">
                     <div class="row">
@@ -96,6 +96,7 @@
         </div>
       </div>
 
+      <% if logged_in? %>
       <div class="row">
         <div class="col-md-5 col-lg-4 mx-auto" id="joinDiv">
           <%= form_tag '/user_tee_times', method: 'post', id: "joinTeeTime" do %>
@@ -126,39 +127,41 @@
           <% end %>
         </div>
       </div>
-    </div>
-  </div><br>
-</div>
-
-
-<div class="container <%= hidden?(current_user, @tee_time) %>" id="commentSection">
-  <div class="row">
-    <div class="col-sm-4 mx-auto">
-      <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">View Comments</button>
-    </div>
-  </div><br>
-
-  <div class="row hidden" id="commentForm">
-    <div class="col-sm-8 mx-auto">
-      <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
-        <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
-        <div class="row">
-          <div class="col-md-9">
-            <%= f.text_field :content, placeholder: "join the conversation!" %>
-          </div>
-          <div class="col-md-3">
-            <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
-          </div>
-        </div>
       <% end %>
-    </div>
-  </div><br>
-
-  <div class="row">
-    <div class="col-9 mx-auto" id="comments">
     </div>
   </div>
 </div>
+
+<% if logged_in? %>
+  <div class="container <%= hidden?(current_user, @tee_time) %>" id="commentSection">
+    <div class="row">
+      <div class="col-sm-4 mx-auto">
+        <button type="button" name="button" class="btn" id="toggleComments" data-id="<%= @tee_time.id %>">View Comments</button>
+      </div>
+    </div><br>
+
+    <div class="row hidden" id="commentForm">
+      <div class="col-sm-8 mx-auto">
+        <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
+          <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
+          <div class="row">
+            <div class="col-md-9">
+              <%= f.text_field :content, placeholder: "join the conversation!" %>
+            </div>
+            <div class="col-md-3">
+              <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <div class="col-9 mx-auto" id="comments">
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <script id="user-card-template" type="text/x-handlebars-template">
   <div class="col-md-6 userCard hidden" data-id="{{id}}" id="currentUser">

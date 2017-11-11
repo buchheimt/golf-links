@@ -1,18 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Copse');
 $font-primary: "Copse";
 $font-secondary: "Open Sans";
-$bg-color: rgba(64, 105, 81, .75);
-$main-dark: rgba(34, 79, 53, .85);
-$main-dark-input: rgb(34, 79, 53);
-$main-light: rgba(35, 156, 86, .75);
-$nav-dark: rgb(34, 79, 53);
-$nav-light: rgb(35, 156, 86);
-$btn-light: rgba(86, 218, 136, .75);
-$btn-dark: rgba(23, 103, 54, .75);
+$font-on-hover: #CCC;
+$bg-color: rgba(84, 105, 91, .85);
+$main-dark: rgba(54, 79, 64, .85);
+$main-dark-input: rgb(54, 79, 64);
+$main-light: rgba(75, 156, 105, .75);
+$nav-dark: rgb(54, 79, 64);
+$nav-light: rgb(70, 156, 105);
+$btn-light: rgba(140, 206, 150, .75);
+$btn-dark: rgba(66, 103, 84, .75);
 $footer: rgba(51, 69, 58, .95);
 $footer-dark: rgba(51, 69, 58, .95);
 
 a:hover, .btn-selected {
+  color: $font-on-hover;
   transition: background 0.5s, color 0.5, box-shadow 0.5;
 }
 
@@ -99,23 +101,23 @@ div.course-summary {
 }
 
 .btn {
-  box-shadow: 0 3px 8px #323;
+  box-shadow: 2px 2px 2px #323;
   background: $btn-light;
   color: white;
 }
 
 .btn:hover, .btn-selected {
-  box-shadow: 0 3px 8px #323 inset;
+  box-shadow: 2px 2px 2px #323 inset;
   background: $btn-dark;
   text-decoration: none;
-  color: white;
+  color: $font-on-hover;
   cursor: pointer;
 }
 
 .btn:disabled, .btn:hover:disabled {
   box-shadow: 0 0 0 #000;
   background: $btn-light;
-  color: white;
+  color: $font-on-hover;
 }
 
 .tee-time-card {
@@ -136,7 +138,7 @@ div.course-summary {
     box-shadow: 0 5px 15px #323 inset;
     background: $main-dark;
     text-decoration: none;
-    color: white;
+    color: $font-on-hover;
     border-radius: 10px;
   }
 }
@@ -153,7 +155,7 @@ div.course-summary {
   a:hover {
     background: rgba(51, 69, 58, .75);
     text-decoration: none;
-    color: white;
+    color: $font-on-hover;
     border-radius: 10px;
   }
 }
@@ -178,7 +180,7 @@ div.course-summary {
 }
 
 .tee-time-show-card {
-  padding: 0 10px 5px;
+  padding: 0 10px 20px;
   margin: 0 10px 10px;
   background: $main-light;
   border-radius: 10px;
@@ -209,7 +211,7 @@ div.course-summary {
   a:hover {
     background: $main-dark;
     text-decoration: none;
-    color: white;
+    color: $font-on-hover;
     border-radius: 10px;
   }
 }
@@ -238,7 +240,7 @@ div.course-summary {
   box-shadow: 0 5px 15px #323 inset;
   background: rgba(51, 69, 58, .75);
   text-decoration: none;
-  color: white;
+  color: $font-on-hover;
   border-radius: 10px;
 }
 
@@ -289,7 +291,7 @@ div.course-summary {
     background: $main-dark;
     text-decoration: none;
     height: 100%;
-    color: white;
+    color: $font-on-hover;
     border-radius: 10px;
   }
 }
@@ -306,6 +308,7 @@ label {
 }
 
 .fb-btn:hover {
+  color: $font-on-hover;
   background: #227;
 }
 
@@ -347,11 +350,12 @@ div.field_with_errors input, div.field_with_errors select {
 }
 
 a.warning:hover, a.leave:hover, input.leave:hover, input.warning:hover, button.warning:hover {
-  color: white;
+  color: $font-on-hover;
   background: #722;
 }
 
 a.warning:hover:disabled, a.leave:hover:disabled, input.warning:hover:disabled, input.warning:hover:disabled {
+  color: $font-on-hover;
   background: rgba(175, 75, 75, .75);
 }
 
@@ -395,7 +399,7 @@ nav {
   }
   a:hover {
     box-shadow: 0 5px 15px #323 inset;
-    color: white;
+    color: $font-on-hover;
     text-decoration: none;
     background: $nav-dark;
   }
@@ -508,7 +512,7 @@ footer {
   .footer-link:hover {
     background: $footer-dark;
     box-shadow: 0 5px 15px #323 inset;
-    color: white;
+    color: $font-on-hover;
     text-decoration: none;
   }
   #footer-info {
@@ -578,7 +582,7 @@ nav-user-card {
   box-shadow: 0 5px 15px #323 inset;
   background: $main-dark;
   text-decoration: none;
-  color: white;
+  color: $font-on-hover;
   border-radius: 10px;
 }
 

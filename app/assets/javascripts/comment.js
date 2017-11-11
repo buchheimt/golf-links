@@ -11,18 +11,20 @@ const createComment = (e) => {
   $.post("/comments", values, function(comment) {
     const newComment = template(comment);
     $(newComment).addClass("dark");
-    $("#comments").append(newComment);
-    const $newComment = $("#comments div").last();
-    $("#comments .comment-content").last().addClass("dark");
-    $("#comments .comment-content").last().addClass("dark");
-    attachCommentEditListener($newComment.children(".comment-edit"));
-    attachCommentRemoveListener($newComment.children(".comment-remove"));
+    $("#comments").prepend(newComment);
+    const $newComment = $("#comments div").first();
+    $newComment.hide();
+    $("#comments .comment-content").first().addClass("dark");
+    $("#comments .comment-content").first().addClass("dark");
+    attachCommentEditListener($newComment.find(".comment-edit"));
+    attachCommentRemoveListener($newComment.find(".comment-remove"));
     $(".octicon-check").addClass("hidden");
-    $newComment.children(".comment-edit").show()
-    $newComment.children(".comment-remove").show();
+    $newComment.find(".comment-edit").show()
+    $newComment.find(".comment-remove").show();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
     $("#comment_content").val("");
+    $newComment.fadeIn();
   });
 }
 
@@ -40,17 +42,17 @@ const toggleComments = () => {
         $.get("/comments", {id: teeTimeId}, function(comments) {
           comments.forEach(function(comment) {
             const commentDiv = template(comment);
-            $("#comments").append(commentDiv);
-            const $newComment = $("#comments div").last();
+            $("#comments").prepend(commentDiv);
+            const $newComment = $("#comments div").first();
 
             if (comment.user.username === $("#currentUser .username").text()) {
-              $("#comments .comment-content").last().addClass("dark");
-              attachCommentEditListener($newComment.children(".comment-edit"))
-              attachCommentRemoveListener($newComment.children(".comment-remove"))
+              $("#comments .comment-content").first().addClass("dark");
+              attachCommentEditListener($newComment.find(".comment-edit"))
+              attachCommentRemoveListener($newComment.find(".comment-remove"))
               if (comment.status === "active") {
                 $(".octicon-check").addClass("hidden");
-                $newComment.children(".comment-edit").show();
-                $newComment.children(".comment-remove").show();
+                $newComment.find(".comment-edit").show();
+                $newComment.find(".comment-remove").show();
               }
             }
           });

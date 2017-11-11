@@ -52,7 +52,7 @@ h1.profile-title {
 }
 
 .admin {
-  box-shadow: 2px 2px 2px #333 inset;
+  box-shadow: 0 5px 15px #323 inset;
   margin-top: 15px;
   padding: 10px;
   border-radius: 10px;
@@ -80,7 +80,7 @@ div.profile-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid $main-dark;
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
 }
 
 div.course-summary {
@@ -90,7 +90,7 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid $main-dark;
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
 }
 
 .site-title {
@@ -99,13 +99,13 @@ div.course-summary {
 }
 
 .btn {
-  box-shadow: 2px 2px 2px #333;
+  box-shadow: 0 3px 8px #323;
   background: $btn-light;
   color: white;
 }
 
 .btn:hover, .btn-selected {
-  box-shadow: 2px 2px 2px #333 inset;
+  box-shadow: 0 3px 8px #323 inset;
   background: $btn-dark;
   text-decoration: none;
   color: white;
@@ -125,7 +125,7 @@ div.course-summary {
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
   a {
-    box-shadow: 4px 4px 2px #333;
+    box-shadow: 0 5px 15px #323;
     padding: 10px;
     border-radius: 10px;
     display: inline-block;
@@ -133,7 +133,7 @@ div.course-summary {
     width: 100%;
   }
   a:hover {
-    box-shadow: 4px 4px 2px #333 inset;
+    box-shadow: 0 5px 15px #323 inset;
     background: $main-dark;
     text-decoration: none;
     color: white;
@@ -164,7 +164,7 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
   input {
     width: 100%;
   }
@@ -183,7 +183,7 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
   p {
     text-align: left;
   }
@@ -220,7 +220,7 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
   input {
     width: 100%;
   }
@@ -235,7 +235,7 @@ div.course-summary {
 }
 
 .fav-course:hover a {
-  box-shadow: 2px 2px 2px #333 inset;
+  box-shadow: 0 5px 15px #323 inset;
   background: rgba(51, 69, 58, .75);
   text-decoration: none;
   color: white;
@@ -248,7 +248,7 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
   p {
     text-align: left;
     margin-bottom: 5px;
@@ -267,7 +267,7 @@ div.course-summary {
   background: $main-light;
   border-radius: 10px;
   border: 1px solid rgb(7, 74, 12);
-  box-shadow: 4px 4px 2px #333;
+  box-shadow: 0 5px 15px #323;
 }
 
 .course-card {
@@ -277,7 +277,7 @@ div.course-summary {
   background: $main-light;
   border: 1px solid rgb(7, 74, 12);
   a {
-    box-shadow: 4px 4px 2px #333;
+    box-shadow: 0 5px 15px #323;
     padding: 25px 10px 10px;
     border-radius: 10px;
     display: inline-block;
@@ -285,7 +285,7 @@ div.course-summary {
     width: 100%;
   }
   a:hover {
-    box-shadow: 4px 4px 2px #333 inset;
+    box-shadow: 0 5px 15px #323 inset;
     background: $main-dark;
     text-decoration: none;
     height: 100%;
@@ -381,7 +381,7 @@ nav {
   }
   box-sizing: border-box;
   background: $nav-light;
-  box-shadow: 0 4px 4px #333;
+  box-shadow: 0 5px 15px #323;
   color: white;
   a {
     box-sizing: border-box;
@@ -394,7 +394,7 @@ nav {
     border: 1px solid $nav-dark;
   }
   a:hover {
-    box-shadow: 3px 3px 3px #333 inset;
+    box-shadow: 0 5px 15px #323 inset;
     color: white;
     text-decoration: none;
     background: $nav-dark;
@@ -507,7 +507,7 @@ footer {
   }
   .footer-link:hover {
     background: $footer-dark;
-    box-shadow: 2px 2px 2px #333 inset;
+    box-shadow: 0 5px 15px #323 inset;
     color: white;
     text-decoration: none;
   }
@@ -575,7 +575,7 @@ nav-user-card {
 }
 
 .session-link:hover {
-  box-shadow: 4px 4px 2px #333 inset;
+  box-shadow: 0 5px 15px #323 inset;
   background: $main-dark;
   text-decoration: none;
   color: white;

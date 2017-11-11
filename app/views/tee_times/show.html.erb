@@ -138,28 +138,27 @@
     </div>
   </div><br>
 
+  <div class="row hidden" id="commentForm">
+    <div class="col-sm-8 mx-auto">
+      <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
+        <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
+        <div class="row">
+          <div class="col-md-9">
+            <%= f.text_field :content, placeholder: "join the conversation!" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div><br>
+
   <div class="row">
     <div class="col-9 mx-auto" id="comments">
     </div>
   </div>
 </div>
-
-<div class="row hidden" id="commentForm">
-  <div class="col-sm-8 mx-auto">
-    <%= form_for @tee_time.comments.build(user_id: current_user.id) do |f| %>
-      <%= f.hidden_field :tee_time_id, value: @tee_time.id %>
-      <div class="row">
-        <div class="col-md-9">
-          <%= f.text_field :content, placeholder: "join the conversation!" %>
-        </div>
-        <div class="col-md-3">
-          <%= f.submit "Add Comment", class: "btn", id: "addCommentBtn" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div><br>
-
 
 <script id="user-card-template" type="text/x-handlebars-template">
   <div class="col-md-6 userCard hidden" data-id="{{id}}" id="currentUser">

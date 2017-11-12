@@ -3,75 +3,64 @@
     <div class="col-sm-6">
       <div class="row">
         <div class="col-sm-8 mx-auto">
-          <%= f.label :name %>
           <%= check_for_errors(course.errors, [:name]) %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-11 mx-auto">
-          <%= f.text_field :name %>
+          <%= f.text_field :name, placeholder: "Name" %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-8 mx-auto">
-          <%= f.label :description %>
           <%= check_for_errors(course.errors, [:description]) %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-11 mx-auto">
-          <%= f.text_area :description %>
+          <%= f.text_area :description, placeholder: "Description" %>
         </div>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="row">
         <div class="col-sm-8 mx-auto">
-          <%= f.label :location %>
           <%= check_for_errors(course.errors, [:location]) %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-11 mx-auto">
-          <%= f.text_field :location %>
+          <%= f.text_field :location, placeholder: "Location" %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-8 mx-auto">
-          <%= f.label :image, "Image URL" %>
           <%= check_for_errors(course.errors, [:image]) %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-11 mx-auto">
-          <%= f.text_field :image, placeholder: "Leave blank for default"  %>
+          <%= f.text_field :image, placeholder: "Image URL (optional)"  %>
         </div>
       </div><br>
-      <div class="row details">
-        <div class="col-4 mx-auto">
-          <%= f.label :par %>
-        </div>
-        <div class="col-4 mx-auto">
-          <%= f.label :length %>
-        </div>
-        <div class="col-4 mx-auto">
-          <%= f.label :price %>
-        </div>
-      </div>
       <div class="row">
         <div class="col-sm-8 mx-auto">
           <%= check_for_errors(course.errors, [:par, :length, :price]) %>
         </div>
       </div>
       <div class="row">
-        <div class="col-4 mx-auto">
-          <%= f.text_field :par %>
-        </div>
-        <div class="col-4 mx-auto">
-          <%= f.text_field :length %>
-        </div>
-        <div class="col-4 mx-auto">
-          <%= f.text_field :price %>
+        <div class="col-sm-11 mx-auto">
+          <div class="row">
+            <div class="col-4 mx-auto">
+              <%= f.text_field :par, placeholder: "Par" %>
+            </div>
+            <div class="col-4 mx-auto">
+              <%= f.text_field :length, placeholder: "Length" %>
+            </div>
+            <div class="col-4 mx-auto">
+              <%= f.text_field :price, placeholder: "Price" %>
+            </div>
+          </div>
         </div>
       </div>
     </div><br>

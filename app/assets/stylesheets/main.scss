@@ -370,8 +370,20 @@ a.warning:hover:disabled, a.leave:hover:disabled, input.warning:hover:disabled, 
 }
 
 textarea {
+  color: white;
+  background: $main-light;
   width: 100%;
   height: 125px;
+  border-color: $btn-light;
+}
+
+textarea::placeholder {
+  color: $font-placeholder;
+}
+
+textarea:focus {
+  outline: none;
+  border:  2px solid $main-dark;
 }
 
 .details label {

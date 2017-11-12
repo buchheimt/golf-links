@@ -1,26 +1,16 @@
 <%= form_for User.new, url: signin_path do |f|  %>
   <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :username %>
+    <div class="col-sm-9 mx-auto">
+      <%= f.text_field :username, class: "mt-2 mb-3", placeholder: 'Username' %>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-9 mx-auto">
-      <%= f.text_field :username %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 mx-auto">
-      <%= f.label :password %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-9 mx-auto">
-      <%= f.password_field :password %>
+      <%= f.password_field :password, class: "mt-3 mb-3", placeholder: 'Password' %>
     </div>
   </div><br><br>
   <div class="row">
-    <div class="col-sm-9 mx-auto">
+    <div class="col-sm-7 mx-auto">
       <%= f.submit "Sign In", class: "btn full" %>
     </div>
   </div><br>

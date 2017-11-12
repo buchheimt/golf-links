@@ -2,6 +2,7 @@
 $font-primary: "Copse";
 $font-secondary: "Open Sans";
 $font-on-hover: #CCC;
+$font-placeholder: #DDD;
 $bg-color: rgba(84, 105, 91, .85);
 $main-dark: rgba(54, 79, 64, .85);
 $main-dark-input: rgb(54, 79, 64);
@@ -318,7 +319,7 @@ label {
 }
 
 div.field_with_errors input, div.field_with_errors select {
-  border: 2px solid red;
+  border-bottom: 2px solid red;
 }
 
 .error-list {
@@ -439,6 +440,13 @@ img.nav-pic {
     width: 50%;
     margin: 0 auto;
   }
+  #signup-options {
+    position: relative;
+    top: 5px;
+    bottom: 0;
+    padding: 24px;
+  }
+
   #courseEditBtn {
     width: 25%;
   }
@@ -716,4 +724,26 @@ div.commentDiv div.comment-content.dark {
 .right {
   display: inline-block;
   float: right;
+}
+
+input {
+  padding: 2px 5px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid $btn-light;
+  outline: 0 none;
+  color: white;
+}
+
+input:focus {
+  border-color: $main-dark;
+}
+
+input::placeholder {
+  color: $font-placeholder;
+}
+
+#signup-options {
+  position: relative;
+  bottom: 64px;
 }

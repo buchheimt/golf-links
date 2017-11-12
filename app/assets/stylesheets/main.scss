@@ -370,6 +370,7 @@ a.warning:hover:disabled, a.leave:hover:disabled, input.warning:hover:disabled, 
 }
 
 textarea {
+  padding: 5px;
   color: white;
   background: $main-light;
   width: 100%;
@@ -729,6 +730,10 @@ div.commentDiv div.comment-content.dark {
   border-color: #343;
 }
 
+.textEditor:focus {
+  border-color: #666;
+}
+
 .half-width {
   width: 50%;
 }
@@ -758,4 +763,30 @@ input::placeholder {
 #signup-options {
   position: relative;
   bottom: 64px;
+}
+
+select {
+  cursor: pointer;
+  box-shadow: 2px 2px 2px #323;
+  border: none;
+  padding: 5px;
+  background: $btn-light;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+}
+
+select:hover {
+  box-shadow: 2px 2px 2px #323 inset;
+  background: $btn-dark;
+  text-decoration: none;
+  color: $font-on-hover;
+}
+
+option:not(:checked) {
+  background: $btn-dark;
+}
+
+option:checked {
+  background: $btn-dark;
 }

@@ -96,11 +96,6 @@ div.course-summary {
   box-shadow: 0 5px 15px #323;
 }
 
-.site-title {
-  font-family: $font-primary;
-  background: $nav-dark;
-}
-
 .btn {
   box-shadow: 2px 2px 2px #323;
   background: $btn-light;
@@ -393,14 +388,96 @@ textarea:focus {
 }
 
 nav {
+  .dropdown-toggle {
+    display: inline-block;
+    width: 100%;
+  }
+  #titleText {
+    padding-left: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-family: $font-primary;
+  }
+  .site-title {
+    padding-top: 16px;
+    height: 66px;
+    display: inline-block;
+    background: $nav-dark;
+  }
+
+  .site-title:hover {
+    box-shadow: none;
+  }
+  .nav-item.dropdown {
+    height: 100%;
+  }
+  #navbarDropdownMenuLink {
+    padding-right: 32px;
+    float: right;
+    height: 100%;
+    border: none;
+  }
+  #nav-name {
+    display: inline-block;
+    font-size: 1.1rem;
+    padding-top: 12px;
+    margin-left: 5px;
+  }
   div.row div {
     padding-left: 0;
     padding-right: 0;
+  }
+  .nav-links {
+    margin-top: 14px;
+    height: 30px;
+  }
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 6px;
+    margin: auto 2%;
+    border: none;
+    width: auto;
+    display: inline-block;
+  }
+  .nav-links a:hover {
+    border-radius: 12px;
+  }
+  #mobileNavBtn {
+    svg {
+      padding-top: 4px;
+    }
+    margin-top: 4px;
+    fill: white;
+    background: none;
+    border: none;
+  }
+  #mobileNavBtn:focus {
+    outline: none;
+  }
+  .mobileLinks {
+    a {
+      background: $nav-light;
+      border: none;
+      border-top: 1px solid black;
+    }
+    a:hover {
+      box-shadow: none;
+    }
+    a:last-child {
+      border-bottom: 1px solid black;
+    }
   }
   box-sizing: border-box;
   background: $nav-light;
   box-shadow: 0 5px 15px #323;
   color: white;
+  img.nav-pic {
+    margin: 0 auto;
+    display: inline-block;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid $main-dark;
+  }
   a {
     box-sizing: border-box;
     width: 100%;
@@ -427,15 +504,6 @@ nav {
   height: 66px;
 }
 
-img.nav-pic {
-  float: left;
-  margin: 11px 10px 0px 25px;
-  display: inline-block;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid $main-dark;
-}
-
 #course-link {
   text-align: center;
 }
@@ -445,7 +513,34 @@ img.nav-pic {
   width: 100%;
 }
 
+@media screen and (max-width: 900px) {
+  nav #titleText {
+    margin-top: 2px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 1204px) {
+  nav span#nav-name {
+    display: none;
+  }
+
+  nav img.nav-pic {
+    margin-top: 6px;
+  }
+}
+
 @media screen and (max-width: 499px) {
+  nav .site-title {
+    background: $nav-light;
+    border: none;
+  }
+  #fullNav {
+    display: none;
+  }
+  #mobileNav {
+    display: block;
+  }
   .tee-time-show-card p {
     text-align: center;
   }
@@ -459,16 +554,16 @@ img.nav-pic {
     bottom: 0;
     padding: 24px;
   }
-
+  #titleText {
+    padding-left: 0;
+    padding-right: 5px;
+  }
   #courseEditBtn {
     width: 25%;
   }
   img.tee-time-pic {
     display: block;
     margin: auto;
-  }
-  nav {
-    display: none;
   }
   .tee-time-user {
 
@@ -491,12 +586,6 @@ img.nav-pic {
   p {
     text-align: center;
   }
-  div.wrapper {
-    margin: 396px auto 0;
-  }
-  nav.fixed-nav {
-    height: 396px;
-  }
   p.stat {
     text-align: center;
   }
@@ -508,9 +597,6 @@ img.nav-pic {
 
 @media screen and (max-width: 950px) {
   #connect-text {
-    visibility: hidden;
-  }
-  #nav-name {
     visibility: hidden;
   }
 }
@@ -544,6 +630,7 @@ footer {
 }
 
 a.nav-user {
+  border: none;
   height: 66px;
   padding: 0;
   span {

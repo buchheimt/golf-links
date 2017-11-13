@@ -12,43 +12,70 @@
   <body>
 
     <nav class="fixed-nav">
-        <div class="row">
-          <div class="col-sm-2">
-            <%= link_to "Golf Links", root_path, class: "site-title" %>
+        <div class="hidden" id="mobileNav">
+          <div class="row">
+            <div class="col-4">
+              <a href="<%= root_path %>", class="site-title">
+                <p id="titleText">Golf Links</p>
+              </a>
+            </div>
+            <div class="col-4"></div>
+            <div class="col-3 mx-auto">
+              <button id="mobileNavBtn">
+                <%= Octicons::Octicon.new("grabber", {width: 48, height: 48}).to_svg.html_safe %>
+              </button>
+            </div>
           </div>
-          <div class="col-sm-2">
-            <%= link_to "Courses", courses_path %>
+
+          <div class="mobileLinks hidden">
+            <% unless current_user.nil? %>
+              <%= link_to "View Profile", user_path(current_user), class: "full-width" %>
+              <%= link_to "Courses", courses_path, class: "full-width" %>
+              <%= link_to "Tee Times", tee_times_path, class: "full-width" %>
+            <% else %>
+              <%= link_to "Sign Up", new_user_path, class: "full-width" %>
+              <%= link_to "Courses", courses_path, class: "full-width" %>
+              <%= link_to "Tee Times", tee_times_path, class: "full-width" %>
+            <% end %>
           </div>
+        </div>
+
+
+        <div class="row" id="fullNav">
           <div class="col-sm-2">
-            <%= link_to "Tee Times", tee_times_path %>
-          </div>
-        <% unless current_user.nil? %>
-          <div class="col-sm-2">
-            <%= link_to "Create Tee Time", new_tee_time_path %>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to "Sign Out", signout_path, method: "delete" %>
-          </div>
-          <div class="col-sm-2">
-            <a href="<%= user_path(current_user) %>" class="nav-user">
-              <div class="nav-user-card clearfix" data-id="<%= current_user.id %>">
-                <%= image_tag current_user.get_image, class: "nav-pic" %>
-                <span id="nav-name"><%= current_user.username %></span>
-              </div>
+            <a href="<%= root_path %>", class="site-title">
+              <p id="titleText">Golf Links</p>
             </a>
           </div>
+        <% unless current_user.nil? %>
+          <div class="col-sm-8 col-xl-8 nav-links mx-auto">
+            <%= link_to "Courses", courses_path %>
+            <%= link_to "Tee Times", tee_times_path %>
+            <%= link_to "Create Tee Time", new_tee_time_path %>
+            <%= link_to "My Tee Times", user_tee_times_path(current_user) %>
+          </div>
+          <div class="col-sm-2 col-xl-2">
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= image_tag current_user.get_image, class: "nav-pic" %>
+                <span id="nav-name"><%= current_user.username %></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to "View Profile", user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Signout", signout_path, class: "dropdown-item", method: "DELETE" %>
+              </div>
+            </div>
+          </div>
         <% else %>
-          <div class="col-sm-2">
+        <div class="col-sm-8 nav-links">
+            <%= link_to "Courses", courses_path %>
+            <%= link_to "Tee Times", tee_times_path %>
             <%= link_to "Sign Up", new_user_path %>
-          </div>
-          <div class="col-sm-2">
             <%= link_to "Sign In", signin_path %>
-          </div>
-          <div class="col-sm-2">
             <%= link_to "About", about_path %>
-          </div>
-        <% end %>
         </div>
+        <% end %>
       </div>
     </nav>
 

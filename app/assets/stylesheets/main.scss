@@ -14,6 +14,11 @@ $btn-dark: rgba(66, 103, 84, .75);
 $footer: rgb(51, 69, 58);
 $footer-dark: rgb(51, 69, 58);
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 a:hover, .btn-selected {
   color: $font-on-hover;
   transition: background 0.5s, color 0.5, box-shadow 0.5;
@@ -25,6 +30,7 @@ p {
 }
 
 body {
+  margin-bottom: 56px;
   font-family: $font-primary;
   background: linear-gradient($bg-color, $bg-color), url("background.jpg");
   background-attachment: fixed;
@@ -35,13 +41,41 @@ body {
   }
 }
 
+footer {
+  padding: 10px 0 0;
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  height: 56px;
+  z-index: 999;
+  width: 100%;
+  background: $footer;
+  .footer-link {
+    font-size: .85rem;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .footer-link:hover {
+    background: $footer-dark;
+    box-shadow: 0 5px 15px #323 inset;
+    color: $font-on-hover;
+    text-decoration: none;
+  }
+  #footer-info {
+    font-size: .85rem;
+    padding: 5px;
+    width: 100%;
+    display: inline-block;
+  }
+}
+
 .wrapper {
   box-sizing: border-box;
   margin: 64px auto 0;
   padding: 25px 40px 64px;
   max-width: 1080px;
-  min-height: 700px;
-  height: 100%;
 }
 
 .container {
@@ -621,33 +655,6 @@ nav {
 .filter {
   width: 50%;
   margin: 15px;
-}
-
-footer {
-  padding: 10px 0 0;
-  position: fixed;
-  bottom: 0;
-  z-index: 999;
-  width: 100%;
-  background: $footer;
-  .footer-link {
-    font-size: .85rem;
-    padding: 5px;
-    border-radius: 5px;
-    display: inline-block;
-  }
-  .footer-link:hover {
-    background: $footer-dark;
-    box-shadow: 0 5px 15px #323 inset;
-    color: $font-on-hover;
-    text-decoration: none;
-  }
-  #footer-info {
-    font-size: .85rem;
-    padding: 5px;
-    width: 100%;
-    display: inline-block;
-  }
 }
 
 a.nav-user {

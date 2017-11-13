@@ -3,7 +3,7 @@ $font-primary: "Copse";
 $font-secondary: "Open Sans";
 $font-on-hover: #CCC;
 $font-placeholder: #DDD;
-$bg-color: rgba(84, 105, 91, .85);
+$bg-color: rgba(84, 105, 91, .9);
 $main-dark: rgba(54, 79, 64, .85);
 $main-dark-input: rgb(54, 79, 64);
 $main-light: rgba(75, 156, 105, .75);
@@ -26,7 +26,7 @@ p {
 
 body {
   font-family: $font-primary;
-  background-image: url("background.jpg");
+  background: linear-gradient($bg-color, $bg-color), url("background.jpg");
   background-attachment: fixed;
   color: white;
   text-align: center;
@@ -37,7 +37,6 @@ body {
 
 .wrapper {
   box-sizing: border-box;
-  background-color: $bg-color;
   margin: 64px auto 0;
   padding: 25px 40px 64px;
   max-width: 1080px;
@@ -423,6 +422,17 @@ nav {
     padding-top: 12px;
     margin-left: 5px;
   }
+  .dropdown-menu.show {
+    background: $nav-light;
+  }
+  .dropdown-item {
+    color: white;
+  }
+  .dropdown-item:hover {
+    box-shadow: none;
+    color: white;
+    background: $nav-dark;
+  }
   div.row div {
     padding-left: 0;
     padding-right: 0;
@@ -520,6 +530,12 @@ nav {
   }
 }
 
+@media screen and (max-width: 770px) {
+  .nav-links a:last-child {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 1204px) {
   nav span#nav-name {
     display: none;
@@ -532,6 +548,7 @@ nav {
 
 @media screen and (max-width: 499px) {
   nav .site-title {
+    padding-left: 12px;
     background: $nav-light;
     border: none;
   }
@@ -608,8 +625,10 @@ nav {
 
 footer {
   padding: 15px 0 0;
-  margin: 0 auto;
-  max-width: 1080px;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
   background: $footer;
   .footer-link {
     padding: 5px;

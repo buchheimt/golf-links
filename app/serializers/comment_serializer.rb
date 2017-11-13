@@ -1,4 +1,4 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :content, :created_at_formatted, :status
+  attributes :id, :content, :timestamp, :status
   belongs_to :user
 end

@@ -2,7 +2,6 @@ $(document).on("turbolinks:load", function() {
   $("#filterForm").submit(reloadTeeTimes);
 })
 
-
 const reloadTeeTimes = (e) => {
   e.preventDefault();
   const templateSource = $("#tee-time-template").html();

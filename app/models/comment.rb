@@ -7,7 +7,7 @@ class Comment < ApplicationRecord
 
   validates :content, presence: true
 
-  def created_at_formatted
+  def timestamp
     self.created_at.strftime("%l:%M %p %m/%d/%Y")
   end
 

@@ -20,7 +20,6 @@
 //= require handlebars.min
 //= require tee_time
 //= require main
-//= require user_form
 //= require tee_time_form
 //= require tee_time_show
 //= require comment

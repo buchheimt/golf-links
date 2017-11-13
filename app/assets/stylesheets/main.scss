@@ -11,8 +11,8 @@ $nav-dark: rgb(54, 79, 64);
 $nav-light: rgb(70, 156, 105);
 $btn-light: rgba(140, 206, 150, .75);
 $btn-dark: rgba(66, 103, 84, .75);
-$footer: rgba(51, 69, 58, .95);
-$footer-dark: rgba(51, 69, 58, .95);
+$footer: rgb(51, 69, 58);
+$footer-dark: rgb(51, 69, 58);
 
 a:hover, .btn-selected {
   color: $font-on-hover;
@@ -624,13 +624,14 @@ nav {
 }
 
 footer {
-  padding: 15px 0 0;
+  padding: 10px 0 0;
   position: fixed;
   bottom: 0;
   z-index: 999;
   width: 100%;
   background: $footer;
   .footer-link {
+    font-size: .85rem;
     padding: 5px;
     border-radius: 5px;
     display: inline-block;
@@ -642,6 +643,7 @@ footer {
     text-decoration: none;
   }
   #footer-info {
+    font-size: .85rem;
     padding: 5px;
     width: 100%;
     display: inline-block;
@@ -847,6 +849,10 @@ div.commentDiv div.comment-content.dark {
 .right {
   display: inline-block;
   float: right;
+}
+
+input, textarea {
+  font-family: $font-secondary;
 }
 
 input {

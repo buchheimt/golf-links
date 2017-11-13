@@ -64,16 +64,16 @@ describe "Course Features", type: :feature do
       Course.first
     }
 
-    context "as admin" do
-      it "has a link to Course#edit" do
-        visit_signin
-        admin_login
-        visit course_path(course)
-        expect(page).to have_content("Edit Course")
-        click_link "Edit Course"
-        expect(current_path).to eq(edit_course_path(course))
-      end
-    end
+    # context "as admin" do
+    #   it "has a link to Course#edit" do
+    #     visit_signin
+    #     admin_login
+    #     visit course_path(course)
+    #     expect(page).to have_content("Edit Course")
+    #     click_link "Edit Course"
+    #     expect(current_path).to eq(edit_course_path(course))
+    #   end
+    # end
 
     context "when logged in" do
       it "links to Course/TeeTime#new" do

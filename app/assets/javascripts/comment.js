@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
 });

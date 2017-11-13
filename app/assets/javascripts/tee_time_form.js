@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
   $("#selectCourseBtn").click(revealCourseSelect);
   $("#newCourseBtn").click(revealCourseNew);
 
@@ -23,6 +23,7 @@ $(function() {
 
 const revealCourseSelect = (e) => {
   e.preventDefault();
+  $("#selectCourseBtn").blur();
 
   $("#newCourseForm").fadeOut(200, function() {
     $("#selectCourseForm").fadeIn();
@@ -35,6 +36,7 @@ const revealCourseSelect = (e) => {
 
 const revealCourseNew = (e) => {
   e.preventDefault();
+  $("#newCourseBtn").blur();
 
   $("#selectCourseForm").fadeOut(200, function() {
     $("#newCourseForm").fadeIn();

@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
   $("#joinTeeTime").submit(joinTeeTime);
   $("#addGuest").submit(addGuest);
   $("#removeGuest").submit(removeGuest);

@@ -73,7 +73,7 @@
               </div>
             <% end %>
             <% @tee_time.guests.each do |guest| %>
-              <div class="col-md-6<%= " userGuest" if guest == current_user.username %>">
+              <div class="col-md-6<%= " userGuest" if  current_user && guest == current_user.username %>">
                 <div class="row">
                   <div class="tee-time-guest">
                     <div class="row">

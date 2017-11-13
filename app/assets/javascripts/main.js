@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
   $(".btn.warning").click(function(e) {
     if (confirm("Are you sure?")) {
       const deleteRoute = $(this).data("url");

@@ -1,19 +1,16 @@
 function Comment(attributes) {
+  this.id = attributes.id;
   this.username = attributes.user.username;
   this.timestamp = attributes.timestamp;
   this.content = attributes.content;
   this.status = attributes.status;
 }
 
-$(function() {
-  Comment.templateSource = $("#comment-template").html();
-  Comment.template = Handlebars.compile(Comment.templateSource);
-})
-
 Comment.prototype.renderDiv = function() {
   const commentDiv = Comment.template(this);
   $("#comments").prepend(commentDiv);
   const $newComment = $("#comments div").first();
+
   if (this.username === $("#currentUser .username").text()) {
     $("#comments .comment-content").first().addClass("dark");
     attachCommentEditListener($newComment.find(".comment-edit"))
@@ -26,31 +23,21 @@ Comment.prototype.renderDiv = function() {
   }
 }
 
-$(function() {
-
-})
-
 $(document).on("turbolinks:load", function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
+  Comment.templateSource = $("#comment-template").html();
+  Comment.template = Handlebars.compile(Comment.templateSource);
 });
 
 const createComment = (e) => {
   e.preventDefault();
   const values = $(e.target).serialize();
-  $.post("/comments", values, function(comment) {
-    const newComment = template(comment);
-    $(newComment).addClass("dark");
-    $("#comments").prepend(newComment);
+  $.post("/comments", values, function(commentJSON) {
+    const comment = new Comment(commentJSON);
+    comment.renderDiv();
+
     const $newComment = $("#comments div").first();
-    $newComment.hide();
-    $("#comments .comment-content").first().addClass("dark");
-    $("#comments .comment-content").first().addClass("dark");
-    attachCommentEditListener($newComment.find(".comment-edit"));
-    attachCommentRemoveListener($newComment.find(".comment-remove"));
-    $(".octicon-check").addClass("hidden");
-    $newComment.find(".comment-edit").show()
-    $newComment.find(".comment-remove").show();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
     $("#comment_content").val("");
@@ -79,7 +66,6 @@ const toggleComments = () => {
       $("#toggleComments").text("Back to Info");
       $("#toggleComments").fadeIn();
     });
-
   } else {
     $(".tee-time-show-card").fadeIn();
     $("#commentForm").fadeOut();

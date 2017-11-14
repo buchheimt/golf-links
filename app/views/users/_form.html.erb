@@ -40,8 +40,12 @@
         <div class="col-sm-9 mx-auto">
           <%= f.password_field :password_confirmation, class: "mt-3 mb-3", placeholder: 'Confirm Password' %>
         </div>
-      </div><br><br>
-
+      </div><br>
+      <div class="row">
+        <div class="col-sm-8 col-lg-6 mt-3 mx-auto">
+          <%= f.submit class: "btn" %>
+        </div>
+      </div>
     </div>
 
     <div class="col-sm-6">
@@ -75,17 +79,24 @@
         <div class="col-sm-10 mx-auto">
           <%= f.range_field :experience, in: 1..10 %>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-8 col-lg 6 mt-3 mx-auto">
-          <%= f.submit class: "btn" %>
+      </div><br>
+      <% if !user.persisted? %>
+      <div id="signup-options">
+        <div class="row">
+          <div class="col-sm-8 mx-auto">
+            <a href='/auth/facebook' class="btn fb-btn full mb-3">
+              <%= image_tag "fb-icon.png", class: "fb-icon" %>
+              <span>Sign Up</span>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= link_to "Already have an account?", signin_path, class: "session-link mt-2" %>
+          </div>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 <% end %>

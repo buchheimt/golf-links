@@ -421,6 +421,10 @@ a.warning:hover:disabled, a.leave:hover:disabled, input.warning:hover:disabled, 
   background: rgba(175, 75, 75, .75);
 }
 
+#signup-options .fb-btn {
+  margin-top: 9px;
+}
+
 .confirmation {
   background: $btn-light;
   color: white;
@@ -634,13 +638,6 @@ nav {
     width: 50%;
     margin: 0 auto;
   }
-  #signup-options {
-    width: 100%;
-    position: relative;
-    top: 5px;
-    bottom: 0;
-    padding: 24px;
-  }
   #titleText {
     padding-left: 0;
     padding-right: 5px;
@@ -651,9 +648,6 @@ nav {
   img.tee-time-pic {
     display: block;
     margin: auto;
-  }
-  .tee-time-user {
-
   }
   div.course-main p {
     text-align: center;
@@ -911,11 +905,6 @@ input:focus {
 
 input::placeholder {
   color: $font-placeholder;
-}
-
-#signup-options {
-  position: relative;
-  bottom: 64px;
 }
 
 select {

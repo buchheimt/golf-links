@@ -7,21 +7,6 @@
         </div>
       </div>
       <%= render partial: 'form', locals: {user: @user} %><br>
-      <div class="half-width right" id="signup-options">
-        <div class="row">
-          <div class="col-sm-8 mx-auto">
-            <a href='/auth/facebook' class="btn fb-btn full mb-3">
-              <%= image_tag "fb-icon.png", class: "fb-icon" %>
-              <span>Sign Up</span>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <%= link_to "Already have an account?", signin_path, class: "session-link mt-2" %>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

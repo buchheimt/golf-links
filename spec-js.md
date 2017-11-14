@@ -10,11 +10,13 @@ Specs:
         *-Course has many TeeTimes and TeeTimes are loaded and appended to DOM via AJAX when 'Next' or 'Prev' is clicked*
 - [x] Use your Rails API and a form to create a resource and render the response without a page refresh.
         *-Comments are created and added to TeeTime#show DOM via AJAX*
-- [ ] Translate JSON responses into js model objects.
-- [ ] At least one of the js model objects must have at least one method added by your code to the prototype.
+- [x] Translate JSON responses into js model objects.
+        *-Comment class converts JSON into comment object*
+- [x] At least one of the js model objects must have at least one method added by your code to the prototype.
+        *-Comment class has prototype method #renderDiv*
 
 Confirm
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message

@@ -7,8 +7,10 @@ function Comment(attributes) {
 }
 
 Comment.ready = function() {
-  Comment.templateSource = $("#comment-template").html();
-  Comment.template = Handlebars.compile(Comment.templateSource);
+  if ($("#comment-template")[0]) {
+    Comment.templateSource = $("#comment-template").html();
+    Comment.template = Handlebars.compile(Comment.templateSource);
+  }
 }
 
 Comment.prototype.renderDiv = function() {
@@ -32,7 +34,7 @@ Comment.prototype.renderDiv = function() {
 $(document).on("turbolinks:load", function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
-  //Comment.ready()
+  Comment.ready()
 });
 
 const createComment = (e) => {

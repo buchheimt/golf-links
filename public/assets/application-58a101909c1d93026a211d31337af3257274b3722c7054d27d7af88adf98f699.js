@@ -18034,9 +18034,9 @@ $(document).on("turbolinks:load", function() {
   $("#filterForm").submit(reloadTeeTimes);
 })
 
-
 const reloadTeeTimes = (e) => {
   e.preventDefault();
+  console.log($("tee-time-template")[0])
   const templateSource = $("#tee-time-template").html();
   const template = Handlebars.compile(templateSource);
   const values = $(e.target).serialize();
@@ -18073,24 +18073,25 @@ $(document).on("turbolinks:load", function() {
       $.ajax({url: deleteRoute, method: "DELETE"});
     }
   });
-  $("#mobileNavBtn").click(function() {
-    const darkColor = "rgb(54, 79, 64)";
-    if ($("svg.octicon-grabber").css("fill") === darkColor ) {
-      $("svg.octicon-grabber").css({fill: "white"});
-    } else {
-      $("svg.octicon-grabber").css({fill: darkColor});
-    }
-    $(".mobileLinks").toggle();
-  });
-});
-$(document).on("turbolinks:load", function() {
-  $('input[type="range"]').rangeslider({polyfill: false});
-  $('input[type="range"]').on("input change", updateResult);
+  $("#mobileNavBtn").click(toggleMobileDropdown);
+  loadRangeSliders();
 });
 
-const updateResult = (e) => {
-  const $range = $(e.target);
-  $range.parent().prev().val($range.val());
+const toggleMobileDropdown = () => {
+  const darkColor = "rgb(54, 79, 64)";
+  if ($("svg.octicon-grabber").css("fill") === darkColor ) {
+    $("svg.octicon-grabber").css({fill: "white"});
+  } else {
+    $("svg.octicon-grabber").css({fill: darkColor});
+  }
+  $(".mobileLinks").toggle();
+}
+
+const loadRangeSliders = () => {
+  $('input[type="range"]').rangeslider({polyfill: false});
+  $('input[type="range"]').on("input change", function(e) {
+    $(this).parent().prev().val($(this).val());
+  });
 }
 ;
 $(document).on("turbolinks:load", function() {
@@ -18252,29 +18253,52 @@ const updateField = (selector, value) => {
   $("#" + selector).fadeIn();
 }
 ;
+function Comment(attributes) {
+  this.id = attributes.id;
+  this.username = attributes.user.username;
+  this.timestamp = attributes.timestamp;
+  this.content = attributes.content;
+  this.status = attributes.status;
+}
+
+Comment.ready = function() {
+  if ($("#comment-template")[0]) {
+    Comment.templateSource = $("#comment-template").html();
+    Comment.template = Handlebars.compile(Comment.templateSource);
+  }
+}
+
+Comment.prototype.renderDiv = function() {
+  Comment.templateSource = $("#comment-template").html();
+  Comment.template = Handlebars.compile(Comment.templateSource);
+  const commentDiv = Comment.template(this);
+  $("#comments").prepend(commentDiv);
+  const $newComment = $("#comments div").first();
+  if (this.username === $("#currentUser .username").text()) {
+    $("#comments .comment-content").first().addClass("dark");
+    attachCommentEditListener($newComment.find(".comment-edit"))
+    attachCommentRemoveListener($newComment.find(".comment-remove"))
+    if (this.status === "active") {
+      $(".octicon-check").addClass("hidden");
+      $newComment.find(".comment-edit").show();
+      $newComment.find(".comment-remove").show();
+    }
+  }
+}
+
 $(document).on("turbolinks:load", function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
+  Comment.ready()
 });
 
 const createComment = (e) => {
   e.preventDefault();
-  const templateSource = $("#comment-template").html();
-  const template = Handlebars.compile(templateSource);
   const values = $(e.target).serialize();
-  $.post("/comments", values, function(comment) {
-    const newComment = template(comment);
-    $(newComment).addClass("dark");
-    $("#comments").prepend(newComment);
+  $.post("/comments", values, function(commentJSON) {
+    const comment = new Comment(commentJSON);
+    comment.renderDiv();
     const $newComment = $("#comments div").first();
-    $newComment.hide();
-    $("#comments .comment-content").first().addClass("dark");
-    $("#comments .comment-content").first().addClass("dark");
-    attachCommentEditListener($newComment.find(".comment-edit"));
-    attachCommentRemoveListener($newComment.find(".comment-remove"));
-    $(".octicon-check").addClass("hidden");
-    $newComment.find(".comment-edit").show()
-    $newComment.find(".comment-remove").show();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
     $("#comment_content").val("");
@@ -18293,29 +18317,16 @@ const toggleComments = () => {
         const teeTimeId = $("#toggleComments").data("id").toString();
         const templateSource = $("#comment-template").html();
         const template = Handlebars.compile(templateSource);
-        $.get("/comments", {id: teeTimeId}, function(comments) {
-          comments.forEach(function(comment) {
-            const commentDiv = template(comment);
-            $("#comments").prepend(commentDiv);
-            const $newComment = $("#comments div").first();
-
-            if (comment.user.username === $("#currentUser .username").text()) {
-              $("#comments .comment-content").first().addClass("dark");
-              attachCommentEditListener($newComment.find(".comment-edit"))
-              attachCommentRemoveListener($newComment.find(".comment-remove"))
-              if (comment.status === "active") {
-                $(".octicon-check").addClass("hidden");
-                $newComment.find(".comment-edit").show();
-                $newComment.find(".comment-remove").show();
-              }
-            }
+        $.get("/comments", {id: teeTimeId}, function(commentsJSON) {
+          commentsJSON.forEach(function(commentJSON) {
+            const comment = new Comment(commentJSON);
+            comment.renderDiv();
           });
         });
       }
       $("#toggleComments").text("Back to Info");
       $("#toggleComments").fadeIn();
     });
-
   } else {
     $(".tee-time-show-card").fadeIn();
     $("#commentForm").fadeOut();
@@ -19092,7 +19103,6 @@ const loadEachTeeTime = (teeTimes) => {
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-
 
 
 

@@ -6,11 +6,17 @@ function Comment(attributes) {
   this.status = attributes.status;
 }
 
+Comment.ready = function() {
+  Comment.templateSource = $("#comment-template").html();
+  Comment.template = Handlebars.compile(Comment.templateSource);
+}
+
 Comment.prototype.renderDiv = function() {
+  Comment.templateSource = $("#comment-template").html();
+  Comment.template = Handlebars.compile(Comment.templateSource);
   const commentDiv = Comment.template(this);
   $("#comments").prepend(commentDiv);
   const $newComment = $("#comments div").first();
-
   if (this.username === $("#currentUser .username").text()) {
     $("#comments .comment-content").first().addClass("dark");
     attachCommentEditListener($newComment.find(".comment-edit"))
@@ -26,8 +32,7 @@ Comment.prototype.renderDiv = function() {
 $(document).on("turbolinks:load", function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
-  Comment.templateSource = $("#comment-template").html();
-  Comment.template = Handlebars.compile(Comment.templateSource);
+  //Comment.ready()
 });
 
 const createComment = (e) => {
@@ -36,7 +41,6 @@ const createComment = (e) => {
   $.post("/comments", values, function(commentJSON) {
     const comment = new Comment(commentJSON);
     comment.renderDiv();
-
     const $newComment = $("#comments div").first();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");

@@ -4,6 +4,7 @@ $(document).on("turbolinks:load", function() {
 
 const reloadTeeTimes = (e) => {
   e.preventDefault();
+  console.log($("tee-time-template")[0])
   const templateSource = $("#tee-time-template").html();
   const template = Handlebars.compile(templateSource);
   const values = $(e.target).serialize();

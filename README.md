@@ -1,6 +1,6 @@
 # Golf Links
 
-Golf Links is a Rails app for managing tee times. It allows users to interact with tee times (create, join, leave) and associated courses. Currently users interact with each other on a basic level (through tee times), but I plan to add more social features eventually. A JQuery front-end and JSON API will be the next major update, per Flatiron School's portfolio project requirements.
+Golf Links is a Rails app for managing tee times. It allows users to interact with tee times (create, join, leave) and associated courses. Currently users interact with each other on a basic level (through tee times), but I plan to add more social features eventually. The app implements a JQuery front-end and JSON API to utilize AJAX requests for an improved user experience.
 
 ## Getting Started
 

@@ -31,7 +31,7 @@ const updateCourseShow = (course) => {
   $("#createTeeTimeBtn").attr("href", course.id + "/tee_times/new")
   $("#prevBtn").data("id", course.id);
   $("#nextBtn").data("id", course.id);
-
+  window.history.pushState({}, {}, '/courses/' + course.id);
 }
 
 const getPrev = () => {
@@ -45,6 +45,7 @@ const getNext = () => {
   const currId = $("#nextBtn").data("id");
   $.get("/courses/" + currId + "/next", function(course) {
     updateCourseShow(course);
+    window.history.pushState({}, {}, '/courses/' + course.id);
   });
 }
 

@@ -8,7 +8,7 @@ class Comment < ApplicationRecord
   validates :content, presence: true
 
   def timestamp
-    self.created_at.strftime("%l:%M %p %m/%d/%Y")
+    self.created_at.in_time_zone('Central Time (US & Canada)').strftime("%l:%M %p CT %m/%d/%Y")
   end
 
   def wipe

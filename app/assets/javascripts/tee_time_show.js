@@ -1,8 +1,8 @@
 $(document).on("turbolinks:load", () => {
-  $("#joinTeeTime").submit(joinTeeTime);
-  $("#addGuest").submit(addGuest);
-  $("#removeGuest").submit(removeGuest);
-  $("#leaveTeeTime").submit(leaveTeeTime);
+  $("#joinTeeTime").on('submit', joinTeeTime);
+  $("#addGuest").on('submit', addGuest);
+  $("#removeGuest").on('submit', removeGuest);
+  $("#leaveTeeTime").on('submit', leaveTeeTime);
 });
 
 const joinTeeTime = e => {
@@ -14,14 +14,10 @@ const joinTeeTime = e => {
     const newCard = template(userTeeTime.user);
     $("div.user-list > div.row").append($(newCard));
     $("#currentUser").fadeIn();
-
     if (userTeeTime.user.get_image !== "user-default.jpg") {
       $("#currentUser img").attr("src", userTeeTime.user.get_image);
     }
-    updateField("groupSize", userTeeTime.tee_time.group_size);
-    updateField("avgPace", userTeeTime.tee_time.avg_pace);
-    updateField("avgExperience", userTeeTime.tee_time.avg_experience);
-
+    updateCard(userTeeTime.tee_time);
     toggleButtons({join: true, leave: false, add: !userTeeTime.tee_time['available?']})
     $("#currentUser").data("id", userTeeTime.id);
   });
@@ -37,10 +33,9 @@ const addGuest = e => {
     method: 'PATCH',
     data: {'operation': '1'}
   }).done(userTeeTime => {
-    updateField("groupSize", userTeeTime.tee_time.group_size);
     $("div.user-list > div.row").append($(template(userTeeTime)));
     $(".userGuest").last().fadeIn();
-
+    updateCard(userTeeTime.tee_time, false);
     toggleButtons({add: !userTeeTime.tee_time['available?'], remove: false})
   });
 }
@@ -52,9 +47,8 @@ const removeGuest = e => {
     method: 'PATCH',
     data: {'operation': '-1'}
   }).done(function(userTeeTime) {
-    updateField("groupSize", userTeeTime.tee_time.group_size);
     $(".userGuest").last().fadeOut(400, function() {$(this).remove()});
-
+    updateCard(userTeeTime.tee_time, false);
     toggleButtons({add: false, remove: userTeeTime.guest_count < 1})
   });
 }
@@ -69,22 +63,13 @@ const leaveTeeTime = e => {
       url: "/user_tee_times/" + $("#currentUser").data("id"),
       method: "DELETE"
     }).done(teeTime => {
-      updateField("groupSize", teeTime.group_size);
-      updateField("avgPace", teeTime.avg_pace);
-      updateField("avgExperience", teeTime.avg_experience);
-
       $("#currentUser").fadeOut(400, function() {$(this).remove()});
       $(".userGuest").fadeOut(400, function() {$(this).remove()});
-      toggleButtons({join: false, add: true, remove: true, leave: true})
       $("#commentSection").fadeOut();
+      updateCard(teeTime);
+      toggleButtons({join: false, add: true, remove: true, leave: true})
     });
   }
-}
-
-const updateField = (selector, value) => {
-  $("#" + selector).hide();
-  $("#" + selector).text(value);
-  $("#" + selector).fadeIn();
 }
 
 const toggleButtons = buttonStates => {
@@ -95,4 +80,18 @@ const toggleButtons = buttonStates => {
       $(`#${key}Btn`).removeAttr("data-disable-with");
     }
   }
+}
+
+const updateCard = (teeTime, allStats = true) => {
+  updateField("groupSize", teeTime.group_size);
+  if (allStats) {
+    updateField("avgPace", teeTime.avg_pace);
+    updateField("avgExperience", teeTime.avg_experience);
+  }
+}
+
+const updateField = (selector, value) => {
+  $("#" + selector).hide();
+  $("#" + selector).text(value);
+  $("#" + selector).fadeIn();
 }

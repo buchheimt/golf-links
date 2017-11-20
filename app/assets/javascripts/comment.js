@@ -14,8 +14,7 @@ Comment.ready = function() {
 }
 
 Comment.prototype.renderDiv = function() {
-  const commentDiv = Comment.template(this);
-  $("#comments").prepend(commentDiv);
+  $("#comments").prepend(Comment.template(this));
   this.$div = $("#comments div").first();
   if (this.isCurrentUser()) {
     this.$div.children().first().addClass("dark");

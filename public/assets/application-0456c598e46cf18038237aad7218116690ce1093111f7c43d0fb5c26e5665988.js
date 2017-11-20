@@ -18039,6 +18039,7 @@ function TeeTime(attributes) {
   this.avgExperience = attributes.avg_experience;
   this.userTeeTimes = attributes.user_tee_times;
   this.available = attributes['available?'];
+  this.active = attributes.active;
 }
 
 TeeTime.ready = function() {
@@ -18475,7 +18476,9 @@ const loadEachTeeTime = (teeTimes) => {
   $("#teeTimeCards").empty();
   teeTimes.forEach(function(teeTimeJSON) {
     const teeTime = new TeeTime(teeTimeJSON);
-    teeTime.renderDiv();
+    if (teeTime.active) {
+      teeTime.renderDiv();
+    }
   });
   $("#teeTimeCards").fadeIn('fast')
 }

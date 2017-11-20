@@ -68,7 +68,9 @@ const loadEachTeeTime = (teeTimes) => {
   $("#teeTimeCards").empty();
   teeTimes.forEach(function(teeTimeJSON) {
     const teeTime = new TeeTime(teeTimeJSON);
-    teeTime.renderDiv();
+    if (teeTime.active) {
+      teeTime.renderDiv();
+    }
   });
   $("#teeTimeCards").fadeIn('fast')
 }

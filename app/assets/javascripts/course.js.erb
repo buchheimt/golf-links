@@ -11,7 +11,6 @@ const updateCourseShow = (course) => {
     setField("price", course);
     setField("name", course);
     setField("description", course);
-
     let imageResource;
     if (course.get_image === "course-default.jpg") {
       imageResource = "<%= asset_path('course-default.jpg') %>";
@@ -19,13 +18,9 @@ const updateCourseShow = (course) => {
       imageResource = course.get_image;
     }
     $("#coursePic").attr("src", imageResource);
-
     $(".course-main").fadeIn('fast');
-
     loadTeeTimes(course.tee_times);
   });
-
-
 
   $("#courseEditBtn").attr("href", course.id + "/edit")
   $("#createTeeTimeBtn").attr("href", course.id + "/tee_times/new")
@@ -70,25 +65,10 @@ const loadTeeTimes = (teeTimes) => {
 }
 
 const loadEachTeeTime = (teeTimes) => {
-  const templateSource = $("#tee-time-template").html();
-  const template = Handlebars.compile(templateSource);
   $("#teeTimeCards").empty();
-  teeTimes.forEach(function(teeTime) {
-    if (teeTime.active) {
-      const $teeTimeDiv = $(template(teeTime));
-      $("#teeTimeCards").append($teeTimeDiv);
-      if (!teeTime['available?']) {
-        $teeTimeDiv.children("div").addClass("tee-time-unjoinable");
-      }
-      if ($(".nav-user-card")[0]) {
-        const userMatch = teeTime.user_tee_times.find(function(el) {
-          return el.user_id === $(".nav-user-card").data("id");
-        });
-        if (userMatch) {
-          $teeTimeDiv.find(".joined-marker").show();
-        }
-      }
-    }
+  teeTimes.forEach(function(teeTimeJSON) {
+    const teeTime = new TeeTime(teeTimeJSON);
+    teeTime.renderDiv();
   });
   $("#teeTimeCards").fadeIn('fast')
 }

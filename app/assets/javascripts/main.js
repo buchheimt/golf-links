@@ -18,7 +18,7 @@ const toggleMobileDropdown = () => {
 }
 
 const loadRangeSliders = () => {
-  $('input[type="range"]').rangeslider({polyfill: false}).on("input change", e => {
+  $('input[type="range"]').rangeslider({polyfill: false}).on("input change", function(e) {
     $(this).parent().prev().val($(this).val());
   });
 }

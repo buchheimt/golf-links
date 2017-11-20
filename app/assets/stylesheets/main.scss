@@ -487,6 +487,10 @@ nav {
     height: 100%;
     border: none;
   }
+  #navbarDropdownMenuLink:hover {
+    background: none;
+    box-shadow: none;
+  }
   #nav-name {
     display: inline-block;
     font-size: 1.1rem;

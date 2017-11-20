@@ -45,8 +45,8 @@ Comment.prototype.attachRemoveListener = function() {
   const $btn = this.$div.find(".comment-remove");
   $btn.click(() => {
     if (confirm("You're sure you want to remove this comment?")) {
-      $.ajax({url: $btn.data("url"), method: "DELETE"}).done(data => {
-        this.$div.find(".content").text(data.content);
+      $.ajax({url: $btn.data("url"), method: "DELETE"}).done(commentJSON => {
+        this.$div.find(".content").text(commentJSON.content);
         this.$div.find(".username").text("[removed]");
       });
       $btn.hide();
@@ -63,11 +63,11 @@ Comment.prototype.attachUpdateListener = function() {
       url: $btn.data("url"),
       method: "PATCH",
       data: {'content': commentContent}
-    }).done(comment => {
+    }).done(commentJSON => {
       this.$div.find(".octicon-check").hide();
       this.$div.find(".octicon-pencil").fadeIn();
       this.$div.find(".content-col").html("<p class='content'></p>");
-      this.$div.find(".content").text(comment.content);
+      this.$div.find(".content").text(commentJSON.content);
       $btn.off("click");
       this.attachEditListener();
     });
@@ -102,14 +102,15 @@ const createComment = (e) => {
 }
 
 const toggleComments = () => {
-  if ($("#toggleComments").text() === "View Comments") {
+  const $toggleBtn = $("#toggleComments");
+  if ($toggleBtn.text() === "View Comments") {
     $(".tee-time-show-card").fadeOut('400', function() {
       $("#commentForm").fadeIn();
-      $("#toggleComments").hide();
+      $toggleBtn.hide();
       if ($("#comments div").length > 0) {
         $("#comments div").fadeIn();
       } else {
-        const teeTimeId = $("#toggleComments").data("id").toString();
+        const teeTimeId = $toggleBtn.data("id").toString();
         $.get("/comments", {id: teeTimeId}, function(commentsJSON) {
           commentsJSON.forEach(commentJSON => {
             const comment = new Comment(commentJSON);
@@ -117,13 +118,13 @@ const toggleComments = () => {
           });
         });
       }
-      $("#toggleComments").text("Back to Info");
-      $("#toggleComments").fadeIn();
+      $toggleBtn.text("Back to Info");
+      $toggleBtn.fadeIn();
     });
   } else {
     $(".tee-time-show-card").fadeIn();
     $("#commentForm").fadeOut();
     $("#comments div").fadeOut();
-    $("#toggleComments").text("View Comments");
+    $toggleBtn.text("View Comments");
   }
 }

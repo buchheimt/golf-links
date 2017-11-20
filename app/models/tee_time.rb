@@ -108,4 +108,8 @@ class TeeTime < ApplicationRecord
     guests
   end
 
+  def userIds
+    self.user_tee_times.map {|utt| utt.user_id}
+  end
+
 end

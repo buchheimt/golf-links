@@ -10,18 +10,18 @@ const joinTeeTime = (e) => {
   const template = Handlebars.compile(templateSource);
   e.preventDefault();
   const values = $("#joinTeeTime").serialize();
-  $.post("/user_tee_times", values, function(data) {
-    const newCard = template(data.user);
+  $.post("/user_tee_times", values, function(userTeeTime) {
+    const newCard = template(userTeeTime.user);
     $("div.user-list > div.row").append($(newCard));
     $("#currentUser").fadeIn();
 
-    if (data.user.get_image !== "user-default.jpg") {
-      $("#currentUser img").attr("src", data.user.get_image);
+    if (userTeeTime.user.get_image !== "user-default.jpg") {
+      $("#currentUser img").attr("src", userTeeTime.user.get_image);
     }
 
-    updateField("groupSize", data.tee_time.group_size);
-    updateField("avgPace", data.tee_time.avg_pace);
-    updateField("avgExperience", data.tee_time.avg_experience);
+    updateField("groupSize", userTeeTime.tee_time.group_size);
+    updateField("avgPace", userTeeTime.tee_time.avg_pace);
+    updateField("avgExperience", userTeeTime.tee_time.avg_experience);
 
     $("#joinBtn").prop("disabled", true);
     $("#leaveBtn").prop("disabled", false);
@@ -30,7 +30,7 @@ const joinTeeTime = (e) => {
     } else {
       $("#addBtn").prop("disabled", true);
     }
-    $("#currentUser").data("id", data.id);
+    $("#currentUser").data("id", userTeeTime.id);
   });
   $("#commentSection").fadeIn();
 }
@@ -86,11 +86,10 @@ const leaveTeeTime = (e) => {
     $.ajax({
       url: "/user_tee_times/" + $("#currentUser").data("id"),
       method: "DELETE"
-    }).done(function(data) {
-
-      updateField("groupSize", data.group_size);
-      updateField("avgPace", data.avg_pace);
-      updateField("avgExperience", data.avg_experience);
+    }).done(function(teeTime) {
+      updateField("groupSize", teeTime.group_size);
+      updateField("avgPace", teeTime.avg_pace);
+      updateField("avgExperience", teeTime.avg_experience);
 
       $("#currentUser").fadeOut(400, function() {$(this).remove()});
       $(".userGuest").fadeOut(400, function() {$(this).remove()});

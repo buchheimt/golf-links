@@ -5,7 +5,7 @@ function TeeTime(attributes) {
   this.groupSize = attributes.group_size;
   this.avgPace = attributes.avg_pace;
   this.avgExperience = attributes.avg_experience;
-  this.userTeeTimes = attributes.user_tee_times;
+  this.userIds = attributes.userIds;
   this.available = attributes['available?'];
   this.active = attributes.active;
 }
@@ -30,8 +30,8 @@ TeeTime.prototype.renderDiv = function() {
 
 TeeTime.prototype.includesCurrentUser = function() {
   if ($(".nav-user-card")[0]) {
-    return !!this.userTeeTimes.find(function(el) {
-      return el.user_id === $(".nav-user-card").data("id");
+    return !!this.userIds.find(function(id) {
+      return id === $(".nav-user-card").data("id");
     });
   }
   return false;

@@ -1,3 +1,3 @@
 class UserTeeTimeTeeTimeSerializer < ActiveModel::Serializer
-  attributes :group_size, :avg_pace, :avg_experience
+  attributes :group_size, :avg_pace, :avg_experience, :available?
 end

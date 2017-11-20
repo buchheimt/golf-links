@@ -12,8 +12,8 @@ function TeeTime(attributes) {
 
 TeeTime.ready = function() {
   if ($("#tee-time-template")[0]) {
-    TeeTime.templateSource = $("#tee-time-template").html();
-    TeeTime.template = Handlebars.compile(TeeTime.templateSource);
+    this.templateSource = $("#tee-time-template").html();
+    this.template = Handlebars.compile(this.templateSource);
   }
 }
 
@@ -30,25 +30,25 @@ TeeTime.prototype.renderDiv = function() {
 
 TeeTime.prototype.includesCurrentUser = function() {
   if ($(".nav-user-card")[0]) {
-    return !!this.userIds.find(function(id) {
+    return !!this.userIds.find(id => {
       return id === $(".nav-user-card").data("id");
     });
   }
   return false;
 }
 
-$(document).on("turbolinks:load", function() {
-  $("#filterForm").submit(reloadTeeTimes);
+$(document).on("turbolinks:load", () => {
+  $("#filterForm").on('submit', reloadTeeTimes);
   TeeTime.ready();
 })
 
-const reloadTeeTimes = (e) => {
+const reloadTeeTimes = e => {
   e.preventDefault();
   const values = $(e.target).serialize();
-  $.get("/tee_times.json", values, (teeTimes) => {
-    $("#teeTimeCards").fadeOut('fast', function() {
+  $.get("/tee_times.json", values, teeTimes => {
+    $("#teeTimeCards").fadeOut('fast', () => {
       $("#teeTimeCards").empty();
-      teeTimes.forEach(function(teeTimeJSON) {
+      teeTimes.forEach(teeTimeJSON => {
         const teeTime = new TeeTime(teeTimeJSON);
         teeTime.renderDiv();
       });

@@ -1,23 +1,12 @@
-$(document).on("turbolinks:load", function() {
-  $("#prevBtn").click(getPrev);
-  $("#nextBtn").click(getNext);
+$(document).on("turbolinks:load", () => {
+  $("#prevBtn").on('click', getPrev);
+  $("#nextBtn").on('click', getNext);
 });
 
-const updateCourseShow = (course) => {
-  $(".course-main").fadeOut('fast', function() {
-    setField("location", course);
-    setField("par", course);
-    setField("length", course);
-    setField("price", course);
-    setField("name", course);
-    setField("description", course);
-    let imageResource;
-    if (course.get_image === "course-default.jpg") {
-      imageResource = "<%= asset_path('course-default.jpg') %>";
-    } else {
-      imageResource = course.get_image;
-    }
-    $("#coursePic").attr("src", imageResource);
+const updateCourseShow = course => {
+  $(".course-main").fadeOut('fast', () => {
+    setFields(["location", "par", "length", "price", "name", "description"], course)
+    handleImage(course);
     $(".course-main").fadeIn('fast');
     loadTeeTimes(course.tee_times);
   });
@@ -31,32 +20,21 @@ const updateCourseShow = (course) => {
 
 const getPrev = () => {
   const currId = $("#prevBtn").data("id");
-  $.get("/courses/" + currId + "/prev", function(course) {
+  $.get("/courses/" + currId + "/prev", course => {
     updateCourseShow(course);
   });
 }
 
 const getNext = () => {
   const currId = $("#nextBtn").data("id");
-  $.get("/courses/" + currId + "/next", function(course) {
+  $.get("/courses/" + currId + "/next", course => {
     updateCourseShow(course);
-    window.history.pushState({}, {}, '/courses/' + course.id);
   });
 }
 
-const setField = (field, course) => {
-  $("#" + field + "Container").show();
-  value = course[field]
-  if (value === null) {
-    value = "";
-    $("#" + field + "Container").hide();
-  }
-  $("#" + field).text(value);
-}
-
-const loadTeeTimes = (teeTimes) => {
+const loadTeeTimes = teeTimes => {
   if ($("#teeTimeCards div").length > 0) {
-    $("#teeTimeCards div").fadeOut("fast", function() {
+    $("#teeTimeCards div").fadeOut("fast", () => {
       loadEachTeeTime(teeTimes);
     });
   } else {
@@ -64,13 +42,35 @@ const loadTeeTimes = (teeTimes) => {
   }
 }
 
-const loadEachTeeTime = (teeTimes) => {
+const loadEachTeeTime = teeTimes => {
   $("#teeTimeCards").empty();
-  teeTimes.forEach(function(teeTimeJSON) {
+  teeTimes.forEach(teeTimeJSON => {
     const teeTime = new TeeTime(teeTimeJSON);
     if (teeTime.active) {
       teeTime.renderDiv();
     }
   });
   $("#teeTimeCards").fadeIn('fast')
+}
+
+const setFields = (fields, course) => {
+  fields.forEach(field => {
+    $("#" + field + "Container").show();
+    value = course[field]
+    if (value === null) {
+      value = "";
+      $("#" + field + "Container").hide();
+    }
+    $("#" + field).text(value);
+  });
+}
+
+const handleImage = course => {
+  let imageResource;
+  if (course.get_image === "course-default.jpg") {
+    imageResource = "<%= asset_path('course-default.jpg') %>";
+  } else {
+    imageResource = course.get_image;
+  }
+  $("#coursePic").attr("src", imageResource);
 }

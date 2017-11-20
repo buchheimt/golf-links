@@ -8,8 +8,8 @@ function Comment(attributes) {
 
 Comment.ready = function() {
   if ($("#comment-template")[0]) {
-    Comment.templateSource = $("#comment-template").html();
-    Comment.template = Handlebars.compile(Comment.templateSource);
+    this.templateSource = $("#comment-template").html();
+    this.template = Handlebars.compile(this.templateSource);
   }
 }
 
@@ -34,7 +34,7 @@ Comment.prototype.attachEditListener = function() {
     this.$div.find(".octicon-pencil").hide();
     this.$div.find(".octicon-check").fadeIn();
     const commentValue = this.$div.find(".content").text();
-    this.$div.find(".content-col").html("<textarea class='textEditor'>");
+    this.$div.find(".content-col").html("<textarea class='textEditor' />");
     this.$div.find(".textEditor").val(commentValue);
     $btn.off("click");
     this.attachUpdateListener();
@@ -82,13 +82,13 @@ Comment.prototype.isActive = function() {
   return this.status === "active";
 }
 
-$(document).on("turbolinks:load", function() {
-  $("#toggleComments").click(toggleComments);
-  $("#new_comment").submit(createComment);
+$(document).on("turbolinks:load", () => {
+  $("#toggleComments").on('click', toggleComments);
+  $("#new_comment").on('submit', createComment);
   Comment.ready();
 });
 
-const createComment = (e) => {
+const createComment = e => {
   e.preventDefault();
   const values = $(e.target).serialize();
   $.post("/comments", values, commentJSON => {
@@ -102,29 +102,36 @@ const createComment = (e) => {
 }
 
 const toggleComments = () => {
-  const $toggleBtn = $("#toggleComments");
-  if ($toggleBtn.text() === "View Comments") {
-    $(".tee-time-show-card").fadeOut('400', function() {
-      $("#commentForm").fadeIn();
-      $toggleBtn.hide();
-      if ($("#comments div").length > 0) {
-        $("#comments div").fadeIn();
-      } else {
-        const teeTimeId = $toggleBtn.data("id").toString();
-        $.get("/comments", {id: teeTimeId}, function(commentsJSON) {
-          commentsJSON.forEach(commentJSON => {
-            const comment = new Comment(commentJSON);
-            comment.renderDiv();
-          });
-        });
-      }
-      $toggleBtn.text("Back to Info");
-      $toggleBtn.fadeIn();
-    });
+  if ($("#toggleComments").text() === "View Comments") {
+    switchToComments();
   } else {
-    $(".tee-time-show-card").fadeIn();
-    $("#commentForm").fadeOut();
-    $("#comments div").fadeOut();
-    $toggleBtn.text("View Comments");
+    switchToMainCard();
   }
+}
+
+const switchToComments = () => {
+  $(".tee-time-show-card").fadeOut('400', function() {
+    $("#commentForm").fadeIn();
+    $("#toggleComments").hide();
+    if ($("#comments div").length > 0) {
+      $("#comments div").fadeIn();
+    } else {
+      const teeTimeId = $("#toggleComments").data("id").toString();
+      $.get("/comments", {id: teeTimeId}, commentsJSON => {
+        commentsJSON.forEach(commentJSON => {
+          const comment = new Comment(commentJSON);
+          comment.renderDiv();
+        });
+      });
+    }
+    $("#toggleComments").text("Back to Info");
+    $("#toggleComments").fadeIn();
+  });
+}
+
+const switchToMainCard = () => {
+  $(".tee-time-show-card").fadeIn();
+  $("#commentForm").fadeOut();
+  $("#comments div").fadeOut();
+  $("#toggleComments").text("View Comments");
 }

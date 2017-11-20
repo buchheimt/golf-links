@@ -21,6 +21,7 @@
 //= require tee_time
 //= require main
 //= require tee_time_show
+//= require tee_time_form
 //= require comment
 //= require course
 //= require_tree .

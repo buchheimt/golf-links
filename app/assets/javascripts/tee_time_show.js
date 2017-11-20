@@ -1,16 +1,16 @@
-$(document).on("turbolinks:load", function() {
+$(document).on("turbolinks:load", () => {
   $("#joinTeeTime").submit(joinTeeTime);
   $("#addGuest").submit(addGuest);
   $("#removeGuest").submit(removeGuest);
   $("#leaveTeeTime").submit(leaveTeeTime);
 });
 
-const joinTeeTime = (e) => {
+const joinTeeTime = e => {
   const templateSource = $("#user-card-template").html();
   const template = Handlebars.compile(templateSource);
   e.preventDefault();
   const values = $("#joinTeeTime").serialize();
-  $.post("/user_tee_times", values, function(userTeeTime) {
+  $.post("/user_tee_times", values, userTeeTime => {
     const newCard = template(userTeeTime.user);
     $("div.user-list > div.row").append($(newCard));
     $("#currentUser").fadeIn();
@@ -18,24 +18,17 @@ const joinTeeTime = (e) => {
     if (userTeeTime.user.get_image !== "user-default.jpg") {
       $("#currentUser img").attr("src", userTeeTime.user.get_image);
     }
-
     updateField("groupSize", userTeeTime.tee_time.group_size);
     updateField("avgPace", userTeeTime.tee_time.avg_pace);
     updateField("avgExperience", userTeeTime.tee_time.avg_experience);
 
-    $("#joinBtn").prop("disabled", true);
-    $("#leaveBtn").prop("disabled", false);
-    if ($("div.user-list > div.row > div").length < 4) {
-      $("#addBtn").prop("disabled", false);
-    } else {
-      $("#addBtn").prop("disabled", true);
-    }
+    toggleButtons({join: true, leave: false, add: !userTeeTime.tee_time['available?']})
     $("#currentUser").data("id", userTeeTime.id);
   });
   $("#commentSection").fadeIn();
 }
 
-const addGuest = (e) => {
+const addGuest = e => {
   const templateSource = $("#guest-card-template").html();
   const template = Handlebars.compile(templateSource);
   e.preventDefault();
@@ -43,22 +36,16 @@ const addGuest = (e) => {
     url: "/user_tee_times/" + $("#currentUser").data("id"),
     method: 'PATCH',
     data: {'operation': '1'}
-  }).done(function(userTeeTime) {
+  }).done(userTeeTime => {
     updateField("groupSize", userTeeTime.tee_time.group_size);
-    const newCard = template(userTeeTime);
-    $("div.user-list > div.row").append($(newCard));
+    $("div.user-list > div.row").append($(template(userTeeTime)));
     $(".userGuest").last().fadeIn();
+
+    toggleButtons({add: !userTeeTime.tee_time['available?'], remove: false})
   });
-  if ($("div.user-list > div.row > div").length + 1 >= 4) {
-    $("#addBtn").prop("disabled", true);
-  } else {
-    $("#addBtn").prop("disabled", false);
-    $("#addBtn").removeAttr("data-disable-with");
-  }
-  $("#removeBtn").prop("disabled", false);
 }
 
-const removeGuest = (e) => {
+const removeGuest = e => {
   e.preventDefault();
   $.ajax({
     url: "/user_tee_times/" + $("#currentUser").data("id"),
@@ -67,17 +54,12 @@ const removeGuest = (e) => {
   }).done(function(userTeeTime) {
     updateField("groupSize", userTeeTime.tee_time.group_size);
     $(".userGuest").last().fadeOut(400, function() {$(this).remove()});
-    if (userTeeTime.guest_count < 1) {
-      $("#removeBtn").prop("disabled", true);
-    } else {
-      $("#removeBtn").prop("disabled", false);
-      $("#removeBtn").removeAttr("data-disable-with");
-    }
+
+    toggleButtons({add: false, remove: userTeeTime.guest_count < 1})
   });
-  $("#addBtn").prop("disabled", false);
 }
 
-const leaveTeeTime = (e) => {
+const leaveTeeTime = e => {
   const userCount = $("#currentUser").length;
   const guestCount = $(".userGuest").length;
   const totalCount = $("div.user-list > div.row > div").length;
@@ -86,17 +68,14 @@ const leaveTeeTime = (e) => {
     $.ajax({
       url: "/user_tee_times/" + $("#currentUser").data("id"),
       method: "DELETE"
-    }).done(function(teeTime) {
+    }).done(teeTime => {
       updateField("groupSize", teeTime.group_size);
       updateField("avgPace", teeTime.avg_pace);
       updateField("avgExperience", teeTime.avg_experience);
 
       $("#currentUser").fadeOut(400, function() {$(this).remove()});
       $(".userGuest").fadeOut(400, function() {$(this).remove()});
-      $("#leaveBtn").prop("disabled", true);
-      $("#addBtn").prop("disabled", true);
-      $("#removeBtn").prop("disabled", true);
-      $("#joinBtn").prop("disabled",false);
+      toggleButtons({join: false, add: true, remove: true, leave: true})
       $("#commentSection").fadeOut();
     });
   }
@@ -106,4 +85,14 @@ const updateField = (selector, value) => {
   $("#" + selector).hide();
   $("#" + selector).text(value);
   $("#" + selector).fadeIn();
+}
+
+const toggleButtons = buttonStates => {
+  for (let key in buttonStates) {
+    const state = buttonStates[key]
+    $(`#${key}Btn`).prop("disabled", state);
+    if (!state) {
+      $(`#${key}Btn`).removeAttr("data-disable-with");
+    }
+  }
 }

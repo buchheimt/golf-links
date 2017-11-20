@@ -18,11 +18,11 @@ Comment.prototype.renderDiv = function() {
   $("#comments").prepend(commentDiv);
   this.$div = $("#comments div").first();
   if (this.isCurrentUser()) {
-    $("#comments .comment-content").first().addClass("dark");
+    this.$div.children().first().addClass("dark");
     this.attachEditListener();
     this.attachRemoveListener();
     if (this.isActive()) {
-      $(".octicon-check").addClass("hidden");
+      this.$div.find(".octicon-check").addClass("hidden");
       this.$div.find(".comment-edit").show();
       this.$div.find(".comment-remove").show();
     }
@@ -46,13 +46,12 @@ Comment.prototype.attachRemoveListener = function() {
   const $btn = this.$div.find(".comment-remove");
   $btn.click(() => {
     if (confirm("You're sure you want to remove this comment?")) {
-      $.ajax({url: $btn.data("url"), method: "DELETE"}).done(function(data) {
-        const $toWipe = $(".commentDiv[data-id=" + data.id + "]");
-        $toWipe.find(".content").text(data.content);
-        $toWipe.find(".username").text("[removed]");
+      $.ajax({url: $btn.data("url"), method: "DELETE"}).done(data => {
+        this.$div.find(".content").text(data.content);
+        this.$div.find(".username").text("[removed]");
       });
-      $(this).hide();
-      $(this).siblings().hide();
+      $btn.hide();
+      $btn.siblings().hide();
     }
   })
 }
@@ -65,7 +64,7 @@ Comment.prototype.attachUpdateListener = function() {
       url: $btn.data("url"),
       method: "PATCH",
       data: {'content': commentContent}
-    }).done((comment) => {
+    }).done(comment => {
       this.$div.find(".octicon-check").hide();
       this.$div.find(".octicon-pencil").fadeIn();
       this.$div.find(".content-col").html("<p class='content'></p>");
@@ -77,30 +76,29 @@ Comment.prototype.attachUpdateListener = function() {
 }
 
 Comment.prototype.isCurrentUser = function() {
-  return this.username === $("#currentUser .username").text()
+  return this.username === $("#currentUser .username").text();
 }
 
 Comment.prototype.isActive = function() {
-  return this.status === "active"
+  return this.status === "active";
 }
 
 $(document).on("turbolinks:load", function() {
   $("#toggleComments").click(toggleComments);
   $("#new_comment").submit(createComment);
-  Comment.ready()
+  Comment.ready();
 });
 
 const createComment = (e) => {
   e.preventDefault();
   const values = $(e.target).serialize();
-  $.post("/comments", values, function(commentJSON) {
+  $.post("/comments", values, commentJSON => {
     const comment = new Comment(commentJSON);
     comment.renderDiv();
-    const $newComment = $("#comments div").first();
     $("#addCommentBtn").removeAttr("data-disable-with");
     $("#addCommentBtn").removeAttr("disabled");
     $("#comment_content").val("");
-    $newComment.fadeIn();
+    comment.$div.fadeIn();
   });
 }
 
@@ -113,10 +111,8 @@ const toggleComments = () => {
         $("#comments div").fadeIn();
       } else {
         const teeTimeId = $("#toggleComments").data("id").toString();
-        const templateSource = $("#comment-template").html();
-        const template = Handlebars.compile(templateSource);
         $.get("/comments", {id: teeTimeId}, function(commentsJSON) {
-          commentsJSON.forEach(function(commentJSON) {
+          commentsJSON.forEach(commentJSON => {
             const comment = new Comment(commentJSON);
             comment.renderDiv();
           });
@@ -131,24 +127,4 @@ const toggleComments = () => {
     $("#comments div").fadeOut();
     $("#toggleComments").text("View Comments");
   }
-}
-
-const attachCommentUpdateListener = ($button) => {
-  $button.click(function() {
-    const $targetDiv = $button.parents(".commentDiv");
-    const commentContent = $targetDiv.find(".textEditor").val();
-    const updateRoute = $(this).data("url");
-    $.ajax({
-      url: updateRoute,
-      method: "PATCH",
-      data: {'content': commentContent}
-    }).done(function(comment) {
-      $targetDiv.find(".octicon-check").hide();
-      $targetDiv.find(".octicon-pencil").fadeIn();
-      $targetDiv.find(".content-col").html("<p class='content'></p>");
-      $targetDiv.find(".content").text(comment.content);
-      $button.off("click");
-      $button.click(attachCommentEditListener($button));
-    });
-  });
 }

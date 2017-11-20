@@ -12,7 +12,6 @@ const toggleMobileDropdown = () => {
   const darkGreen = "rgb(54, 79, 64)";
   const $toggleIcon = $("svg.octicon-grabber");
   const newColor = $toggleIcon.css('fill') === 'white' ? darkGreen : 'white';
-
   $toggleIcon.css({fill: newColor});
   $(".mobileLinks").toggle();
 }
